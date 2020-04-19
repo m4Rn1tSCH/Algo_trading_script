@@ -37,7 +37,13 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="settings.editor.selected.configurable" value="tasks" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.path.for.package.tslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RunManager">
     <configuration default="true" type="PythonConfigurationType" factoryName="Python">
@@ -66,6 +72,9 @@
       <module name="Algo_trader_V1" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
       <option name="SDK_HOME" value="" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <option name="IS_MODULE_SDK" value="true" />
@@ -117,13 +126,16 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="739" y="274" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1587265433122" />
-    <state x="460" y="162" key="SettingsEditor" timestamp="1587266098304">
+    <state x="682" y="228" key="SettingsEditor" timestamp="1587266787428">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="460" y="162" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1587266098304" />
+    <state x="682" y="228" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1587266787428" />
     <state x="551" y="253" key="Vcs.Push.Dialog.v2" timestamp="1587266157269">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="551" y="253" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1587266157269" />
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/Algo_trader_V1$buylowsellhigh.coverage" NAME="buylowsellhigh Coverage Results" MODIFIED="1587266794436" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>

@@ -1,11 +1,10 @@
 from pandas_datareader import data
+import numpy as np
+import pandas as pd
+
 start_date = '2014-01-01'
 end_date = '2020-03-30'
 goog_data = data.DataReader('GOOG', 'yahoo', start_date, end_date)
-
-
-import numpy as np
-import pandas as pd
 
 goog_data_signal = pd.DataFrame(index=goog_data.index)
 goog_data_signal['price'] = goog_data['Adj Close']

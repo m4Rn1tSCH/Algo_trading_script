@@ -37,6 +37,7 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../ENVEL/Python_NN_application.py" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -107,7 +108,8 @@
       <option name="presentableId" value="Default" />
       <updated>1587264744561</updated>
       <workItem from="1587264746038" duration="1292000" />
-      <workItem from="1587268060805" duration="649000" />
+      <workItem from="1587268060805" duration="1025000" />
+      <workItem from="1587269180103" duration="649000" />
     </task>
     <servers />
   </component>
@@ -123,10 +125,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="413" y="175" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1587265834736" />
-    <state x="739" y="274" key="FileChooserDialogImpl" timestamp="1587265433122">
+    <state x="609" y="282" width="630" height="567" key="FileChooserDialogImpl" timestamp="1587269281441">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="739" y="274" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1587265433122" />
+    <state x="609" y="282" width="630" height="567" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1587269281441" />
     <state width="1875" height="347" key="GridCell.Tab.0.bottom" timestamp="1587267987879">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>

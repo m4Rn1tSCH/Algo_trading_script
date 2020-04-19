@@ -19,7 +19,7 @@ goog_data_signal['signal'][:] = np.where(goog_data_signal['daily_difference'][:]
 goog_data_signal['positions'] = goog_data_signal['signal'].diff()
 
 
-fig = plt.figure()
+fig = plt.figure(figsize = (12, 10))
 ax1 = fig.add_subplot(111, ylabel='Google price in $')
 goog_data_signal['price'].plot(ax=ax1, color='r', lw=2.)
 

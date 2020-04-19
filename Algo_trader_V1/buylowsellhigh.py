@@ -1,9 +1,13 @@
 from pandas_datareader import data
 import numpy as np
 import pandas as pd
+pd.set_option('display.width', 1000)
+import matplotlib.pyplot as plt
 
+#getting start and end date
 start_date = '2014-01-01'
 end_date = '2020-03-30'
+#generates a dataframe
 goog_data = data.DataReader('GOOG', 'yahoo', start_date, end_date)
 
 goog_data_signal = pd.DataFrame(index=goog_data.index)
@@ -14,7 +18,7 @@ goog_data_signal['signal'][:] = np.where(goog_data_signal['daily_difference'][:]
 
 goog_data_signal['positions'] = goog_data_signal['signal'].diff()
 
-import matplotlib.pyplot as plt
+
 fig = plt.figure()
 ax1 = fig.add_subplot(111, ylabel='Google price in $')
 goog_data_signal['price'].plot(ax=ax1, color='r', lw=2.)

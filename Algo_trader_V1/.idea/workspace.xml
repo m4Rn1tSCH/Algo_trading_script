@@ -46,7 +46,7 @@
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
-  <component name="RunManager" selected="Python.account_configurations">
+  <component name="RunManager" selected="Python.trade">
     <configuration default="true" type="PythonConfigurationType" factoryName="Python">
       <module name="Algo_trader_V1" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -169,10 +169,10 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.trade" />
         <item itemvalue="Python.account_configurations" />
         <item itemvalue="Python.account_activities" />
         <item itemvalue="Python.config" />
-        <item itemvalue="Python.trade" />
         <item itemvalue="Python.buylowsellhigh" />
       </list>
     </recent_temporary>
@@ -191,7 +191,7 @@
       <workItem from="1587268060805" duration="1025000" />
       <workItem from="1587269180103" duration="649000" />
       <workItem from="1587344859677" duration="3474000" />
-      <workItem from="1587352087977" duration="1197000" />
+      <workItem from="1587352087977" duration="4212000" />
     </task>
     <servers />
   </component>
@@ -255,6 +255,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="551" y="253" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1587266157269" />
+    <state width="968" height="528" key="XDebugger.FullValuePopup" timestamp="1587354661122">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="968" height="528" key="XDebugger.FullValuePopup/0.0.1920.1040@0.0.1920.1040" timestamp="1587354661122" />
     <state x="655" y="344" key="com.intellij.ide.util.TipDialog" timestamp="1587352124467">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>

@@ -5,7 +5,7 @@ pd.set_option('display.width', 1000)
 import matplotlib.pyplot as plt
 
 #getting start and end date
-start_date = '2014-01-01'
+start_date = '2016-01-01'
 end_date = '2020-03-30'
 #generates a dataframe
 goog_data = data.DataReader('GOOG', 'yahoo', start_date, end_date)

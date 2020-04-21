@@ -1,0 +1,12 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Sat Nov  9 15:16:53 2019
+
+@author: bill-
+"""
+##INSERT KEYS HERE AND THEY WILL BE EMPLOYED AUTOMATICALLY
+#PASS ALL ARGUMENTS TO PROPERLY AUTHENTICATE
+API_KEY = 'PKONO5YVIY3IDJLD8DZ0'
+SECRET_KEY = 'EOM4O0b/JthgUu5RsmrcqqYVixMHGGM4OpNKRPs6'
+BASE_URL = 'https://paper-api.alpaca.markets'
+

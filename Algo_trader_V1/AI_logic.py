@@ -43,6 +43,8 @@ and facilitate their prediction
 
 #Create pipeline with feature selector and regressor
 #replace with gradient boosted at this point or regressor
+#TODO
+##turn this into a function
 pipe = Pipeline([
     ('feature_selection', SelectKBest(score_func = f_classif)),
     ('reg', LogisticRegression(C = 1.0, random_state = 42))])
@@ -76,6 +78,8 @@ print(grid_search.fit(X_train, y_train).best_params_)
 TEST RESULTS
 
 '''
+#TODO
+##turn RFE into a function
 #Use the Cross-Validation function of the RFE modul
 #accuracy describes the number of correct classifications
 #LOGISTIC REGRESSION

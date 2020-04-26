@@ -8,6 +8,7 @@
 #data.to_csv('stock_data.csv')
 from Python_alpaca_API_connector import api
 
+#pull stock data from Alpha Vantage
 def pull_stock_data(symbol, adjusted, outputsize, cadence, output_format):
     '''
     DOCUMENTATION
@@ -41,6 +42,10 @@ def pull_intraday_data(symbol, interval, outputsize, output_format):
                                         interval=interval,
                                         outputsize=outputsize,
                                         output_format=output_format)
+        # test_df.replace(to_replace=['1. open', '2. high', '3. low', '4. close', '5. adjusted close',
+        #                 '6. volume', '7. dividend amount', '8. split coefficient'],
+        #                 value = ['open', 'high', 'low', 'close', 'adjusted close', 'volume', 'dividend amount', 'split coefficient'],
+        #                 inplace = True)
     except BaseException as e:
         print(e)
         print("API not properly connected")

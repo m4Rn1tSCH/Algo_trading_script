@@ -14,7 +14,7 @@ import matplotlib.pyplot as plt
 
 
 from sklearn.feature_selection import SelectKBest , chi2, f_classif, RFE, RFECV
-from sklearn.model_selection import GridSearchCV, train_test_split
+
 
 from sklearn.preprocessing import LabelEncoder, StandardScaler, MinMaxScaler
 from sklearn.decomposition import PCA
@@ -31,6 +31,7 @@ from sklearn.pipeline import Pipeline
 This module contains the AI/ML packages to take preprocessed data, find informative features
 and facilitate their prediction
 '''
+
 '''
             Setting up a pipeline
 '''
@@ -45,28 +46,29 @@ and facilitate their prediction
 #replace with gradient boosted at this point or regressor
 #TODO
 ##turn this into a function
-pipe = Pipeline([
-    ('feature_selection', SelectKBest(score_func = f_classif)),
-    ('reg', LogisticRegression(C = 1.0, random_state = 42))])
+def set_pipeline:
+    pipe = Pipeline([
+        ('feature_selection', SelectKBest(score_func = f_classif)),
+        ('reg', LogisticRegression(C = 1.0, random_state = 42))])
 
-#Create a parameter grid
-#parameter grids provide the values for the models to try
-#PARAMETERs NEED TO HAVE THE SAME LENGTH
-params = {
-    'feature_selection__k':[5, 6, 7],
-    'reg__max_iter':[800, 1000, 1500]}
+    #Create a parameter grid
+    #parameter grids provide the values for the models to try
+    #PARAMETERs NEED TO HAVE THE SAME LENGTH
+    params = {
+        'feature_selection__k':[5, 6, 7],
+        'reg__max_iter':[800, 1000, 1500]}
 
-#Initialize the grid search object
-grid_search = GridSearchCV(pipe, param_grid = params)
+    #Initialize the grid search object
+    grid_search = GridSearchCV(pipe, param_grid = params)
 
-#best combination of feature selector and the regressor
-grid_search.best_params_
-#best score
-grid_search.best_score_
+    #best combination of feature selector and the regressor
+    grid_search.best_params_
+    #best score
+    grid_search.best_score_
 
-#Fit it to the data and print the best value combination
-print(grid_search.fit(X_train, y_train).best_params_)
-
+    #Fit it to the data and print the best value combination
+    print(grid_search.fit(X_train, y_train).best_params_)
+    return 'Pipeline set:'
 
 
 #%%

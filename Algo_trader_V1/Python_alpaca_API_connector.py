@@ -16,13 +16,8 @@ def acc_report():
 
     account_info = api.get_account()
     print(account_info)
-    # Check if our account is restricted from trading.
-    if account_info.trading_blocked:
-        print('Account is currently restricted from trading.')
-    return
-    # Check how much money we can use to open new positions.
-    print('${} is available as buying power.'.format(account.buying_power))
-    return 'acc report:'
+    print('${} is available as buying power.'.format(account_info.buying_power))
+    return 'Account ready'
 
 # Lists currently open trades
 def list_positions():

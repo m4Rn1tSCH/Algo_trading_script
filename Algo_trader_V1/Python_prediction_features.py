@@ -17,11 +17,13 @@ def pred_feat(df):
     of values
     NaNs need to be dropped to make scaling and selection of features working
     '''
-    # typically engineered features based on lagging metrics
-    # mean + stdev of past 3d/7d/30d/ + rolling volume
+    #TODO
+    ###proper try statement and duplicate handling
+    #typically engineered features based on lagging metrics
+    #mean + stdev of past 3d/7d/30d/ + rolling volume
     df.reset_index(drop=True, inplace=True)
-    # pick lag features to iterate through and calculate features
-    lag_features = ["open", "high", "low", "close"]
+    #pick lag features to iterate through and calculate features
+    lag_features = ['1. open', '2. high', '3. low', '4. close', '5. adjusted close']
     # set up time frames; how many days/months back/forth
     t1 = 3
     t2 = 7
@@ -54,4 +56,12 @@ def pred_feat(df):
     #drop the first and second row since the indicators refer to previous non-existent days
     #df = df.drop([0, 1])
     df.reset_index(drop=True, inplace=True)
+
+    #for col in list(df):
+    #    if df[col].dtype == 'datetime64[ns]':
+    #        df[f"{col}_month"] = df[col].dt.month
+    #        df[f"{col}_week"] = df[col].dt.week
+    #       df[f"{col}_weekday"] = df[col].dt.weekday
+    #df.reset_index(drop = True, inplace = True)
+
     return df

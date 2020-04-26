@@ -21,6 +21,7 @@ def get_acc():
     r_acc_info = req.get(ACC_URL, headers = HEADERS)
     #load is for a file-like object; loads is for is for strings;
     return js.loads(r_acc_info.content)
+
 #retrieve acc config info
 def get_acc_config():
     r_acc_info = req.get(CONFIG_URL, headers = HEADERS)

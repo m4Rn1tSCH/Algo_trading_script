@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="03f5633e-c1b1-4ad3-8a91-bdb1d14f71b4" name="Default Changelist" comment="" />
+    <list default="true" id="03f5633e-c1b1-4ad3-8a91-bdb1d14f71b4" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -24,9 +26,6 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
-  <component name="GithubDefaultAccount">
-    <option name="defaultAccountId" value="3399e0a2-bc99-42ad-b807-12da278363e7" />
-  </component>
   <component name="ProjectId" id="1ak1OPcAr2AoCTK0RIjPEFzOtcN" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
@@ -44,7 +43,7 @@
     <property name="node.js.path.for.package.tslint" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
-    <property name="settings.editor.selected.configurable" value="copyright" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RunManager" selected="Python.Python_alpaca_API_test">
     <configuration name="Python_alpaca_API_test" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
@@ -205,6 +204,9 @@
       <workItem from="1587344859677" duration="3474000" />
       <workItem from="1587352087977" duration="4212000" />
       <workItem from="1587501960812" duration="3623000" />
+      <workItem from="1587592242556" duration="657000" />
+      <workItem from="1587599503913" duration="52000" />
+      <workItem from="1587599579541" duration="152000" />
     </task>
     <servers />
   </component>
@@ -220,9 +222,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="413" y="175" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1587265834736" />
-    <state x="639" y="256" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog" timestamp="1587351640223">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state x="596" y="276" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog" timestamp="1587599545478">
+      <screen x="0" y="0" width="1792" height="1120" />
     </state>
+    <state x="596" y="276" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog/0.0.1792.1120@0.0.1792.1120" timestamp="1587599545478" />
     <state x="639" y="256" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1587351640223" />
     <state x="609" y="282" width="630" height="567" key="FileChooserDialogImpl" timestamp="1587503405587">
       <screen x="0" y="0" width="1920" height="1040" />
@@ -260,9 +263,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1875" height="347" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1587267987879" />
-    <state x="608" y="173" key="SettingsEditor" timestamp="1587502833511">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state x="567" y="186" key="SettingsEditor" timestamp="1587593267616">
+      <screen x="0" y="0" width="1792" height="1120" />
     </state>
+    <state x="567" y="186" key="SettingsEditor/0.0.1792.1120@0.0.1792.1120" timestamp="1587593267616" />
     <state x="608" y="173" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1587502833511" />
     <state x="551" y="253" key="Vcs.Push.Dialog.v2" timestamp="1587266157269">
       <screen x="0" y="0" width="1920" height="1040" />
@@ -272,9 +276,14 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="968" height="528" key="XDebugger.FullValuePopup/0.0.1920.1040@0.0.1920.1040" timestamp="1587354661122" />
-    <state x="611" y="365" key="com.intellij.ide.util.TipDialog" timestamp="1587592266043">
-      <screen x="0" y="23" width="1792" height="1033" />
+    <state x="659" y="413" key="cloudConfig.SelfSettingsDialog" timestamp="1587592693731">
+      <screen x="0" y="0" width="1792" height="1120" />
     </state>
+    <state x="659" y="413" key="cloudConfig.SelfSettingsDialog/0.0.1792.1120@0.0.1792.1120" timestamp="1587592693731" />
+    <state x="611" y="371" key="com.intellij.ide.util.TipDialog" timestamp="1587609889567">
+      <screen x="0" y="0" width="1792" height="1120" />
+    </state>
+    <state x="611" y="371" key="com.intellij.ide.util.TipDialog/0.0.1792.1120@0.0.1792.1120" timestamp="1587609889567" />
     <state x="655" y="344" key="com.intellij.ide.util.TipDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1587502016625" />
     <state x="611" y="365" key="com.intellij.ide.util.TipDialog/0.23.1792.1033@0.23.1792.1033" timestamp="1587592266043" />
     <state x="601" y="246" width="700" height="530" key="recent.locations.popup" timestamp="1587503056272">

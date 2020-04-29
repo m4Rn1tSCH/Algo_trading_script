@@ -24,6 +24,9 @@ def pull_stock_data(symbol, adjusted, outputsize, cadence, output_format):
                                 outputsize=outputsize,
                                 cadence=cadence,
                                 output_format=output_format)
+        #drop the date as index to use it
+        df_pull = df_pull.reset_index(drop=False, inplace=False)
+
     except BaseException as e:
         print(e)
         print("API not properly connected")
@@ -41,7 +44,10 @@ def pull_intraday_data(symbol, interval, outputsize, output_format):
         df_intra_pull = api.alpha_vantage.intraday_quotes(symbol=symbol,
                                         interval=interval,
                                         outputsize=outputsize,
-                                        output_format=output_format)
+                                        output_format=output_format
+                                        )
+        #drop the date as index to use it
+        df_intra_pull = df_intra_pull.reset_index(drop=False, inplace=False)
         # test_df.replace(to_replace=['1. open', '2. high', '3. low', '4. close', '5. adjusted close',
         #                 '6. volume', '7. dividend amount', '8. split coefficient'],
         #                 value = ['open', 'high', 'low', 'close', 'adjusted close', 'volume', 'dividend amount', 'split coefficient'],

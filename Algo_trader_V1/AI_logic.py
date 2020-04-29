@@ -7,52 +7,41 @@ Created on 24 4/24/2020 5:25 PM 2020
 #packages
 import pandas as pd
 pd.set_option('display.width', 1000)
-import numpy as np
-
-import os
+from datetime import datetime as dt
 import matplotlib.pyplot as plt
 
 
 from sklearn.feature_selection import SelectKBest , chi2, f_classif, RFE, RFECV
-
-
-from sklearn.preprocessing import LabelEncoder, StandardScaler, MinMaxScaler
-from sklearn.decomposition import PCA
-
 from sklearn.linear_model import LogisticRegression, LinearRegression, SGDRegressor
 from sklearn.neighbors import KNeighborsClassifier
-from sklearn.ensemble import RandomForestRegressor, GradientBoostingClassifier, RandomForestClassifier
-from sklearn.neural_network import MLPClassifier
 from sklearn.svm import SVR
-
-from sklearn.metrics import r2_score, mean_squared_error, accuracy_score, classification_report, f1_score, roc_auc_score
 from sklearn.pipeline import Pipeline
+from sklearn.metrics import r2_score, mean_squared_error, accuracy_score, classification_report, f1_score, roc_auc_score
+from sklearn.model_selection import GridSearchCV
+
 '''
 This module contains the AI/ML packages to take preprocessed data, find informative features
 and facilitate their prediction
 '''
 
 '''
-            Setting up a pipeline
+            Setting up the pipeline
+
+SelectKBest picks features based on their f-value to
+find the features that can optimally predict the labels
+F_CLASSIFIER;FOR CLASSIFICATION TASKS determines features based on
+the f-values between features & labels;
+Chi2: for regression tasks; requires non-neg values
+other functions: mutual_info_classif; chi2, f_regression; mutual_info_regression
 '''
-#SelectKBest picks features based on their f-value to
-#find the features that can optimally predict the labels
-#F_CLASSIFIER;FOR CLASSIFICATION TASKS determines features based on
-#the f-values between features & labels;
-#Chi2: for regression tasks; requires non-neg values
-#other functions: mutual_info_classif; chi2, f_regression; mutual_info_regression
+
 
 #Create pipeline with feature selector and regressor
-#replace with gradient boosted at this point or regressor
-#TODO
-##turn this into a function
+#replace with classifier/regressor
+
 def set_pipeline_KNN():
     '''
-    Pipeline 6 - SelectKBest and K Nearest Neighbor
-    ##########
-    Pipeline 6; 2020-04-27 11:00:27
-    {'clf__n_neighbors': 7, 'feature_selection__k': 3}
-    Best accuracy with parameters: 0.5928202115158637
+    Pipeline - SelectKBest and K Nearest Neighbor
     '''
     #Create pipeline with feature selector and classifier
     #replace with gradient boosted at this point or regressor
@@ -61,8 +50,7 @@ def set_pipeline_KNN():
         ('clf', KNeighborsClassifier())])
 
     #Create a parameter grid
-    #parameter grids provide the values for the models to try
-    #PARAMETERs NEED TO HAVE THE SAME LENGTH
+
     params = {
         'feature_selection__k':[1, 2, 3, 4, 5, 6, 7],
         'clf__n_neighbors':[2, 3, 4, 5, 6, 7, 8]}
@@ -74,23 +62,22 @@ def set_pipeline_KNN():
     print(f"Pipeline 6; {dt.today()}")
     print(grid_search.fit(X_train, y_train).best_params_)
     print(f"Best accuracy with parameters: {grid_search.best_score_}")
-#%%
+    return grid_search.best_score_
+
 def set_pipeline_Reg():
     '''
-    Pipeline 4 - Logistic Regression and Support Vector Kernel
+    Pipeline - Logistic Regression and Support Vector Kernel
     '''
-    #Create pipeline with feature selector and regressor
-    #replace with gradient boosted at this point or regressor
+
     pipe = Pipeline([
         ('feature_selection', SelectKBest(score_func = chi2)),
         ('reg', SVR(kernel = 'linear'))
         ])
 
     #Create a parameter grid
-    #parameter grids provide the values for the models to try
-    #PARAMETERs NEED TO HAVE THE SAME LENGTH
     #C regularization parameter that is applied to all terms
     #to push down their individual impact and reduce overfitting
+
     #Epsilon tube around actual values; threshold beyond which regularization is applied
     #the more features picked the more prone the model is to overfitting
     #stricter C and e to counteract
@@ -103,14 +90,11 @@ def set_pipeline_Reg():
     #Initialize the grid search object
     grid_search = GridSearchCV(pipe, param_grid = params)
 
-    #best combination of feature selector and the regressor
-    #grid_search.best_params_
-    #best score
-    #grid_search.best_score_
     #Fit it to the data and print the best value combination
     print(f"Pipeline 4; {dt.today()}")
     print(grid_search.fit(X_train, y_train).best_params_)
     print(f"Best accuracy with parameters: {grid_search.best_score_}")
+    return grid_search.best_score_
 #%%
 '''
         Application of Recursive Feature Extraction - Cross Validation

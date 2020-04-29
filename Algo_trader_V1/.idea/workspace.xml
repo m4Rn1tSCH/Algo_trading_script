@@ -34,7 +34,7 @@
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
-  <component name="RunManager" selected="Python.data_split">
+  <component name="RunManager" selected="Python.Python_prediction_features">
     <configuration name="Python_AV_get_intraday_stock" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="Algo_trader_V1" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -49,28 +49,6 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Python_AV_get_intraday_stock.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="Python_alpaca_API_connector" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="Algo_trader_V1" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Python_alpaca_API_connector.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -123,7 +101,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="data_split" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="account_activities" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="Algo_trader_V1" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -136,7 +114,29 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/data_split.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/account_activities.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="account_configurations" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="Algo_trader_V1" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/account_configurations.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -147,10 +147,10 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.data_split" />
         <item itemvalue="Python.Python_prediction_features" />
         <item itemvalue="Python.Python_AV_get_intraday_stock" />
-        <item itemvalue="Python.Python_alpaca_API_connector" />
+        <item itemvalue="Python.account_configurations" />
+        <item itemvalue="Python.account_activities" />
         <item itemvalue="Python.acc_config" />
       </list>
     </recent_temporary>
@@ -170,6 +170,7 @@
       <workItem from="1587866833737" duration="4419000" />
       <workItem from="1587953897717" duration="588000" />
       <workItem from="1588084131057" duration="345000" />
+      <workItem from="1588105321209" duration="2998000" />
     </task>
     <servers />
   </component>
@@ -177,22 +178,22 @@
     <option name="version" value="2" />
   </component>
   <component name="WindowStateProjectService">
-    <state width="1401" height="282" key="GridCell.Tab.0.bottom" timestamp="1587871296355">
+    <state width="1396" height="282" key="GridCell.Tab.0.bottom" timestamp="1588108374907">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1401" height="282" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1587871296355" />
-    <state width="1401" height="282" key="GridCell.Tab.0.center" timestamp="1587871296355">
+    <state width="1396" height="282" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1588108374907" />
+    <state width="1396" height="282" key="GridCell.Tab.0.center" timestamp="1588108374907">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1401" height="282" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1587871296355" />
-    <state width="1401" height="282" key="GridCell.Tab.0.left" timestamp="1587871296355">
+    <state width="1396" height="282" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1588108374907" />
+    <state width="1396" height="282" key="GridCell.Tab.0.left" timestamp="1588108374907">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1401" height="282" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1587871296355" />
-    <state width="1401" height="282" key="GridCell.Tab.0.right" timestamp="1587871296355">
+    <state width="1396" height="282" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1588108374907" />
+    <state width="1396" height="282" key="GridCell.Tab.0.right" timestamp="1588108374907">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1401" height="282" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1587871296355" />
+    <state width="1396" height="282" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1588108374907" />
     <state x="461" y="165" key="SettingsEditor" timestamp="1587870532509">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -200,10 +201,11 @@
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/Algo_trader_V1$Python_alpaca_API_connector.coverage" NAME="Python_alpaca_API_connector Coverage Results" MODIFIED="1587866958005" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/Algo_trader_V1$acc_config.coverage" NAME="acc_config Coverage Results" MODIFIED="1587866933059" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/Algo_trader_V1$account_configurations.coverage" NAME="account_configurations Coverage Results" MODIFIED="1587866452860" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/Algo_trader_V1$Python_prediction_features.coverage" NAME="Python_prediction_features Coverage Results" MODIFIED="1587868668621" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Algo_trader_V1$acc_config.coverage" NAME="acc_config Coverage Results" MODIFIED="1588105578327" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Algo_trader_V1$account_activities.coverage" NAME="account_activities Coverage Results" MODIFIED="1588105639868" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Algo_trader_V1$account_configurations.coverage" NAME="account_configurations Coverage Results" MODIFIED="1588105665483" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Algo_trader_V1$Python_prediction_features.coverage" NAME="Python_prediction_features Coverage Results" MODIFIED="1588107891091" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/Algo_trader_V1$data_split.coverage" NAME="data_split Coverage Results" MODIFIED="1587870858750" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/Algo_trader_V1$Python_AV_get_intraday_stock.coverage" NAME="Python_AV_get_intraday_stock Coverage Results" MODIFIED="1587867573043" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Algo_trader_V1$Python_AV_get_intraday_stock.coverage" NAME="Python_AV_get_intraday_stock Coverage Results" MODIFIED="1588107298714" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>

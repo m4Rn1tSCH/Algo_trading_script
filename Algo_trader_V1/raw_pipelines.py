@@ -4,7 +4,7 @@ Created on 28 4/28/2020 10:34 AM 2020
 
 @author: bill-
 """
-
+#TODO
 '''
 Pipeline 6 - SelectKBest and K Nearest Neighbor
 ##########
@@ -64,4 +64,39 @@ grid_search = GridSearchCV(pipe, param_grid = params)
 #Fit it to the data and print the best value combination
 print(f"Pipeline 7; {dt.today()}")
 print(grid_search.fit(X_train_scaled, y_train).best_params_)
+print(f"Best accuracy with parameters: {grid_search.best_score_}")
+#%%
+'''
+Pipeline 8 - SelectKBest and Multi-Layer Perceptron
+##########
+
+'''
+#Create pipeline with feature selector and classifier
+#replace with classifier or regressor
+#learning_rate = 'adaptive'; when solver='sgd'
+pipe = Pipeline([
+    ('feature_selection', SelectKBest(score_func = chi2)),
+    ('clf', MLPClassifier(activation='relu',
+                          solver='adam',
+                          learning_rate='constant'))])
+
+#Create a parameter grid
+#parameter grids provide the values for the models to try
+#PARAMETERS NEED TO HAVE THE SAME LENGTH
+#Parameter explanation
+#   C: penalty parameter
+#   gamma: [standard 'auto' = 1/n_feat], kernel coefficient
+#
+params = {
+    'feature_selection__k':[4, 5, 6, 7],
+    'clf__max_iter':[1500, 2000, 2500],
+    'clf__alpha':[0.0001, 0.001, 0.01]}
+
+#Initialize the grid search object
+grid_search = GridSearchCV(pipe, param_grid = params)
+
+#Fit it to the data and print the best value combination
+print(f"Pipeline 7; {dt.today()}")
+print(grid_search.fit(X_train, y_train).best_params_)
+print("Overall score: %.4f" %(grid_search.score(X_test, y_test)))
 print(f"Best accuracy with parameters: {grid_search.best_score_}")

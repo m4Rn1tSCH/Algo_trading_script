@@ -75,22 +75,22 @@ def split_data(df, label_col, plot = True):
     print("Reduced shape: {}".format(str(X_train_pca.shape)))
 
     if plot == True:
-    '''
-                PLotting of PCA/ Cluster Pairs
-
-    '''
+        '''
+                    PLotting of PCA/ Cluster Pairs
+    
+        '''
         #Kmeans clusters to categorize groups WITH SCALED DATA
         #determine number of groups needed or desired for
-        kmeans = KMeans(n_clusters = 5, random_state = 10)
+        kmeans = KMeans(n_clusters=5, random_state=10)
         train_clusters = kmeans.fit(X_train_scaled)
 
-        kmeans = KMeans(n_clusters = 5, random_state = 10)
+        kmeans = KMeans(n_clusters=5, random_state=10)
         test_clusters = kmeans.fit(X_test_scaled)
 
-        fig, ax = plt.subplots(nrows = 2, ncols = 1, figsize = (15, 10), dpi = 600)
+        fig, ax = plt.subplots(nrows = 2, ncols = 1, figsize = (12, 10), dpi = 600)
         #styles for title: normal; italic; oblique
         ax[0].scatter(X_train_pca[:, 0], X_train_pca[:, 1], c = train_clusters.labels_)
-        ax[0].set_title('Plotted Principal Components of TRAIN DATA', style = 'oblique')
+        ax[0].set_title('Plotted Principal Components of TRAINING DATA', style = 'oblique')
         ax[0].legend(train_clusters.labels_)
         ax[1].scatter(X_test_pca[:, 0], X_test_pca[:, 1], c = test_clusters.labels_)
         ax[1].set_title('Plotted Principal Components of TEST DATA', style = 'oblique')

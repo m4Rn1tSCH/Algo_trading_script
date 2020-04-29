@@ -72,10 +72,5 @@ def get_acc_profit():
 # Print today's price of a stock
 ###api.alpha_vantage.historic_quotes(symbol='AAPL')
 
-# ts = TimeSeries(key='IH4EENERLUFUKJRW', output_format='pandas')
-# data, meta_data = ts.get_intraday(symbol='MSFT',interval='1min', outputsize='full')
-
-# data.to_csv('stock_data.csv')
-
 # Lists all open orders
 # orders = api.list_orders()

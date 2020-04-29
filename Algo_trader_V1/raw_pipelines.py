@@ -100,3 +100,19 @@ print(f"Pipeline 7; {dt.today()}")
 print(grid_search.fit(X_train, y_train).best_params_)
 print("Overall score: %.4f" %(grid_search.score(X_test, y_test)))
 print(f"Best accuracy with parameters: {grid_search.best_score_}")
+#%%
+#accuracy negative; model toally off
+#n_quantiles needs to be smaller than the number of samples (standard is 1000)
+transformer = QuantileTransformer(n_quantiles=750, output_distribution='normal')
+regressor = LinearRegression()
+regr = TransformedTargetRegressor(regressor=regressor,
+                                   transformer=transformer)
+
+regr.fit(X_train, y_train)
+
+TransformedTargetRegressor(...)
+print('q-t R2-score: {0:.3f}'.format(regr.score(X_test, y_test)))
+
+
+raw_target_regr = LinearRegression().fit(X_train, y_train)
+print('unprocessed R2-score: {0:.3f}'.format(raw_target_regr.score(X_test, y_test)))

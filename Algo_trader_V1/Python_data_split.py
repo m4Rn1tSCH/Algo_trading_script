@@ -7,7 +7,9 @@ Created on 25 4/25/2020 10:57 PM 2020
 '''
 This module contains the function to split the data in a test and a training set
 '''
-from sklearn.model_selection import GridSearchCV, train_test_split
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import StandardScaler
+from sklearn.decomposition import PCA
 
 def split_data(df, label_col, plot = True):
     '''
@@ -28,6 +30,8 @@ def split_data(df, label_col, plot = True):
         DESCRIPTION.
 
     '''
+    #TODO
+    ##variables arent being passed correctly
     #specify the label to be predicted
     model_features = df.drop([label_col], axis = 1, inplace = False)
     model_label = df[label_col]
@@ -35,14 +39,17 @@ def split_data(df, label_col, plot = True):
     X_train, X_test, y_train, y_test = train_test_split(model_features,
                                                         model_label,
                                                         shuffle = True,
-                                                        test_size = 0.3)
+                                                        test_size = 0.4)
 
     #create a validation set from the training set
     print(f"Shape of the split training data set X_train:{X_train.shape}")
     print(f"Shape of the split training data set X_test: {X_test.shape}")
     print(f"Shape of the split training data set y_train: {y_train.shape}")
     print(f"Shape of the split training data set y_test: {y_test.shape}")
-    #STD SCALING - does not work yet
+
+    model_features.set_index('date', drop=True, inplace=True)
+    
+    #TODO
     #fit the scaler to the training data first
     #standard scaler works only with maximum 2 dimensions
     scaler = StandardScaler(copy = True, with_mean = True, with_std = True).fit(X_train)
@@ -50,22 +57,10 @@ def split_data(df, label_col, plot = True):
 
     #transform test data with the object learned from the training data
     X_test_scaled = scaler.transform(X_test)
-    scaler_mean = scaler.mean_
-    stadard_scale = scaler.scale_
-    #%%
-    #MINMAX SCALING - works with Select K Best
-    min_max_scaler = MinMaxScaler()
-    X_train_minmax = min_max_scaler.fit_transform(X_train)
-
-    X_test_minmax = min_max_scaler.transform(X_test)
-    minmax_scale = min_max_scaler.scale_
-    min_max_minimum = min_max_scaler.min_
     #%%
     #Principal Component Reduction
-    #first scale
-    #then reduce
     #keep the most important features of the data
-    pca = PCA(n_components = int(len(bank_df.columns) / 2))
+    pca = PCA(n_components = int(len(df.columns) / 2))
     #fit PCA model to breast cancer data
     pca.fit(X_train_scaled)
     #transform data onto the first two principal components
@@ -75,8 +70,10 @@ def split_data(df, label_col, plot = True):
     print("Reduced shape: {}".format(str(X_train_pca.shape)))
 
     if plot == True:
+        import matplotlib.pyplot as plt
+        from sklearn.cluster import KMeans
         '''
-                    PLotting of PCA/ Cluster Pairs
+                    Plotting of PCA/ Cluster Pairs
     
         '''
         #Kmeans clusters to categorize groups WITH SCALED DATA

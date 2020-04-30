@@ -65,10 +65,8 @@ def get_acc_profit():
         # Check our current balance vs. our balance at the last market close
         balance_change = float(account.equity) - float(account.last_equity)
         print(f'Today\'s portfolio balance change: ${balance_change}')
+    return
 
-
-# list orders
-###api.list_orders()
 # Print today's price of a stock
 ###api.alpha_vantage.historic_quotes(symbol='AAPL')
 

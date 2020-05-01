@@ -5,6 +5,7 @@ Created on Sat April 22 10:26:42 2020
 @author: bill-
 """
 import numpy as np
+import pandas as pd
 
 
 def pred_feat(df):
@@ -18,15 +19,30 @@ def pred_feat(df):
     of values
     NaNs need to be dropped to make scaling and selection of features working
     """
-    # TODO
-    # proper try statement and duplicate handling
 
-    # handle datetime object and add features
-    for col in list(df):
-        if df[col].dtype == 'datetime64[ns]':
-            df[f"{col}_month"] = df[col].dt.month
-            df[f"{col}_week"] = df[col].dt.week
-            df[f"{col}_weekday"] = df[col].dt.weekday
+    #Conversion datetime to timestamps
+    try:
+        # check for date objects + conversion if required
+        if df['date'].dtype == 'datetime64[ns]':
+            pass
+        else:
+            df['date'] = pd.to_datetime(df['date'])
+
+        # handle datetime object and add features
+        for col in list(df):
+            if df[col].dtype == 'datetime64[ns]':
+                df[f"{col}_month"] = df[col].dt.month
+                df[f"{col}_week"] = df[col].dt.week
+                df[f"{col}_weekday"] = df[col].dt.weekday
+
+        #conversion of dates to unix timestamps as numeric value (fl64)
+        if df['date'].isnull().sum() == 0:
+            df['date'] = df['date'].apply(lambda x: dt.timestamp(x))
+        else:
+            df = df.drop(columns='date', axis=1)
+            print("Column date dropped")
+    except (TypeError, OSError, ValueError) as e:
+        print(f"Problem with conversion:{e}")
 
     # typically engineered features based on lagging metrics
     # mean + stdev of past 3d/7d/30d/ + rolling volume

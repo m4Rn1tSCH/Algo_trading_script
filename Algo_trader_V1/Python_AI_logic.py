@@ -40,7 +40,7 @@ other functions: mutual_info_classif; chi2, f_regression; mutual_info_regression
 
 # TODO
 # define/import X_train/y_train correctly
-def set_pipeline_knn(X=X_train, y=y_train):
+def set_pipeline_knn(X, y):
     """
     Pipeline - SelectKBest and K Nearest Neighbor
     """
@@ -68,7 +68,7 @@ def set_pipeline_knn(X=X_train, y=y_train):
 
 #TODO
 #define X_train , y_train correctly
-def set_pipeline_reg():
+def set_pipeline_reg(X, y):
     '''
     Pipeline - Logistic Regression and Support Vector Kernel
     '''
@@ -96,14 +96,14 @@ def set_pipeline_reg():
 
     # Fit it to the data and print the best value combination
     print(f"Pipeline 4; {dt.today()}")
-    print(grid_search.fit(X_train, y_train).best_params_)
+    print(grid_search.fit(X, y).best_params_)
     print(f"Best accuracy with parameters: {grid_search.best_score_}")
 
     return grid_search.best_score_
 
 
 # %%
-def set_RFE_cross_val():
+def set_rfe_cross_val(X, y):
     '''
         Application of Recursive Feature Extraction - Cross Validation
         IMPORTANT
@@ -148,7 +148,7 @@ def set_RFE_cross_val():
                   # needs to be aligned with estimator
                   cv=None,
                   scoring='completeness_score')
-    rfecv.fit(X_train, y_train)
+    rfecv.fit(X, y)
 
     print("Optimal number of features: %d" % rfecv.n_features_)
     print('Selected features: %s' % list(X_train.columns[rfecv.support_]))

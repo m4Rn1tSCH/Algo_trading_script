@@ -36,10 +36,10 @@ other functions: mutual_info_classif; chi2, f_regression; mutual_info_regression
 '''
 
 
-# Create pipeline with feature selector and regressor
+# Create pipeline with feature selector and regressor/classifier
 
 # TODO
-# define/import X_train/y_train correctly
+# TEST
 def set_pipeline_knn(x, y):
     """
     Pipeline - SelectKBest and K Nearest Neighbor
@@ -67,11 +67,11 @@ def set_pipeline_knn(x, y):
     return grid_search.best_score_
 
 #TODO
-#define X_train , y_train correctly
+# TEST
 def set_pipeline_reg(x, y):
-    '''
+    """
     Pipeline - Logistic Regression and Support Vector Kernel
-    '''
+    """
 
     pipe = Pipeline([
         ('feature_selection', SelectKBest(score_func=chi2)),

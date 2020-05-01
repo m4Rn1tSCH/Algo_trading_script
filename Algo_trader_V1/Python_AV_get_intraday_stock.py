@@ -103,3 +103,17 @@ def get_asset_list(status, asset_class):
     except BaseException as f:
         print(f)
     return asset_list
+#%%
+import matplotlib.pyplot as plt
+
+fig, ax = plt.subplots(nrows=2, ncols=1, figsize=(12, 10), dpi=600)
+# Plot the date on x-axis and open price on y-axis
+#LINE VALUES
+#   supported values are: '-', '--', '-.', ':',
+#   'None', ' ', '', 'solid', 'dashed', 'dashdot', 'dotted'
+ax[0].set_title('Open Price', style='oblique')
+ax[0].plot(stock_df['date'], stock_df['1. open'], color='green', lw=1, ls='dashdot', marker='o', label="Open Price")
+# Plot the date on x-axis and the trading volume on y-axis
+ax[1].set_title('Trading Volume', style='oblique')
+ax[1].plot(stock_df['date'], stock_df['6. volume'], color='orange', lw=0, ls='solid', marker='o', label="Trade Volume")
+plt.show()

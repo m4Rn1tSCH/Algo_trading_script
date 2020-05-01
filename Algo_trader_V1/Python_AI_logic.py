@@ -10,7 +10,7 @@ import pandas as pd
 pd.set_option('display.width', 1000)
 from datetime import datetime as dt
 import matplotlib.pyplot as plt
-
+import pickle
 from sklearn.feature_selection import SelectKBest, chi2, f_classif, RFE, RFECV
 from sklearn.linear_model import LogisticRegression, LinearRegression, SGDRegressor
 from sklearn.neighbors import KNeighborsClassifier
@@ -40,7 +40,7 @@ other functions: mutual_info_classif; chi2, f_regression; mutual_info_regression
 
 # TODO
 # define/import X_train/y_train correctly
-def set_pipeline_knn(X, y):
+def set_pipeline_knn(x, y):
     """
     Pipeline - SelectKBest and K Nearest Neighbor
     """
@@ -61,14 +61,14 @@ def set_pipeline_knn(X, y):
 
     # Fit it to the data and print the best value combination
     print(f"Pipeline 6; {dt.today()}")
-    print(grid_search.fit(X, y).best_params_)
+    print(grid_search.fit(x, y).best_params_)
     print(f"Best accuracy with parameters: {grid_search.best_score_}")
 
     return grid_search.best_score_
 
 #TODO
 #define X_train , y_train correctly
-def set_pipeline_reg(X, y):
+def set_pipeline_reg(x, y):
     '''
     Pipeline - Logistic Regression and Support Vector Kernel
     '''
@@ -96,24 +96,22 @@ def set_pipeline_reg(X, y):
 
     # Fit it to the data and print the best value combination
     print(f"Pipeline 4; {dt.today()}")
-    print(grid_search.fit(X, y).best_params_)
+    print(grid_search.fit(x, y).best_params_)
     print(f"Best accuracy with parameters: {grid_search.best_score_}")
 
     return grid_search.best_score_
 
 
 # %%
-def set_rfe_cross_val(X, y):
-    '''
+def set_rfe_cross_val(x, y):
+    """
         Application of Recursive Feature Extraction - Cross Validation
         IMPORTANT
         Accuracy: for classification problems
         Mean Squared Error(MSE); Root Mean Squared Error(RSME); R2 Score: for regression
-    '''
-    # TODO
-    ##turn RFE into a function
+    """
+
     # Use the Cross-Validation function of the RFE module
-    # accuracy describes the number of correct classifications
     # LOGISTIC REGRESSION
     est_logreg = LogisticRegression(max_iter=2000)
     # SGD REGRESSOR
@@ -148,10 +146,10 @@ def set_rfe_cross_val(X, y):
                   # needs to be aligned with estimator
                   cv=None,
                   scoring='completeness_score')
-    rfecv.fit(X, y)
+    rfecv.fit(x, y)
 
     print("Optimal number of features: %d" % rfecv.n_features_)
-    print('Selected features: %s' % list(X_train.columns[rfecv.support_]))
+    print('Selected features: %s' % list(x.columns[rfecv.support_]))
 
     # plot number of features VS. cross-validation scores
     plt.figure(figsize=(10, 7))

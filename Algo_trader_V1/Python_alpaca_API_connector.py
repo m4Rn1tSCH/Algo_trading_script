@@ -1,10 +1,13 @@
+"""
+This module connects to the alpaca API and automatically to the Alpha Vantage API
+The functions gather data around the account primarily profit n loss; buying power
+The keys for it are stored in the module acc_config.py
+"""
 # access files
 import alpaca_trade_api as tradeapi
 import acc_config
-from alpha_vantage.timeseries import TimeSeries
-from pprint import pprint
-import pandas as pd
-#initialize the API connection
+
+# initialize the API connection
 api = tradeapi.REST(acc_config.API_KEY,
                     acc_config.SECRET_KEY,
                     'https://paper-api.alpaca.markets')

@@ -6,7 +6,6 @@ Created on 24 4/24/2020 5:25 PM 2020
 """
 # packages
 import pandas as pd
-from Python_data_split import X_train, X_test, y_train, y_test
 
 pd.set_option('display.width', 1000)
 from datetime import datetime as dt
@@ -41,14 +40,14 @@ other functions: mutual_info_classif; chi2, f_regression; mutual_info_regression
 
 # TODO
 # define/import X_train/y_train correctly
-def set_pipeline_KNN():
-    '''
+def set_pipeline_knn(X=X_train, y=y_train):
+    """
     Pipeline - SelectKBest and K Nearest Neighbor
-    '''
+    """
     # Create pipeline with feature selector and classifier
     # replace with gradient boosted at this point or regressor
     pipe = Pipeline([
-        ('feature_selection', SelectKBest(score_func=f_classif)),
+        ('feature_selection', SelectKBest(score_func=chi2)),
         ('clf', KNeighborsClassifier())])
 
     # Create a parameter grid
@@ -62,14 +61,14 @@ def set_pipeline_KNN():
 
     # Fit it to the data and print the best value combination
     print(f"Pipeline 6; {dt.today()}")
-    print(grid_search.fit(X_train, y_train).best_params_)
+    print(grid_search.fit(X, y).best_params_)
     print(f"Best accuracy with parameters: {grid_search.best_score_}")
 
     return grid_search.best_score_
 
 #TODO
 #define X_train , y_train correctly
-def set_pipeline_Reg():
+def set_pipeline_reg():
     '''
     Pipeline - Logistic Regression and Support Vector Kernel
     '''
@@ -163,3 +162,31 @@ def set_RFE_cross_val():
     plt.show()
 
     return rfecv.grid_scores_
+#%%
+'''
+        Usage of a Pickle Model -Storage of a trained Model
+'''
+def store_pickle(model):
+    model_file = "gridsearch_model.sav"
+    with open(model_file, mode='wb') as m_f:
+        pickle.dump(model, m_f)
+    return model_file
+#%%
+'''
+        Usage of a Pickle Model -Loading of a Pickle File
+
+model file can be opened either with FILE NAME
+open_pickle(model_file="gridsearch_model.sav")
+INTERNAL PARAMETER
+open_pickle(model_file=model_file)
+'''
+
+def open_pickle(model_file):
+    with open(model_file, mode='rb') as m_f:
+        grid_search = pickle.load(m_f)
+        result = grid_search.score(X_test, y_test)
+        print("Employed Estimator:", grid_search.get_params)
+        print("--------------------")
+        print("BEST PARAMETER COMBINATION:", grid_search.best_params_)
+        print("Training Accuracy Result: %.4f" %(result))
+        return 'grid_search parameters loaded'

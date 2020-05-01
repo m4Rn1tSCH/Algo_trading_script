@@ -12,7 +12,7 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.decomposition import PCA
 
 def split_data(df, label_col, plot = True):
-    '''
+    """
 
 
     Parameters
@@ -29,11 +29,12 @@ def split_data(df, label_col, plot = True):
     df : TYPE
         DESCRIPTION.
 
-    '''
+    """
     #TODO
     ##variables arent being passed correctly
     #specify the label to be predicted
-    model_features = df.drop([label_col], axis = 1, inplace = False)
+    #convert dates to datetime, then to timestamp objects
+    model_features = df.drop(columns=label_col, axis = 1, inplace = False)
     model_label = df[label_col]
 
     X_train, X_test, y_train, y_test = train_test_split(model_features,
@@ -48,7 +49,7 @@ def split_data(df, label_col, plot = True):
     print(f"Shape of the split training data set y_test: {y_test.shape}")
 
     model_features.set_index('date', drop=True, inplace=True)
-    
+
     #TODO
     #fit the scaler to the training data first
     #standard scaler works only with maximum 2 dimensions

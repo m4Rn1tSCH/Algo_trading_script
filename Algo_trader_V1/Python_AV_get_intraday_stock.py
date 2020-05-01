@@ -8,6 +8,7 @@
 #data.to_csv('stock_data.csv')
 from Python_alpaca_API_connector import api
 
+#IMPORTANT  LIMIT AV API 5 API requests per minute and 500 requests per day
 #pull stock data from Alpha Vantage
 def pull_stock_data(symbol, adjusted, outputsize, cadence, output_format):
     '''
@@ -31,6 +32,12 @@ def pull_stock_data(symbol, adjusted, outputsize, cadence, output_format):
         print(e)
         print("API not properly connected")
     return df_pull
+
+# pull_stock_data(symbol='COTY',
+#                 adjusted=True,
+#                 outputsize='full',
+#                 cadence='monthly',
+#                 output_format='pandas')
 
 def pull_intraday_data(symbol, interval, outputsize, output_format):
     '''

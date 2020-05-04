@@ -8,12 +8,12 @@ Created on Mon Nov 11 22:53:55 2019
 #load necessary packages
 import json as js
 import requests as req
-import acc_config
+import Python_acc_config
 #%%
 ENDPOINT_URL = "https://paper-api.alpaca.markets"
 ACT_URL = "{}/v2/account/activities/{activity_type}".format(ENDPOINT_URL)
 ALL_ACT_URL = "{}/v2/account/activities".format(ENDPOINT_URL)
-HEADERS = {'APCA-API-KEY-ID': acc_config.API_KEY, 'APCA-API-SECRET-KEY': acc_config.SECRET_KEY}
+HEADERS = {'APCA-API-KEY-ID': Python_acc_config.API_KEY, 'APCA-API-SECRET-KEY': Python_acc_config.SECRET_KEY}
 
 #display one activity
 def get_activity(activity_type, date, until, after):

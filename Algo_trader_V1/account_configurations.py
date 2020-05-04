@@ -7,14 +7,14 @@ Created on Mon Nov 11 22:24:54 2019
 #load necessary packages
 import json as js
 import requests as req
-import acc_config
+import Python_acc_config
 
 #%%
 ##retrieve account configurations
 ENDPOINT_URL = "https://paper-api.alpaca.markets"
 ACC_URL = "{}/v2/account".format(ENDPOINT_URL)
 CONFIG_URL = "{}/v2/account/configurations".format(ENDPOINT_URL)
-HEADERS = {'APCA-API-KEY-ID': acc_config.API_KEY, 'APCA-API-SECRET-KEY': acc_config.SECRET_KEY}
+HEADERS = {'APCA-API-KEY-ID': Python_acc_config.API_KEY, 'APCA-API-SECRET-KEY': Python_acc_config.SECRET_KEY}
 #%%
 #can be turned into a dictionary
 def get_acc():

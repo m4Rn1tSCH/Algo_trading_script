@@ -7,7 +7,7 @@ Created on Mon Nov 11 22:30:14 2019
 
 import json as js
 import requests as req
-import acc_config
+import Python_acc_config
 
 
 ##put positions or metrics thereof here

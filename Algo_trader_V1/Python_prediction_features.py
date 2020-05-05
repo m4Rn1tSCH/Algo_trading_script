@@ -31,7 +31,7 @@ def pred_feat(df):
 
         #conversion of dates to unix timestamps as numeric value (fl64)
         if df['date'].isnull().sum() == 0:
-            df['date'] = df['date'].apply(lambda x: dt.timestamp(x))
+            df['date_ts'] = df['date'].apply(lambda x: dt.timestamp(x))
         else:
             df = df.drop(columns='date', axis=1)
             print("Column date dropped")
@@ -42,7 +42,7 @@ def pred_feat(df):
     # mean + stdev of past 3d/7d/30d/ + rolling volume
     df.reset_index(drop=True, inplace=True)
     # pick lag features to iterate through and calculate features
-    lag_features = ['1. open', '2. high', '3. low', '4. close', '5. adjusted close']
+    lag_features = ['open', 'high', 'low', 'close', 'adjusted close']
     # set up time frames; how many days/months back/forth
     t1 = 3
     t2 = 7

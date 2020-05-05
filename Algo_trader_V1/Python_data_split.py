@@ -36,7 +36,7 @@ def split_data(df, label_col, plot = True):
     df = intra_df
     label_col='open'
         #datetie object is pushed back to be index again before split
-        #this way scaling is possible +
+        #this way scaling is possible + index allows plotting later on
         if df['date'].dtype == 'datetime64[ns]':
             model_features.set_index('date', drop=True, inplace=True)
         else:
@@ -62,7 +62,7 @@ def split_data(df, label_col, plot = True):
     #TODO
     #fit the scaler to the training data first
     #standard scaler works only with maximum 2 dimensions
-    scaler = StandardScaler(copy = True, with_mean = True, with_std = True).fit(X_train)
+    scaler = StandardScaler(copy=True, with_mean=True, with_std=True).fit(X_train)
     X_train_scaled = scaler.transform(X_train)
 
     #transform test data with the object learned from the training data

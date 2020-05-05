@@ -34,15 +34,14 @@ def split_data(df, label_col, plot = True):
     ##variables arent being passed correctly
     #specify the label to be predicted
     df = intra_df
-    label_col='1. open'
-    try:
+    label_col='open'
+        #datetie object is pushed back to be index again before split
+        #this way scaling is possible +
         if df['date'].dtype == 'datetime64[ns]':
-            pass
+            model_features.set_index('date', drop=True, inplace=True)
         else:
-            df['date'] = pd.to_datetime(df['date'])
+            print("datetime object still in df; scaling will fail")
 
-    except:
-        print("date conversion failed")
 
     model_features = df.drop(columns=label_col, axis = 1, inplace = False)
     model_label = df[label_col]
@@ -58,7 +57,7 @@ def split_data(df, label_col, plot = True):
     print(f"Shape of the split training data set y_train: {y_train.shape}")
     print(f"Shape of the split training data set y_test: {y_test.shape}")
 
-    model_features.set_index('date', drop=True, inplace=True)
+
 
     #TODO
     #fit the scaler to the training data first

@@ -128,18 +128,16 @@ def get_asset_list(status, asset_class):
     return asset_list
 #%%
 #TODO
+#fix date columns
 import matplotlib.pyplot as plt
-import numpy as np
-
-fig, ax = plt.subplots(2, 1, figsize=(12, 10), dpi=600, squeeze=False)
-
 # LINE VALUES
 #   supported values are: '-', '--', '-.', ':',
 #   'None', ' ', '', 'solid', 'dashed', 'dashdot', 'dotted'
 # Plot the date on x-axis and open price on y-axis
-ax[0,0].set_title('Open Price', style='oblique')
-ax[0,0].plot(intra_df['date'], intra_df['1. open'], color='green', lw=1, ls='dashdot', marker='o', label="Open Price")
+plt.title('Open Price', style='oblique')
+plt.xticks(rotation=60)
+intra_df['date'], intra_df['1. open'].plot(color='green', lw=1, ls='dashdot', marker='x', label="Open Price")
 # Plot the date on x-axis and the trading volume on y-axis
-ax[1,0].set_title('Trading Volume', style='oblique')
-ax[1,0].plot(intra_df['date'], intra_df['5. volume'], color='orange', lw=0, ls='solid', marker='o', label="Trade Volume")
+#plt.set_title('Trading Volume', style='oblique')
+intra_df['date'], intra_df['5. volume'].plot(color='orange', lw=1, ls='solid', marker='x', label="Trade Volume")
 plt.show()

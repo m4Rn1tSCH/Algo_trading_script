@@ -33,7 +33,17 @@ def split_data(df, label_col, plot = True):
     #TODO
     ##variables arent being passed correctly
     #specify the label to be predicted
-    #convert dates to datetime, then to timestamp objects
+    df = intra_df
+    label_col='1. open'
+    try:
+        if df['date'].dtype == 'datetime64[ns]':
+            pass
+        else:
+            df['date'] = pd.to_datetime(df['date'])
+
+    except:
+        print("date conversion failed")
+
     model_features = df.drop(columns=label_col, axis = 1, inplace = False)
     model_label = df[label_col]
 
@@ -85,13 +95,13 @@ def split_data(df, label_col, plot = True):
         kmeans = KMeans(n_clusters=5, random_state=10)
         test_clusters = kmeans.fit(X_test_scaled)
 
-        fig, ax = plt.subplots(nrows = 2, ncols = 1, figsize = (12, 10), dpi = 600)
+        fig, ax = plt.subplots(nrows=2, ncols=1, figsize=(12, 10), dpi=600,squeeze=False)
         #styles for title: normal; italic; oblique
-        ax[0].scatter(X_train_pca[:, 0], X_train_pca[:, 1], c = train_clusters.labels_)
-        ax[0].set_title('Plotted Principal Components of TRAINING DATA', style = 'oblique')
+        ax[0].scatter(X_train_pca[:, 0], X_train_pca[:, 1], c=train_clusters.labels_)
+        ax[0].set_title('Plotted Principal Components of TRAINING DATA', style='oblique')
         ax[0].legend(train_clusters.labels_)
-        ax[1].scatter(X_test_pca[:, 0], X_test_pca[:, 1], c = test_clusters.labels_)
-        ax[1].set_title('Plotted Principal Components of TEST DATA', style = 'oblique')
+        ax[1].scatter(X_test_pca[:, 0], X_test_pca[:, 1], c=test_clusters.labels_)
+        ax[1].set_title('Plotted Principal Components of TEST DATA', style='oblique')
         ax[1].legend(test_clusters.l1abels_)
     #principal components of bank panel has better results than card panel with clearer borders
     else:

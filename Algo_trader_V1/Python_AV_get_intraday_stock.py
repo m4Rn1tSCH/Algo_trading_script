@@ -28,6 +28,15 @@ def pull_stock_data(symbol, adjusted, outputsize, cadence, output_format):
         #drop the date as index to use it
         df_pull = df_pull.reset_index(drop=False, inplace=False)
 
+        #rename columns names for better handling
+        df_pull.rename(
+            columns={"1. open": "open",
+                     "2. high": "high",
+                     "3. low": "low",
+                     "4. close":"close",
+                     "5. volume": "volume"},
+            inplace=False)
+
     except BaseException as e:
         print(e)
         print("API not properly connected")
@@ -59,10 +68,24 @@ def pull_intraday_data(symbol, interval, outputsize, output_format):
         #                 '6. volume', '7. dividend amount', '8. split coefficient'],
         #                 value = ['open', 'high', 'low', 'close', 'adjusted close', 'volume', 'dividend amount', 'split coefficient'],
         #                 inplace = True)
+
+        df_intra_pull.rename(
+            columns={"1. open": "open",
+                     "2. high": "high",
+                     "3. low": "low",
+                     "4. close":"close",
+                     "5. volume": "volume"},
+            inplace=False)
+
     except BaseException as e:
         print(e)
         print("API not properly connected")
     return df_intra_pull
+
+ intra_df = pull_intraday_data(symbol='COTY',
+                                interval='5min',
+                                outputsize='full',
+                                output_format='pandas')
 
 def submit_order(symbol, qty, side, type, time_in_force, limit_price):
     '''
@@ -104,22 +127,19 @@ def get_asset_list(status, asset_class):
         print(f)
     return asset_list
 #%%
+#TODO
 import matplotlib.pyplot as plt
-stock_df = pull_stock_data(symbol='COTY',
-                            adjusted=True,
-                            outputsize='full',
-                            cadence='monthly',
-                            output_format='pandas')
+import numpy as np
 
-fig, ax = plt.subplots(nrows=2, ncols=1, figsize=(12, 10), dpi=600)
+fig, ax = plt.subplots(2, 1, figsize=(12, 10), dpi=600, squeeze=False)
 
 # LINE VALUES
 #   supported values are: '-', '--', '-.', ':',
 #   'None', ' ', '', 'solid', 'dashed', 'dashdot', 'dotted'
 # Plot the date on x-axis and open price on y-axis
-ax[0].set_title('Open Price', style='oblique')
-ax[0].plot(stock_df["date"], stock_df["1. open"], color='green', lw=1, ls='dashdot', marker='o', label="Open Price")
+ax[0,0].set_title('Open Price', style='oblique')
+ax[0,0].plot(intra_df['date'], intra_df['1. open'], color='green', lw=1, ls='dashdot', marker='o', label="Open Price")
 # Plot the date on x-axis and the trading volume on y-axis
-ax[1].set_title('Trading Volume', style='oblique')
-ax[1].plot(stock_df["date"], stock_df["6. volume"], color='orange', lw=0, ls='solid', marker='o', label="Trade Volume")
+ax[1,0].set_title('Trading Volume', style='oblique')
+ax[1,0].plot(intra_df['date'], intra_df['5. volume'], color='orange', lw=0, ls='solid', marker='o', label="Trade Volume")
 plt.show()

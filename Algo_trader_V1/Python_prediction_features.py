@@ -22,12 +22,6 @@ def pred_feat(df):
 
     #Conversion datetime to timestamps
     try:
-        # check for date objects + conversion if required
-        if df['date'].dtype == 'datetime64[ns]':
-            pass
-        else:
-            df['date'] = pd.to_datetime(df['date'])
-
         # handle datetime object and add features
         for col in list(df):
             if df[col].dtype == 'datetime64[ns]':

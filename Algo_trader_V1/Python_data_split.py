@@ -5,7 +5,7 @@ Created on 25 4/25/2020 10:57 PM 2020
 @author: bill-
 """
 
-from Python_AV_get_intraday_stock import intra_df, pull_stock_data
+#from Python_AV_get_intraday_stock import pull_stock_data
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
 from sklearn.decomposition import PCA
@@ -45,16 +45,16 @@ def split_data(df, label_col):
     #df = intra_df
     #label_col='open'
 
-    #datetime object is pushed back to be index again before split
-    #this way scaling is possible + index allows plotting later on
+    model_features = df.drop(columns=label_col, axis = 1, inplace = False)
+    model_label = df[label_col]
+
+    # datetime object is pushed back to be index again before split
+    # this way scaling is possible + index allows plotting later on
     if df['date'].dtype == 'datetime64[ns]':
         model_features.set_index('date', drop=True, inplace=True)
     else:
         print("datetime object still in df; scaling will fail")
 
-
-    model_features = df.drop(columns=label_col, axis = 1, inplace = False)
-    model_label = df[label_col]
 
     X_train, X_test, y_train, y_test = train_test_split(model_features,
                                                         model_label,

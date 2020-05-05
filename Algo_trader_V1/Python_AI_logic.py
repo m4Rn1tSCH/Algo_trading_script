@@ -6,7 +6,6 @@ Created on 24 4/24/2020 5:25 PM 2020
 """
 # packages
 import pandas as pd
-
 pd.set_option('display.width', 1000)
 from datetime import datetime as dt
 import matplotlib.pyplot as plt
@@ -100,8 +99,6 @@ def set_pipeline_reg(x, y):
     print(f"Best accuracy with parameters: {grid_search.best_score_}")
 
     return grid_search.best_score_
-
-
 # %%
 def set_rfe_cross_val(x, y):
     """

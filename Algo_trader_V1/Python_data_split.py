@@ -4,16 +4,24 @@ Created on 25 4/25/2020 10:57 PM 2020
 
 @author: bill-
 """
-'''
-This module contains the function to split the data in a test and a training set
-'''
+
+from Python_AV_get_intraday_stock import intra_df, pull_stock_data
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
 from sklearn.decomposition import PCA
 
-def split_data(df, label_col, plot = True):
-    """
+'''
+This module contains the function to split the data in a test and a training set
+'''
 
+def split_data(df, label_col):
+    """
+    DOCUMENTATION   Dataframe is split into test and training set.
+    Additionally, the label column can be set and will be automatically dropped
+    in the feature dataframe.
+    -Application of Stadard Scaler
+    -Application of Min-Max Scaler
+    -Application of Principal Component Analysis+KMeans; plots the results afterwards
 
     Parameters
     ----------
@@ -33,14 +41,16 @@ def split_data(df, label_col, plot = True):
     #TODO
     ##variables arent being passed correctly
     #specify the label to be predicted
-    df = intra_df
-    label_col='open'
-        #datetie object is pushed back to be index again before split
-        #this way scaling is possible + index allows plotting later on
-        if df['date'].dtype == 'datetime64[ns]':
-            model_features.set_index('date', drop=True, inplace=True)
-        else:
-            print("datetime object still in df; scaling will fail")
+
+    #df = intra_df
+    #label_col='open'
+
+    #datetime object is pushed back to be index again before split
+    #this way scaling is possible + index allows plotting later on
+    if df['date'].dtype == 'datetime64[ns]':
+        model_features.set_index('date', drop=True, inplace=True)
+    else:
+        print("datetime object still in df; scaling will fail")
 
 
     model_features = df.drop(columns=label_col, axis = 1, inplace = False)
@@ -79,31 +89,33 @@ def split_data(df, label_col, plot = True):
     print("Original shape: {}".format(str(X_train_scaled.shape)))
     print("Reduced shape: {}".format(str(X_train_pca.shape)))
 
-    if plot == True:
-        import matplotlib.pyplot as plt
-        from sklearn.cluster import KMeans
-        '''
-                    Plotting of PCA/ Cluster Pairs
-    
-        '''
-        #Kmeans clusters to categorize groups WITH SCALED DATA
-        #determine number of groups needed or desired for
-        kmeans = KMeans(n_clusters=5, random_state=10)
-        train_clusters = kmeans.fit(X_train_scaled)
+    return'split completed'
 
-        kmeans = KMeans(n_clusters=5, random_state=10)
-        test_clusters = kmeans.fit(X_test_scaled)
-
-        fig, ax = plt.subplots(nrows=2, ncols=1, figsize=(12, 10), dpi=600,squeeze=False)
-        #styles for title: normal; italic; oblique
-        ax[0].scatter(X_train_pca[:, 0], X_train_pca[:, 1], c=train_clusters.labels_)
-        ax[0].set_title('Plotted Principal Components of TRAINING DATA', style='oblique')
-        ax[0].legend(train_clusters.labels_)
-        ax[1].scatter(X_test_pca[:, 0], X_test_pca[:, 1], c=test_clusters.labels_)
-        ax[1].set_title('Plotted Principal Components of TEST DATA', style='oblique')
-        ax[1].legend(test_clusters.l1abels_)
-    #principal components of bank panel has better results than card panel with clearer borders
-    else:
-        pass
-
-    return df
+    # if plot == True:
+    #     import matplotlib.pyplot as plt
+    #     from sklearn.cluster import KMeans
+    #     '''
+    #                 Plotting of PCA/ Cluster Pairs
+    #
+    #     '''
+    #     #Kmeans clusters to categorize groups WITH SCALED DATA
+    #     #determine number of groups needed or desired for
+    #     kmeans = KMeans(n_clusters=5, random_state=10)
+    #     train_clusters = kmeans.fit(X_train_scaled)
+    #
+    #     kmeans = KMeans(n_clusters=5, random_state=10)
+    #     test_clusters = kmeans.fit(X_test_scaled)
+    #
+    #     fig, ax = plt.subplots(nrows=2, ncols=1, figsize=(12, 10), dpi=600,squeeze=False)
+    #     #styles for title: normal; italic; oblique
+    #     ax[0].scatter(X_train_pca[:, 0], X_train_pca[:, 1], c=train_clusters.labels_)
+    #     ax[0].set_title('Plotted Principal Components of TRAINING DATA', style='oblique')
+    #     ax[0].legend(train_clusters.labels_)
+    #     ax[1].scatter(X_test_pca[:, 0], X_test_pca[:, 1], c=test_clusters.labels_)
+    #     ax[1].set_title('Plotted Principal Components of TEST DATA', style='oblique')
+    #     ax[1].legend(test_clusters.l1abels_)
+    # #principal components of bank panel has better results than card panel with clearer borders
+    # else:
+    #     pass
+    #
+    # return df

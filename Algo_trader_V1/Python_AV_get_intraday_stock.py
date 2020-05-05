@@ -29,13 +29,12 @@ def pull_stock_data(symbol, adjusted, outputsize, cadence, output_format):
         df_pull = df_pull.reset_index(drop=False, inplace=False)
 
         #rename columns names for better handling
-        df_pull.rename(
-            columns={"1. open": "open",
-                     "2. high": "high",
-                     "3. low": "low",
-                     "4. close":"close",
-                     "5. volume": "volume"},
-            inplace=False)
+        df_pull = df_pull.rename(columns={"1. open": "open",
+                                        "2. high": "high",
+                                        "3. low": "low",
+                                        "4. close":"close",
+                                        "5. volume": "volume"},
+                                inplace=False)
 
     except BaseException as e:
         print(e)
@@ -64,28 +63,23 @@ def pull_intraday_data(symbol, interval, outputsize, output_format):
                                         )
         #drop the date as index to use it
         df_intra_pull = df_intra_pull.reset_index(drop=False, inplace=False)
-        # test_df.replace(to_replace=['1. open', '2. high', '3. low', '4. close', '5. adjusted close',
-        #                 '6. volume', '7. dividend amount', '8. split coefficient'],
-        #                 value = ['open', 'high', 'low', 'close', 'adjusted close', 'volume', 'dividend amount', 'split coefficient'],
-        #                 inplace = True)
 
-        df_intra_pull.rename(
-            columns={"1. open": "open",
-                     "2. high": "high",
-                     "3. low": "low",
-                     "4. close":"close",
-                     "5. volume": "volume"},
-            inplace=False)
+        df_intra_pull = df_intra_pull.rename(columns={"1. open": "open",
+                                                    "2. high": "high",
+                                                    "3. low": "low",
+                                                    "4. close": "close",
+                                                    "5. volume": "volume"},
+                                            inplace=False)
 
     except BaseException as e:
         print(e)
         print("API not properly connected")
     return df_intra_pull
 
- intra_df = pull_intraday_data(symbol='COTY',
-                                interval='5min',
-                                outputsize='full',
-                                output_format='pandas')
+#intra_df = pull_intraday_data(symbol='COTY',
+#                            interval='5min',
+#                            outputsize='full',
+#                            output_format='pandas')
 
 def submit_order(symbol, qty, side, type, time_in_force, limit_price):
     '''
@@ -129,6 +123,7 @@ def get_asset_list(status, asset_class):
 #%%
 #TODO
 #fix date columns
+#split up carts into 2 subplots again (prob has been fixed)
 import matplotlib.pyplot as plt
 # LINE VALUES
 #   supported values are: '-', '--', '-.', ':',

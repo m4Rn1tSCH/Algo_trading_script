@@ -69,9 +69,3 @@ def get_acc_profit():
         balance_change = float(account.equity) - float(account.last_equity)
         print(f'Today\'s portfolio balance change: ${balance_change}')
     return
-
-# Print today's price of a stock
-###api.alpha_vantage.historic_quotes(symbol='AAPL')
-
-# Lists all open orders
-# orders = api.list_orders()

@@ -5,8 +5,8 @@ Created on Sat April 22 10:26:42 2020
 @author: bill-
 """
 import numpy as np
-import pandas as pd
-
+from datetime import datetime as dt
+1
 
 def pred_feat(df):
     """
@@ -42,7 +42,7 @@ def pred_feat(df):
     # mean + stdev of past 3d/7d/30d/ + rolling volume
     df.reset_index(drop=True, inplace=True)
     # pick lag features to iterate through and calculate features
-    lag_features = ['open', 'high', 'low', 'close', 'adjusted close']
+    lag_features = ['open', 'high', 'low', 'close', 'volume']
     # set up time frames; how many days/months back/forth
     t1 = 3
     t2 = 7
@@ -75,4 +75,6 @@ def pred_feat(df):
     # drop the first and second row since the indicators refer to previous non-existent days
     # df = df.drop([0, 1])
     df.reset_index(drop=True, inplace=True)
+    df = df.fillna(method='bfill')
+
     return df

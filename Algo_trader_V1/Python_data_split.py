@@ -42,8 +42,8 @@ def split_data(df, label_col):
     ##variables arent being passed correctly
     #specify the label to be predicted
 
-    #df = intra_df
-    #label_col='open'
+    df = intra_df
+    label_col='open'
 
     model_features = df.drop(columns=label_col, axis = 1, inplace = False)
     model_label = df[label_col]
@@ -89,7 +89,7 @@ def split_data(df, label_col):
     print("Original shape: {}".format(str(X_train_scaled.shape)))
     print("Reduced shape: {}".format(str(X_train_pca.shape)))
 
-    return'split completed'
+    return (X_train, X_test, X_train_scaled, X_test_scaled, X_train_pca, X_test_pca)
 
     # if plot == True:
     #     import matplotlib.pyplot as plt

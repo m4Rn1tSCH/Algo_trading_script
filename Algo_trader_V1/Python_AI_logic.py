@@ -6,6 +6,7 @@ Created on 24 4/24/2020 5:25 PM 2020
 """
 # packages
 import pandas as pd
+
 pd.set_option('display.width', 1000)
 from datetime import datetime as dt
 import matplotlib.pyplot as plt
@@ -39,6 +40,7 @@ other functions: mutual_info_classif; chi2, f_regression; mutual_info_regression
 
 # TODO
 # TEST
+# set up fitting with scaled values as well
 def set_pipeline_knn(x, y):
     """
     Pipeline - SelectKBest and K Nearest Neighbor
@@ -50,7 +52,6 @@ def set_pipeline_knn(x, y):
         ('clf', KNeighborsClassifier())])
 
     # Create a parameter grid
-
     params = {
         'feature_selection__k': [1, 2, 3, 4, 5, 6, 7],
         'clf__n_neighbors': [2, 3, 4, 5, 6, 7, 8]}
@@ -65,8 +66,10 @@ def set_pipeline_knn(x, y):
 
     return grid_search.best_score_
 
-#TODO
+
+# TODO
 # TEST
+# set up fitting with scaled values as well
 def set_pipeline_reg(x, y):
     """
     Pipeline - Logistic Regression and Support Vector Kernel
@@ -99,6 +102,43 @@ def set_pipeline_reg(x, y):
     print(f"Best accuracy with parameters: {grid_search.best_score_}")
 
     return grid_search.best_score_
+
+
+# %%
+#TODO
+# set up fitting with scaled values
+
+def set_pipeline_rfr():
+    """
+    Pipeline  - SelectKBest and Random Forest Regressor
+    REQUIRES FLOAT32 OR INT32 VALUES AS LABELS
+    """
+    # Create pipeline with feature selector and classifier
+    pipe = Pipeline([
+        ('feature_selection', SelectKBest(score_func=f_classif)),
+        ('reg', RandomForestRegressor(n_estimators=75,
+                                      max_depth=len(bank_df.columns) / 2,
+                                      min_samples_split=4))
+    ])
+
+    # Create a parameter grid
+    params = {
+        'feature_selection__k': [5, 6, 7, 8, 9],
+        'reg__n_estimators': [75, 100, 150, 200],
+        'reg__min_samples_split': [4, 8, 10, 15],
+    }
+
+    # Initialize the grid search object
+    grid_search = GridSearchCV(pipe, param_grid=params)
+
+    # Fit it to the data and print the best value combination
+    print(f"Pipeline 3; {dt.today()}")
+    print(grid_search.fit(X_train, y_train).best_params_)
+    print("Overall score: %.4f" % (grid_search.score(X_test, y_test)))
+    print(f"Best accuracy with parameters: {grid_search.best_score_}")
+    return grid_search.best_score_
+
+
 # %%
 def set_rfe_cross_val(x, y):
     """
@@ -157,16 +197,22 @@ def set_rfe_cross_val(x, y):
     plt.show()
 
     return rfecv.grid_scores_
-#%%
+
+
+# %%
 '''
         Usage of a Pickle Model -Storage of a trained Model
 '''
+
+
 def store_pickle(model):
     model_file = "gridsearch_model.sav"
     with open(model_file, mode='wb') as m_f:
         pickle.dump(model, m_f)
     return model_file
-#%%
+
+
+# %%
 '''
         Usage of a Pickle Model -Loading of a Pickle File
 
@@ -176,6 +222,7 @@ INTERNAL PARAMETER
 open_pickle(model_file=model_file)
 '''
 
+
 def open_pickle(model_file):
     with open(model_file, mode='rb') as m_f:
         grid_search = pickle.load(m_f)
@@ -183,5 +230,5 @@ def open_pickle(model_file):
         print("Employed Estimator:", grid_search.get_params)
         print("--------------------")
         print("BEST PARAMETER COMBINATION:", grid_search.best_params_)
-        print("Training Accuracy Result: %.4f" %(result))
+        print("Training Accuracy Result: %.4f" % (result))
         return 'grid_search parameters loaded'

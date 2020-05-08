@@ -15,6 +15,8 @@ This module contains the function to split the data in a test and a training set
 '''
 
 def split_data(df, label_col):
+
+
     """
     DOCUMENTATION   Dataframe is split into test and training set.
     Additionally, the label column can be set and will be automatically dropped
@@ -39,14 +41,21 @@ def split_data(df, label_col):
 
     """
     #TODO
-    ##variables arent being passed correctly
-    #specify the label to be predicted
+    # variables arent being passed correctly
+    # specify the label to be predicted
 
     df = intra_df
     label_col='open'
 
     model_features = df.drop(columns=label_col, axis = 1, inplace = False)
     model_label = df[label_col]
+
+    if model_label.dtype == 'float32':
+        model_label = model_label.astype('int32')
+    elif model_label.dtype == 'float64':
+        model_label = model_label.astype('int64')
+    else:
+        print("model label has unsuitable data type!")
 
     # datetime object is pushed back to be index again before split
     # this way scaling is possible + index allows plotting later on
@@ -70,8 +79,8 @@ def split_data(df, label_col):
 
 
     #TODO
-    #fit the scaler to the training data first
-    #standard scaler works only with maximum 2 dimensions
+    # fit the scaler to the training data first
+    # standard scaler works only with maximum 2 dimensions
     scaler = StandardScaler(copy=True, with_mean=True, with_std=True).fit(X_train)
     X_train_scaled = scaler.transform(X_train)
 
@@ -91,7 +100,7 @@ def split_data(df, label_col):
 
     return (X_train, X_test, X_train_scaled, X_test_scaled, X_train_pca, X_test_pca)
 
-    # if plot == True:
+    # if plot:
     #     import matplotlib.pyplot as plt
     #     from sklearn.cluster import KMeans
     #     '''

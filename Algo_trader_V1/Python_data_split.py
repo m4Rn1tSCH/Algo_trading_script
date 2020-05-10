@@ -44,7 +44,7 @@ def split_data(df, label_col):
     # variables arent being passed correctly
     # specify the label to be predicted
 
-    df = intra_df
+    df = df
     label_col='open'
 
     model_features = df.drop(columns=label_col, axis = 1, inplace = False)
@@ -86,7 +86,7 @@ def split_data(df, label_col):
 
     #transform test data with the object learned from the training data
     X_test_scaled = scaler.transform(X_test)
-    #%%
+
     #Principal Component Reduction
     #keep the most important features of the data
     pca = PCA(n_components = int(len(df.columns) / 2))
@@ -98,7 +98,7 @@ def split_data(df, label_col):
     print("Original shape: {}".format(str(X_train_scaled.shape)))
     print("Reduced shape: {}".format(str(X_train_pca.shape)))
 
-    return (X_train, X_test, X_train_scaled, X_test_scaled, X_train_pca, X_test_pca)
+    return list([X_train, X_test, X_train_scaled, X_test_scaled, X_train_pca, X_test_pca])
 
     # if plot:
     #     import matplotlib.pyplot as plt

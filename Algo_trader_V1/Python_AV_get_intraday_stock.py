@@ -125,10 +125,12 @@ def get_asset_list(status, asset_class):
 #fix date columns
 #split up carts into 2 subplots again (prob has been fixed)
 import matplotlib.pyplot as plt
+'''
 # LINE VALUES
 #   supported values are: '-', '--', '-.', ':',
 #   'None', ' ', '', 'solid', 'dashed', 'dashdot', 'dotted'
 # Plot the date on x-axis and open price on y-axis
+
 plt.title('Open Price', style='oblique')
 plt.xticks(rotation=60)
 intra_df['date'], intra_df['1. open'].plot(color='green', lw=1, ls='dashdot', marker='x', label="Open Price")
@@ -136,3 +138,4 @@ intra_df['date'], intra_df['1. open'].plot(color='green', lw=1, ls='dashdot', ma
 #plt.set_title('Trading Volume', style='oblique')
 intra_df['date'], intra_df['5. volume'].plot(color='orange', lw=1, ls='solid', marker='x', label="Trade Volume")
 plt.show()
+'''

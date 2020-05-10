@@ -11,6 +11,7 @@ pd.set_option('display.width', 1000)
 from datetime import datetime as dt
 import matplotlib.pyplot as plt
 import pickle
+
 from sklearn.feature_selection import SelectKBest, chi2, f_classif, RFE, RFECV
 from sklearn.linear_model import LogisticRegression, LinearRegression, SGDRegressor
 from sklearn.neighbors import KNeighborsClassifier
@@ -18,6 +19,7 @@ from sklearn.svm import SVR
 from sklearn.pipeline import Pipeline
 from sklearn.metrics import r2_score, mean_squared_error, accuracy_score, classification_report, f1_score, roc_auc_score
 from sklearn.model_selection import GridSearchCV
+from sklearn.cluster import KMeans
 
 '''
 This module contains the AI/ML packages to take preprocessed data, find informative features
@@ -102,8 +104,6 @@ def set_pipeline_knn(x, y, pca_plot=False):
 
 
     if pca_plot:
-        import matplotlib.pyplot as plt
-        from sklearn.cluster import KMeans
         '''
                     Plotting of PCA/ Cluster Pairs
 
@@ -210,8 +210,7 @@ def set_pipeline_reg(x, y, pca_plot=False):
 
 
     if pca_plot:
-        import matplotlib.pyplot as plt
-        from sklearn.cluster import KMeans
+
         '''
                     Plotting of PCA/ Cluster Pairs
 
@@ -327,8 +326,6 @@ def set_pipeline_rfr():
 
 
     if plot:
-        import matplotlib.pyplot as plt
-        from sklearn.cluster import KMeans
         '''
                     Plotting of PCA/ Cluster Pairs
 
@@ -439,8 +436,6 @@ def set_rfe_cross_val(x, y):
     print("Reduced shape: {}".format(str(X_train_pca.shape)))
 
     if plot:
-        import matplotlib.pyplot as plt
-        from sklearn.cluster import KMeans
         '''
                     Plotting of PCA/ Cluster Pairs
 

@@ -47,7 +47,6 @@ other functions: mutual_info_classif; chi2, f_regression; mutual_info_regression
 # set up fitting with scaled values as well
 def set_pipeline_knn(x, y, pca_plot=False):
 
-
     """
     Pipeline - SelectKBest and K Nearest Neighbor
     """
@@ -101,7 +100,6 @@ def set_pipeline_knn(x, y, pca_plot=False):
     print("Original shape: {}".format(str(X_train_scaled.shape)))
     print("Reduced shape: {}".format(str(X_train_pca.shape)))
 
-    return list([X_train, X_test, X_train_scaled, X_test_scaled, X_train_pca, X_test_pca])
 
     if pca_plot:
         import matplotlib.pyplot as plt
@@ -210,7 +208,6 @@ def set_pipeline_reg(x, y, pca_plot=False):
     print("Original shape: {}".format(str(X_train_scaled.shape)))
     print("Reduced shape: {}".format(str(X_train_pca.shape)))
 
-    return list([X_train, X_test, X_train_scaled, X_test_scaled, X_train_pca, X_test_pca])
 
     if pca_plot:
         import matplotlib.pyplot as plt
@@ -328,34 +325,33 @@ def set_pipeline_rfr():
     print("Original shape: {}".format(str(X_train_scaled.shape)))
     print("Reduced shape: {}".format(str(X_train_pca.shape)))
 
-    return list([X_train, X_test, X_train_scaled, X_test_scaled, X_train_pca, X_test_pca])
 
-    # if plot:
-    #     import matplotlib.pyplot as plt
-    #     from sklearn.cluster import KMeans
-    #     '''
-    #                 Plotting of PCA/ Cluster Pairs
-    #
-    #     '''
-    #     #Kmeans clusters to categorize groups WITH SCALED DATA
-    #     #determine number of groups needed or desired for
-    #     kmeans = KMeans(n_clusters=5, random_state=10)
-    #     train_clusters = kmeans.fit(X_train_scaled)
-    #
-    #     kmeans = KMeans(n_clusters=5, random_state=10)
-    #     test_clusters = kmeans.fit(X_test_scaled)
-    #
-    #     fig, ax = plt.subplots(nrows=2, ncols=1, figsize=(12, 10), dpi=600,squeeze=False)
-    #     #styles for title: normal; italic; oblique
-    #     ax[0].scatter(X_train_pca[:, 0], X_train_pca[:, 1], c=train_clusters.labels_)
-    #     ax[0].set_title('Plotted Principal Components of TRAINING DATA', style='oblique')
-    #     ax[0].legend(train_clusters.labels_)
-    #     ax[1].scatter(X_test_pca[:, 0], X_test_pca[:, 1], c=test_clusters.labels_)
-    #     ax[1].set_title('Plotted Principal Components of TEST DATA', style='oblique')
-    #     ax[1].legend(test_clusters.l1abels_)
-    # #principal components of bank panel has better results than card panel with clearer borders
-    # else:
-    #     pass
+    if plot:
+        import matplotlib.pyplot as plt
+        from sklearn.cluster import KMeans
+        '''
+                    Plotting of PCA/ Cluster Pairs
+
+        '''
+        #Kmeans clusters to categorize groups WITH SCALED DATA
+        #determine number of groups needed or desired for
+        kmeans = KMeans(n_clusters=5, random_state=10)
+        train_clusters = kmeans.fit(X_train_scaled)
+
+        kmeans = KMeans(n_clusters=5, random_state=10)
+        test_clusters = kmeans.fit(X_test_scaled)
+
+        fig, ax = plt.subplots(nrows=2, ncols=1, figsize=(12, 10), dpi=600,squeeze=False)
+        #styles for title: normal; italic; oblique
+        ax[0].scatter(X_train_pca[:, 0], X_train_pca[:, 1], c=train_clusters.labels_)
+        ax[0].set_title('Plotted Principal Components of TRAINING DATA', style='oblique')
+        ax[0].legend(train_clusters.labels_)
+        ax[1].scatter(X_test_pca[:, 0], X_test_pca[:, 1], c=test_clusters.labels_)
+        ax[1].set_title('Plotted Principal Components of TEST DATA', style='oblique')
+        ax[1].legend(test_clusters.l1abels_)
+    #principal components of bank panel has better results than card panel with clearer borders
+    else:
+        pass
 
     # Create pipeline with feature selector and classifier
     pipe = Pipeline([
@@ -442,34 +438,32 @@ def set_rfe_cross_val(x, y):
     print("Original shape: {}".format(str(X_train_scaled.shape)))
     print("Reduced shape: {}".format(str(X_train_pca.shape)))
 
-    return list([X_train, X_test, X_train_scaled, X_test_scaled, X_train_pca, X_test_pca])
+    if plot:
+        import matplotlib.pyplot as plt
+        from sklearn.cluster import KMeans
+        '''
+                    Plotting of PCA/ Cluster Pairs
 
-    # if plot:
-    #     import matplotlib.pyplot as plt
-    #     from sklearn.cluster import KMeans
-    #     '''
-    #                 Plotting of PCA/ Cluster Pairs
-    #
-    #     '''
-    #     #Kmeans clusters to categorize groups WITH SCALED DATA
-    #     #determine number of groups needed or desired for
-    #     kmeans = KMeans(n_clusters=5, random_state=10)
-    #     train_clusters = kmeans.fit(X_train_scaled)
-    #
-    #     kmeans = KMeans(n_clusters=5, random_state=10)
-    #     test_clusters = kmeans.fit(X_test_scaled)
-    #
-    #     fig, ax = plt.subplots(nrows=2, ncols=1, figsize=(12, 10), dpi=600,squeeze=False)
-    #     #styles for title: normal; italic; oblique
-    #     ax[0].scatter(X_train_pca[:, 0], X_train_pca[:, 1], c=train_clusters.labels_)
-    #     ax[0].set_title('Plotted Principal Components of TRAINING DATA', style='oblique')
-    #     ax[0].legend(train_clusters.labels_)
-    #     ax[1].scatter(X_test_pca[:, 0], X_test_pca[:, 1], c=test_clusters.labels_)
-    #     ax[1].set_title('Plotted Principal Components of TEST DATA', style='oblique')
-    #     ax[1].legend(test_clusters.l1abels_)
-    # #principal components of bank panel has better results than card panel with clearer borders
-    # else:
-    #     pass
+        '''
+        #Kmeans clusters to categorize groups WITH SCALED DATA
+        #determine number of groups needed or desired for
+        kmeans = KMeans(n_clusters=5, random_state=10)
+        train_clusters = kmeans.fit(X_train_scaled)
+
+        kmeans = KMeans(n_clusters=5, random_state=10)
+        test_clusters = kmeans.fit(X_test_scaled)
+
+        fig, ax = plt.subplots(nrows=2, ncols=1, figsize=(12, 10), dpi=600,squeeze=False)
+        #styles for title: normal; italic; oblique
+        ax[0].scatter(X_train_pca[:, 0], X_train_pca[:, 1], c=train_clusters.labels_)
+        ax[0].set_title('Plotted Principal Components of TRAINING DATA', style='oblique')
+        ax[0].legend(train_clusters.labels_)
+        ax[1].scatter(X_test_pca[:, 0], X_test_pca[:, 1], c=test_clusters.labels_)
+        ax[1].set_title('Plotted Principal Components of TEST DATA', style='oblique')
+        ax[1].legend(test_clusters.l1abels_)
+    #principal components of bank panel has better results than card panel with clearer borders
+    else:
+        pass
 
     # Use the Cross-Validation function of the RFE module
     # LOGISTIC REGRESSION

@@ -18,8 +18,12 @@ from sklearn.neighbors import KNeighborsClassifier
 from sklearn.svm import SVR
 from sklearn.pipeline import Pipeline
 from sklearn.metrics import r2_score, mean_squared_error, accuracy_score, classification_report, f1_score, roc_auc_score
-from sklearn.model_selection import GridSearchCV
+from sklearn.model_selection import GridSearchCV, train_test_split
 from sklearn.cluster import KMeans
+from sklearn.preprocessing import LabelEncoder, StandardScaler, MinMaxScaler, QuantileTransformer
+from sklearn.decomposition import PCA
+from sklearn.compose import TransformedTargetRegressor
+from sklearn.ensemble import RandomForestRegressor
 
 '''
 This module contains the AI/ML packages to take preprocessed data, find informative features
@@ -41,13 +45,14 @@ Chi2: for regression tasks; requires non-neg values
 other functions: mutual_info_classif; chi2, f_regression; mutual_info_regression
 '''
 
-
+df = intra_df
+label_col = 'open'
 # Create pipeline with feature selector and regressor/classifier
 
 # TODO
 # TEST
 # set up fitting with scaled values as well
-def set_pipeline_knn(pca_plot=False):
+def pipeline_knn(df, pca_plot=False):
 
     """
     Pipeline - SelectKBest and K Nearest Neighbor
@@ -153,13 +158,10 @@ def set_pipeline_knn(pca_plot=False):
 # TODO
 # TEST
 # set up fitting with scaled values as well
-def set_pipeline_reg(pca_plot=False):
+def pipeline_reg(df, pca_plot=False):
     """
     Pipeline - Logistic Regression and Support Vector Kernel
     """
-
-    df = df
-    label_col = 'open'
 
     model_features = df.drop(columns=label_col, axis=1, inplace=False)
     model_label = df[label_col]
@@ -267,14 +269,11 @@ def set_pipeline_reg(pca_plot=False):
 #TODO
 # set up fitting with scaled values
 
-def set_pipeline_rfr(pca_plot=False):
+def pipeline_rfr(df, pca_plot=False):
     """
     Pipeline  - SelectKBest and Random Forest Regressor
     REQUIRES FLOAT32 OR INT32 VALUES AS LABELS
     """
-
-    df = df
-    label_col = 'open'
 
     model_features = df.drop(columns=label_col, axis=1, inplace=False)
     model_label = df[label_col]
@@ -353,14 +352,13 @@ def set_pipeline_rfr(pca_plot=False):
     # Create pipeline with feature selector and classifier
     pipe = Pipeline([
         ('feature_selection', SelectKBest(score_func=f_classif)),
-        ('reg', RandomForestRegressor(n_estimators=75,
-                                      max_depth=len(bank_df.columns) / 2,
-                                      min_samples_split=4))
+        ('reg', RandomForestRegressor(max_depth=len(df.columns) / 2,
+                                      random_state=8))
     ])
 
     # Create a parameter grid
     params = {
-        'feature_selection__k': [5, 6, 7, 8, 9],
+        'feature_selection__k': [2, 3, 4, 5],
         'reg__n_estimators': [75, 100, 150, 200],
         'reg__min_samples_split': [4, 8, 10, 15],
     }
@@ -373,7 +371,8 @@ def set_pipeline_rfr(pca_plot=False):
     print(grid_search_rfr.fit(X_train, y_train).best_params_)
     print("Overall score: %.4f" % (grid_search_rfr.score(X_test, y_test)))
     print(f"Best accuracy with parameters: {grid_search_rfr.best_score_}")
-    return grid_search.best_score_
+
+    return grid_search_rfr
 
 def pipeline_trans_reg():
 

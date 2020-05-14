@@ -44,18 +44,26 @@ the f-values between features & labels;
 Chi2: for regression tasks; requires non-neg values
 other functions: mutual_info_classif; chi2, f_regression; mutual_info_regression
 '''
-
-df = intra_df
-label_col = 'open'
+# for tests only
+# df = intra_df
+# label_col = 'open'
 # Create pipeline with feature selector and regressor/classifier
 
 # TODO
-# TEST
+
 # set up fitting with scaled values as well
 def pipeline_knn(df, pca_plot=False):
 
     """
     Pipeline - SelectKBest and K Nearest Neighbor
+    Pipeline KNN; 2020-05-14 16:35:40
+    {'clf__n_neighbors': 7, 'feature_selection__k': 1}
+    Best accuracy with parameters: 0.6242857142857143
+    GridSearchCV(cv=None, error_score=nan,
+             estimator=Pipeline(memory=None,
+                                steps=[('feature_selection',
+                                        SelectKBest(k=10,
+                                        score_func=chi2)),
     """
 
     model_features = df.drop(columns=label_col, axis=1, inplace=False)
@@ -87,9 +95,6 @@ def pipeline_knn(df, pca_plot=False):
     print(f"Shape of the split training data set y_train: {y_train.shape}")
     print(f"Shape of the split training data set y_test: {y_test.shape}")
 
-    # TODO
-    # fit the scaler to the training data first
-    # standard scaler works only with maximum 2 dimensions
     scaler = StandardScaler(copy=True, with_mean=True, with_std=True).fit(X_train)
     X_train_scaled = scaler.transform(X_train)
 
@@ -129,7 +134,7 @@ def pipeline_knn(df, pca_plot=False):
         ax[1].scatter(X_test_pca[:, 0], X_test_pca[:, 1], c=test_clusters.labels_)
         ax[1].set_title('Plotted Principal Components of TEST DATA', style='oblique')
         ax[1].legend(test_clusters.l1abels_)
-    #principal components of bank panel has better results than card panel with clearer borders
+
     else:
         pass
 
@@ -149,14 +154,13 @@ def pipeline_knn(df, pca_plot=False):
 
     # Fit it to the data and print the best value combination
     print(f"Pipeline KNN; {dt.today()}")
-    print(grid_search_knn.fit(x, y).best_params_)
+    print(grid_search_knn.fit(X_train, y_train).best_params_)
     print(f"Best accuracy with parameters: {grid_search_knn.best_score_}")
 
     return grid_search_knn
 
 
 # TODO
-# TEST
 # set up fitting with scaled values as well
 def pipeline_reg(df, pca_plot=False):
     """
@@ -259,13 +263,12 @@ def pipeline_reg(df, pca_plot=False):
 
     # Fit it to the data and print the best value combination
     print(f"Pipeline SVR; {dt.today()}")
-    print(grid_search_svr.fit(x, y).best_params_)
+    print(grid_search_svr.fit(X_train, y_train).best_params_)
     print(f"Best accuracy with parameters: {grid_search_svr.best_score_}")
 
     return grid_search_svr
 
 
-# %%
 #TODO
 # set up fitting with scaled values
 
@@ -307,9 +310,6 @@ def pipeline_rfr(df, pca_plot=False):
     print(f"Shape of the split training data set y_train: {y_train.shape}")
     print(f"Shape of the split training data set y_test: {y_test.shape}")
 
-    # TODO
-    # fit the scaler to the training data first
-    # standard scaler works only with maximum 2 dimensions
     scaler = StandardScaler(copy=True, with_mean=True, with_std=True).fit(X_train)
     X_train_scaled = scaler.transform(X_train)
 
@@ -378,6 +378,7 @@ def pipeline_rfr(df, pca_plot=False):
 
     return grid_search_rfr
 
+
 def pipeline_trans_reg():
 
     '''
@@ -406,7 +407,7 @@ def pipeline_trans_reg():
     print('unprocessed R2-score: {0:.3f}'.format(raw_target_regr.score(X_test, y_test)))
     return regr, raw_target_regr
 
-# %%
+
 def set_rfe_cross_val(pca_plot=False):
     """
         Application of Recursive Feature Extraction - Cross Validation
@@ -445,9 +446,6 @@ def set_rfe_cross_val(pca_plot=False):
     print(f"Shape of the split training data set y_train: {y_train.shape}")
     print(f"Shape of the split training data set y_test: {y_test.shape}")
 
-    # TODO
-    # fit the scaler to the training data first
-    # standard scaler works only with maximum 2 dimensions
     scaler = StandardScaler(copy=True, with_mean=True, with_std=True).fit(X_train)
     X_train_scaled = scaler.transform(X_train)
 
@@ -470,8 +468,8 @@ def set_rfe_cross_val(pca_plot=False):
                     Plotting of PCA/ Cluster Pairs
 
         '''
-        #Kmeans clusters to categorize groups WITH SCALED DATA
-        #determine number of groups needed or desired for
+        # Kmeans clusters to categorize groups WITH SCALED DATA
+        # determine number of groups needed or desired for
         kmeans = KMeans(n_clusters=5, random_state=10)
         train_clusters = kmeans.fit(X_train_scaled)
 
@@ -479,14 +477,14 @@ def set_rfe_cross_val(pca_plot=False):
         test_clusters = kmeans.fit(X_test_scaled)
 
         fig, ax = plt.subplots(nrows=2, ncols=1, figsize=(12, 10), dpi=600,squeeze=False)
-        #styles for title: normal; italic; oblique
+        # styles for title: normal; italic; oblique
         ax[0].scatter(X_train_pca[:, 0], X_train_pca[:, 1], c=train_clusters.labels_)
         ax[0].set_title('Plotted Principal Components of TRAINING DATA', style='oblique')
         ax[0].legend(train_clusters.labels_)
         ax[1].scatter(X_test_pca[:, 0], X_test_pca[:, 1], c=test_clusters.labels_)
         ax[1].set_title('Plotted Principal Components of TEST DATA', style='oblique')
         ax[1].legend(test_clusters.l1abels_)
-    #principal components of bank panel has better results than card panel with clearer borders
+
     else:
         pass
 
@@ -541,12 +539,9 @@ def set_rfe_cross_val(pca_plot=False):
     return rfecv_obj
 
 
-# %%
 '''
         Usage of a Pickle Model -Storage of a trained Model
 '''
-
-
 def store_pickle(model):
     model_file = "gridsearch_model.sav"
     with open(model_file, mode='wb') as m_f:
@@ -554,7 +549,6 @@ def store_pickle(model):
     return model_file
 
 
-# %%
 '''
         Usage of a Pickle Model -Loading of a Pickle File
 

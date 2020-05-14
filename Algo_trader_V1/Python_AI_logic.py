@@ -47,7 +47,7 @@ other functions: mutual_info_classif; chi2, f_regression; mutual_info_regression
 # TODO
 # TEST
 # set up fitting with scaled values as well
-def set_pipeline_knn(x, y, pca_plot=False):
+def set_pipeline_knn(pca_plot=False):
 
     """
     Pipeline - SelectKBest and K Nearest Neighbor
@@ -140,20 +140,20 @@ def set_pipeline_knn(x, y, pca_plot=False):
         'clf__n_neighbors': [2, 3, 4, 5, 6, 7, 8]}
 
     # Initialize the grid search object
-    grid_search = GridSearchCV(pipe, param_grid=params)
+    grid_search_knn = GridSearchCV(pipe, param_grid=params)
 
     # Fit it to the data and print the best value combination
     print(f"Pipeline 6; {dt.today()}")
-    print(grid_search.fit(x, y).best_params_)
-    print(f"Best accuracy with parameters: {grid_search.best_score_}")
+    print(grid_search_knn.fit(x, y).best_params_)
+    print(f"Best accuracy with parameters: {grid_search_knn.best_score_}")
 
-    return grid_search.best_score_
+    return grid_search_knn
 
 
 # TODO
 # TEST
 # set up fitting with scaled values as well
-def set_pipeline_reg(x, y, pca_plot=False):
+def set_pipeline_reg(pca_plot=False):
     """
     Pipeline - Logistic Regression and Support Vector Kernel
     """
@@ -253,21 +253,21 @@ def set_pipeline_reg(x, y, pca_plot=False):
     }
 
     # Initialize the grid search object
-    grid_search = GridSearchCV(pipe, param_grid=params)
+    grid_search_svr = GridSearchCV(pipe, param_grid=params)
 
     # Fit it to the data and print the best value combination
     print(f"Pipeline 4; {dt.today()}")
-    print(grid_search.fit(x, y).best_params_)
-    print(f"Best accuracy with parameters: {grid_search.best_score_}")
+    print(grid_search_svr.fit(x, y).best_params_)
+    print(f"Best accuracy with parameters: {grid_search_svr.best_score_}")
 
-    return grid_search.best_score_
+    return grid_search_svr
 
 
 # %%
 #TODO
 # set up fitting with scaled values
 
-def set_pipeline_rfr():
+def set_pipeline_rfr(pca_plot=False):
     """
     Pipeline  - SelectKBest and Random Forest Regressor
     REQUIRES FLOAT32 OR INT32 VALUES AS LABELS
@@ -325,7 +325,7 @@ def set_pipeline_rfr():
     print("Reduced shape: {}".format(str(X_train_pca.shape)))
 
 
-    if plot:
+    if pca_plot:
         '''
                     Plotting of PCA/ Cluster Pairs
 
@@ -366,18 +366,45 @@ def set_pipeline_rfr():
     }
 
     # Initialize the grid search object
-    grid_search = GridSearchCV(pipe, param_grid=params)
+    grid_search_rfr = GridSearchCV(pipe, param_grid=params)
 
     # Fit it to the data and print the best value combination
     print(f"Pipeline 3; {dt.today()}")
-    print(grid_search.fit(X_train, y_train).best_params_)
-    print("Overall score: %.4f" % (grid_search.score(X_test, y_test)))
-    print(f"Best accuracy with parameters: {grid_search.best_score_}")
+    print(grid_search_rfr.fit(X_train, y_train).best_params_)
+    print("Overall score: %.4f" % (grid_search_rfr.score(X_test, y_test)))
+    print(f"Best accuracy with parameters: {grid_search_rfr.best_score_}")
     return grid_search.best_score_
 
+def pipeline_trans_reg():
+
+    '''
+            Application of Transformed Linear Regression
+
+    #n_quantiles needs to be smaller than the number of samples (standard is 1000)
+
+    PRIMARY_MERCHANT_NAME
+    #accuracy negative; model totally off
+    ---
+    AMOUNT_MEAN_LAG7
+    q-t R2-score: 0.896
+    unprocessed R2-score: 0.926
+    '''
+    transformer = QuantileTransformer(n_quantiles=750, output_distribution='normal')
+    regressor = LinearRegression()
+    regr = TransformedTargetRegressor(regressor=regressor,
+                                       transformer=transformer)
+
+    regr.fit(X_train, y_train)
+
+    TransformedTargetRegressor(...)
+    print('q-t R2-score: {0:.3f}'.format(regr.score(X_test, y_test)))
+
+    raw_target_regr = LinearRegression().fit(X_train, y_train)
+    print('unprocessed R2-score: {0:.3f}'.format(raw_target_regr.score(X_test, y_test)))
+    return regr, raw_target_regr
 
 # %%
-def set_rfe_cross_val(x, y):
+def set_rfe_cross_val(pca_plot=False):
     """
         Application of Recursive Feature Extraction - Cross Validation
         IMPORTANT
@@ -435,7 +462,7 @@ def set_rfe_cross_val(x, y):
     print("Original shape: {}".format(str(X_train_scaled.shape)))
     print("Reduced shape: {}".format(str(X_train_pca.shape)))
 
-    if plot:
+    if pca_plot:
         '''
                     Plotting of PCA/ Cluster Pairs
 
@@ -508,7 +535,7 @@ def set_rfe_cross_val(x, y):
     plt.plot(range(1, len(rfecv.grid_scores_) + 1), rfecv.grid_scores_)
     plt.show()
 
-    return rfecv.grid_scores_
+    return rfecv_obj
 
 
 # %%

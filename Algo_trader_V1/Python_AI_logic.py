@@ -148,7 +148,7 @@ def pipeline_knn(df, pca_plot=False):
     grid_search_knn = GridSearchCV(pipe, param_grid=params)
 
     # Fit it to the data and print the best value combination
-    print(f"Pipeline 6; {dt.today()}")
+    print(f"Pipeline KNN; {dt.today()}")
     print(grid_search_knn.fit(x, y).best_params_)
     print(f"Best accuracy with parameters: {grid_search_knn.best_score_}")
 
@@ -258,7 +258,7 @@ def pipeline_reg(df, pca_plot=False):
     grid_search_svr = GridSearchCV(pipe, param_grid=params)
 
     # Fit it to the data and print the best value combination
-    print(f"Pipeline 4; {dt.today()}")
+    print(f"Pipeline SVR; {dt.today()}")
     print(grid_search_svr.fit(x, y).best_params_)
     print(f"Best accuracy with parameters: {grid_search_svr.best_score_}")
 
@@ -273,6 +273,10 @@ def pipeline_rfr(df, pca_plot=False):
     """
     Pipeline  - SelectKBest and Random Forest Regressor
     REQUIRES FLOAT32 OR INT32 VALUES AS LABELS
+    Pipeline RFR; 2020-05-14 16:28:25
+    {'feature_selection__k': 3, 'reg__min_samples_split': 4, 'reg__n_estimators': 200}
+    Overall score: 0.9796
+    Best accuracy with parameters: 0.9823479626506231
     """
 
     model_features = df.drop(columns=label_col, axis=1, inplace=False)
@@ -367,7 +371,7 @@ def pipeline_rfr(df, pca_plot=False):
     grid_search_rfr = GridSearchCV(pipe, param_grid=params)
 
     # Fit it to the data and print the best value combination
-    print(f"Pipeline 3; {dt.today()}")
+    print(f"Pipeline RFR; {dt.today()}")
     print(grid_search_rfr.fit(X_train, y_train).best_params_)
     print("Overall score: %.4f" % (grid_search_rfr.score(X_test, y_test)))
     print(f"Best accuracy with parameters: {grid_search_rfr.best_score_}")

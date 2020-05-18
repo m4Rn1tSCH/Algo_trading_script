@@ -386,12 +386,6 @@ def pipeline_trans_reg():
 
     #n_quantiles needs to be smaller than the number of samples (standard is 1000)
 
-    PRIMARY_MERCHANT_NAME
-    #accuracy negative; model totally off
-    ---
-    AMOUNT_MEAN_LAG7
-    q-t R2-score: 0.896
-    unprocessed R2-score: 0.926
     '''
     transformer = QuantileTransformer(n_quantiles=750, output_distribution='normal')
     regressor = LinearRegression()

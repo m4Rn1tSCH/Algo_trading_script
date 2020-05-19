@@ -502,7 +502,7 @@ def pipeline_mlp(label_col, df, pca_plot=False):
         'clf__alpha':[0.0001, 0.001]}
 
     #Initialize the grid search object
-    grid_search = GridSearchCV(pipe, param_grid = params)
+    grid_search_mlp = GridSearchCV(pipe, param_grid = params)
 
     #Fit it to the data and print the best value combination
     print(f"Pipeline; {dt.today()}")

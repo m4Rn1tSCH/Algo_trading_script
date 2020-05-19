@@ -11,14 +11,14 @@ from Python_alpaca_API_connector import api
 #IMPORTANT  LIMIT AV API 5 API requests per minute and 500 requests per day
 #pull stock data from Alpha Vantage
 def pull_stock_data(symbol, adjusted, outputsize, cadence, output_format):
-    '''
+    """
     DOCUMENTATION
     symbol: pick abbreviation in letter strings 'XXXX'
     adjusted: 'True' or 'False'
     outputsize: 'Full'
     cadence: 'daily' / 'weekly' / 'monthly'
     output_format: ['json', 'csv', 'pandas']
-    '''
+    """
     try:
         df_pull = api.alpha_vantage.historic_quotes(symbol=symbol,
                                 adjusted=adjusted,

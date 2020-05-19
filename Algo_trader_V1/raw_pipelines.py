@@ -5,6 +5,7 @@ Created on 28 4/28/2020 10:34 AM 2020
 @author: bill-
 """
 #TODO
+# implement these pipelines
 '''
 Pipeline 6 - SelectKBest and K Nearest Neighbor
 ##########

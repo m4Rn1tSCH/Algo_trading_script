@@ -21,10 +21,10 @@ def pull_stock_data(symbol, adjusted, outputsize, cadence, output_format):
     """
     try:
         df_pull = api.alpha_vantage.historic_quotes(symbol=symbol,
-                                adjusted=adjusted,
-                                outputsize=outputsize,
-                                cadence=cadence,
-                                output_format=output_format)
+                                                    adjusted=adjusted,
+                                                    outputsize=outputsize,
+                                                    cadence=cadence,
+                                                    output_format=output_format)
         #drop the date as index to use it
         df_pull = df_pull.reset_index(drop=False, inplace=False)
 
@@ -57,10 +57,9 @@ def pull_intraday_data(symbol, interval, outputsize, output_format):
     '''
     try:
         df_intra_pull = api.alpha_vantage.intraday_quotes(symbol=symbol,
-                                        interval=interval,
-                                        outputsize=outputsize,
-                                        output_format=output_format
-                                        )
+                                                            interval=interval,
+                                                            outputsize=outputsize,
+                                                            output_format=output_format)
         #drop the date as index to use it
         df_intra_pull = df_intra_pull.reset_index(drop=False, inplace=False)
 

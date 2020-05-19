@@ -1,7 +1,7 @@
 """
 This module connects to the alpaca API and automatically to the Alpha Vantage API
 The functions gather data around the account primarily profit n loss; buying power
-The keys for it are stored in the module Python_acc_config.py
+The keys are stored in  Python_acc_config.py
 """
 # access files
 import alpaca_trade_api as tradeapi

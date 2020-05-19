@@ -50,8 +50,7 @@ other functions: mutual_info_classif; chi2, f_regression; mutual_info_regression
 # label_col = 'open'
 # Create pipeline with feature selector and regressor/classifier
 
-# TODO
-
+#TODO
 # set up fitting with scaled values as well
 def pipeline_knn(df, pca_plot=False):
 
@@ -161,9 +160,9 @@ def pipeline_knn(df, pca_plot=False):
     return grid_search_knn
 
 
-# TODO
+#TODO
 # set up fitting with scaled values as well
-def pipeline_reg(df, pca_plot=False):
+def pipeline_reg(label_col, df, pca_plot=False):
     """
     Pipeline - Logistic Regression and Support Vector Kernel
     """
@@ -273,7 +272,7 @@ def pipeline_reg(df, pca_plot=False):
 #TODO
 # set up fitting with scaled values
 
-def pipeline_rfr(df, pca_plot=False):
+def pipeline_rfr(label_col, df, pca_plot=False):
     """
     Pipeline  - SelectKBest and Random Forest Regressor
     REQUIRES FLOAT32 OR INT32 VALUES AS LABELS

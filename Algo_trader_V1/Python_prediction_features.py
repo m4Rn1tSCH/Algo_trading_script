@@ -6,7 +6,9 @@ Created on Sat April 22 10:26:42 2020
 """
 import numpy as np
 from datetime import datetime as dt
-1
+# TODO
+# NaNs that are being generated cannot be dropped properly
+# find a way to properly drop those values and make data feasible
 
 def pred_feat(df):
     """
@@ -32,6 +34,7 @@ def pred_feat(df):
         #conversion of dates to unix timestamps as numeric value (fl64)
         if df['date'].isnull().sum() == 0:
             df['date_ts'] = df['date'].apply(lambda x: dt.timestamp(x))
+            df['date_ts'].astype('int64')
         else:
             df = df.drop(columns='date', axis=1)
             print("Column date dropped")
@@ -75,6 +78,8 @@ def pred_feat(df):
     # drop the first and second row since the indicators refer to previous non-existent days
     # df = df.drop([0, 1])
     df.reset_index(drop=True, inplace=True)
-    df = df.fillna(method='bfill')
-
+    try:
+        df = df.drop(df.index[[0, 1]])
+    except BaseException as e:
+        print("ERROR OCCURED:", e)
     return df

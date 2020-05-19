@@ -20,8 +20,13 @@ intra_df = pull_intraday_data(symbol='TSLA',
                             interval='5min',
                             outputsize='full',
                             output_format='pandas')
+pull_df = pull_stock_data(symbol='COTY',
+                        adjusted=True,
+                        outputsize='full',
+                        cadence='monthly',
+                        output_format='pandas')
 
-#add feature engineering columns that yield more accuracy
+# add feature engineering columns that yield more accuracy
 pred_feat(df=intra_df)
 print(intra_df.head(10))
 

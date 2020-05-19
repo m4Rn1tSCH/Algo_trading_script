@@ -41,11 +41,7 @@ def pull_stock_data(symbol, adjusted, outputsize, cadence, output_format):
         print("API not properly connected")
     return df_pull
 
-# pull_stock_data(symbol='COTY',
-#                 adjusted=True,
-#                 outputsize='full',
-#                 cadence='monthly',
-#                 output_format='pandas')
+
 
 def pull_intraday_data(symbol, interval, outputsize, output_format):
     '''

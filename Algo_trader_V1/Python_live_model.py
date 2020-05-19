@@ -37,7 +37,7 @@ stock_df['open_diff'] = stock_df['open'].diff()
 #print(intra_df.head(10))
 
 
-def trading_support_resistance(df, bin_width=20):
+def trading_support_resistance(df, bin_width=30):
 
 
     """
@@ -100,6 +100,6 @@ def trading_support_resistance(df, bin_width=20):
 
 def test():
     while True:
-        print("running")
+        print("I love tati")
         # sleep time in minutes
-        time.sleep(300)
+        time.sleep(2)

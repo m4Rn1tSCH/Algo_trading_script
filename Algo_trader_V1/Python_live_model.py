@@ -20,12 +20,13 @@ intra_df = pull_intraday_data(symbol='TSLA',
                             interval='5min',
                             outputsize='full',
                             output_format='pandas')
-pull_df = pull_stock_data(symbol='COTY',
+intra_df['open_diff'] = intra_df['open'].diff()
+pull_df = pull_stock_data(symbol='NVDX',
                         adjusted=True,
                         outputsize='full',
                         cadence='monthly',
                         output_format='pandas')
-
+pull_df['open_diff'] = pull_df['open'].diff()
 # add feature engineering columns that yield more accuracy
 pred_feat(df=intra_df)
 print(intra_df.head(10))
@@ -33,7 +34,8 @@ print(intra_df.head(10))
 def test():
     while True:
         print("running")
-        time.sleep(5)
+        # sleep time in minutes
+        time.sleep(300)
 
 
 

@@ -10,6 +10,7 @@ import numpy as np
 import time
 from Python_AV_get_intraday_stock import pull_intraday_data, pull_stock_data, submit_order
 from Python_prediction_features import pred_feat
+
 """
 -pull data every hour /every day
 -prepare df and decide what to sell or buy
@@ -98,11 +99,41 @@ def trading_support_resistance(df, bin_width=30):
         df['signal'][x] = df['signal'][x - 1]
         df['positions'] = df['signal'].diff()
 
+    # produces NaNs in the df again!
+    trading_support_resistance(df=stock_df, bin_width=30)
 
-    # trading_support_resistance(goog_df_signal)
 
-def test():
+#time loop for trading logic
+def test_loop():
+    """
+    Thank you for using Alpha Vantage!
+    Our standard API call frequency is 5 calls per minute and 500 calls per day.
+    Please visit https://www.alphavantage.co/premium/
+    if you would like to target a higher API call frequency.
+    """
     while True:
-        print("I love tati")
+        last_price = pull_intraday_data(symbol='TSLA',
+                                      interval='5min',
+                                      outputsize='full',
+                                      output_format='pandas')
+        # calculate the mean price of the last 25 min of the day
+        mean_price = last_price['open'][:5].mean()
+        print("Price retrieved; procuring stocks")
         # sleep time in minutes
+        try:
+            submit_order(symbol='TSLA',
+                             qty=api.get_account().buying_power * 0.1,
+                             side='buy',
+                             type='limit',
+                             time_in_force='gtc',
+                             limit_price=mean_price
+                         )
+        except:
+            submit_order(symbol='TSLA',
+                         qty=2,
+                         side='buy',
+                         type='limit',
+                         time_in_force='gtc',
+                         limit_price=mean_price
+                         )
         time.sleep(2)

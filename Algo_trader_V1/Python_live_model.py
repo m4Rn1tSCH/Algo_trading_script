@@ -9,7 +9,7 @@ import pandas as pd
 import numpy as np
 import time
 from Python_AV_get_intraday_stock import pull_intraday_data, pull_stock_data, submit_order
-
+from Python_prediction_features import pred_feat
 """
 -pull data every hour /every day
 -prepare df and decide what to sell or buy
@@ -18,23 +18,26 @@ append data every hour
 calculate/or mark -> sell or buy order
 """
 # TODO
-# loop works
+# set up loop for stock pull
+# intra day data
 intra_df = pull_intraday_data(symbol='TSLA',
                               interval='5min',
                               outputsize='full',
                               output_format='pandas')
 intra_df['open_diff'] = intra_df['open'].diff()
+intra_df = pred_feat(df=intra_df)
+print(stock_df.head(3))
+
+# monthly data
 stock_df = pull_stock_data(symbol='NVDA',
                            adjusted=True,
                            outputsize='full',
                            cadence='monthly',
                            output_format='pandas')
 stock_df['open_diff'] = stock_df['open'].diff()
-
-# add feature engineering columns that yield more accuracy
-
-#pred_feat(df=intra_df)
-#print(intra_df.head(10))
+# adds features and removes NaNs
+stock_df = pred_feat(df=stock_df)
+print(stock_df.head(3))
 
 
 def trading_support_resistance(df, bin_width=30):

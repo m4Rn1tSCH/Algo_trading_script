@@ -4,7 +4,7 @@ Created on 20 5/20/2020 4:46 PM 2020
 
 @author: bill-
 """
-#import all libraries
+#import packages
 import numpy as np
 import pandas as pd
 import math

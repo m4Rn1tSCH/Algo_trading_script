@@ -32,8 +32,10 @@ def pull_stock_data(symbol, adjusted, outputsize, cadence, output_format):
         df_pull = df_pull.rename(columns={"1. open": "open",
                                         "2. high": "high",
                                         "3. low": "low",
-                                        "4. close":"close",
-                                        "5. volume": "volume"},
+                                        "4. close": "close",
+                                        "5. adjusted close": "adjusted_close",
+                                        "6. volume": "volume",
+                                        "7. dividend amount": "dividend amount"},
                                 inplace=False)
 
     except BaseException as e:

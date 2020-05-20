@@ -78,8 +78,9 @@ def pred_feat(df):
     # drop the first and second row since the indicators refer to previous non-existent days
     # df = df.drop([0, 1])
     df.reset_index(drop=True, inplace=True)
-    try:
-        df = df.drop(df.index[[0, 1]])
+    # drop NaNs to allow prediction models
+	try:
+        df = df.dropna()
     except BaseException as e:
         print("ERROR OCCURED:", e)
     return df

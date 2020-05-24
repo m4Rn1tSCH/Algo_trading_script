@@ -8,6 +8,8 @@ from datetime import datetime as dt
 import pandas as pd
 import numpy as np
 import time
+from alpha_vantage import techindicators
+ti = TechIndicators('PKS7JXWMMDQQXQNDWT2P')
 from Python_AV_get_intraday_stock import pull_intraday_data, pull_stock_data, submit_order
 from Python_prediction_features import pred_feat
 
@@ -102,7 +104,6 @@ def trading_support_resistance(df, bin_width=30):
     # produces NaNs in the df again!
     trading_support_resistance(df=stock_df, bin_width=30)
 
-
 #time loop for trading logic
 def test_loop():
     """
@@ -137,3 +138,16 @@ def test_loop():
                          limit_price=mean_price
                          )
         time.sleep(2)
+
+
+# tech indicator returns a tuple; sma dictionary with values; meta dict with characteristics
+sma, meta_sma = ti.get_sma(symbol='TSLA', interval='5min', time_period=30, series_type='open')
+for key, values in sma.items():
+print(key, values)
+"""
+symbol : 'XXXX'
+interval : 1min, 5min, 15min, 30min, 60min, daily, weekly, monthly
+time_period : time_period=60, time_period=200
+series_type : close, open, high, low
+datatype : 'json', 'csv', 'pandas'
+"""

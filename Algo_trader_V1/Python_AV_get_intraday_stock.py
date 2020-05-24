@@ -15,7 +15,7 @@ def pull_stock_data(symbol, adjusted, outputsize, cadence, output_format):
     DOCUMENTATION
     symbol: pick abbreviation in letter strings 'XXXX'
     adjusted: 'True' or 'False'
-    outputsize: 'Full'
+    outputsize: 'compact'(100 rows for faster calls) or 'Full'(full retrieval)
     cadence: 'daily' / 'weekly' / 'monthly'
     output_format: ['json', 'csv', 'pandas']
     """

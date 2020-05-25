@@ -9,4 +9,3 @@ Created on Sat Nov  9 15:16:53 2019
 API_KEY = 'PKS7JXWMMDQQXQNDWT2P'
 SECRET_KEY = '6G14xT3kRY4VgDy58n5ULTvEKiFjYF5cD0Y8z5f2'
 BASE_URL = 'https://paper-api.alpaca.markets'
-

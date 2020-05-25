@@ -8,6 +8,7 @@ from datetime import datetime as dt
 import pandas as pd
 import numpy as np
 import time
+from Python_alpaca_API_connector import api
 from alpha_vantage import techindicators
 ti = TechIndicators('PKS7JXWMMDQQXQNDWT2P')
 from Python_AV_get_intraday_stock import pull_intraday_data, pull_stock_data, submit_order
@@ -20,8 +21,7 @@ if loop -> buy or sell
 append data every hour
 calculate/or mark -> sell or buy order
 """
-# TODO
-# set up loop for stock pull
+
 # intra day data
 intra_df = pull_intraday_data(symbol='TSLA',
                               interval='5min',
@@ -109,35 +109,61 @@ def test_loop():
     """
     Thank you for using Alpha Vantage!
     Our standard API call frequency is 5 calls per minute and 500 calls per day.
-    Please visit https://www.alphavantage.co/premium/
-    if you would like to target a higher API call frequency.
+    Premium: https://www.alphavantage.co/premium/
     """
     while True:
         last_price = pull_intraday_data(symbol='TSLA',
                                       interval='5min',
                                       outputsize='full',
                                       output_format='pandas')
-        # calculate the mean price of the last 25 min of the day
+        # calculate the mean price of the last 25 min of the trading day
         mean_price = last_price['open'][:5].mean()
+        # retrieve the very last quote to compare with
+        actual_price = last_price['open'][:].mean()
         print("Price retrieved; procuring stocks")
-        # sleep time in minutes
-        try:
-            submit_order(symbol='TSLA',
-                             qty=api.get_account().buying_power * 0.1,
+        if mean_price > actual_price:
+            # buy signal
+            try:
+                print("Stock is being purchased")
+                submit_order(symbol='TSLA',
+                                 qty=api.get_account().buying_power * 0.1,
+                                 side='buy',
+                                 type='limit',
+                                 time_in_force='gtc',
+                                 limit_price=mean_price
+                             )
+            except BaseException as e:
+                print(e)
+                submit_order(symbol='TSLA',
+                             qty=2,
                              side='buy',
                              type='limit',
                              time_in_force='gtc',
                              limit_price=mean_price
-                         )
-        except:
-            submit_order(symbol='TSLA',
-                         qty=2,
-                         side='buy',
-                         type='limit',
-                         time_in_force='gtc',
-                         limit_price=mean_price
-                         )
-        time.sleep(2)
+                             )
+        elif mean_price < actual_price
+            try:
+                print("Stock is being sold")
+                submit_order(symbol='TSLA',
+                             qty=api.get_account().buying_power * 0.1,
+                             side='sell',
+                             type='limit',
+                             time_in_force='gtc',
+                             limit_price=mean_price
+                             )
+            except BaseException as e:
+                print(e)
+                submit_order(symbol='TSLA',
+                             qty=2,
+                             side='sell',
+                             type='limit',
+                             time_in_force='gtc',
+                             limit_price=mean_price
+                             )
+        else:
+            print("Both prices identical; no action")
+        # loop will pause for x seconds
+        time.sleep(60)
 
 
 # tech indicator returns a tuple; sma dictionary with values; meta dict with characteristics

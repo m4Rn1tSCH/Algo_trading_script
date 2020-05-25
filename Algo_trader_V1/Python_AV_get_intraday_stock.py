@@ -1,5 +1,5 @@
 """
-Thise module connects to the integrated Alpha Vantage API and allows data queries
+This module connects to the integrated Alpha Vantage API and allows data queries
 IMPORTANT LIMIT AV API 5 API requests per minute and 500 requests per day
 pull_stock_data = pulls data in intervals of days or higher
 pull_intraday_data = dataframes for minute intervals

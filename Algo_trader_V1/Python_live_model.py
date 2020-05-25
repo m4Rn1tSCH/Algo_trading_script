@@ -119,7 +119,7 @@ def test_loop():
         # calculate the mean price of the last 25 min of the trading day
         mean_price = last_price['open'][:5].mean()
         # retrieve the very last quote to compare with
-        actual_price = last_price['open'][:1]
+        actual_price = last_price['open'][:1].mean()
         print("Price retrieved; procuring stocks")
         if mean_price > actual_price:
             # buy signal
@@ -145,11 +145,11 @@ def test_loop():
             try:
                 print("Stock is being sold")
                 submit_order(symbol='TSLA',
-                             qty=api.get_account().buying_power * 0.1,
+                             qty=float(api.get_account().buying_power) * 0.1,
                              side='sell',
                              type='limit',
                              time_in_force='gtc',
-                             limit_price=mean_price
+                             limit_price=actual_prie
                              )
             except BaseException as e:
                 print(e)
@@ -158,7 +158,7 @@ def test_loop():
                              side='sell',
                              type='limit',
                              time_in_force='gtc',
-                             limit_price=mean_price
+                             limit_price=actual_price
                              )
         else:
             print("Both prices identical; no action")

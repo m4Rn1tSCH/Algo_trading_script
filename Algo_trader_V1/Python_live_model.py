@@ -119,7 +119,7 @@ def test_loop():
         # calculate the mean price of the last 25 min of the trading day
         mean_price = last_price['open'][:5].mean()
         # retrieve the very last quote to compare with
-        actual_price = last_price['open'][:].mean()
+        actual_price = last_price['open'][:1]
         print("Price retrieved; procuring stocks")
         if mean_price > actual_price:
             # buy signal
@@ -141,7 +141,7 @@ def test_loop():
                              time_in_force='gtc',
                              limit_price=mean_price
                              )
-        elif mean_price < actual_price
+        elif mean_price < actual_price:
             try:
                 print("Stock is being sold")
                 submit_order(symbol='TSLA',

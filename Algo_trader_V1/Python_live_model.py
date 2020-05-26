@@ -126,7 +126,7 @@ def test_loop():
             try:
                 print("Stock is being purchased")
                 submit_order(symbol='TSLA',
-                                 qty=api.get_account().buying_power * 0.1,
+                                 qty=2,
                                  side='buy',
                                  type='limit',
                                  time_in_force='gtc',
@@ -145,11 +145,11 @@ def test_loop():
             try:
                 print("Stock is being sold")
                 submit_order(symbol='TSLA',
-                             qty=float(api.get_account().buying_power) * 0.1,
+                             qty=2,
                              side='sell',
                              type='limit',
                              time_in_force='gtc',
-                             limit_price=actual_prie
+                             limit_price=actual_price
                              )
             except BaseException as e:
                 print(e)
@@ -163,7 +163,7 @@ def test_loop():
         else:
             print("Both prices identical; no action")
         # loop will pause for x seconds
-        time.sleep(60)
+        time.sleep(600)
 
 
 # tech indicator returns a tuple; sma dictionary with values; meta dict with characteristics

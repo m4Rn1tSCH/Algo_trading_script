@@ -1,34 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-<<<<<<< HEAD
-    <list default="true" id="03f5633e-c1b1-4ad3-8a91-bdb1d14f71b4" name="Default Changelist" comment="">
+    <list default="true" id="1aa0a1a9-df87-4847-b597-2f2227d476e8" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/rAvailablePackageCache.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/rpackages.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/rSettings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/rSettings.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
-=======
-    <list default="true" id="a83ebf30-f633-4203-a115-5c791e8b9548" name="Default Changelist" comment="" />
->>>>>>> 2c1b26970546bf5de618895ac470a7fc2561cec5
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="FileTemplateManagerImpl">
-    <option name="RECENT_TEMPLATES">
-      <list>
-        <option value="Python Script" />
-      </list>
-    </option>
-  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
-<<<<<<< HEAD
-  <component name="ProjectId" id="1ak1OPcAr2AoCTK0RIjPEFzOtcN" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
-=======
-  <component name="ProjectId" id="1b0Jp44FFu8wqHd78HCLOMqAKmS" />
->>>>>>> 2c1b26970546bf5de618895ac470a7fc2561cec5
+  <component name="ProjectId" id="1cVSDPnUTXxF23rD02wbrvEvvog" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -36,168 +24,21 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="node.js.detected.package.eslint" value="true" />
-    <property name="node.js.detected.package.tslint" value="true" />
-    <property name="node.js.path.for.package.eslint" value="project" />
-    <property name="node.js.path.for.package.tslint" value="project" />
-    <property name="node.js.selected.package.eslint" value="(autodetect)" />
-    <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
-  </component>
-  <component name="RunManager" selected="Python.Python_prediction_features">
-    <configuration name="Python_AV_get_intraday_stock" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="Algo_trader_V1" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Python_AV_get_intraday_stock.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="Python_prediction_features" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="Algo_trader_V1" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Python_prediction_features.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="acc_config" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="Algo_trader_V1" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/acc_config.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="account_activities" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="Algo_trader_V1" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/account_activities.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="account_configurations" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="Algo_trader_V1" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/account_configurations.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <recent_temporary>
-      <list>
-        <item itemvalue="Python.Python_prediction_features" />
-        <item itemvalue="Python.Python_AV_get_intraday_stock" />
-        <item itemvalue="Python.account_configurations" />
-        <item itemvalue="Python.account_activities" />
-        <item itemvalue="Python.acc_config" />
-      </list>
-    </recent_temporary>
   </component>
   <component name="SvnConfiguration">
     <configuration />
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="a83ebf30-f633-4203-a115-5c791e8b9548" name="Default Changelist" comment="" />
-      <created>1587763261796</created>
+      <changelist id="1aa0a1a9-df87-4847-b597-2f2227d476e8" name="Default Changelist" comment="" />
+      <created>1590612148374</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-<<<<<<< HEAD
-      <updated>1587264744561</updated>
-      <workItem from="1587264746038" duration="1292000" />
-      <workItem from="1587268060805" duration="1025000" />
-      <workItem from="1587269180103" duration="649000" />
-      <workItem from="1587344859677" duration="3474000" />
-      <workItem from="1587352087977" duration="4212000" />
-      <workItem from="1587501960812" duration="3623000" />
-      <workItem from="1587592242556" duration="657000" />
-      <workItem from="1587599503913" duration="52000" />
-      <workItem from="1587599579541" duration="152000" />
-=======
-      <updated>1587763261796</updated>
-      <workItem from="1587763280979" duration="820000" />
-      <workItem from="1587863752432" duration="2158000" />
-      <workItem from="1587866833737" duration="4419000" />
-      <workItem from="1587953897717" duration="588000" />
-      <workItem from="1588084131057" duration="345000" />
-<<<<<<< HEAD
-      <workItem from="1588105321209" duration="2998000" />
-=======
->>>>>>> 2c1b26970546bf5de618895ac470a7fc2561cec5
->>>>>>> 450ee4d233359036c21181e050800d2286c49700
+      <updated>1590612148374</updated>
+      <workItem from="1590612151415" duration="497000" />
     </task>
     <servers />
   </component>
@@ -205,112 +46,13 @@
     <option name="version" value="2" />
   </component>
   <component name="WindowStateProjectService">
-<<<<<<< HEAD
-    <state width="1396" height="282" key="GridCell.Tab.0.bottom" timestamp="1588108374907">
-=======
-<<<<<<< HEAD
-    <state x="551" y="178" key="#Notifications" timestamp="1587265712520">
+    <state x="415" y="88" key="CommitChangelistDialog2" timestamp="1590612334528">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="551" y="178" key="#Notifications/0.0.1920.1040@0.0.1920.1040" timestamp="1587265712520" />
-    <state x="413" y="175" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1587265834736">
+    <state x="415" y="88" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1590612334528" />
+    <state x="461" y="165" key="SettingsEditor" timestamp="1590612658640">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="413" y="175" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1587265834736" />
-    <state x="596" y="276" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog" timestamp="1587599545478">
-      <screen x="0" y="0" width="1792" height="1120" />
-    </state>
-    <state x="596" y="276" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog/0.0.1792.1120@0.0.1792.1120" timestamp="1587599545478" />
-    <state x="639" y="256" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1587351640223" />
-    <state x="609" y="282" width="630" height="567" key="FileChooserDialogImpl" timestamp="1587503405587">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="609" y="282" width="630" height="567" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1587503405587" />
-    <state width="1875" height="347" key="GridCell.Tab.0.bottom" timestamp="1587267987879">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1875" height="347" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1587267987879" />
-    <state width="1875" height="347" key="GridCell.Tab.0.center" timestamp="1587267987879">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1875" height="347" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1587267987879" />
-    <state width="1875" height="347" key="GridCell.Tab.0.left" timestamp="1587267987879">
-=======
-    <state width="1401" height="282" key="GridCell.Tab.0.bottom" timestamp="1587871296355">
->>>>>>> 2c1b26970546bf5de618895ac470a7fc2561cec5
->>>>>>> 450ee4d233359036c21181e050800d2286c49700
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1396" height="282" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1588108374907" />
-    <state width="1396" height="282" key="GridCell.Tab.0.center" timestamp="1588108374907">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1396" height="282" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1588108374907" />
-    <state width="1396" height="282" key="GridCell.Tab.0.left" timestamp="1588108374907">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-<<<<<<< HEAD
-    <state width="1396" height="282" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1588108374907" />
-    <state width="1396" height="282" key="GridCell.Tab.0.right" timestamp="1588108374907">
-=======
-<<<<<<< HEAD
-    <state width="1875" height="347" key="GridCell.Tab.1.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1587267987879" />
-    <state width="1875" height="347" key="GridCell.Tab.1.center" timestamp="1587267987879">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1875" height="347" key="GridCell.Tab.1.center/0.0.1920.1040@0.0.1920.1040" timestamp="1587267987879" />
-    <state width="1875" height="347" key="GridCell.Tab.1.left" timestamp="1587267987879">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1875" height="347" key="GridCell.Tab.1.left/0.0.1920.1040@0.0.1920.1040" timestamp="1587267987879" />
-    <state width="1875" height="347" key="GridCell.Tab.1.right" timestamp="1587267987879">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1875" height="347" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1587267987879" />
-    <state x="567" y="186" key="SettingsEditor" timestamp="1587593267616">
-      <screen x="0" y="0" width="1792" height="1120" />
-    </state>
-    <state x="567" y="186" key="SettingsEditor/0.0.1792.1120@0.0.1792.1120" timestamp="1587593267616" />
-    <state x="608" y="173" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1587502833511" />
-    <state x="551" y="253" key="Vcs.Push.Dialog.v2" timestamp="1587266157269">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="551" y="253" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1587266157269" />
-    <state width="968" height="528" key="XDebugger.FullValuePopup" timestamp="1587354661122">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state width="968" height="528" key="XDebugger.FullValuePopup/0.0.1920.1040@0.0.1920.1040" timestamp="1587354661122" />
-    <state x="659" y="413" key="cloudConfig.SelfSettingsDialog" timestamp="1587592693731">
-      <screen x="0" y="0" width="1792" height="1120" />
-    </state>
-    <state x="659" y="413" key="cloudConfig.SelfSettingsDialog/0.0.1792.1120@0.0.1792.1120" timestamp="1587592693731" />
-    <state x="611" y="371" key="com.intellij.ide.util.TipDialog" timestamp="1587609889567">
-      <screen x="0" y="0" width="1792" height="1120" />
-    </state>
-    <state x="611" y="371" key="com.intellij.ide.util.TipDialog/0.0.1792.1120@0.0.1792.1120" timestamp="1587609889567" />
-    <state x="655" y="344" key="com.intellij.ide.util.TipDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1587502016625" />
-    <state x="611" y="365" key="com.intellij.ide.util.TipDialog/0.23.1792.1033@0.23.1792.1033" timestamp="1587592266043" />
-    <state x="601" y="246" width="700" height="530" key="recent.locations.popup" timestamp="1587503056272">
-=======
-    <state width="1401" height="282" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1587871296355" />
-    <state width="1401" height="282" key="GridCell.Tab.0.right" timestamp="1587871296355">
->>>>>>> 2c1b26970546bf5de618895ac470a7fc2561cec5
->>>>>>> 450ee4d233359036c21181e050800d2286c49700
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1396" height="282" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1588108374907" />
-    <state x="461" y="165" key="SettingsEditor" timestamp="1587870532509">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="461" y="165" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1587870532509" />
-  </component>
-  <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/Algo_trader_V1$Python_alpaca_API_connector.coverage" NAME="Python_alpaca_API_connector Coverage Results" MODIFIED="1587866958005" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/Algo_trader_V1$acc_config.coverage" NAME="acc_config Coverage Results" MODIFIED="1588105578327" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/Algo_trader_V1$account_activities.coverage" NAME="account_activities Coverage Results" MODIFIED="1588105639868" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/Algo_trader_V1$account_configurations.coverage" NAME="account_configurations Coverage Results" MODIFIED="1588105665483" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/Algo_trader_V1$Python_prediction_features.coverage" NAME="Python_prediction_features Coverage Results" MODIFIED="1588107891091" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/Algo_trader_V1$data_split.coverage" NAME="data_split Coverage Results" MODIFIED="1587870858750" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/Algo_trader_V1$Python_AV_get_intraday_stock.coverage" NAME="Python_AV_get_intraday_stock Coverage Results" MODIFIED="1588107298714" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <state x="461" y="165" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1590612658640" />
   </component>
 </project>

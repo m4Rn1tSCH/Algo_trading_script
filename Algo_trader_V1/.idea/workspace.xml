@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="1aa0a1a9-df87-4847-b597-2f2227d476e8" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-    </list>
+    <list default="true" id="1aa0a1a9-df87-4847-b597-2f2227d476e8" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -36,6 +34,7 @@
       <updated>1590612148374</updated>
       <workItem from="1590612151415" duration="497000" />
       <workItem from="1590718707040" duration="354000" />
+      <workItem from="1590719093929" duration="121000" />
     </task>
     <servers />
   </component>
@@ -47,9 +46,9 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="415" y="88" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1590612334528" />
-    <state x="461" y="165" key="SettingsEditor" timestamp="1590718940374">
+    <state x="461" y="165" key="SettingsEditor" timestamp="1590719214499">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="461" y="165" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1590718940374" />
+    <state x="461" y="165" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1590719214499" />
   </component>
 </project>

@@ -22,6 +22,12 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.path.for.package.tslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="SvnConfiguration">
@@ -38,6 +44,8 @@
       <workItem from="1590718707040" duration="354000" />
       <workItem from="1590719093929" duration="194000" />
       <workItem from="1590719323231" duration="121000" />
+      <workItem from="1590719476778" duration="169000" />
+      <workItem from="1590719671519" duration="2037000" />
     </task>
     <task id="LOCAL-00001" summary="-fuck mac">
       <created>1590719250675</created>
@@ -57,14 +65,22 @@
     <option name="LAST_COMMIT_MESSAGE" value="-fuck mac" />
   </component>
   <component name="WindowStateProjectService">
+    <state x="414" y="175" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1590719556978">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="414" y="175" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1590719556978" />
     <state x="415" y="88" key="CommitChangelistDialog2" timestamp="1590719248635">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="415" y="88" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1590719248635" />
-    <state x="461" y="165" key="SettingsEditor" timestamp="1590719394266">
+    <state x="739" y="275" key="FileChooserDialogImpl" timestamp="1590719714860">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="461" y="165" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1590719394266" />
+    <state x="739" y="275" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1590719714860" />
+    <state x="461" y="165" key="SettingsEditor" timestamp="1590721901459">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="461" y="165" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1590721901459" />
     <state x="552" y="253" key="Vcs.Push.Dialog.v2" timestamp="1590719255637">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>

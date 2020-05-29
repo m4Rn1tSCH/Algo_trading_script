@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="1aa0a1a9-df87-4847-b597-2f2227d476e8" name="Default Changelist" comment="" />
+    <list default="true" id="1aa0a1a9-df87-4847-b597-2f2227d476e8" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -35,6 +37,7 @@
       <workItem from="1590612151415" duration="497000" />
       <workItem from="1590718707040" duration="354000" />
       <workItem from="1590719093929" duration="194000" />
+      <workItem from="1590719323231" duration="121000" />
     </task>
     <task id="LOCAL-00001" summary="-fuck mac">
       <created>1590719250675</created>
@@ -58,10 +61,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="415" y="88" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1590719248635" />
-    <state x="461" y="165" key="SettingsEditor" timestamp="1590719289309">
+    <state x="461" y="165" key="SettingsEditor" timestamp="1590719394266">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="461" y="165" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1590719289309" />
+    <state x="461" y="165" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1590719394266" />
     <state x="552" y="253" key="Vcs.Push.Dialog.v2" timestamp="1590719255637">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>

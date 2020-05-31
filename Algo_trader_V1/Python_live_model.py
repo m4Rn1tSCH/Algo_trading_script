@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-Created on 18 5/18/2020 8:15 PM 2020
+Created on 5/18/2020 8:15 PM
 
 @author: bill-
 """

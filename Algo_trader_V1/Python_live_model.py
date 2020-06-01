@@ -10,7 +10,6 @@ import numpy as np
 import time
 
 from alpha_vantage.techindicators import TechIndicators
-ti = TechIndicators('PKS7JXWMMDQQXQNDWT2P')
 from Python_AV_get_intraday_stock import pull_intraday_data, pull_stock_data, submit_order
 from Python_prediction_features import pred_feat
 
@@ -166,14 +165,35 @@ def test_loop():
         time.sleep(600)
 
 
-# tech indicator returns a tuple; sma dictionary with values; meta dict with characteristics
-sma, meta_sma = ti.get_sma(symbol='TSLA', interval='5min', time_period=30, series_type='open')
-for key, values in sma.items():
-print(key, values)
-"""
-symbol : 'XXXX'
-interval : 1min, 5min, 15min, 30min, 60min, daily, weekly, monthly
-time_period : time_period=60, time_period=200
-series_type : close, open, high, low
-datatype : 'json', 'csv', 'pandas'
-"""
+def wma_loop(symbol):
+
+    """
+    symbol : 'XXXX'
+    interval : 1min, 5min, 15min, 30min, 60min, daily, weekly, monthly
+    time_period : time_period=60, time_period=200
+    series_type : close, open, high, low
+    datatype : 'json', 'csv', 'pandas'
+    """
+    while True:
+        # tech indicator returns a tuple; sma dictionary with values; meta dict with characteristics
+        # instantiate the class first and provide the API key
+        ti = TechIndicators('PKS7JXWMMDQQXQNDWT2P')
+        wma_50, meta_wma_50 = ti.get_wma(symbol='TSLA', interval='daily', time_period='50', series_type='open')
+        wma_200, meta_wma_200 = ti.get_wma(symbol='TSLA', interval='daily', time_period='200', series_type='open')
+
+        # TODO
+        # fix access code for dictionary
+        # dict: (key): ((inner key, inner value))
+        for key, nested_value in wma_50.items():
+            for sma_key, value in nested_value.items():
+                print(value)
+        # comparison loop
+        if wma_50 > wma_200:
+            # buy signal
+            print(f"{symbol} is being bought")
+        elif wma_50 < wma_200 and # stock owned:
+            # sell signal
+            print(f"{symbol} is being bought")
+        else:
+            break
+            time.sleep(600)

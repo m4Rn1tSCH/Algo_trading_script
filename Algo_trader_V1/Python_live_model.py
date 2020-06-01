@@ -8,8 +8,8 @@ from datetime import datetime as dt
 import pandas as pd
 import numpy as np
 import time
-from Python_alpaca_API_connector import api
-from alpha_vantage import techindicators
+
+from alpha_vantage.techindicators import TechIndicators
 ti = TechIndicators('PKS7JXWMMDQQXQNDWT2P')
 from Python_AV_get_intraday_stock import pull_intraday_data, pull_stock_data, submit_order
 from Python_prediction_features import pred_feat
@@ -29,7 +29,7 @@ intra_df = pull_intraday_data(symbol='TSLA',
                               output_format='pandas')
 intra_df['open_diff'] = intra_df['open'].diff()
 intra_df = pred_feat(df=intra_df)
-print(stock_df.head(3))
+print(intra_df.head(3))
 
 # monthly data
 stock_df = pull_stock_data(symbol='NVDA',
@@ -78,7 +78,7 @@ def trading_support_resistance(df, bin_width=30):
 
     df['res'][x] = resistance_level
     df['sup'][x] = support_level
-    #allow a 20% buffer back into the mean zone of the price movement
+    # allow a 20% buffer back into the mean zone of the price movement
     df['sup_tol'][x] = support_level + 0.2 * range_level
     # allow a 20% buffer back into the mean zone of the price movement
     df['res_tol'][x] = resistance_level - 0.2 * range_level

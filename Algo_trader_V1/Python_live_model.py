@@ -181,19 +181,30 @@ def wma_loop(symbol):
         wma_50, meta_wma_50 = ti.get_wma(symbol='TSLA', interval='daily', time_period='50', series_type='open')
         wma_200, meta_wma_200 = ti.get_wma(symbol='TSLA', interval='daily', time_period='200', series_type='open')
 
+        # create a iterable tuple for the orders;
+        # print order symbol; quantity; (side) - not needed for now
+        pos = list_positions()
+        portfolio_list = []
+        for i in range(0, len(list_positions()), 1):
+            print((pos[i].symbol, pos[i].qty))
+            # append a tuple with the stock and quantity held
+            portfolio_list.append((pos[i].symbol, pos[i].qty))
         # TODO
         # fix access code for dictionary
         # dict: (key): ((inner key, inner value))
         for key, nested_value in wma_50.items():
             for sma_key, value in nested_value.items():
-                print(value)
+                print(value[0])
         # comparison loop
         if wma_50 > wma_200:
             # buy signal
             print(f"{symbol} is being bought")
-        elif wma_50 < wma_200 and # stock owned:
+        # check if wma_50 is smaller than wma_200; the stock is owned; at least one stock is owned
+        elif wma_50 < wma_200 and symbol in portfolio_list and portfolio_list[1] > 0:
             # sell signal
-            print(f"{symbol} is being bought")
+            print(f"{symbol} is being sold")
+            if portfolio_list[1] == 0:
+                print(f"No {symbol} shares owned; shorting not enabled")
         else:
             break
-            time.sleep(600)
+            time.sleep(5)

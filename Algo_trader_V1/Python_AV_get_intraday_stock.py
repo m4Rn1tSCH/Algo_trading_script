@@ -85,8 +85,8 @@ def submit_order(symbol, qty, side, type, time_in_force, limit_price):
      qty: int,
      side: 'buy' / 'sell',
      type: 'limit',
-     time_in_force: 'gtc',
-     limit_price: Any = fl32,
+     time_in_force: 'gtc' / 'day',
+     limit_price: Any = fl32 (with or without ''),
      stop_price: LIMIT ORDERS DO NOT REQUIRE A STOP PRICE
      '''
     try:

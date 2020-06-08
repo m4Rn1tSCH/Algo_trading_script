@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="1aa0a1a9-df87-4847-b597-2f2227d476e8" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Python_AV_get_intraday_stock.py" beforeDir="false" afterPath="$PROJECT_DIR$/Python_AV_get_intraday_stock.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -139,7 +138,8 @@
       <workItem from="1590898185303" duration="361000" />
       <workItem from="1590971046168" duration="8727000" />
       <workItem from="1591129180910" duration="4862000" />
-      <workItem from="1591620236167" duration="160000" />
+      <workItem from="1591620236167" duration="336000" />
+      <workItem from="1591620856983" duration="253000" />
     </task>
     <task id="LOCAL-00001" summary="-fuck mac">
       <created>1590719250675</created>
@@ -176,7 +176,14 @@
       <option name="project" value="LOCAL" />
       <updated>1590982835251</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="-fixed working directory bug&#10;- minor spelling&#10;-prep for weighted moving average&#10;- docs changed for submit order">
+      <created>1591620483607</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1591620483607</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -186,17 +193,22 @@
     <MESSAGE value="-fuck mac" />
     <MESSAGE value="-cleaning up them aess of the fucking mac" />
     <MESSAGE value="-fixed working directory bug&#10;- minor spelling&#10;-prep for weighted moving average" />
-    <option name="LAST_COMMIT_MESSAGE" value="-fixed working directory bug&#10;- minor spelling&#10;-prep for weighted moving average" />
+    <MESSAGE value="-fixed working directory bug&#10;- minor spelling&#10;-prep for weighted moving average&#10;- docs changed for submit order" />
+    <option name="LAST_COMMIT_MESSAGE" value="-fixed working directory bug&#10;- minor spelling&#10;-prep for weighted moving average&#10;- docs changed for submit order" />
   </component>
   <component name="WindowStateProjectService">
     <state x="414" y="175" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1590898285460">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="414" y="175" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1590898285460" />
-    <state x="415" y="88" key="CommitChangelistDialog2" timestamp="1590982833835">
+    <state x="640" y="256" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog" timestamp="1591620563379">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="415" y="88" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1590982833835" />
+    <state x="640" y="256" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1591620563379" />
+    <state x="415" y="88" key="CommitChangelistDialog2" timestamp="1591620479313">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="415" y="88" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1591620479313" />
     <state x="1084" y="299" key="EnvironmentVariablesDialog" timestamp="1590897386033">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -225,10 +237,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="718" y="194" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1590898518427" />
-    <state x="552" y="253" key="Vcs.Push.Dialog.v2" timestamp="1590973233915">
+    <state x="552" y="253" key="Vcs.Push.Dialog.v2" timestamp="1591620486528">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="552" y="253" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1590973233915" />
+    <state x="552" y="253" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1591620486528" />
     <state width="968" height="528" key="XDebugger.FullValuePopup" timestamp="1591132388317">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>

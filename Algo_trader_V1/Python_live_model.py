@@ -196,6 +196,10 @@ def wma_loop(symbol):
             for sma_key, value in nested_value.items():
                 print(value[0])
         # comparison loop
+        # TODO
+        # only buy side; refer to crossing and not to numerical comparison
+        # intersection after measurement begins
+        # take t1 and t2 intersection
         if wma_50 > wma_200:
             # buy signal
             print(f"{symbol} is being bought")

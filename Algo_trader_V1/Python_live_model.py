@@ -7,7 +7,8 @@ Created on 5/18/2020 8:15 PM
 import pandas as pd
 import numpy as np
 import time
-
+from datetime import datetime as dt
+from datetime import timedelta
 from alpha_vantage.techindicators import TechIndicators
 from Python_AV_get_intraday_stock import pull_intraday_data, pull_stock_data, submit_order
 from Python_prediction_features import pred_feat
@@ -190,7 +191,17 @@ def wma_loop(symbol):
         wma_50, meta_wma_50 = ti.get_wma(symbol='TSLA', interval='daily', time_period='50', series_type='open')
         wma_200, meta_wma_200 = ti.get_wma(symbol='TSLA', interval='daily', time_period='200', series_type='open')
 
-        # TODO
+
+        last_day_iso = dt.today() + timedelta(days=-1)
+        next_day_iso = dt.today() + timedelta(days=1)
+        yesterday_iso = last_day_iso.strftime('%Y-%m-%d')
+        today_iso = dt.today().strftime('%Y-%m-%d')
+        tomorrow_iso = next_day_iso.strftime('%Y-%m-%d')
+        wma_50.get(yesterday_iso)
+        wma_50.get(today_iso)
+        wma_50.get(tomorrow_iso)
+
+        # Access of nested dictionary
         # dict: (key): ((inner key, inner value))
         for key, nested_value in wma_50.items():
             for wma_key, value in nested_value.items():

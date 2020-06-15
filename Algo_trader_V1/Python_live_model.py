@@ -191,11 +191,11 @@ def wma_loop(symbol):
         wma_200, meta_wma_200 = ti.get_wma(symbol='TSLA', interval='daily', time_period='200', series_type='open')
 
         # TODO
-        # fix access code for dictionary
         # dict: (key): ((inner key, inner value))
         for key, nested_value in wma_50.items():
-            for sma_key, value in nested_value.items():
-                print(value[0])
+            for wma_key, value in nested_value.items():
+                # print the numerical inner value (the wma of a specific day)
+                print(value)
         # comparison loop
         # TODO
         # only buy side; refer to crossing and not to numerical comparison

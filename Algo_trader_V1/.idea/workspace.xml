@@ -3,6 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="1aa0a1a9-df87-4847-b597-2f2227d476e8" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Python_AV_indicators.py" beforeDir="false" afterPath="$PROJECT_DIR$/Python_AV_indicators.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Python_acc_config.py" beforeDir="false" afterPath="$PROJECT_DIR$/Python_acc_config.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Python_live_model.py" beforeDir="false" afterPath="$PROJECT_DIR$/Python_live_model.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -42,7 +44,7 @@
       </console-settings>
     </option>
   </component>
-  <component name="RunManager" selected="Python.Python_live_model">
+  <component name="RunManager" selected="Python.Python_AV_get_intraday_stock">
     <configuration name="Python_AV_get_intraday_stock" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
       <module name="Algo_trader_V1" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -59,6 +61,44 @@
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Python_AV_get_intraday_stock.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Python_acc_config" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="Algo_trader_V1" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Python_acc_config.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="true" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Python_alpaca_API_connector" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
+      <module name="Algo_trader_V1" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Python_alpaca_API_connector.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="true" />
       <option name="EMULATE_TERMINAL" value="false" />
       <option name="MODULE_MODE" value="false" />
       <option name="REDIRECT_INPUT" value="false" />
@@ -111,6 +151,7 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.Python_acc_config" />
         <item itemvalue="Python.Python_live_model" />
       </list>
     </recent_temporary>
@@ -142,6 +183,7 @@
       <workItem from="1591620236167" duration="336000" />
       <workItem from="1591620856983" duration="253000" />
       <workItem from="1591985345208" duration="2889000" />
+      <workItem from="1592251674601" duration="1655000" />
     </task>
     <task id="LOCAL-00001" summary="-fuck mac">
       <created>1590719250675</created>
@@ -219,22 +261,22 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="739" y="275" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1590897675657" />
-    <state width="1403" height="282" key="GridCell.Tab.0.bottom" timestamp="1590897961095">
+    <state width="1401" height="282" key="GridCell.Tab.0.bottom" timestamp="1592252768494">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1403" height="282" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1590897961095" />
-    <state width="1403" height="282" key="GridCell.Tab.0.center" timestamp="1590897961095">
+    <state width="1401" height="282" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1592252768494" />
+    <state width="1401" height="282" key="GridCell.Tab.0.center" timestamp="1592252768493">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1403" height="282" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1590897961095" />
-    <state width="1403" height="282" key="GridCell.Tab.0.left" timestamp="1590897961095">
+    <state width="1401" height="282" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1592252768493" />
+    <state width="1401" height="282" key="GridCell.Tab.0.left" timestamp="1592252768493">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1403" height="282" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1590897961095" />
-    <state width="1403" height="282" key="GridCell.Tab.0.right" timestamp="1590897961095">
+    <state width="1401" height="282" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1592252768493" />
+    <state width="1401" height="282" key="GridCell.Tab.0.right" timestamp="1592252768494">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1403" height="282" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1590897961095" />
+    <state width="1401" height="282" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1592252768494" />
     <state x="718" y="194" key="SettingsEditor" timestamp="1590898518427">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -253,6 +295,6 @@
     <state x="601" y="246" width="700" height="530" key="recent.locations.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1591986954884" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/Algo_trader_V1$Python_AV_get_intraday_stock.coverage" NAME="Python_AV_get_intraday_stock Coverage Results" MODIFIED="1590897181032" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Algo_trader_V1$Python_AV_get_intraday_stock.coverage" NAME="Python_AV_get_intraday_stock Coverage Results" MODIFIED="1592252762039" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>

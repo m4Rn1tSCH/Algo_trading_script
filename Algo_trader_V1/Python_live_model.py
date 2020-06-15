@@ -4,7 +4,6 @@ Created on 5/18/2020 8:15 PM
 
 @author: bill-
 """
-from datetime import datetime as dt
 import pandas as pd
 import numpy as np
 import time
@@ -12,6 +11,7 @@ import time
 from alpha_vantage.techindicators import TechIndicators
 from Python_AV_get_intraday_stock import pull_intraday_data, pull_stock_data, submit_order
 from Python_prediction_features import pred_feat
+import Python_alpaca_API_connector
 
 """
 -pull data every hour /every day
@@ -41,9 +41,17 @@ stock_df['open_diff'] = stock_df['open'].diff()
 stock_df = pred_feat(df=stock_df)
 print(stock_df.head(3))
 
+# create a iterable tuple for the orders;
+# print order symbol; quantity; (side) - not needed for now
+pos = Python_alpaca_API_connector.list_positions()
+portfolio_list = []
+for i in range(0, len(Python_alpaca_API_connector.list_positions()), 1):
+    print((pos[i].symbol, pos[i].qty))
+    # append a tuple with the stock and quantity held
+    portfolio_list.append((pos[i].symbol, pos[i].qty))
+
 
 def trading_support_resistance(df, bin_width=30):
-
 
     """
     create empty indicator columns and add values as the data evovles
@@ -103,8 +111,10 @@ def trading_support_resistance(df, bin_width=30):
     # produces NaNs in the df again!
     trading_support_resistance(df=stock_df, bin_width=30)
 
-#time loop for trading logic
-def test_loop():
+
+# time loop for trading logic
+def simple_loop():
+
     """
     Thank you for using Alpha Vantage!
     Our standard API call frequency is 5 calls per minute and 500 calls per day.
@@ -112,9 +122,9 @@ def test_loop():
     """
     while True:
         last_price = pull_intraday_data(symbol='TSLA',
-                                      interval='5min',
-                                      outputsize='full',
-                                      output_format='pandas')
+                                        interval='5min',
+                                        outputsize='full',
+                                        output_format='pandas')
         # calculate the mean price of the last 25 min of the trading day
         mean_price = last_price['open'][:5].mean()
         # retrieve the very last quote to compare with
@@ -125,11 +135,11 @@ def test_loop():
             try:
                 print("Stock is being purchased")
                 submit_order(symbol='TSLA',
-                                 qty=2,
-                                 side='buy',
-                                 type='limit',
-                                 time_in_force='gtc',
-                                 limit_price=mean_price
+                             qty=2,
+                             side='buy',
+                             type='limit',
+                             time_in_force='gtc',
+                             limit_price=mean_price
                              )
             except BaseException as e:
                 print(e)
@@ -166,7 +176,6 @@ def test_loop():
 
 
 def wma_loop(symbol):
-
     """
     symbol : 'XXXX'
     interval : 1min, 5min, 15min, 30min, 60min, daily, weekly, monthly
@@ -181,14 +190,6 @@ def wma_loop(symbol):
         wma_50, meta_wma_50 = ti.get_wma(symbol='TSLA', interval='daily', time_period='50', series_type='open')
         wma_200, meta_wma_200 = ti.get_wma(symbol='TSLA', interval='daily', time_period='200', series_type='open')
 
-        # create a iterable tuple for the orders;
-        # print order symbol; quantity; (side) - not needed for now
-        pos = list_positions()
-        portfolio_list = []
-        for i in range(0, len(list_positions()), 1):
-            print((pos[i].symbol, pos[i].qty))
-            # append a tuple with the stock and quantity held
-            portfolio_list.append((pos[i].symbol, pos[i].qty))
         # TODO
         # fix access code for dictionary
         # dict: (key): ((inner key, inner value))
@@ -211,4 +212,4 @@ def wma_loop(symbol):
                 print(f"No {symbol} shares owned; shorting not enabled")
         else:
             break
-            time.sleep(5)
+        time.sleep(5)

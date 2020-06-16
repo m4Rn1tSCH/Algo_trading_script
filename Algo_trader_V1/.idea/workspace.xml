@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="1aa0a1a9-df87-4847-b597-2f2227d476e8" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Python_live_model.py" beforeDir="false" afterPath="$PROJECT_DIR$/Python_live_model.py" afterDir="false" />
-    </list>
+    <list default="true" id="1aa0a1a9-df87-4847-b597-2f2227d476e8" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -191,7 +188,7 @@
       <workItem from="1592256136255" duration="2446000" />
       <workItem from="1592262574105" duration="3465000" />
       <workItem from="1592271499072" duration="5501000" />
-      <workItem from="1592313983001" duration="2940000" />
+      <workItem from="1592313983001" duration="3080000" />
     </task>
     <task id="LOCAL-00001" summary="-fuck mac">
       <created>1590719250675</created>
@@ -270,7 +267,14 @@
       <option name="project" value="LOCAL" />
       <updated>1592278023407</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="-fixed working directory bug&#10;-minor spelling&#10;-prep for weighted moving average&#10;-docs changed for submit order&#10;-streamlined imports&#10;-added correct access for dict; with  keys&#10;-correct evaluation of signal (intersection 50/200)">
+      <created>1592317029173</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1592317029173</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -295,10 +299,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="640" y="256" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1591620563379" />
-    <state x="415" y="51" key="CommitChangelistDialog2" timestamp="1592278022208">
+    <state x="415" y="51" key="CommitChangelistDialog2" timestamp="1592317026956">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="415" y="51" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1592278022208" />
+    <state x="415" y="51" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1592317026956" />
     <state x="1084" y="299" key="EnvironmentVariablesDialog" timestamp="1590897386033">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -307,30 +311,30 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="739" y="275" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1590897675657" />
-    <state width="1398" height="282" key="GridCell.Tab.0.bottom" timestamp="1592314468337">
+    <state width="1398" height="282" key="GridCell.Tab.0.bottom" timestamp="1592317120142">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1398" height="282" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1592314468337" />
-    <state width="1398" height="282" key="GridCell.Tab.0.center" timestamp="1592314468337">
+    <state width="1398" height="282" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1592317120142" />
+    <state width="1398" height="282" key="GridCell.Tab.0.center" timestamp="1592317120142">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1398" height="282" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1592314468337" />
-    <state width="1398" height="282" key="GridCell.Tab.0.left" timestamp="1592314468337">
+    <state width="1398" height="282" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1592317120142" />
+    <state width="1398" height="282" key="GridCell.Tab.0.left" timestamp="1592317120142">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1398" height="282" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1592314468337" />
-    <state width="1398" height="282" key="GridCell.Tab.0.right" timestamp="1592314468337">
+    <state width="1398" height="282" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1592317120142" />
+    <state width="1398" height="282" key="GridCell.Tab.0.right" timestamp="1592317120142">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1398" height="282" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1592314468337" />
+    <state width="1398" height="282" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1592317120142" />
     <state x="718" y="194" key="SettingsEditor" timestamp="1590898518427">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="718" y="194" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1590898518427" />
-    <state x="552" y="253" key="Vcs.Push.Dialog.v2" timestamp="1592278025906">
+    <state x="552" y="253" key="Vcs.Push.Dialog.v2" timestamp="1592317043637">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="552" y="253" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1592278025906" />
+    <state x="552" y="253" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1592317043637" />
     <state width="968" height="528" key="XDebugger.FullValuePopup" timestamp="1592274838646">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>

@@ -208,13 +208,22 @@ def wma_loop(symbol):
                 # print the numerical inner value (the wma of a specific day)
                 print(value)
 
-        key_list = sorted(wma_50.keys(), reverse=True)
-        for i, v in enumerate(key_list):
-            print("day+1:", wma_50[key_list[i + 1]])
+        '''
+        ACCESS OF weighted moving averages
+        naming of day + 1 is inverted to index position because list is in descending order
+        then the consecutively increasing index element in the list represents a day
+        further in the past (smaller date number)
+        '''
+        # reverse set to true for descending order; most recent first
+        key_list = sorted(wma_50.keys(), reverse=True)[:3]
+        # last element for list slicing exclusive
+        for i, v in enumerate(key_list, 1):
+            print("day-1:", wma_50[key_list[i + 1]])
             print("day:", wma_50[key_list[i]])
-            print("day-1:", wma_50[key_list[i - 1]])
+            print("day+1:", wma_50[key_list[i - 1]])
 
-        key_list_2 = sorted(wma_200.keys(), reverse=True)
+        key_list_2 = sorted(wma_200.keys(), reverse=True)[:1]
+        # last element for list slicing exclusive
         for i, v in enumerate(key_list_2):
             print("day+1:", wma_50[key_list_2[i + 1]])
             print("day:", wma_50[key_list_2[i]])

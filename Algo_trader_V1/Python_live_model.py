@@ -209,25 +209,31 @@ def wma_loop(symbol):
                 print(value)
 
         '''
-        ACCESS OF weighted moving averages
+        ACCESS OF WEIGHTED MOVING AVERAGES AND CONSECUTIVE INTERSECTION THEREOF
         naming of day + 1 is inverted to index position because list is in descending order
         then the consecutively increasing index element in the list represents a day
         further in the past (smaller date number)
         '''
         # reverse set to true for descending order; most recent first
+        # zero indexed counter with values selected before index 3; start at index 1
         key_list = sorted(wma_50.keys(), reverse=True)[:3]
         # last element for list slicing exclusive
         for i, v in enumerate(key_list, 1):
+            # previous day
             print("day-1:", wma_50[key_list[i + 1]])
+            # day of interest
             print("day:", wma_50[key_list[i]])
+            # next day
             print("day+1:", wma_50[key_list[i - 1]])
+            # if wma_50[key_list[i -1]] < wma_50[key_list[i]] and wma_50[key_list[i + 1]] > wma_50[key_list[i]]:
+                # print("wma is going up")
 
-        key_list_2 = sorted(wma_200.keys(), reverse=True)[:1]
+        key_list_2 = sorted(wma_200.keys(), reverse=True)[:3]
         # last element for list slicing exclusive
-        for i, v in enumerate(key_list_2):
-            print("day+1:", wma_50[key_list_2[i + 1]])
-            print("day:", wma_50[key_list_2[i]])
-            print("day-1:", wma_50[key_list_2[i - 1]])
+        for i, v in enumerate(key_list_2, 1):
+            print("day+1:", wma_200[key_list_2[i + 1]])
+            print("day:", wma_200[key_list_2[i]])
+            print("day-1:", wma_200[key_list_2[i - 1]])
 
         # comparison loop
         # TODO

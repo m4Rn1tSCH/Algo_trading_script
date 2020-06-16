@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="1aa0a1a9-df87-4847-b597-2f2227d476e8" name="Default Changelist" comment="" />
+    <list default="true" id="1aa0a1a9-df87-4847-b597-2f2227d476e8" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Python_live_model.py" beforeDir="false" afterPath="$PROJECT_DIR$/Python_live_model.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -39,7 +42,7 @@
       </console-settings>
     </option>
   </component>
-  <component name="RunManager" selected="Python.Python_AV_get_intraday_stock">
+  <component name="RunManager" selected="Python.Python_alpaca_API_connector">
     <configuration name="Python_AV_get_intraday_stock" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
       <module name="Algo_trader_V1" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -188,6 +191,7 @@
       <workItem from="1592256136255" duration="2446000" />
       <workItem from="1592262574105" duration="3465000" />
       <workItem from="1592271499072" duration="5501000" />
+      <workItem from="1592313983001" duration="2940000" />
     </task>
     <task id="LOCAL-00001" summary="-fuck mac">
       <created>1590719250675</created>
@@ -303,22 +307,22 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="739" y="275" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1590897675657" />
-    <state width="1400" height="282" key="GridCell.Tab.0.bottom" timestamp="1592262536274">
+    <state width="1398" height="282" key="GridCell.Tab.0.bottom" timestamp="1592314468337">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1400" height="282" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1592262536274" />
-    <state width="1400" height="282" key="GridCell.Tab.0.center" timestamp="1592262536274">
+    <state width="1398" height="282" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1592314468337" />
+    <state width="1398" height="282" key="GridCell.Tab.0.center" timestamp="1592314468337">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1400" height="282" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1592262536274" />
-    <state width="1400" height="282" key="GridCell.Tab.0.left" timestamp="1592262536274">
+    <state width="1398" height="282" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1592314468337" />
+    <state width="1398" height="282" key="GridCell.Tab.0.left" timestamp="1592314468337">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1400" height="282" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1592262536274" />
-    <state width="1400" height="282" key="GridCell.Tab.0.right" timestamp="1592262536274">
+    <state width="1398" height="282" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1592314468337" />
+    <state width="1398" height="282" key="GridCell.Tab.0.right" timestamp="1592314468337">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1400" height="282" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1592262536274" />
+    <state width="1398" height="282" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1592314468337" />
     <state x="718" y="194" key="SettingsEditor" timestamp="1590898518427">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -337,6 +341,6 @@
     <state x="601" y="246" width="700" height="530" key="recent.locations.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1591986954884" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/Algo_trader_V1$Python_AV_get_intraday_stock.coverage" NAME="Python_AV_get_intraday_stock Coverage Results" MODIFIED="1592260170555" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Algo_trader_V1$Python_AV_get_intraday_stock.coverage" NAME="Python_AV_get_intraday_stock Coverage Results" MODIFIED="1592314433692" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>

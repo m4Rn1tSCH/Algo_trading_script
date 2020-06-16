@@ -46,7 +46,7 @@ print(stock_df.head(3))
 # print order symbol; quantity; (side) - not needed for now
 pos = Python_alpaca_API_connector.list_positions()
 portfolio_list = []
-for i in range(0, len(Python_alpaca_API_connector.list_positions()), 1):
+for i in range(0, len(pos), 1):
     print((pos[i].symbol, pos[i].qty))
     # append a tuple with the stock and quantity held
     portfolio_list.append((pos[i].symbol, pos[i].qty))
@@ -211,7 +211,7 @@ def wma_loop(symbol):
         '''
         ACCESS OF WEIGHTED MOVING AVERAGES AND CONSECUTIVE INTERSECTION THEREOF
         naming of day + 1 is inverted to index position because list is in descending order
-        then the consecutively increasing index element in the list represents a day
+        then the increasing index element in the list represents a day
         further in the past (smaller date number)
         '''
         # reverse set to true for descending order; most recent first
@@ -219,14 +219,10 @@ def wma_loop(symbol):
         key_list = sorted(wma_50.keys(), reverse=True)[:3]
         # last element for list slicing exclusive
         for i, v in enumerate(key_list, 1):
-            # previous day
             print("day-1:", wma_50[key_list[i + 1]])
-            # day of interest
             print("day:", wma_50[key_list[i]])
-            # next day
             print("day+1:", wma_50[key_list[i - 1]])
-            # if wma_50[key_list[i -1]] < wma_50[key_list[i]] and wma_50[key_list[i + 1]] > wma_50[key_list[i]]:
-                # print("wma is going up")
+
 
         key_list_2 = sorted(wma_200.keys(), reverse=True)[:3]
         # last element for list slicing exclusive
@@ -234,6 +230,17 @@ def wma_loop(symbol):
             print("day+1:", wma_200[key_list_2[i + 1]])
             print("day:", wma_200[key_list_2[i]])
             print("day-1:", wma_200[key_list_2[i - 1]])
+
+
+        for nested_dict in sorted(wma_200, reverse=True)[:10]:
+            print(wma_200[nested_dict])
+
+                key_list_2 = sorted(wma_200.keys(), reverse=True)[:10]
+                for i, v in enumerate(key_list_2, 1):
+                    print("day+1:", wma_200[key_list_2[i + 1]])
+                    print("day:", wma_200[key_list_2[i]])
+                    print("day-1:", wma_200[key_list_2[i - 1]])
+
 
         # comparison loop
         # TODO

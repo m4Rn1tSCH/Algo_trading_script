@@ -191,23 +191,6 @@ def wma_loop(symbol):
         wma_50, meta_wma_50 = ti.get_wma(symbol='TSLA', interval='daily', time_period='50', series_type='open')
         wma_200, meta_wma_200 = ti.get_wma(symbol='TSLA', interval='daily', time_period='200', series_type='open')
 
-        # temporary test
-        # last_day_iso = dt.today() + timedelta(days=-1)
-        # next_day_iso = dt.today() + timedelta(days=1)
-        # yesterday_iso = last_day_iso.strftime('%Y-%m-%d')
-        # today_iso = dt.today().strftime('%Y-%m-%d')
-        # tomorrow_iso = next_day_iso.strftime('%Y-%m-%d')
-        # wma_50.get(yesterday_iso)
-        # wma_50.get(today_iso)
-        # wma_50.get(tomorrow_iso)
-
-        # Access of nested dictionary
-        # dict: (key): ((inner key, inner value))
-        for key, nested_value in wma_50.items():
-            for wma_key, value in nested_value.items():
-                # print the numerical inner value (the wma of a specific day)
-                print(value)
-
         '''
         ACCESS OF WEIGHTED MOVING AVERAGES AND CONSECUTIVE INTERSECTION THEREOF
         naming of day + 1 is inverted to index position because list is in descending order
@@ -215,49 +198,31 @@ def wma_loop(symbol):
         further in the past (smaller date number)
         '''
         # reverse set to true for descending order; most recent first
-        # zero indexed counter with values selected before index 3; start at index 1
+        # zero indexed counter with values selected before index 3(last element exclusive); start at index 1
+
         key_list = sorted(wma_50.keys(), reverse=True)[:3]
+        key_list_2 = sorted(wma_200.keys(), reverse=True)[:3]
+
         # last element for list slicing exclusive
         for i, v in enumerate(key_list, 1):
-            print("day-1:", wma_50[key_list[i + 1]])
-            print("day:", wma_50[key_list[i]])
-            print("day+1:", wma_50[key_list[i - 1]])
-
-
-        key_list_2 = sorted(wma_200.keys(), reverse=True)[:3]
-        # last element for list slicing exclusive
-        for i, v in enumerate(key_list_2, 1):
-            print("day+1:", wma_200[key_list_2[i + 1]])
-            print("day:", wma_200[key_list_2[i]])
-            print("day-1:", wma_200[key_list_2[i - 1]])
-
-
-        for nested_dict in sorted(wma_200, reverse=True)[:10]:
-            print(wma_200[nested_dict])
-
-                key_list_2 = sorted(wma_200.keys(), reverse=True)[:10]
-                for i, v in enumerate(key_list_2, 1):
-                    print("Date:", v, "WMA:", wma_200[v]['WMA'])
-                    print("Date:", v, "WMA:", wma_200[v]['WMA'])
-                    print("day+1:", wma_200[key_list_2[i + 1]])
-                    print("day:", wma_200[key_list_2[i]])
-                    print("day-1:", wma_200[key_list_2[i - 1]])
-
+            for i, v in enumerate(key_list_2, 1):
+                # access of nested dictionary
+                # print("Date:", v, "WMA:", wma_200[v]['WMA'])
+                print("Date -1:", key_list_2[i + 1], "WMA:", wma_200[key_list_2[i + 1]]['WMA'])
+                print("Date:", key_list_2[i], wma_200[key_list_2[i]]['WMA'])
+                print("Date +1:", key_list_2[i - 1], wma_200[key_list_2[i - 1]]['WMA'])
 
         # comparison loop
-        # TODO
-        # only buy side; refer to crossing and not to numerical comparison
-        # intersection after measurement begins
-        # take t1 and t2 intersection
-        if wma_50 > wma_200:
-            # buy signal
-            print(f"{symbol} is being bought")
-        # check if wma_50 is smaller than wma_200; the stock is owned; at least one stock is owned
-        elif wma_50 < wma_200 and symbol in portfolio_list and portfolio_list[1] > 0:
-            # sell signal
-            print(f"{symbol} is being sold")
-            if portfolio_list[1] == 0:
-                print(f"No {symbol} shares owned; shorting not enabled")
-        else:
-            print("no action")
-            time.sleep(5)
+
+            if (wma_50[key_list[i - 1]]['WMA'] < wma_200[key_list_2[i -1]]['WMA'] and wma_50[key_list[i + 1]]['WMA'] > wma_200[key_list_2[i + 1]]['WMA']):
+                # buy signal
+                print(f"{symbol} is being bought")
+            # check if wma_50 is smaller than wma_200; the stock is owned; at least one stock is owned
+            elif wma_50 < wma_200 and symbol in portfolio_list and portfolio_list[1] > 0:
+                # sell signal
+                print(f"{symbol} is being sold")
+                if portfolio_list[1] == 0:
+                    print(f"No {symbol} shares owned; shorting not enabled")
+            else:
+                print("no action")
+                time.sleep(5)

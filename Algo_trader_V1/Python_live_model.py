@@ -191,15 +191,15 @@ def wma_loop(symbol):
         wma_50, meta_wma_50 = ti.get_wma(symbol='TSLA', interval='daily', time_period='50', series_type='open')
         wma_200, meta_wma_200 = ti.get_wma(symbol='TSLA', interval='daily', time_period='200', series_type='open')
 
-
-        last_day_iso = dt.today() + timedelta(days=-1)
-        next_day_iso = dt.today() + timedelta(days=1)
-        yesterday_iso = last_day_iso.strftime('%Y-%m-%d')
-        today_iso = dt.today().strftime('%Y-%m-%d')
-        tomorrow_iso = next_day_iso.strftime('%Y-%m-%d')
-        wma_50.get(yesterday_iso)
-        wma_50.get(today_iso)
-        wma_50.get(tomorrow_iso)
+        # temporary test
+        # last_day_iso = dt.today() + timedelta(days=-1)
+        # next_day_iso = dt.today() + timedelta(days=1)
+        # yesterday_iso = last_day_iso.strftime('%Y-%m-%d')
+        # today_iso = dt.today().strftime('%Y-%m-%d')
+        # tomorrow_iso = next_day_iso.strftime('%Y-%m-%d')
+        # wma_50.get(yesterday_iso)
+        # wma_50.get(today_iso)
+        # wma_50.get(tomorrow_iso)
 
         # Access of nested dictionary
         # dict: (key): ((inner key, inner value))
@@ -207,6 +207,19 @@ def wma_loop(symbol):
             for wma_key, value in nested_value.items():
                 # print the numerical inner value (the wma of a specific day)
                 print(value)
+
+        key_list = sorted(wma_50.keys(), reverse=True)
+        for i, v in enumerate(key_list):
+            print("day+1:", wma_50[key_list[i + 1]])
+            print("day:", wma_50[key_list[i]])
+            print("day-1:", wma_50[key_list[i - 1]])
+
+        key_list_2 = sorted(wma_200.keys(), reverse=True)
+        for i, v in enumerate(key_list_2):
+            print("day+1:", wma_50[key_list_2[i + 1]])
+            print("day:", wma_50[key_list_2[i]])
+            print("day-1:", wma_50[key_list_2[i - 1]])
+
         # comparison loop
         # TODO
         # only buy side; refer to crossing and not to numerical comparison

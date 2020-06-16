@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1aa0a1a9-df87-4847-b597-2f2227d476e8" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/raw_code snippets.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Python_live_model.py" beforeDir="false" afterPath="$PROJECT_DIR$/Python_live_model.py" afterDir="false" />
     </list>
@@ -204,7 +203,7 @@
       <workItem from="1592313983001" duration="3080000" />
       <workItem from="1592317220626" duration="1520000" />
       <workItem from="1592320622139" duration="734000" />
-      <workItem from="1592338675870" duration="2662000" />
+      <workItem from="1592338675870" duration="2886000" />
     </task>
     <task id="LOCAL-00001" summary="-fuck mac">
       <created>1590719250675</created>
@@ -290,7 +289,14 @@
       <option name="project" value="LOCAL" />
       <updated>1592317029173</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary=" Model:&#10;    -fixed working directory bug&#10;    -minor spelling&#10;    -weighted moving average&#10;    -docs changed for submit order&#10;    -streamlined imports&#10;    -correct evaluation of signal (intersection 50/200)&#10;Raw Code Snippets&#10;    -raw code goes here that might prove useful later on">
+      <created>1592341449060</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1592341449060</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -304,7 +310,8 @@
     <MESSAGE value="-fixed working directory bug&#10;- minor spelling&#10;-prep for weighted moving average&#10;- docs changed for submit order&#10;-streamlined imports" />
     <MESSAGE value="-fixed working directory bug&#10;- minor spelling&#10;-prep for weighted moving average&#10;- docs changed for submit order&#10;-streamlined imports&#10;-added correct access for dict&#10;- correct evaluation of signal (intersection 50/200)" />
     <MESSAGE value="-fixed working directory bug&#10;-minor spelling&#10;-prep for weighted moving average&#10;-docs changed for submit order&#10;-streamlined imports&#10;-added correct access for dict; with  keys&#10;-correct evaluation of signal (intersection 50/200)" />
-    <option name="LAST_COMMIT_MESSAGE" value="-fixed working directory bug&#10;-minor spelling&#10;-prep for weighted moving average&#10;-docs changed for submit order&#10;-streamlined imports&#10;-added correct access for dict; with  keys&#10;-correct evaluation of signal (intersection 50/200)" />
+    <MESSAGE value=" Model:&#10;    -fixed working directory bug&#10;    -minor spelling&#10;    -weighted moving average&#10;    -docs changed for submit order&#10;    -streamlined imports&#10;    -correct evaluation of signal (intersection 50/200)&#10;Raw Code Snippets&#10;    -raw code goes here that might prove useful later on" />
+    <option name="LAST_COMMIT_MESSAGE" value=" Model:&#10;    -fixed working directory bug&#10;    -minor spelling&#10;    -weighted moving average&#10;    -docs changed for submit order&#10;    -streamlined imports&#10;    -correct evaluation of signal (intersection 50/200)&#10;Raw Code Snippets&#10;    -raw code goes here that might prove useful later on" />
   </component>
   <component name="WindowStateProjectService">
     <state x="414" y="175" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1590898285460">
@@ -315,10 +322,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="640" y="256" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1591620563379" />
-    <state x="415" y="51" key="CommitChangelistDialog2" timestamp="1592317026956">
+    <state x="415" y="51" key="CommitChangelistDialog2" timestamp="1592341447285">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="415" y="51" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1592317026956" />
+    <state x="415" y="51" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1592341447285" />
     <state x="1084" y="299" key="EnvironmentVariablesDialog" timestamp="1590897386033">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -327,30 +334,30 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="739" y="275" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1590897675657" />
-    <state width="1397" height="282" key="GridCell.Tab.0.bottom" timestamp="1592338914650">
+    <state width="1397" height="282" key="GridCell.Tab.0.bottom" timestamp="1592341577141">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1397" height="282" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1592338914650" />
-    <state width="1397" height="282" key="GridCell.Tab.0.center" timestamp="1592338914649">
+    <state width="1397" height="282" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1592341577141" />
+    <state width="1397" height="282" key="GridCell.Tab.0.center" timestamp="1592341577140">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1397" height="282" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1592338914649" />
-    <state width="1397" height="282" key="GridCell.Tab.0.left" timestamp="1592338914649">
+    <state width="1397" height="282" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1592341577140" />
+    <state width="1397" height="282" key="GridCell.Tab.0.left" timestamp="1592341577140">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1397" height="282" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1592338914649" />
-    <state width="1397" height="282" key="GridCell.Tab.0.right" timestamp="1592338914649">
+    <state width="1397" height="282" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1592341577140" />
+    <state width="1397" height="282" key="GridCell.Tab.0.right" timestamp="1592341577141">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1397" height="282" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1592338914649" />
+    <state width="1397" height="282" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1592341577141" />
     <state x="718" y="194" key="SettingsEditor" timestamp="1590898518427">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="718" y="194" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1590898518427" />
-    <state x="552" y="253" key="Vcs.Push.Dialog.v2" timestamp="1592317043637">
+    <state x="552" y="253" key="Vcs.Push.Dialog.v2" timestamp="1592341450878">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="552" y="253" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1592317043637" />
+    <state x="552" y="253" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1592341450878" />
     <state width="968" height="528" key="XDebugger.FullValuePopup" timestamp="1592274838646">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>

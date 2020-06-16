@@ -212,9 +212,9 @@ def wma_loop(symbol):
                 print("Date:", key_list_2[i], wma_200[key_list_2[i]]['WMA'])
                 print("Date +1:", key_list_2[i - 1], wma_200[key_list_2[i - 1]]['WMA'])
 
-        # comparison loop
-
-            if (wma_50[key_list[i - 1]]['WMA'] < wma_200[key_list_2[i -1]]['WMA'] and wma_50[key_list[i + 1]]['WMA'] > wma_200[key_list_2[i + 1]]['WMA']):
+            # comparison loop
+            if (wma_50[key_list[i - 1]]['WMA'] < wma_200[key_list_2[i -1]]['WMA'] and
+                    wma_50[key_list[i + 1]]['WMA'] > wma_200[key_list_2[i + 1]]['WMA']):
                 # buy signal
                 print(f"{symbol} is being bought")
             # check if wma_50 is smaller than wma_200; the stock is owned; at least one stock is owned

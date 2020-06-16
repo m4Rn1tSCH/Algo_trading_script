@@ -237,6 +237,8 @@ def wma_loop(symbol):
 
                 key_list_2 = sorted(wma_200.keys(), reverse=True)[:10]
                 for i, v in enumerate(key_list_2, 1):
+                    print("Date:", v, "WMA:", wma_200[v]['WMA'])
+                    print("Date:", v, "WMA:", wma_200[v]['WMA'])
                     print("day+1:", wma_200[key_list_2[i + 1]])
                     print("day:", wma_200[key_list_2[i]])
                     print("day-1:", wma_200[key_list_2[i - 1]])
@@ -257,5 +259,5 @@ def wma_loop(symbol):
             if portfolio_list[1] == 0:
                 print(f"No {symbol} shares owned; shorting not enabled")
         else:
-            break
-        time.sleep(5)
+            print("no action")
+            time.sleep(5)

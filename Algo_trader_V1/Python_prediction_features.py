@@ -6,9 +6,6 @@ Created on Sat April 22 10:26:42 2020
 """
 import numpy as np
 from datetime import datetime as dt
-# TODO
-# NaNs that are being generated cannot be dropped properly
-# find a way to properly drop those values and make data feasible
 
 def pred_feat(df):
     """

@@ -177,7 +177,8 @@ def simple_loop():
         # loop will pause for x seconds
         time.sleep(600)
 
-
+# loop based on the weighted moving average
+# this loop does not allow shorting
 def wma_loop(symbol):
     """
     symbol : 'XXXX'
@@ -201,7 +202,8 @@ def wma_loop(symbol):
         '''
         # reverse set to true for descending order; most recent first
         # zero indexed counter with values selected before index 3(last element exclusive); start at index 1
-
+        # TODO
+        # fix error handling here to enable loop
         key_list = sorted(wma_50.keys(), reverse=True)[:3]
         key_list_2 = sorted(wma_200.keys(), reverse=True)[:3]
 

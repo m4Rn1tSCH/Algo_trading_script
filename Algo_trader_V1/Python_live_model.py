@@ -26,21 +26,21 @@ calculate/or mark -> sell or buy order
 intra_df = pull_intraday_data(symbol='TSLA',
                               interval='5min',
                               outputsize='full',
-                              output_format='pandas')
+                              output_format='pandas',
+                              plot_price=True)
 intra_df['open_diff'] = intra_df['open'].diff()
 intra_df = pred_feat(df=intra_df)
-print(intra_df.head(3))
 
 # monthly data
 stock_df = pull_stock_data(symbol='NVDA',
                            adjusted=True,
                            outputsize='full',
                            cadence='monthly',
-                           output_format='pandas')
+                           output_format='pandas',
+                           plot_price=True)
 stock_df['open_diff'] = stock_df['open'].diff()
 # adds features and removes NaNs
 stock_df = pred_feat(df=stock_df)
-print(stock_df.head(3))
 
 # create a iterable tuple for the orders;
 # print order symbol; quantity; (side) - not needed for now

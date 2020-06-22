@@ -10,7 +10,7 @@ from Python_alpaca_API_connector import api
 
 
 #pull stock data from Alpha Vantage
-def pull_stock_data(symbol, adjusted, outputsize, cadence, output_format):
+def pull_stock_data(symbol, adjusted, outputsize, cadence, output_format, plot_price=False):
     """
     DOCUMENTATION
     symbol: pick abbreviation in letter strings 'XXXX'
@@ -37,7 +37,22 @@ def pull_stock_data(symbol, adjusted, outputsize, cadence, output_format):
                                         "6. volume": "volume",
                                         "7. dividend amount": "dividend amount"},
                                 inplace=False)
+        if plot_price:
+            # LINE VALUES
+            #   supported values are: '-', '--', '-.', ':',
+            #   'None', ' ', '', 'solid', 'dashed', 'dashdot', 'dotted'
+            fig, ax = plt.subplots(2, 1, figsize=(15, 8))
+            plt.title('Open Price', style='oblique')
+            ax[0].plot(df_pull['date'], df_pull['open'],
+                       color='blue', lw=1, ls='dashdot', marker=',', label="Open Price")
+            # Plot the date on x-axis and the trading volume on y-axis
+            ax[1].plot(df_pull['date'], df_pull['volume'],
+                       color='orange', lw=1, ls='--', marker='x', label="Trade Volume")
+            plt.title(symbol, style='oblique')
+            ax[0].legend(loc='upper right')
+            ax[1].legend(loc='upper right')
 
+            plt.show()
     except BaseException as e:
         print(e)
         print("API not properly connected")
@@ -45,13 +60,14 @@ def pull_stock_data(symbol, adjusted, outputsize, cadence, output_format):
 
 
 
-def pull_intraday_data(symbol, interval, outputsize, output_format):
+def pull_intraday_data(symbol, interval, outputsize, output_format, plot_price=False):
     '''
     DOCUMENTATION
     symbol: pick abbreviation in letter strings 'XXXX'
     interval: ['1min', '5min', '15min', '30min', '60min']
     outputsize: 'Full'
     output_format: ['json', 'csv', 'pandas']
+    plot_price: boolean; generate a plot with open price and trading volume
     '''
     try:
         df_intra_pull = api.alpha_vantage.intraday_quotes(symbol=symbol,
@@ -67,7 +83,22 @@ def pull_intraday_data(symbol, interval, outputsize, output_format):
                                                     "4. close": "close",
                                                     "5. volume": "volume"},
                                             inplace=False)
+        if plot_price:
+            # LINE VALUES
+            #   supported values are: '-', '--', '-.', ':',
+            #   'None', ' ', '', 'solid', 'dashed', 'dashdot', 'dotted'
+            fig, ax = plt.subplots(2, 1, figsize=(15, 8))
+            plt.title('Open Price', style='oblique')
+            ax[0].plot(df_intra_pull['date'], df_intra_pull['open'],
+                       color='red', lw=1, ls='dashdot', marker=',', label="Open Price")
+            # Plot the date on x-axis and the trading volume on y-axis
+            ax[1].plot(df_intra_pull['date'], df_intra_pull['volume'],
+                       color='cyan', lw=1, ls='--', marker='x', label="Trade Volume")
+            plt.title(symbol, style='oblique')
+            ax[0].legend(loc='upper right')
+            ax[1].legend(loc='upper right')
 
+            plt.show()
     except BaseException as e:
         print(e)
         print("API not properly connected")
@@ -76,7 +107,8 @@ def pull_intraday_data(symbol, interval, outputsize, output_format):
 #intra_df = pull_intraday_data(symbol='COTY',
 #                            interval='5min',
 #                            outputsize='full',
-#                            output_format='pandas')
+#                            output_format='pandas',
+#                            plot_price=False)
 
 def submit_order(symbol, qty, side, type, time_in_force, limit_price):
     '''
@@ -117,25 +149,5 @@ def get_asset_list(status, asset_class):
     except BaseException as f:
         print(f)
     return asset_list
-#%%
-#TODO
-#fix date columns
-#split up charts into 2 subplots again (prob has been fixed)
-import matplotlib.pyplot as plt
-import seaborn as sns
 
-# LINE VALUES
-#   supported values are: '-', '--', '-.', ':',
-#   'None', ' ', '', 'solid', 'dashed', 'dashdot', 'dotted'
-# Plot the date on x-axis and open price on y-axis
-
-fig, ax = plt.subplots(2, 1, figsize=(15, 8))
-
-ax[0].plot(intra_df.index.values, intra_df['open'], color='green', lw=1, ls='dashdot', marker='solid', label="Open Price")
-# Plot the date on x-axis and the trading volume on y-axis
-#plt.set_title('Trading Volume', style='oblique')
-ax[1].plot(intra_df.index.values, intra_df['volume'], color='orange', lw=1, ls='solid', marker='x', label="Trade Volume")
-plt.title('Open Price', style='oblique')
-plt.xticks(rotation=60)
-plt.show()
 

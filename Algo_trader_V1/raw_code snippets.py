@@ -16,7 +16,7 @@ Created on 16 6/16/2020 4:43 PM
 # wma_50.get(yesterday_iso)
 # wma_50.get(today_iso)
 # wma_50.get(tomorrow_iso)
-
+#%%
 # Access of nested dictionary
 # dict: (key): ((inner key, inner value))
 for key, nested_value in wma_50.items():
@@ -33,3 +33,26 @@ for i, v in enumerate(key_list, 1):
     print("day-1:", wma_50[key_list[i + 1]])
     print("day:", wma_50[key_list[i]])
     print("day+1:", wma_50[key_list[i - 1]])
+
+#%%
+'''
+Plot code
+'''
+
+# LINE VALUES
+#   supported values are: '-', '--', '-.', ':',
+#   'None', ' ', '', 'solid', 'dashed', 'dashdot', 'dotted'
+# Plot the date on x-axis and open price on y-axis
+
+fig, ax = plt.subplots(2, 1, figsize=(15, 8))
+plt.title('Open Price', style='oblique')
+ax[0].plot(intra_df['date'], intra_df['open'], color='green', lw=1, ls='dashdot', marker=',', label="Open Price")
+# Plot the date on x-axis and the trading volume on y-axis
+#plt.set_title('Trading Volume', style='oblique')
+ax[1].plot(intra_df['date'], intra_df['volume'], color='orange', lw=1, ls='--', marker='x', label="Trade Volume")
+plt.title('Volume', style='oblique')
+
+ax[0].legend(loc='upper right')
+ax[1].legend(loc='upper right')
+#
+# plt.show()

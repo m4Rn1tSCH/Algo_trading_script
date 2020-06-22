@@ -8,6 +8,7 @@ Created on 5/23/2020 11:26 PM
 This file contains all technical indicators for the stock data
 '''
 # TODO
+# class still buggy
 from alpha_vantage.techindicators import TechIndicators
 import matplotlib.pyplot as plt
 

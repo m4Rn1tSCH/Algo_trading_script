@@ -21,7 +21,8 @@ if loop -> buy or sell
 append data every hour
 calculate/or mark -> sell or buy order
 """
-
+# TODO
+# potential problem: plots are overwriting each other aas theyre named the same
 # intra day data
 intra_df = pull_intraday_data(symbol='TSLA',
                               interval='5min',

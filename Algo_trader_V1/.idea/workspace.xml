@@ -3,10 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="1aa0a1a9-df87-4847-b597-2f2227d476e8" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Python_AV_get_intraday_stock.py" beforeDir="false" afterPath="$PROJECT_DIR$/Python_AV_get_intraday_stock.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Python_AV_indicators.py" beforeDir="false" afterPath="$PROJECT_DIR$/Python_AV_indicators.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Python_live_model.py" beforeDir="false" afterPath="$PROJECT_DIR$/Python_live_model.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/raw_code snippets.py" beforeDir="false" afterPath="$PROJECT_DIR$/raw_code snippets.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -214,7 +211,7 @@
       <workItem from="1592320622139" duration="734000" />
       <workItem from="1592338675870" duration="2886000" />
       <workItem from="1592860652851" duration="2450000" />
-      <workItem from="1592864139348" duration="2022000" />
+      <workItem from="1592864139348" duration="2180000" />
     </task>
     <task id="LOCAL-00001" summary="-fuck mac">
       <created>1590719250675</created>
@@ -314,7 +311,14 @@
       <option name="project" value="LOCAL" />
       <updated>1592863941030</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary=" Model:&#10;    -fixed working directory bug&#10;    -minor spelling&#10;    -weighted moving average&#10;    -docs changed for submit order&#10;    -streamlined imports&#10;    -correct evaluation of signal (intersection 50/200)&#10;Raw Code Snippets&#10;    -raw code goes here that might prove useful later on&#10; AV_intraday&#10;    -fixed plotting feature and added to df pull/intra_df_pull">
+      <created>1592866201815</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1592866201815</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -330,7 +334,8 @@
     <MESSAGE value="-fixed working directory bug&#10;-minor spelling&#10;-prep for weighted moving average&#10;-docs changed for submit order&#10;-streamlined imports&#10;-added correct access for dict; with  keys&#10;-correct evaluation of signal (intersection 50/200)" />
     <MESSAGE value=" Model:&#10;    -fixed working directory bug&#10;    -minor spelling&#10;    -weighted moving average&#10;    -docs changed for submit order&#10;    -streamlined imports&#10;    -correct evaluation of signal (intersection 50/200)&#10;Raw Code Snippets&#10;    -raw code goes here that might prove useful later on" />
     <MESSAGE value=" Model:&#10;    -fixed working directory bug&#10;    -minor spelling&#10;    -weighted moving average&#10;    -docs changed for submit order&#10;    -streamlined imports&#10;    -correct evaluation of signal (intersection 50/200)&#10;Raw Code Snippets&#10;    -raw code goes here that might prove useful later on&#10; AV_intraday&#10;    -fixed plotting feature and added to function" />
-    <option name="LAST_COMMIT_MESSAGE" value=" Model:&#10;    -fixed working directory bug&#10;    -minor spelling&#10;    -weighted moving average&#10;    -docs changed for submit order&#10;    -streamlined imports&#10;    -correct evaluation of signal (intersection 50/200)&#10;Raw Code Snippets&#10;    -raw code goes here that might prove useful later on&#10; AV_intraday&#10;    -fixed plotting feature and added to function" />
+    <MESSAGE value=" Model:&#10;    -fixed working directory bug&#10;    -minor spelling&#10;    -weighted moving average&#10;    -docs changed for submit order&#10;    -streamlined imports&#10;    -correct evaluation of signal (intersection 50/200)&#10;Raw Code Snippets&#10;    -raw code goes here that might prove useful later on&#10; AV_intraday&#10;    -fixed plotting feature and added to df pull/intra_df_pull" />
+    <option name="LAST_COMMIT_MESSAGE" value=" Model:&#10;    -fixed working directory bug&#10;    -minor spelling&#10;    -weighted moving average&#10;    -docs changed for submit order&#10;    -streamlined imports&#10;    -correct evaluation of signal (intersection 50/200)&#10;Raw Code Snippets&#10;    -raw code goes here that might prove useful later on&#10; AV_intraday&#10;    -fixed plotting feature and added to df pull/intra_df_pull" />
   </component>
   <component name="WindowStateProjectService">
     <state x="414" y="175" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1590898285460">
@@ -341,10 +346,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="640" y="256" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1591620563379" />
-    <state x="415" y="9" key="CommitChangelistDialog2" timestamp="1592863938610">
+    <state x="415" y="0" key="CommitChangelistDialog2" timestamp="1592866199133">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="415" y="9" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1592863938610" />
+    <state x="415" y="0" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1592866199133" />
     <state x="1084" y="299" key="EnvironmentVariablesDialog" timestamp="1590897386033">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -373,10 +378,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="718" y="194" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1590898518427" />
-    <state x="552" y="253" key="Vcs.Push.Dialog.v2" timestamp="1592863952297">
+    <state x="552" y="253" key="Vcs.Push.Dialog.v2" timestamp="1592866203876">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="552" y="253" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1592863952297" />
+    <state x="552" y="253" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1592866203876" />
     <state width="968" height="528" key="XDebugger.FullValuePopup" timestamp="1592274838646">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>

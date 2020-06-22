@@ -3,6 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="1aa0a1a9-df87-4847-b597-2f2227d476e8" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Python_AV_get_intraday_stock.py" beforeDir="false" afterPath="$PROJECT_DIR$/Python_AV_get_intraday_stock.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Python_live_model.py" beforeDir="false" afterPath="$PROJECT_DIR$/Python_live_model.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -204,6 +205,7 @@
       <workItem from="1592317220626" duration="1520000" />
       <workItem from="1592320622139" duration="734000" />
       <workItem from="1592338675870" duration="2886000" />
+      <workItem from="1592860652851" duration="2304000" />
     </task>
     <task id="LOCAL-00001" summary="-fuck mac">
       <created>1590719250675</created>

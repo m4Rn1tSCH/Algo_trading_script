@@ -120,19 +120,22 @@ def get_asset_list(status, asset_class):
 #%%
 #TODO
 #fix date columns
-#split up carts into 2 subplots again (prob has been fixed)
+#split up charts into 2 subplots again (prob has been fixed)
 import matplotlib.pyplot as plt
-'''
+import seaborn as sns
+
 # LINE VALUES
 #   supported values are: '-', '--', '-.', ':',
 #   'None', ' ', '', 'solid', 'dashed', 'dashdot', 'dotted'
 # Plot the date on x-axis and open price on y-axis
 
-plt.title('Open Price', style='oblique')
-plt.xticks(rotation=60)
-intra_df['date'], intra_df['1. open'].plot(color='green', lw=1, ls='dashdot', marker='x', label="Open Price")
+fig, ax = plt.subplots(2, 1, figsize=(15, 8))
+
+ax[0].plot(intra_df.index.values, intra_df['open'], color='green', lw=1, ls='dashdot', marker='solid', label="Open Price")
 # Plot the date on x-axis and the trading volume on y-axis
 #plt.set_title('Trading Volume', style='oblique')
-intra_df['date'], intra_df['5. volume'].plot(color='orange', lw=1, ls='solid', marker='x', label="Trade Volume")
+ax[1].plot(intra_df.index.values, intra_df['volume'], color='orange', lw=1, ls='solid', marker='x', label="Trade Volume")
+plt.title('Open Price', style='oblique')
+plt.xticks(rotation=60)
 plt.show()
-'''
+

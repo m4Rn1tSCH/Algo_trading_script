@@ -47,6 +47,7 @@ print(stock_df.head(3))
 pos = Python_alpaca_API_connector.list_positions()
 portfolio_list = []
 for i in range(0, len(pos), 1):
+    # print as tuple
     print((pos[i].symbol, pos[i].qty))
     # append a tuple with the stock and quantity held
     portfolio_list.append((pos[i].symbol, pos[i].qty))

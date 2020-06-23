@@ -7,6 +7,7 @@ Created on 5/18/2020 8:15 PM
 import pandas as pd
 import numpy as np
 import time
+import matplotlib.pyplot as plt
 from datetime import datetime as dt
 from datetime import timedelta
 from alpha_vantage.techindicators import TechIndicators
@@ -207,6 +208,9 @@ def wma_loop(symbol):
         key_list = sorted(wma_50.keys(), reverse=True)[:3]
         key_list_2 = sorted(wma_200.keys(), reverse=True)[:3]
 
+        di = [(x, y) for x in key_list for y in key_list_2]
+        print(di)
+
         # last element for list slicing exclusive
         for i, v in enumerate(key_list, 1):
             for i, v in enumerate(key_list_2, 1):
@@ -217,12 +221,14 @@ def wma_loop(symbol):
                 print("Date +1:", key_list_2[i - 1], wma_200[key_list_2[i - 1]]['WMA'])
 
             # comparison loop
-            if (wma_50[key_list[i - 1]]['WMA'] < wma_200[key_list_2[i -1]]['WMA'] and
+            if (wma_50[key_list[i - 1]]['WMA'] < wma_200[key_list_2[i -1]]['WMA'] and \
                     wma_50[key_list[i + 1]]['WMA'] > wma_200[key_list_2[i + 1]]['WMA']):
                 # buy signal
                 print(f"{symbol} is being bought")
             # check if wma_50 is smaller than wma_200; the stock is owned; at least one stock is owned
-            elif wma_50 < wma_200 and symbol in portfolio_list and portfolio_list[1] > 0:
+            elif (wma_50[key_list[i - 1]]['WMA'] > wma_200[key_list_2[i -1]]['WMA'] and \
+                    wma_50[key_list[i + 1]]['WMA'] < wma_200[key_list_2[i + 1]]['WMA']) and \
+                    (symbol in portfolio_list and portfolio_list[1] > 0):
                 # sell signal
                 print(f"{symbol} is being sold")
                 if portfolio_list[1] == 0:

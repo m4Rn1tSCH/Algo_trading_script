@@ -7,7 +7,7 @@ pull_intraday_data = dataframes for minute intervals
 returns a dataframe
 """
 from Python_alpaca_API_connector import api
-
+import matplotlib.pyplot as plt
 
 #pull stock data from Alpha Vantage
 def pull_stock_data(symbol, adjusted, outputsize, cadence, output_format, plot_price=False):
@@ -48,14 +48,12 @@ def pull_stock_data(symbol, adjusted, outputsize, cadence, output_format, plot_p
             # Plot the date on x-axis and the trading volume on y-axis
             ax[1].plot(df_pull['date'], df_pull['volume'],
                        color='orange', lw=1, ls='--', marker='x', label="Trade Volume")
-            plt.title(symbol, style='oblique')
             ax[0].legend(loc='upper right')
             ax[1].legend(loc='upper right')
-
             plt.show()
     except BaseException as e:
         print(e)
-        print("API not properly connected")
+        print("API not properly connected!")
     return df_pull
 
 
@@ -87,21 +85,20 @@ def pull_intraday_data(symbol, interval, outputsize, output_format, plot_price=F
             # LINE VALUES
             #   supported values are: '-', '--', '-.', ':',
             #   'None', ' ', '', 'solid', 'dashed', 'dashdot', 'dotted'
-            fig, ax = plt.subplots(2, 1, figsize=(15, 8))
+            fig_intra, ax_intra = plt.subplots(2, 1, fig_intrasize=(15, 8))
             plt.title('Open Price', style='oblique')
-            ax[0].plot(df_intra_pull['date'], df_intra_pull['open'],
+            ax_intra[0].plot(df_intra_pull['date'], df_intra_pull['open'],
                        color='red', lw=1, ls='dashdot', marker=',', label="Open Price")
             # Plot the date on x-axis and the trading volume on y-axis
-            ax[1].plot(df_intra_pull['date'], df_intra_pull['volume'],
+            ax_intra[1].plot(df_intra_pull['date'], df_intra_pull['volume'],
                        color='cyan', lw=1, ls='--', marker='x', label="Trade Volume")
-            plt.title(symbol, style='oblique')
-            ax[0].legend(loc='upper right')
-            ax[1].legend(loc='upper right')
+            ax_intra[0].legend(loc='upper right')
+            ax_intra[1].legend(loc='upper right')
 
             plt.show()
     except BaseException as e:
         print(e)
-        print("API not properly connected")
+        print("API not properly connected!")
     return df_intra_pull
 
 #intra_df = pull_intraday_data(symbol='COTY',

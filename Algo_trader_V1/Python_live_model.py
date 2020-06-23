@@ -208,8 +208,11 @@ def wma_loop(symbol):
         key_list = sorted(wma_50.keys(), reverse=True)[:3]
         key_list_2 = sorted(wma_200.keys(), reverse=True)[:3]
 
-        di = [(x, y) for x in key_list for y in key_list_2]
-        print(di)
+        values = [(x, y) for x in key_list for y in key_list_2]
+        for a, b in values:
+            print("list tomorrow:", a[i-1], "list_2 tomorrow:", b[i-1])
+            print("list today:", a, "list_2 today:", b)
+            print("list yesterday:", a, "list_2 yesterday:", b)
 
         # last element for list slicing exclusive
         for i, v in enumerate(key_list, 1):

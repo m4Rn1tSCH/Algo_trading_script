@@ -85,7 +85,7 @@ def pull_intraday_data(symbol, interval, outputsize, output_format, plot_price=F
             # LINE VALUES
             #   supported values are: '-', '--', '-.', ':',
             #   'None', ' ', '', 'solid', 'dashed', 'dashdot', 'dotted'
-            fig_intra, ax_intra = plt.subplots(2, 1, fig_intrasize=(15, 8))
+            fig, ax_intra = plt.subplots(2, 1, figsize=(15, 8))
             plt.title('Open Price', style='oblique')
             ax_intra[0].plot(df_intra_pull['date'], df_intra_pull['open'],
                        color='red', lw=1, ls='dashdot', marker=',', label="Open Price")

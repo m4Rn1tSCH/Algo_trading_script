@@ -3,8 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="1aa0a1a9-df87-4847-b597-2f2227d476e8" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Python_AV_get_intraday_stock.py" beforeDir="false" afterPath="$PROJECT_DIR$/Python_AV_get_intraday_stock.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Python_live_model.py" beforeDir="false" afterPath="$PROJECT_DIR$/Python_live_model.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -48,7 +46,7 @@
     <property name="node.js.path.for.package.tslint" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
-    <property name="settings.editor.selected.configurable" value="fileTemplates" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="PyConsoleOptionsProvider">
     <option name="myPythonConsoleState">
@@ -214,6 +212,7 @@
       <workItem from="1592860652851" duration="2450000" />
       <workItem from="1592864139348" duration="7081000" />
       <workItem from="1592873943117" duration="1053000" />
+      <workItem from="1593003901482" duration="618000" />
     </task>
     <task id="LOCAL-00001" summary="-fuck mac">
       <created>1590719250675</created>
@@ -403,10 +402,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1397" height="282" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1592341577141" />
-    <state x="718" y="194" key="SettingsEditor" timestamp="1590898518427">
+    <state x="718" y="194" key="SettingsEditor" timestamp="1593004345324">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="718" y="194" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1590898518427" />
+    <state x="718" y="194" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1593004345324" />
     <state x="552" y="253" key="Vcs.Push.Dialog.v2" timestamp="1592872905185">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>

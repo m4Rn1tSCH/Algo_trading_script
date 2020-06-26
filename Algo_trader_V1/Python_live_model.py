@@ -205,10 +205,10 @@ def wma_loop(symbol):
         # zero indexed counter with values selected before index 3(last element exclusive); start at index 1
         # TODO
         # fix error handling here to enable loop
-        key_list = sorted(wma_50.keys(), reverse=True)[:3]
-        key_list_2 = sorted(wma_200.keys(), reverse=True)[:3]
+        key_list = sorted(enumerate(wma_50.keys()), reverse=True)[:3]
+        key_list_2 = sorted(enumerate(wma_200.keys()), reverse=True)[:3]
 
-        values = [(x, y) for x in key_list for y in key_list_2]
+        values = [(index, x, y) for x in key_list for y in key_list_2]
         for a, b in values:
             print("list tomorrow:", a[i-1], "list_2 tomorrow:", b[i-1])
             print("list today:", a, "list_2 today:", b)

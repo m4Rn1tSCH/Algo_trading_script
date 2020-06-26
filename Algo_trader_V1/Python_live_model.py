@@ -205,23 +205,21 @@ def wma_loop(symbol):
         # zero indexed counter with values selected before index 3(last element exclusive); start at index 1
         # TODO
         # fix error handling here to enable loop
-        key_list = sorted(enumerate(wma_50.keys()), reverse=True)[:3]
-        key_list_2 = sorted(enumerate(wma_200.keys()), reverse=True)[:3]
+        try:
+            key_list = sorted(enumerate(wma_50.keys()), reverse=True)[:3]
+            key_list_2 = sorted(enumerate(wma_200.keys()), reverse=True)[:3]
 
-        values = [(index, x, y) for x in key_list for y in key_list_2]
-        for a, b in values:
-            print("list tomorrow:", a[i-1], "list_2 tomorrow:", b[i-1])
-            print("list today:", a, "list_2 today:", b)
-            print("list yesterday:", a, "list_2 yesterday:", b)
+            values = [(x, y) for x in key_list for y in key_list_2]
+            for x, y in values:
+                print("list day+1:", wma_50[key_list[x - 1]]['WMA'], "list_2 tomorrow:", wma_200[key_list_2[y - 1]]['WMA'])
+                print("list day:", wma_50[key_list[x]], "list_2 today:", wma_200[key_list[y]])
+                print("list day-1:", wma_50[key_list[x + 1]]['WMA'], "list_2 yesterday:", wma_20[key_list_2[y - 1]]['WMA'])
 
-        # last element for list slicing exclusive
-        for i, v in enumerate(key_list, 1):
-            for i, v in enumerate(key_list_2, 1):
-                # access of nested dictionary
-                # print("Date:", v, "WMA:", wma_200[v]['WMA'])
-                print("Date -1:", key_list_2[i + 1], "WMA:", wma_200[key_list_2[i + 1]]['WMA'])
-                print("Date:", key_list_2[i], wma_200[key_list_2[i]]['WMA'])
-                print("Date +1:", key_list_2[i - 1], wma_200[key_list_2[i - 1]]['WMA'])
+
+        except BaseException as e:
+            print(e, "List exhausted")
+            # ignore error here; list will always be 3 dates long
+            pass
 
             # comparison loop
             if (wma_50[key_list[i - 1]]['WMA'] < wma_200[key_list_2[i -1]]['WMA'] and \

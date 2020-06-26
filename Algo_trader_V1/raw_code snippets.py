@@ -33,7 +33,20 @@ for i, v in enumerate(key_list, 1):
     print("day-1:", wma_50[key_list[i + 1]])
     print("day:", wma_50[key_list[i]])
     print("day+1:", wma_50[key_list[i - 1]])
-
+#%%
+# last element for list slicing exclusive
+for i, v in enumerate(key_list, 1):
+    for i, v in enumerate(key_list_2, 1):
+        # access of nested dictionary
+        # print("Date:", v, "WMA:", wma_200[v]['WMA'])
+        print("Date -1:", key_list_2[i + 1], "WMA:", wma_200[key_list_2[i + 1]]['WMA'])
+        print("Date:", key_list_2[i], wma_200[key_list_2[i]]['WMA'])
+        print("Date +1:", key_list_2[i - 1], wma_200[key_list_2[i - 1]]['WMA'])
+#%%
+# generator statement to iterate over 2 lists
+values = [(index50, index200, x, y) for index50, x in key_list for index200, y in key_list_2]
+for index50, index200, x, y in values:
+    print(index50, index200, x, y)
 #%%
 '''
 Plot code

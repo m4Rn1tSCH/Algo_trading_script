@@ -3,6 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="1aa0a1a9-df87-4847-b597-2f2227d476e8" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Python_AV_get_intraday_stock.py" beforeDir="false" afterPath="$PROJECT_DIR$/Python_AV_get_intraday_stock.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -213,6 +214,7 @@
       <workItem from="1592864139348" duration="7081000" />
       <workItem from="1592873943117" duration="1053000" />
       <workItem from="1593003901482" duration="618000" />
+      <workItem from="1593182424515" duration="729000" />
     </task>
     <task id="LOCAL-00001" summary="-fuck mac">
       <created>1590719250675</created>
@@ -382,10 +384,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="1084" y="299" key="EnvironmentVariablesDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1590897386033" />
-    <state x="739" y="275" key="FileChooserDialogImpl" timestamp="1590897675657">
+    <state x="739" y="275" key="FileChooserDialogImpl" timestamp="1593183082093">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="739" y="275" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1590897675657" />
+    <state x="739" y="275" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1593183082093" />
     <state width="1397" height="282" key="GridCell.Tab.0.bottom" timestamp="1592341577141">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>

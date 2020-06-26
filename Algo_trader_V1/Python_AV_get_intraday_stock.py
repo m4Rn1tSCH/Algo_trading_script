@@ -42,12 +42,13 @@ def pull_stock_data(symbol, adjusted, outputsize, cadence, output_format, plot_p
             #   supported values are: '-', '--', '-.', ':',
             #   'None', ' ', '', 'solid', 'dashed', 'dashdot', 'dotted'
             fig, ax = plt.subplots(2, 1, figsize=(15, 8))
-            plt.title('Open Price', style='oblique')
             ax[0].plot(df_pull['date'], df_pull['open'],
                        color='blue', lw=1, ls='dashdot', marker=',', label="Open Price")
             # Plot the date on x-axis and the trading volume on y-axis
             ax[1].plot(df_pull['date'], df_pull['volume'],
                        color='orange', lw=1, ls='--', marker='x', label="Trade Volume")
+            ax[0].set_title('Open Price', style='oblique')
+            ax[1].set_title('Trading Volume', style='oblique')
             ax[0].legend(loc='upper right')
             ax[1].legend(loc='upper right')
             plt.show()
@@ -86,12 +87,13 @@ def pull_intraday_data(symbol, interval, outputsize, output_format, plot_price=F
             #   supported values are: '-', '--', '-.', ':',
             #   'None', ' ', '', 'solid', 'dashed', 'dashdot', 'dotted'
             fig, ax_intra = plt.subplots(2, 1, figsize=(15, 8))
-            plt.title('Open Price', style='oblique')
             ax_intra[0].plot(df_intra_pull['date'], df_intra_pull['open'],
                        color='red', lw=1, ls='dashdot', marker=',', label="Open Price")
             # Plot the date on x-axis and the trading volume on y-axis
             ax_intra[1].plot(df_intra_pull['date'], df_intra_pull['volume'],
-                       color='cyan', lw=1, ls='--', marker='x', label="Trade Volume")
+                       color='cyan', lw=1, ls='--', marker='x', label="Trading Volume")
+            ax_intra[0].set_title('Open Price', style='oblique')
+            ax_intra[1].set_title('Trading Volume', style='oblique')
             ax_intra[0].legend(loc='upper right')
             ax_intra[1].legend(loc='upper right')
 

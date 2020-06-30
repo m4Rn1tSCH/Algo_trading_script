@@ -69,3 +69,26 @@ ax[0].legend(loc='upper right')
 ax[1].legend(loc='upper right')
 #
 # plt.show()
+#%%
+from sklearn.preprocessing import StandardScaler
+from sklearn.svm import OneClassSVM
+
+data = AAPL_hist[['close', 'volume']]
+scaler = StandardScaler()
+np_scaled = scaler.fit_transform(data)
+data = pd.DataFrame(np_scaled)
+# train oneclassSVM 
+outliers_fraction =0.09
+model = OneClassSVM(nu=outliers_fraction, kernel="rbf", gamma=0.01)
+model.fit(data)
+AAPL_hist['anomaly'] = pd.Series(model.predict(data),index=AAPL_hist.index)
+
+fig, ax = plt.subplots(figsize=(12,8))
+a = AAPL_hist.loc[AAPL_hist['anomaly'] == -1, ['close','volume']] #anomaly
+ax = plt.subplot(212)
+ax.plot( AAPL_hist['volume'], color='blue')
+ax.scatter(a.index,a['volume'], color='red')
+ax1 = plt.subplot(211)
+ax1.plot( AAPL_hist['close'], color='blue')
+ax1.scatter(a.index,a['close'], color='red')
+plt.show();

@@ -178,6 +178,8 @@ def simple_loop():
 
 # loop based on the WEIGHTED MOVING AVERAGE
 # this loop does not allow shorting
+# TODO
+# add argument symbol
 def wma_loop(symbol):
     """
     symbol : 'XXXX'
@@ -274,6 +276,8 @@ def wma_loop(symbol):
 
 # loop based on the MOVING AVERAGE
 # this loop does not allow shorting
+# TODO
+# add argument symbol
 def ma_loop(symbol):
     """
     symbol : 'XXXX'
@@ -313,8 +317,8 @@ def ma_loop(symbol):
         # access tuples inside list with key_list[LIST_INDEX][TUPLE_ELEMENT] (both 0-indexed)
         # comparison loop
         # check if sma_50 is intersecting sma_200 coming from below
-        if (sma_50[key_list[2][1]]['sma'] < sma_200[key_list_2[2][1]]['SMA'] and
-                sma_50[key_list[0][1]]['sma'] > sma_200[key_list_2[0][1]]['SMA']):
+        if (sma_50[key_list[2][1]]['SMA'] < sma_200[key_list_2[2][1]]['SMA'] and
+                sma_50[key_list[0][1]]['SMA'] > sma_200[key_list_2[0][1]]['SMA']):
             # buy signal
             # TODO
             # logic for buying a certain number of stocks
@@ -339,8 +343,8 @@ def ma_loop(symbol):
             print(f"{symbol} is being bought")
 
         # check if sma_50 is intersecting sma_200 coming from above; the stock is owned; at least one stock is owned
-        elif (sma_50[key_list[i - 1]]['sma'] > sma_200[key_list_2[i - 1]]['SMA'] and
-                sma_50[key_list[i + 1]]['sma'] < sma_200[key_list_2[i + 1]]['SMA']) and\
+        elif (sma_50[key_list[2][1]]['SMA'] > sma_200[key_list_2[2][1]]['SMA'] and
+                sma_50[key_list[0][1]]['SMA'] < sma_200[key_list_2[0][1]]['SMA']) and\
                 (symbol in portfolio_list and portfolio_list[1] > 0):
             # sell signal
             # TODO

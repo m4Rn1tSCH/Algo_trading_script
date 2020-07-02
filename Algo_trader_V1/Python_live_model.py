@@ -316,6 +316,8 @@ def ma_loop(symbol):
         if (sma_50[key_list[2][1]]['sma'] < sma_200[key_list_2[2][1]]['SMA'] and
                 sma_50[key_list[0][1]]['sma'] > sma_200[key_list_2[0][1]]['SMA']):
             # buy signal
+            # TODO
+            # logic for buying a certain number of stocks
             try:
                 print("Stock is being purchased")
                 submit_order(symbol='TSLA',
@@ -341,6 +343,8 @@ def ma_loop(symbol):
                 sma_50[key_list[i + 1]]['sma'] < sma_200[key_list_2[i + 1]]['SMA']) and\
                 (symbol in portfolio_list and portfolio_list[1] > 0):
             # sell signal
+            # TODO
+            # correct logic for selling all stocks
             print(f"{symbol} is being sold")
             if portfolio_list[1] == 0:
                 print(f"No {symbol} shares owned; shorting not enabled")

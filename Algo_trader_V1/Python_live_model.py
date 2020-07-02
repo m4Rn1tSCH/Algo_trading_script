@@ -246,7 +246,7 @@ def wma_loop(symbol):
                 print(f"{symbol} is being bought")
             # check if wma_50 is smaller than wma_200; the stock is owned; at least one stock is owned
             elif (wma_50[key_list[i - 1]]['WMA'] > wma_200[key_list_2[i - 1]]['WMA'] and
-                    wma_50[key_list[i + 1]]['WMA'] < wma_200[key_list_2[i + 1]]['WMA']) and
+                    wma_50[key_list[i + 1]]['WMA'] < wma_200[key_list_2[i + 1]]['WMA']) and\
                     (symbol in portfolio_list and portfolio_list[1] > 0):
                 # sell signal
                 print(f"{symbol} is being sold")

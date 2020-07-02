@@ -2,8 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1aa0a1a9-df87-4847-b597-2f2227d476e8" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/rAvailablePackageCache.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/rGraphicsSettings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/rSettings.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Python_live_model.py" beforeDir="false" afterPath="$PROJECT_DIR$/Python_live_model.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/raw_code snippets.py" beforeDir="false" afterPath="$PROJECT_DIR$/raw_code snippets.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -47,7 +51,7 @@
     <property name="node.js.path.for.package.tslint" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
-    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+    <property name="settings.editor.selected.configurable" value="org.jetbrains.r.configuration.RSettingsProjectConfigurable" />
   </component>
   <component name="PyConsoleOptionsProvider">
     <option name="myPythonConsoleState">
@@ -218,7 +222,7 @@
       <workItem from="1593184245060" duration="2216000" />
       <workItem from="1593545190508" duration="1322000" />
       <workItem from="1593650432658" duration="664000" />
-      <workItem from="1593721718054" duration="255000" />
+      <workItem from="1593721718054" duration="788000" />
     </task>
     <task id="LOCAL-00001" summary="-fuck mac">
       <created>1590719250675</created>
@@ -367,7 +371,14 @@
       <option name="project" value="LOCAL" />
       <updated>1593186397122</updated>
     </task>
-    <option name="localTasksCounter" value="22" />
+    <task id="LOCAL-00022" summary=" Model:&#10;    -fixed working directory bug&#10;    -minor spelling&#10;    -weighted moving average&#10;    -docs changed for submit order&#10;    -streamlined imports&#10;    -correct evaluation of signal (intersection 50/200)&#10;    -list exhaustion handling when iterating over dates&#10;    - added buy signal&#10;Raw Code Snippets&#10;    -raw code goes here that might prove useful later on&#10; AV_intraday&#10;    -fixed plotting feature and added to df pull/intra_df_pull&#10;    -plots are not co existing and not overwriting each other">
+      <created>1593722027458</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1593722027458</updated>
+    </task>
+    <option name="localTasksCounter" value="23" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -387,7 +398,8 @@
     <MESSAGE value=" Model:&#10;    -fixed working directory bug&#10;    -minor spelling&#10;    -weighted moving average&#10;    -docs changed for submit order&#10;    -streamlined imports&#10;    -correct evaluation of signal (intersection 50/200)&#10;    - fix error handling of out-of-range-values&#10;Raw Code Snippets&#10;    -raw code goes here that might prove useful later on&#10; AV_intraday&#10;    -fixed plotting feature and added to df pull/intra_df_pull" />
     <MESSAGE value=" Model:&#10;    -fixed working directory bug&#10;    -minor spelling&#10;    -weighted moving average&#10;    -docs changed for submit order&#10;    -streamlined imports&#10;    -correct evaluation of signal (intersection 50/200)&#10;    - fix error handling of out-of-range-values&#10;Raw Code Snippets&#10;    -raw code goes here that might prove useful later on&#10; AV_intraday&#10;    -fixed plotting feature and added to df pull/intra_df_pull&#10;    -plots are not co existing and not overwriting each other" />
     <MESSAGE value=" Model:&#10;    -fixed working directory bug&#10;    -minor spelling&#10;    -weighted moving average&#10;    -docs changed for submit order&#10;    -streamlined imports&#10;    -correct evaluation of signal (intersection 50/200)&#10;    -list exhaustion handling when iterating over dates&#10;Raw Code Snippets&#10;    -raw code goes here that might prove useful later on&#10; AV_intraday&#10;    -fixed plotting feature and added to df pull/intra_df_pull&#10;    -plots are not co existing and not overwriting each other" />
-    <option name="LAST_COMMIT_MESSAGE" value=" Model:&#10;    -fixed working directory bug&#10;    -minor spelling&#10;    -weighted moving average&#10;    -docs changed for submit order&#10;    -streamlined imports&#10;    -correct evaluation of signal (intersection 50/200)&#10;    -list exhaustion handling when iterating over dates&#10;Raw Code Snippets&#10;    -raw code goes here that might prove useful later on&#10; AV_intraday&#10;    -fixed plotting feature and added to df pull/intra_df_pull&#10;    -plots are not co existing and not overwriting each other" />
+    <MESSAGE value=" Model:&#10;    -fixed working directory bug&#10;    -minor spelling&#10;    -weighted moving average&#10;    -docs changed for submit order&#10;    -streamlined imports&#10;    -correct evaluation of signal (intersection 50/200)&#10;    -list exhaustion handling when iterating over dates&#10;    - added buy signal&#10;Raw Code Snippets&#10;    -raw code goes here that might prove useful later on&#10; AV_intraday&#10;    -fixed plotting feature and added to df pull/intra_df_pull&#10;    -plots are not co existing and not overwriting each other" />
+    <option name="LAST_COMMIT_MESSAGE" value=" Model:&#10;    -fixed working directory bug&#10;    -minor spelling&#10;    -weighted moving average&#10;    -docs changed for submit order&#10;    -streamlined imports&#10;    -correct evaluation of signal (intersection 50/200)&#10;    -list exhaustion handling when iterating over dates&#10;    - added buy signal&#10;Raw Code Snippets&#10;    -raw code goes here that might prove useful later on&#10; AV_intraday&#10;    -fixed plotting feature and added to df pull/intra_df_pull&#10;    -plots are not co existing and not overwriting each other" />
   </component>
   <component name="WindowStateProjectService">
     <state x="552" y="178" width="816" height="729" key="#Intentions" timestamp="1592872559474">
@@ -402,10 +414,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="640" y="256" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1591620563379" />
-    <state x="415" y="0" key="CommitChangelistDialog2" timestamp="1593186393446">
+    <state x="415" y="0" key="CommitChangelistDialog2" timestamp="1593722022460">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="415" y="0" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1593186393446" />
+    <state x="415" y="0" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1593722022460" />
     <state x="184" y="86" key="DiffContextDialog" timestamp="1593183321879">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -434,14 +446,14 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1397" height="282" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1592341577141" />
-    <state x="718" y="194" key="SettingsEditor" timestamp="1593004345324">
+    <state x="718" y="194" key="SettingsEditor" timestamp="1593722073821">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="718" y="194" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1593004345324" />
-    <state x="552" y="253" key="Vcs.Push.Dialog.v2" timestamp="1593186399825">
+    <state x="718" y="194" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1593722073821" />
+    <state x="552" y="253" key="Vcs.Push.Dialog.v2" timestamp="1593722030261">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="552" y="253" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1593186399825" />
+    <state x="552" y="253" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1593722030261" />
     <state width="968" height="528" key="XDebugger.FullValuePopup" timestamp="1593545582912">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>

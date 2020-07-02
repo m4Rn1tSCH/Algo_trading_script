@@ -92,3 +92,14 @@ ax1 = plt.subplot(211)
 ax1.plot( AAPL_hist['close'], color='blue')
 ax1.scatter(a.index,a['close'], color='red')
 plt.show();
+#%%
+# interating over indices of two nested dicts and comparing values
+try:
+    key_list = sorted(enumerate(wma_50.keys()), reverse=True)[:3]
+    key_list_2 = sorted(enumerate(wma_200.keys()), reverse=True)[:3]
+
+    values = [(x, y) for x in key_list for y in key_list_2]
+    for x, y in values:
+        print("list day+1:", wma_50[key_list[x - 1]]['WMA'], "list_2 tomorrow:", wma_200[key_list_2[y - 1]]['WMA'])
+        print("list day:", wma_50[key_list[x]], "list_2 today:", wma_200[key_list[y]])
+        print("list day-1:", wma_50[key_list[x + 1]]['WMA'], "list_2 yesterday:", wma_200[key_list_2[y - 1]]['WMA'])

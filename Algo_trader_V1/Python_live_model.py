@@ -213,7 +213,7 @@ def wma_loop(symbol):
             for x, y in values:
                 print("list day+1:", wma_50[key_list[x - 1]]['WMA'], "list_2 tomorrow:", wma_200[key_list_2[y - 1]]['WMA'])
                 print("list day:", wma_50[key_list[x]], "list_2 today:", wma_200[key_list[y]])
-                print("list day-1:", wma_50[key_list[x + 1]]['WMA'], "list_2 yesterday:", wma_20[key_list_2[y - 1]]['WMA'])
+                print("list day-1:", wma_50[key_list[x + 1]]['WMA'], "list_2 yesterday:", wma_200[key_list_2[y - 1]]['WMA'])
 
 
         except BaseException as e:
@@ -222,12 +222,12 @@ def wma_loop(symbol):
             pass
 
             # comparison loop
-            if (wma_50[key_list[i - 1]]['WMA'] < wma_200[key_list_2[i -1]]['WMA'] and \
+            if (wma_50[key_list[i - 1]]['WMA'] < wma_200[key_list_2[i - 1]]['WMA'] and \
                     wma_50[key_list[i + 1]]['WMA'] > wma_200[key_list_2[i + 1]]['WMA']):
                 # buy signal
                 print(f"{symbol} is being bought")
             # check if wma_50 is smaller than wma_200; the stock is owned; at least one stock is owned
-            elif (wma_50[key_list[i - 1]]['WMA'] > wma_200[key_list_2[i -1]]['WMA'] and \
+            elif (wma_50[key_list[i - 1]]['WMA'] > wma_200[key_list_2[i - 1]]['WMA'] and \
                     wma_50[key_list[i + 1]]['WMA'] < wma_200[key_list_2[i + 1]]['WMA']) and \
                     (symbol in portfolio_list and portfolio_list[1] > 0):
                 # sell signal

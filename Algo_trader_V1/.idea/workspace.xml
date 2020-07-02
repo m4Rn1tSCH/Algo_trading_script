@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="1aa0a1a9-df87-4847-b597-2f2227d476e8" name="Default Changelist" comment="">
+    <list default="true" id="1aa0a1a9-df87-4847-b597-2f2227d476e8" name="Default Changelist" comment=" Model:&#10;    -fixed working directory bug&#10;    -minor spelling&#10;    -weighted moving average&#10;    -docs changed for submit order&#10;    -streamlined imports&#10;    -correct evaluation of signal (intersection 50/200)&#10;    -list exhaustion handling when iterating over dates&#10;    - added buy signal&#10;Raw Code Snippets&#10;    -raw code goes here that might prove useful later on&#10; AV_intraday&#10;    -fixed plotting feature and added to df pull/intra_df_pull&#10;    -plots are not co existing and not overwriting each other">
+      <change beforePath="$PROJECT_DIR$/.idea/dictionaries/bill_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dictionaries/bill_.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Python_live_model.py" beforeDir="false" afterPath="$PROJECT_DIR$/Python_live_model.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/raw_code snippets.py" beforeDir="false" afterPath="$PROJECT_DIR$/raw_code snippets.py" afterDir="false" />
@@ -220,7 +221,7 @@
       <workItem from="1593545190508" duration="1322000" />
       <workItem from="1593650432658" duration="664000" />
       <workItem from="1593721718054" duration="996000" />
-      <workItem from="1593722792846" duration="2049000" />
+      <workItem from="1593722792846" duration="8420000" />
     </task>
     <task id="LOCAL-00001" summary="-fuck mac">
       <created>1590719250675</created>
@@ -383,7 +384,14 @@
       <option name="project" value="LOCAL" />
       <updated>1593722722404</updated>
     </task>
-    <option name="localTasksCounter" value="24" />
+    <task id="LOCAL-00024" summary=" Model:&#10;    -fixed working directory bug&#10;    -minor spelling&#10;    -weighted moving average&#10;    -docs changed for submit order&#10;    -streamlined imports&#10;    -correct evaluation of signal (intersection 50/200)&#10;    -list exhaustion handling when iterating over dates&#10;    - added buy signal&#10;Raw Code Snippets&#10;    -raw code goes here that might prove useful later on&#10; AV_intraday&#10;    -fixed plotting feature and added to df pull/intra_df_pull&#10;    -plots are not co existing and not overwriting each other">
+      <created>1593724864613</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1593724864613</updated>
+    </task>
+    <option name="localTasksCounter" value="25" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -419,10 +427,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="640" y="256" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1591620563379" />
-    <state x="415" y="0" key="CommitChangelistDialog2" timestamp="1593722720837">
+    <state x="415" y="0" key="CommitChangelistDialog2" timestamp="1593729001039">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="415" y="0" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1593722720837" />
+    <state x="415" y="0" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1593729001039" />
     <state x="184" y="86" key="DiffContextDialog" timestamp="1593183321879">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -459,10 +467,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="552" y="253" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1593722030261" />
-    <state width="968" height="528" key="XDebugger.FullValuePopup" timestamp="1593724175272">
+    <state width="968" height="528" key="XDebugger.FullValuePopup" timestamp="1593727914625">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="968" height="528" key="XDebugger.FullValuePopup/0.0.1920.1040@0.0.1920.1040" timestamp="1593724175272" />
+    <state width="968" height="528" key="XDebugger.FullValuePopup/0.0.1920.1040@0.0.1920.1040" timestamp="1593727914625" />
     <state x="769" y="434" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1592863970100">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>

@@ -22,9 +22,7 @@ if loop -> buy or sell
 append data every hour
 calculate/or mark -> sell or buy order
 """
-# TODO
-# potential problem: plots are overwriting each other aas theyre named the same
-# intra day data
+
 intra_df = pull_intraday_data(symbol='TSLA',
                               interval='5min',
                               outputsize='full',
@@ -178,7 +176,7 @@ def simple_loop():
         # loop will pause for x seconds
         time.sleep(600)
 
-# loop based on the weighted moving average
+# loop based on the WEIGHTED MOVING AVERAGE
 # this loop does not allow shorting
 def wma_loop(symbol):
     """
@@ -188,6 +186,18 @@ def wma_loop(symbol):
     series_type : close, open, high, low
     datatype : 'json', 'csv', 'pandas'
     """
+    last_price = pull_intraday_data(symbol='TSLA',
+                                    interval='5min',
+                                    outputsize='full',
+                                    output_format='pandas')
+    # calculate the mean price of the last 25 min of the trading day
+    mean_price = last_price['open'][:5].mean()
+    # retrieve the very last quote to compare with
+    actual_price = last_price['open'][:1].mean()
+
+    # retrieve accounts remaining buying power
+    bp = float(api.get_account().buying_power)
+
     # tech indicator returns a tuple; sma dictionary with values; meta dict with characteristics
     # instantiate the class first and provide the API key
     ti = TechIndicators('PKS7JXWMMDQQXQNDWT2P')
@@ -201,36 +211,145 @@ def wma_loop(symbol):
         then the increasing index element in the list represents a day
         further in the past (smaller date number)
         '''
-        # reverse set to true for descending order; most recent first
-        # zero indexed counter with values selected before index 3(last element exclusive); start at index 1
-        # TODO
-        # fix error handling here to enable loop
-        try:
-            key_list = sorted(enumerate(wma_50.keys()), reverse=False)[:3]
-            key_list_2 = sorted(enumerate(wma_200.keys()), reverse=False)[:3]
+        # zero indexed counter with values selected before index 3(last element exclusive); start at index 0
 
-            values = [(x, y) for x in key_list for y in key_list_2]
-            # values returns a tuple (2320, '2020-07-02'); access date with x[0] or x[1]
-            for x, y in values:
-                print("list day+1:", wma_50[x[1]]['WMA'], "list_2 tomorrow:", wma_200[y[1]]['WMA'])
-                print("list day:", wma_50[x[1]]['WMA'], "list_2 today:", wma_200[y[1]]['WMA'])
-                print("list day-1:", wma_50[x[1]]['WMA'], "list_2 yesterday:", wma_200[y[1]]['WMA'])
-        except BaseException as e:
-            print(e, "List exhausted")
-            # ignore error here; list will always be 3 dates long
+        key_list = sorted(enumerate(wma_50.keys()), reverse=False)[:3]
+        key_list_2 = sorted(enumerate(wma_200.keys()), reverse=False)[:3]
+        # access tuples inside list with key_list[LIST_INDEX][TUPLE_ELEMENT] (both 0-indexed)
+        # comparison loop
+        if (wma_50[key_list[2][1]]['WMA'] < wma_200[key_list_2[2][1]]['WMA'] and
+                wma_50[key_list[0][1]]['WMA'] > wma_200[key_list_2[0][1]]['WMA']):
+            # buy signal
+            try:
+                print("Stock is being purchased")
+                submit_order(symbol='TSLA',
+                             qty=bp,
+                             side='buy',
+                             type='limit',
+                             time_in_force='gtc',
+                             limit_price=mean_price
+                             )
+            except BaseException as e:
+                print(e)
+                submit_order(symbol='TSLA',
+                             qty=5,
+                             side='buy',
+                             type='limit',
+                             time_in_force='gtc',
+                             limit_price=mean_price
+                             )
+            print(f"{symbol} is being bought")
 
-
-
-
-            # comparison loop
-            if (wma_50[key_list[i - 1]]['WMA'] < wma_200[key_list_2[i - 1]]['WMA'] and
-                    wma_50[key_list[i + 1]]['WMA'] > wma_200[key_list_2[i + 1]]['WMA']):
-                # buy signal
+        # check if wma_50 is smaller than wma_200; the stock is owned; at least one stock is owned
+        elif (wma_50[key_list[2][1]]['WMA'] > wma_200[key_list_2[2][1]]['WMA'] and
+                wma_50[key_list[0][1]]['WMA'] < wma_200[key_list_2[0][1]]['WMA']) and\
+                (symbol in portfolio_list and portfolio_list[1] > 0):
+            # sell signal
+            print(f"{symbol} is being sold")
+            if portfolio_list[1] == 0:
+                print(f"No {symbol} shares owned; shorting not enabled")
+            else:
                 try:
-                    print("Stock is being purchased")
+                    print("Stock is being sold")
                     submit_order(symbol='TSLA',
                                  qty=2,
-                                 side='buy',
+                                 side='sell',
+                                 type='limit',
+                                 time_in_force='gtc',
+                                 limit_price=actual_price
+                                 )
+                except BaseException as e:
+                    print(e)
+                    submit_order(symbol='TSLA',
+                                 qty=float(stock_df['high'].head(1) / bp * 0.1),
+                                 side='sell',
+                                 type='limit',
+                                 time_in_force='gtc',
+                                 limit_price=actual_price
+                                 )
+                    pass
+        else:
+            print("No action conducted at", dt.now().isoformat())
+            time.sleep(5)
+
+# loop based on the MOVING AVERAGE
+# this loop does not allow shorting
+def ma_loop(symbol):
+    """
+    symbol : 'XXXX'
+    interval : 1min, 5min, 15min, 30min, 60min, daily, weekly, monthly
+    time_period : time_period=60, time_period=200
+    series_type : close, open, high, low
+    datatype : 'json', 'csv', 'pandas'
+    """
+    last_price = pull_intraday_data(symbol='TSLA',
+                                    interval='5min',
+                                    outputsize='full',
+                                    output_format='pandas')
+    # calculate the mean price of the last 25 min of the trading day
+    mean_price = last_price['open'][:5].mean()
+    # retrieve the very last quote to compare with
+    actual_price = last_price['open'][:1].mean()
+    # retrieve accounts remaining buying power
+    bp = float(api.get_account().buying_power)
+
+    # tech indicator returns a tuple; sma dictionary with values; meta dict with characteristics
+    # instantiate the class first and provide the API key
+    ti = TechIndicators('PKS7JXWMMDQQXQNDWT2P')
+    sma_50, meta_sma_50 = ti.get_sma(symbol='TSLA', interval='daily', time_period='50', series_type='open')
+    sma_200, meta_sma_200 = ti.get_sma(symbol='TSLA', interval='daily', time_period='200', series_type='open')
+
+    while True:
+        '''
+        ACCESS OF WEIGHTED MOVING AVERAGES AND CONSECUTIVE INTERSECTION THEREOF
+        naming of day + 1 is inverted to index position because list is in descending order
+        then the increasing index element in the list represents a day
+        further in the past (smaller date number)
+        '''
+        # zero indexed counter with values selected before index 3(last element exclusive); start at index 0
+
+        key_list = sorted(enumerate(sma_50.keys()), reverse=False)[:3]
+        key_list_2 = sorted(enumerate(sma_200.keys()), reverse=False)[:3]
+        # access tuples inside list with key_list[LIST_INDEX][TUPLE_ELEMENT] (both 0-indexed)
+        # comparison loop
+        # check if sma_50 is intersecting sma_200 coming from below
+        if (sma_50[key_list[2][1]]['sma'] < sma_200[key_list_2[2][1]]['SMA'] and
+                sma_50[key_list[0][1]]['sma'] > sma_200[key_list_2[0][1]]['SMA']):
+            # buy signal
+            try:
+                print("Stock is being purchased")
+                submit_order(symbol='TSLA',
+                             qty=2,
+                             side='buy',
+                             type='limit',
+                             time_in_force='gtc',
+                             limit_price=actual_price
+                             )
+            except BaseException as e:
+                print(e)
+                submit_order(symbol='TSLA',
+                             qty=float(stock_df['high'].head(1) / bp * 0.1),
+                             side='buy',
+                             type='limit',
+                             time_in_force='gtc',
+                             limit_price=actual_price
+                             )
+            print(f"{symbol} is being bought")
+
+        # check if sma_50 is intersecting sma_200 coming from above; the stock is owned; at least one stock is owned
+        elif (sma_50[key_list[i - 1]]['sma'] > sma_200[key_list_2[i - 1]]['SMA'] and
+                sma_50[key_list[i + 1]]['sma'] < sma_200[key_list_2[i + 1]]['SMA']) and\
+                (symbol in portfolio_list and portfolio_list[1] > 0):
+            # sell signal
+            print(f"{symbol} is being sold")
+            if portfolio_list[1] == 0:
+                print(f"No {symbol} shares owned; shorting not enabled")
+            else:
+                try:
+                    print("Stock is being sold")
+                    submit_order(symbol='TSLA',
+                                 qty=2,
+                                 side='sell',
                                  type='limit',
                                  time_in_force='gtc',
                                  limit_price=mean_price
@@ -238,21 +357,13 @@ def wma_loop(symbol):
                 except BaseException as e:
                     print(e)
                     submit_order(symbol='TSLA',
-                                 qty=2,
-                                 side='buy',
+                                 qty=3,
+                                 side='sell',
                                  type='limit',
                                  time_in_force='gtc',
                                  limit_price=mean_price
                                  )
-                print(f"{symbol} is being bought")
-            # check if wma_50 is smaller than wma_200; the stock is owned; at least one stock is owned
-            elif (wma_50[key_list[i - 1]]['WMA'] > wma_200[key_list_2[i - 1]]['WMA'] and
-                    wma_50[key_list[i + 1]]['WMA'] < wma_200[key_list_2[i + 1]]['WMA']) and\
-                    (symbol in portfolio_list and portfolio_list[1] > 0):
-                # sell signal
-                print(f"{symbol} is being sold")
-                if portfolio_list[1] == 0:
-                    print(f"No {symbol} shares owned; shorting not enabled")
-            else:
-                print("no action")
-                time.sleep(5)
+                    pass
+        else:
+            print("No action conducted at", dt.now().isoformat())
+            time.sleep(5)

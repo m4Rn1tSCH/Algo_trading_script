@@ -103,3 +103,19 @@ try:
         print("list day+1:", wma_50[key_list[x - 1]]['WMA'], "list_2 tomorrow:", wma_200[key_list_2[y - 1]]['WMA'])
         print("list day:", wma_50[key_list[x]]['WMA'], "list_2 today:", wma_200[key_list[y]]['WMA'])
         print("list day-1:", wma_50[key_list[x + 1]]['WMA'], "list_2 yesterday:", wma_200[key_list_2[y - 1]]['WMA'])
+#%%
+try:
+    # generates a simple tuple held by a list;
+    # access with key_list[INDEX OF LIST ELEMENT][INDEX OF TUPLE ELEMENT] (key_list[0][1])
+    key_list = sorted(enumerate(wma_50.keys()), reverse=False)[:3]
+    key_list_2 = sorted(enumerate(wma_200.keys()), reverse=False)[:3]
+
+    values = [(x, y) for x in key_list for y in key_list_2]
+    # values returns a tuple inside a big tuple ((2320, '2020-07-02'), (2320, '2020-07-02')); access date with x[0] or x[1]
+    for x, y in values:
+        print("list day+1:", wma_50[x[1]]['WMA'], "list_2 tomorrow:", wma_200[y[1]]['WMA'])
+        print("list day:", wma_50[x[1]]['WMA'], "list_2 today:", wma_200[y[1]]['WMA'])
+        print("list day-1:", wma_50[x[1]]['WMA'], "list_2 yesterday:", wma_200[y[1]]['WMA'])
+except BaseException as e:
+    print(e, "List exhausted")
+    # ignore error here; list will always be 3 dates long

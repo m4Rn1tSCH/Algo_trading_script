@@ -101,5 +101,5 @@ try:
     values = [(x, y) for x in key_list for y in key_list_2]
     for x, y in values:
         print("list day+1:", wma_50[key_list[x - 1]]['WMA'], "list_2 tomorrow:", wma_200[key_list_2[y - 1]]['WMA'])
-        print("list day:", wma_50[key_list[x]], "list_2 today:", wma_200[key_list[y]])
+        print("list day:", wma_50[key_list[x]]['WMA'], "list_2 today:", wma_200[key_list[y]]['WMA'])
         print("list day-1:", wma_50[key_list[x + 1]]['WMA'], "list_2 yesterday:", wma_200[key_list_2[y - 1]]['WMA'])

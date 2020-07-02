@@ -188,13 +188,13 @@ def wma_loop(symbol):
     series_type : close, open, high, low
     datatype : 'json', 'csv', 'pandas'
     """
-    while True:
-        # tech indicator returns a tuple; sma dictionary with values; meta dict with characteristics
-        # instantiate the class first and provide the API key
-        ti = TechIndicators('PKS7JXWMMDQQXQNDWT2P')
-        wma_50, meta_wma_50 = ti.get_wma(symbol='TSLA', interval='daily', time_period='50', series_type='open')
-        wma_200, meta_wma_200 = ti.get_wma(symbol='TSLA', interval='daily', time_period='200', series_type='open')
+    # tech indicator returns a tuple; sma dictionary with values; meta dict with characteristics
+    # instantiate the class first and provide the API key
+    ti = TechIndicators('PKS7JXWMMDQQXQNDWT2P')
+    wma_50, meta_wma_50 = ti.get_wma(symbol='TSLA', interval='daily', time_period='50', series_type='open')
+    wma_200, meta_wma_200 = ti.get_wma(symbol='TSLA', interval='daily', time_period='200', series_type='open')
 
+    while True:
         '''
         ACCESS OF WEIGHTED MOVING AVERAGES AND CONSECUTIVE INTERSECTION THEREOF
         naming of day + 1 is inverted to index position because list is in descending order
@@ -206,20 +206,21 @@ def wma_loop(symbol):
         # TODO
         # fix error handling here to enable loop
         try:
-            key_list = sorted(enumerate(wma_50.keys()), reverse=True)[:3]
-            key_list_2 = sorted(enumerate(wma_200.keys()), reverse=True)[:3]
+            key_list = sorted(enumerate(wma_50.keys()), reverse=False)[:3]
+            key_list_2 = sorted(enumerate(wma_200.keys()), reverse=False)[:3]
 
             values = [(x, y) for x in key_list for y in key_list_2]
+            # values returns a tuple (2320, '2020-07-02'); access date with x[0] or x[1]
             for x, y in values:
-                print("list day+1:", wma_50[key_list[x - 1]]['WMA'], "list_2 tomorrow:", wma_200[key_list_2[y - 1]]['WMA'])
-                print("list day:", wma_50[key_list[x]], "list_2 today:", wma_200[key_list[y]])
-                print("list day-1:", wma_50[key_list[x + 1]]['WMA'], "list_2 yesterday:", wma_200[key_list_2[y - 1]]['WMA'])
-
-
+                print("list day+1:", wma_50[x[1]]['WMA'], "list_2 tomorrow:", wma_200[y[1]]['WMA'])
+                print("list day:", wma_50[x[1]]['WMA'], "list_2 today:", wma_200[y[1]]['WMA'])
+                print("list day-1:", wma_50[x[1]]['WMA'], "list_2 yesterday:", wma_200[y[1]]['WMA'])
         except BaseException as e:
             print(e, "List exhausted")
             # ignore error here; list will always be 3 dates long
-            pass
+
+
+
 
             # comparison loop
             if (wma_50[key_list[i - 1]]['WMA'] < wma_200[key_list_2[i - 1]]['WMA'] and

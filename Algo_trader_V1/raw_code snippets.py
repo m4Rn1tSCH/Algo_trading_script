@@ -119,3 +119,6 @@ try:
 except BaseException as e:
     print(e, "List exhausted")
     # ignore error here; list will always be 3 dates long
+#%%
+# generator statement to print certain orders
+[o for o in api.list_orders() if o.symbol == "AAPL"]

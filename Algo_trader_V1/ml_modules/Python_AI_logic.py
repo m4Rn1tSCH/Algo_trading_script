@@ -13,15 +13,14 @@ from datetime import datetime as dt
 import matplotlib.pyplot as plt
 import pickle
 
-from sklearn.feature_selection import SelectKBest, chi2, f_classif, RFE, RFECV
+from sklearn.feature_selection import SelectKBest, chi2, f_classif, RFECV
 from sklearn.linear_model import LogisticRegression, LinearRegression, SGDRegressor
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.svm import SVR
 from sklearn.pipeline import Pipeline
-from sklearn.metrics import r2_score, mean_squared_error, accuracy_score, classification_report, f1_score, roc_auc_score
 from sklearn.model_selection import GridSearchCV, train_test_split
 from sklearn.cluster import KMeans
-from sklearn.preprocessing import LabelEncoder, StandardScaler, MinMaxScaler, QuantileTransformer
+from sklearn.preprocessing import StandardScaler, QuantileTransformer
 from sklearn.decomposition import PCA
 from sklearn.compose import TransformedTargetRegressor
 from sklearn.ensemble import RandomForestRegressor

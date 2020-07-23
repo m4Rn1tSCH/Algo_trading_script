@@ -4,15 +4,12 @@ Created on 20 5/20/2020 4:46 PM 2020
 
 @author: bill-
 """
-#import packages
+import matplotlib.pyplot as plt
+# import packages
 import numpy as np
 import pandas as pd
-import math
 import sklearn
 import sklearn.preprocessing
-import datetime
-import os
-import matplotlib.pyplot as plt
 import tensorflow as tf
 
 # import dataset

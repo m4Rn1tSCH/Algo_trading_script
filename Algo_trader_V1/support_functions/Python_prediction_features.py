@@ -4,8 +4,10 @@ Created on Sat April 22 10:26:42 2020
 
 @author: bill-
 """
-import numpy as np
 from datetime import datetime as dt
+
+import numpy as np
+
 
 def pred_feat(df):
     """

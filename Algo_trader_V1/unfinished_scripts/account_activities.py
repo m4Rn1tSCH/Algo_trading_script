@@ -8,7 +8,14 @@ Created on Mon Nov 11 22:53:55 2019
 #load necessary packages
 import json as js
 import requests as req
-import Python_acc_config
+from api import Python_acc_config
+# load necessary packages
+import json as js
+
+import requests as req
+
+from api import Python_acc_config
+
 #%%
 ENDPOINT_URL = "https://paper-api.alpaca.markets"
 ACT_URL = "{}/v2/account/activities/{activity_type}".format(ENDPOINT_URL)

@@ -6,8 +6,10 @@ pull_intraday_data = dataframes for minute intervals
 
 returns a dataframe
 """
-from Python_alpaca_API_connector import api
 import matplotlib.pyplot as plt
+
+from api.Python_alpaca_API_connector import api
+
 
 #pull stock data from Alpha Vantage
 def pull_stock_data(symbol, adjusted, outputsize, cadence, output_format, plot_price=False):

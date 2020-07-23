@@ -1,10 +1,12 @@
 import os
+import sys
+
 import alpaca_trade_api as tradeapi
 import pandas as pd
-import sys
-from PySide2.QtGui import *
 from PySide2.QtCore import *
+from PySide2.QtGui import *
 from PySide2.QtWidgets import *
+
 
 def loadOpenOrders():
     open_orders = api.list_orders(status='open', limit = 500, direction = 'desc')
@@ -93,8 +95,6 @@ if __name__ == "__main__":
 
 ############################################################################
 from alpha_vantage.timeseries import TimeSeries
-from pprint import pprint
-import pandas as pd
 
 ts = TimeSeries(key = 'IH4EENERLUFUKJRW', output_format = 'pandas')
 data, meta_data = ts.get_intraday(symbol = 'MSFT', interval = '1min', outputsize = 'full')

@@ -4,16 +4,16 @@ Created on 5/18/2020 8:15 PM
 
 @author: bill-
 """
-import pandas as pd
-import numpy as np
 import time
-import matplotlib.pyplot as plt
 from datetime import datetime as dt
-from datetime import timedelta
+
+import numpy as np
+import pandas as pd
 from alpha_vantage.techindicators import TechIndicators
-from Python_AV_get_intraday_stock import pull_intraday_data, pull_stock_data, submit_order
-from Python_prediction_features import pred_feat
-import Python_alpaca_API_connector
+
+from api import Python_alpaca_API_connector
+from live_model_functions.Python_AV_get_intraday_stock import pull_intraday_data, pull_stock_data, submit_order
+from support_functions.Python_prediction_features import pred_feat
 
 """
 -pull data every hour /every day

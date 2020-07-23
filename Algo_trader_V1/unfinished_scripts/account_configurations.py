@@ -7,7 +7,13 @@ Created on Mon Nov 11 22:24:54 2019
 #load necessary packages
 import json as js
 import requests as req
-import Python_acc_config
+from api import Python_acc_config
+# load necessary packages
+import json as js
+
+import requests as req
+
+from api import Python_acc_config
 
 #%%
 ##retrieve account configurations

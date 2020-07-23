@@ -26,22 +26,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1aa0a1a9-df87-4847-b597-2f2227d476e8" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/starter_app.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Python_AI_logic.py" beforeDir="false" afterPath="$PROJECT_DIR$/ml_modules/Python_AI_logic.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Python_AV_get_intraday_stock.py" beforeDir="false" afterPath="$PROJECT_DIR$/live_model_functions/Python_AV_get_intraday_stock.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Python_Alpaca_polygon_hist.py" beforeDir="false" afterPath="$PROJECT_DIR$/support_functions/Python_Alpaca_polygon_hist.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Python_CSV_export.py" beforeDir="false" afterPath="$PROJECT_DIR$/support_functions/Python_CSV_export.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Python_NN_multivariate.py" beforeDir="false" afterPath="$PROJECT_DIR$/ml_modules/Python_NN_multivariate.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Python_acc_config.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/Python_acc_config.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Python_alpaca_Positions_Orders.py" beforeDir="false" afterPath="$PROJECT_DIR$/unfinished_scripts/Python_alpaca_Positions_Orders.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Python_live_model.py" beforeDir="false" afterPath="$PROJECT_DIR$/live_model_functions/Python_live_model.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Python_prediction_features.py" beforeDir="false" afterPath="$PROJECT_DIR$/support_functions/Python_prediction_features.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RNN_LSTM_GRU_module.py" beforeDir="false" afterPath="$PROJECT_DIR$/ml_modules/RNN_LSTM_GRU_module.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/account_activities.py" beforeDir="false" afterPath="$PROJECT_DIR$/unfinished_scripts/account_activities.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/account_configurations.py" beforeDir="false" afterPath="$PROJECT_DIR$/unfinished_scripts/account_configurations.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/positions.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/raw_code snippets.py" beforeDir="false" afterPath="$PROJECT_DIR$/unfinished_scripts/raw_code snippets.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/raw_pipelines.py" beforeDir="false" afterPath="$PROJECT_DIR$/unfinished_scripts/raw_pipelines.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -289,7 +275,7 @@
       <workItem from="1593721718054" duration="996000" />
       <workItem from="1593722792846" duration="8834000" />
       <workItem from="1594914348373" duration="2427000" />
-      <workItem from="1595539272516" duration="1278000" />
+      <workItem from="1595539272516" duration="2202000" />
     </task>
     <task id="LOCAL-00001" summary="-fuck mac">
       <created>1590719250675</created>
@@ -494,7 +480,21 @@
       <option name="project" value="LOCAL" />
       <updated>1595540529133</updated>
     </task>
-    <option name="localTasksCounter" value="30" />
+    <task id="LOCAL-00030" summary=" --restructured into separate folders&#10; --Introduced second loop with a simple moving average&#10; Model:&#10;    -fixed working directory bug&#10;    -minor spelling&#10;    -weighted moving average&#10;    -docs changed for submit order&#10;    -streamlined imports&#10;    -correct evaluation of signal (intersection 50/200)&#10;    -list exhaustion handling when iterating over dates&#10;    - added buy signal and sell signal&#10;Raw Code Snippets&#10;    -raw code goes here that might prove useful later on&#10; AV_intraday&#10;    -fixed plotting feature and added to df pull/intra_df_pull&#10;    -plots are not co-existing and not overwriting each other">
+      <created>1595540712426</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1595540712426</updated>
+    </task>
+    <task id="LOCAL-00031" summary=" --restructured into separate folders&#10; --Introduced second loop with a simple moving average&#10; Model:&#10;    -fixed working directory bug&#10;    -minor spelling&#10;    -weighted moving average&#10;    -docs changed for submit order&#10;    -streamlined imports&#10;    -correct evaluation of signal (intersection 50/200)&#10;    -list exhaustion handling when iterating over dates&#10;    - added buy signal and sell signal&#10;Raw Code Snippets&#10;    -raw code goes here that might prove useful later on&#10; AV_intraday&#10;    -fixed plotting feature and added to df pull/intra_df_pull&#10;    -plots are not co-existing and not overwriting each other">
+      <created>1595540754361</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1595540754361</updated>
+    </task>
+    <option name="localTasksCounter" value="32" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -505,7 +505,19 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="master" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
           </value>
         </entry>
       </map>
@@ -544,14 +556,14 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="640" y="256" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1591620563379" />
-    <state x="520" y="0" key="CommitChangelistDialog2" timestamp="1595540526076">
+    <state x="520" y="0" key="CommitChangelistDialog2" timestamp="1595540753188">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="520" y="0" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1595540526075" />
-    <state x="184" y="86" key="DiffContextDialog" timestamp="1593183321879">
+    <state x="520" y="0" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1595540753188" />
+    <state x="184" y="86" key="DiffContextDialog" timestamp="1595540669674">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="184" y="86" key="DiffContextDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1593183321879" />
+    <state x="184" y="86" key="DiffContextDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1595540669674" />
     <state x="1084" y="299" key="EnvironmentVariablesDialog" timestamp="1590897386033">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>

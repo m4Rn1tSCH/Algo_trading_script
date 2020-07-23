@@ -5,7 +5,8 @@ The keys are stored in  Python_acc_config.py
 """
 # access files
 import alpaca_trade_api as tradeapi
-import Python_acc_config
+
+from api import Python_acc_config
 
 # initialize the API connection
 api = tradeapi.REST(Python_acc_config.API_KEY,

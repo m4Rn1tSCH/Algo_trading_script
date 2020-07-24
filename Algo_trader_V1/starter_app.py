@@ -9,3 +9,10 @@ This endpoint unifies all functions
 and starts the algorithm.
 Specify which loop and stock
 '''
+
+def test():
+	return 'function was good'
+
+
+print("test was successful")
+

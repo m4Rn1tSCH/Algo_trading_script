@@ -26,8 +26,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1aa0a1a9-df87-4847-b597-2f2227d476e8" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/starter_app.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/starter_app.py" beforeDir="false" afterPath="$PROJECT_DIR$/starter_app.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -275,7 +275,7 @@
       <workItem from="1593721718054" duration="996000" />
       <workItem from="1593722792846" duration="8834000" />
       <workItem from="1594914348373" duration="2427000" />
-      <workItem from="1595539272516" duration="2202000" />
+      <workItem from="1595539272516" duration="2896000" />
     </task>
     <task id="LOCAL-00001" summary="-fuck mac">
       <created>1590719250675</created>
@@ -494,7 +494,14 @@
       <option name="project" value="LOCAL" />
       <updated>1595540754361</updated>
     </task>
-    <option name="localTasksCounter" value="32" />
+    <task id="LOCAL-00032" summary=" --restructured into separate folders&#10; --Introduced second loop with a simple moving average&#10; Model:&#10;    -fixed working directory bug&#10;    -minor spelling&#10;    -weighted moving average&#10;    -docs changed for submit order&#10;    -streamlined imports&#10;    -correct evaluation of signal (intersection 50/200)&#10;    -list exhaustion handling when iterating over dates&#10;    - added buy signal and sell signal&#10;Raw Code Snippets&#10;    -raw code goes here that might prove useful later on&#10; AV_intraday&#10;    -fixed plotting feature and added to df pull/intra_df_pull&#10;    -plots are not co-existing and not overwriting each other">
+      <created>1595542556675</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1595542556675</updated>
+    </task>
+    <option name="localTasksCounter" value="33" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -556,10 +563,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="640" y="256" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1591620563379" />
-    <state x="520" y="0" key="CommitChangelistDialog2" timestamp="1595540753188">
+    <state x="520" y="0" key="CommitChangelistDialog2" timestamp="1595542555330">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="520" y="0" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1595540753188" />
+    <state x="520" y="0" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1595542555330" />
     <state x="184" y="86" key="DiffContextDialog" timestamp="1595540669674">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>

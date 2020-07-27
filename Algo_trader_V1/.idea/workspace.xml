@@ -162,6 +162,9 @@
       <module name="Algo_trader_V1" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
       <option name="SDK_HOME" value="" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/live_model_functions" />
       <option name="IS_MODULE_SDK" value="true" />
@@ -276,6 +279,7 @@
       <workItem from="1593722792846" duration="8834000" />
       <workItem from="1594914348373" duration="2427000" />
       <workItem from="1595539272516" duration="2896000" />
+      <workItem from="1595784151295" duration="1322000" />
     </task>
     <task id="LOCAL-00001" summary="-fuck mac">
       <created>1590719250675</created>
@@ -529,6 +533,7 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="-fuck mac" />

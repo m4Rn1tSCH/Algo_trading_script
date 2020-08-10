@@ -12,7 +12,7 @@ Specify which loop and stock
 from live_model_functions.Python_live_model import ma_loop
 
 def test():
-	# ma_loop(symbol=)
+	ma_loop(stock_symbol=)
 	return 'function was good'
 
 

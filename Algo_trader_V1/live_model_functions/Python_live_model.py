@@ -46,6 +46,7 @@ stock_df = pred_feat(df=stock_df)
 # print order symbol; quantity; (side) - not needed for now
 pos = Python_alpaca_API_connector.list_positions()
 portfolio_list = []
+print("Current portfolio positions:\n SYMBOL | NO. STOCKS")
 for i in range(0, len(pos), 1):
     # print as tuple
     print((pos[i].symbol, pos[i].qty))
@@ -278,15 +279,17 @@ def wma_loop(symbol):
 # this loop does not allow shorting
 # TODO
 # add argument symbol
-def ma_loop(symbol):
+def ma_loop(stock_symbol):
     """
+    Parameters
+    -----------------
     symbol : 'XXXX'
     interval : 1min, 5min, 15min, 30min, 60min, daily, weekly, monthly
     time_period : time_period=60, time_period=200
     series_type : close, open, high, low
     datatype : 'json', 'csv', 'pandas'
     """
-    last_price = pull_intraday_data(symbol='TSLA',
+    last_price = pull_intraday_data(symbol=stock_symbol,
                                     interval='5min',
                                     outputsize='full',
                                     output_format='pandas')
@@ -300,8 +303,8 @@ def ma_loop(symbol):
     # tech indicator returns a tuple; sma dictionary with values; meta dict with characteristics
     # instantiate the class first and provide the API key
     ti = TechIndicators('PKS7JXWMMDQQXQNDWT2P')
-    sma_50, meta_sma_50 = ti.get_sma(symbol='TSLA', interval='daily', time_period='50', series_type='open')
-    sma_200, meta_sma_200 = ti.get_sma(symbol='TSLA', interval='daily', time_period='200', series_type='open')
+    sma_50, meta_sma_50 = ti.get_sma(symbol=stock_symbol, interval='daily', time_period='50', series_type='open')
+    sma_200, meta_sma_200 = ti.get_sma(symbol=stock_symbol, interval='daily', time_period='200', series_type='open')
 
     while True:
         '''
@@ -320,11 +323,9 @@ def ma_loop(symbol):
         if (sma_50[key_list[2][1]]['SMA'] < sma_200[key_list_2[2][1]]['SMA'] and
                 sma_50[key_list[0][1]]['SMA'] > sma_200[key_list_2[0][1]]['SMA']):
             # buy signal
-            # TODO
-            # logic for buying a certain number of stocks
             try:
-                print("Stock is being purchased")
-                submit_order(symbol='TSLA',
+                print(f"Stock {stock_symbol} is being purchased")
+                submit_order(symbol=stock_symbol,
                              qty=2,
                              side='buy',
                              type='limit',
@@ -333,29 +334,27 @@ def ma_loop(symbol):
                              )
             except BaseException as e:
                 print(e)
-                submit_order(symbol='TSLA',
+                submit_order(symbol=stock_symbol,
                              qty=float(stock_df['high'].head(1) / bp * 0.1),
                              side='buy',
                              type='limit',
                              time_in_force='gtc',
                              limit_price=actual_price
                              )
-            print(f"{symbol} is being bought")
+            print(f"{stock_symbol} is being bought")
 
         # check if sma_50 is intersecting sma_200 coming from above; the stock is owned; at least one stock is owned
         elif (sma_50[key_list[2][1]]['SMA'] > sma_200[key_list_2[2][1]]['SMA'] and
                 sma_50[key_list[0][1]]['SMA'] < sma_200[key_list_2[0][1]]['SMA']) and\
                 (symbol in portfolio_list and portfolio_list[1] > 0):
             # sell signal
-            # TODO
-            # correct logic for selling all stocks
-            print(f"{symbol} is being sold")
+            print(f"{stock_symbol} is being sold")
             if portfolio_list[1] == 0:
                 print(f"No {symbol} shares owned; shorting not enabled")
             else:
                 try:
-                    print("Stock is being sold")
-                    submit_order(symbol='TSLA',
+                    print(f"Stock {stock_symbol} is being sold")
+                    submit_order(symbol=stock_symbol,
                                  qty=2,
                                  side='sell',
                                  type='limit',
@@ -364,7 +363,7 @@ def ma_loop(symbol):
                                  )
                 except BaseException as e:
                     print(e)
-                    submit_order(symbol='TSLA',
+                    submit_order(symbol=stock_symbol,
                                  qty=3,
                                  side='sell',
                                  type='limit',
@@ -373,5 +372,5 @@ def ma_loop(symbol):
                                  )
                     pass
         else:
-            print("No action conducted at", dt.now().isoformat())
+            print("No action needed to be conducted at", dt.now().isoformat())
             time.sleep(5)

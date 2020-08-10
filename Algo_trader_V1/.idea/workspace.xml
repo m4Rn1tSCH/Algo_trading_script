@@ -43,6 +43,11 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="PREVIOUS_COMMIT_AUTHORS">
+      <list>
+        <option value="Bill" />
+      </list>
+    </option>
     <option name="PUSH_TAGS">
       <GitPushTagMode>
         <option name="argument" value="--tags" />
@@ -92,7 +97,7 @@
       <recent name="C:\Users\bill-\OneDrive\Dokumente\Docs Bill\TA_files\functions_scripts_storage\Algo_trading_script\Algo_trader_V1\live_model_functions" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.Python_live_model (1)">
+  <component name="RunManager" selected="Python.starter_app">
     <configuration name="Python_AV_get_intraday_stock" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
       <module name="Algo_trader_V1" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -243,8 +248,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.Python_live_model (1)" />
         <item itemvalue="Python.starter_app" />
+        <item itemvalue="Python.Python_live_model (1)" />
         <item itemvalue="Python.Python_live_model" />
         <item itemvalue="Python.Python_acc_config" />
       </list>
@@ -300,7 +305,7 @@
       <workItem from="1595784151295" duration="1322000" />
       <workItem from="1596061594175" duration="850000" />
       <workItem from="1597023135302" duration="148000" />
-      <workItem from="1597023694991" duration="1269000" />
+      <workItem from="1597023694991" duration="3022000" />
     </task>
     <task id="LOCAL-00001" summary="-fuck mac">
       <created>1590719250675</created>
@@ -526,7 +531,14 @@
       <option name="project" value="LOCAL" />
       <updated>1595542556675</updated>
     </task>
-    <option name="localTasksCounter" value="33" />
+    <task id="LOCAL-00033" summary=" --restructured into separate folders&#10; --Introduced second loop with a simple moving average&#10; Model:&#10;    -fixed working directory bug&#10;    -minor spelling&#10;    -weighted moving average&#10;    -docs changed for submit order&#10;    -streamlined imports&#10;    -correct evaluation of signal (intersection 50/200)&#10;    -list exhaustion handling when iterating over dates&#10;    - added buy signal and sell signal&#10;Raw Code Snippets&#10;    -raw code goes here that might prove useful later on&#10; AV_intraday&#10;    -fixed plotting feature and added to df pull/intra_df_pull&#10;    -plots are not co-existing and not overwriting each other">
+      <created>1597025008191</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1597025008191</updated>
+    </task>
+    <option name="localTasksCounter" value="34" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -589,10 +601,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="640" y="256" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1597023170678" />
-    <state x="520" y="0" key="CommitChangelistDialog2" timestamp="1595542555330">
+    <state x="520" y="0" key="CommitChangelistDialog2" timestamp="1597025004134">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="520" y="0" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1595542555330" />
+    <state x="520" y="0" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1597025004134" />
     <state x="184" y="86" key="DiffContextDialog" timestamp="1595540669674">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -633,10 +645,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="968" height="528" key="XDebugger.FullValuePopup/0.0.1920.1040@0.0.1920.1040" timestamp="1594916001602" />
-    <state x="769" y="434" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1595540278201">
+    <state x="769" y="434" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1597025024288">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="769" y="434" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1920.1040@0.0.1920.1040" timestamp="1595540278201" />
+    <state x="769" y="434" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1920.1040@0.0.1920.1040" timestamp="1597025024288" />
     <state x="601" y="246" width="700" height="530" key="recent.locations.popup" timestamp="1591986954884">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>

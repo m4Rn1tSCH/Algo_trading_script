@@ -6,30 +6,20 @@ Created on 5/18/2020 8:15 PM
 """
 import time
 from datetime import datetime as dt
-
 import numpy as np
 import pandas as pd
 from alpha_vantage.techindicators import TechIndicators
 
 from api import Python_alpaca_API_connector
 from live_model_functions.Python_AV_get_intraday_stock import pull_intraday_data, pull_stock_data, submit_order
-from support_functions.Python_prediction_features import pred_feat
-
-"""
--pull data every hour /every day
--prepare df and decide what to sell or buy
-if loop -> buy or sell
-append data every hour
-calculate/or mark -> sell or buy order
-"""
 
 intra_df = pull_intraday_data(symbol='TSLA',
                               interval='5min',
                               outputsize='full',
                               output_format='pandas',
-                              plot_price=True)
-intra_df['open_diff'] = intra_df['open'].diff()
-intra_df = pred_feat(df=intra_df)
+                              plot_price=False)
+# intra_df['open_diff'] = intra_df['open'].diff()
+# intra_df = pred_feat(df=intra_df)
 
 # monthly data
 stock_df = pull_stock_data(symbol='NVDA',
@@ -37,21 +27,10 @@ stock_df = pull_stock_data(symbol='NVDA',
                            outputsize='full',
                            cadence='monthly',
                            output_format='pandas',
-                           plot_price=True)
-stock_df['open_diff'] = stock_df['open'].diff()
+                           plot_price=False)
+# stock_df['open_diff'] = stock_df['open'].diff()
 # adds features and removes NaNs
-stock_df = pred_feat(df=stock_df)
-
-# create a iterable tuple for the orders;
-# print order symbol; quantity; (side) - not needed for now
-pos = Python_alpaca_API_connector.list_positions()
-portfolio_list = []
-print("Current portfolio positions:\n SYMBOL | NO. STOCKS")
-for i in range(0, len(pos), 1):
-    # print as tuple
-    print((pos[i].symbol, pos[i].qty))
-    # append a tuple with the stock and quantity held
-    portfolio_list.append((pos[i].symbol, pos[i].qty))
+# stock_df = pred_feat(df=stock_df)
 
 
 def trading_support_resistance(df, bin_width=30):
@@ -189,7 +168,7 @@ def wma_loop(symbol):
     series_type : close, open, high, low
     datatype : 'json', 'csv', 'pandas'
     """
-    last_price = pull_intraday_data(symbol='TSLA',
+    last_price = pull_intraday_data(symbol=stock_symbol,
                                     interval='5min',
                                     outputsize='full',
                                     output_format='pandas')
@@ -204,8 +183,8 @@ def wma_loop(symbol):
     # tech indicator returns a tuple; sma dictionary with values; meta dict with characteristics
     # instantiate the class first and provide the API key
     ti = TechIndicators('PKS7JXWMMDQQXQNDWT2P')
-    wma_50, meta_wma_50 = ti.get_wma(symbol='TSLA', interval='daily', time_period='50', series_type='open')
-    wma_200, meta_wma_200 = ti.get_wma(symbol='TSLA', interval='daily', time_period='200', series_type='open')
+    wma_50, meta_wma_50 = ti.get_wma(symbol=stock_symbol, interval='daily', time_period='50', series_type='open')
+    wma_200, meta_wma_200 = ti.get_wma(symbol=stock_symbol, interval='daily', time_period='200', series_type='open')
 
     while True:
         '''
@@ -225,7 +204,7 @@ def wma_loop(symbol):
             # buy signal
             try:
                 print("Stock is being purchased")
-                submit_order(symbol='TSLA',
+                submit_order(symbol=stock_symbol,
                              qty=bp,
                              side='buy',
                              type='limit',
@@ -234,7 +213,7 @@ def wma_loop(symbol):
                              )
             except BaseException as e:
                 print(e)
-                submit_order(symbol='TSLA',
+                submit_order(symbol=stock_symbol,
                              qty=5,
                              side='buy',
                              type='limit',
@@ -254,7 +233,7 @@ def wma_loop(symbol):
             else:
                 try:
                     print("Stock is being sold")
-                    submit_order(symbol='TSLA',
+                    submit_order(symbol=stock_symbol,
                                  qty=2,
                                  side='sell',
                                  type='limit',
@@ -263,7 +242,7 @@ def wma_loop(symbol):
                                  )
                 except BaseException as e:
                     print(e)
-                    submit_order(symbol='TSLA',
+                    submit_order(symbol=stock_symbol,
                                  qty=float(stock_df['high'].head(1) / bp * 0.1),
                                  side='sell',
                                  type='limit',
@@ -275,10 +254,7 @@ def wma_loop(symbol):
             print("No action conducted at", dt.now().isoformat())
             time.sleep(5)
 
-# loop based on the MOVING AVERAGE
-# this loop does not allow shorting
-# TODO
-# add argument symbol
+
 def ma_loop(stock_symbol):
     """
     Parameters
@@ -289,24 +265,30 @@ def ma_loop(stock_symbol):
     series_type : close, open, high, low
     datatype : 'json', 'csv', 'pandas'
     """
-    last_price = pull_intraday_data(symbol=stock_symbol,
-                                    interval='5min',
-                                    outputsize='full',
-                                    output_format='pandas')
-    # calculate the mean price of the last 25 min of the trading day
-    mean_price = last_price['open'][:5].mean()
-    # retrieve the very last quote to compare with
-    actual_price = last_price['open'][:1].mean()
-    # retrieve accounts remaining buying power
-    bp = float(api.get_account().buying_power)
-
-    # tech indicator returns a tuple; sma dictionary with values; meta dict with characteristics
-    # instantiate the class first and provide the API key
-    ti = TechIndicators('PKS7JXWMMDQQXQNDWT2P')
-    sma_50, meta_sma_50 = ti.get_sma(symbol=stock_symbol, interval='daily', time_period='50', series_type='open')
-    sma_200, meta_sma_200 = ti.get_sma(symbol=stock_symbol, interval='daily', time_period='200', series_type='open')
 
     while True:
+
+        '''endless loop for buying and selling'''
+        # create a iterable tuple for the orders;
+        start_time = time.time()
+        last_price = pull_intraday_data(symbol=stock_symbol,
+                                        interval='5min',
+                                        outputsize='full',
+                                        output_format='pandas')
+        # retrieve the very last quote to compare with
+        actual_price = last_price['open'][:1].mean()
+        # retrieve accounts remaining buying power
+        bp = float(api.get_account().buying_power)
+
+        pos = Python_alpaca_API_connector.list_positions()
+        portfolio_list = []
+        print("Current portfolio positions:\n SYMBOL | NO. STOCKS")
+        for i in range(0, len(pos), 1):
+            # print as tuple
+            print((pos[i].symbol, pos[i].qty))
+            # append a tuple with the stock and quantity held
+            portfolio_list.append((pos[i].symbol, pos[i].qty))
+
         '''
         ACCESS OF WEIGHTED MOVING AVERAGES AND CONSECUTIVE INTERSECTION THEREOF
         naming of day + 1 is inverted to index position because list is in descending order
@@ -314,6 +296,11 @@ def ma_loop(stock_symbol):
         further in the past (smaller date number)
         '''
         # zero indexed counter with values selected before index 3(last element exclusive); start at index 0
+        # tech indicator returns a tuple; sma dictionary with values; meta dict with characteristics
+        # instantiate the class first and provide the API key
+        ti = TechIndicators('PKS7JXWMMDQQXQNDWT2P')
+        sma_50, meta_sma_50 = ti.get_sma(symbol=stock_symbol, interval='daily', time_period='50', series_type='open')
+        sma_200, meta_sma_200 = ti.get_sma(symbol=stock_symbol, interval='daily', time_period='200', series_type='open')
 
         key_list = sorted(enumerate(sma_50.keys()), reverse=False)[:3]
         key_list_2 = sorted(enumerate(sma_200.keys()), reverse=False)[:3]
@@ -332,6 +319,7 @@ def ma_loop(stock_symbol):
                              time_in_force='gtc',
                              limit_price=actual_price
                              )
+                print("script execution time:", time.time() - start_time, "sec.")
             except BaseException as e:
                 print(e)
                 submit_order(symbol=stock_symbol,
@@ -371,6 +359,7 @@ def ma_loop(stock_symbol):
                                  limit_price=mean_price
                                  )
                     pass
+            print("script execution time:", time.time() - start_time, "sec.")
         else:
             print("No action needed to be conducted at", dt.now().isoformat())
             time.sleep(5)

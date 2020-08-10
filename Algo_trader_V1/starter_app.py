@@ -11,9 +11,9 @@ Specify which loop and stock
 '''
 from live_model_functions.Python_live_model import ma_loop
 
-def test():
-	ma_loop(stock_symbol=)
-	return 'function was good'
+def endpoint_algo():
+	ma_loop(stock_symbol='TSLA')
+	return 'function run'
 
 
 print("test was successful")

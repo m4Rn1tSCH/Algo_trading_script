@@ -11,10 +11,18 @@ Specify which loop and stock
 '''
 from live_model_functions.Python_live_model import ma_loop
 
+
 def endpoint_algo():
+
+	"""
+	This functions kicks off the loop in the algorithm and should sit on top of everything.
+	It just starts the function ma_loop, the moving average loop.
+	-----
+	Parameters.
+	stock_symbol: string; specify the stock for which data will be pulled.
+	"""
 	ma_loop(stock_symbol='TSLA')
 	return 'function run'
 
 
 print("test was successful")
-

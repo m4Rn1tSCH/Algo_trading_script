@@ -203,6 +203,7 @@ def wma_loop(stock_symbol):
         if (wma_50[key_list[2][1]]['WMA'] < wma_200[key_list_2[2][1]]['WMA'] and
                 wma_50[key_list[0][1]]['WMA'] > wma_200[key_list_2[0][1]]['WMA']):
             # buy signal
+            print("Executing buy signal...")
             try:
                 print("Stock is being purchased")
                 submit_order(symbol=stock_symbol,
@@ -227,30 +228,27 @@ def wma_loop(stock_symbol):
         elif (wma_50[key_list[2][1]]['WMA'] > wma_200[key_list_2[2][1]]['WMA'] and
                 wma_50[key_list[0][1]]['WMA'] < wma_200[key_list_2[0][1]]['WMA']) and\
                 (symbol in portfolio_list and portfolio_list[1] > 0):
-            # sell signal
-            print(f"{symbol} is being sold")
-            if portfolio_list[1] == 0:
-                print(f"No {symbol} shares owned; shorting not enabled")
-            else:
-                try:
-                    print("Stock is being sold")
-                    submit_order(symbol=stock_symbol,
-                                 qty=2,
-                                 side='sell',
-                                 type='limit',
-                                 time_in_force='gtc',
-                                 limit_price=actual_price
-                                 )
-                except BaseException as e:
-                    print(e)
-                    submit_order(symbol=stock_symbol,
-                                 qty=float(stock_df['high'].head(1) / bp * 0.1),
-                                 side='sell',
-                                 type='limit',
-                                 time_in_force='gtc',
-                                 limit_price=actual_price
-                                 )
-                    pass
+            # execute sell signal
+            print("Executing sell signal...")
+            try:
+                print("Stock is owned and is being sold...")
+                submit_order(symbol=stock_symbol,
+                             qty=2,
+                             side='sell',
+                             type='limit',
+                             time_in_force='gtc',
+                             limit_price=actual_price
+                             )
+            except BaseException as e:
+                print(e)
+                submit_order(symbol=stock_symbol,
+                             qty=float(stock_df['high'].head(1) / bp * 0.1),
+                             side='sell',
+                             type='limit',
+                             time_in_force='gtc',
+                             limit_price=actual_price
+                             )
+                pass
         else:
             print("No action conducted at", dt.now().isoformat())
             time.sleep(5)
@@ -312,6 +310,7 @@ def ma_loop(stock_symbol):
         if (sma_50[key_list[2][1]]['SMA'] < sma_200[key_list_2[2][1]]['SMA'] and
                 sma_50[key_list[0][1]]['SMA'] > sma_200[key_list_2[0][1]]['SMA']):
             # buy signal
+            print("Executing buy signal...")
             try:
                 print(f"Stock {stock_symbol} is being purchased")
                 submit_order(symbol=stock_symbol,
@@ -338,29 +337,27 @@ def ma_loop(stock_symbol):
                 sma_50[key_list[0][1]]['SMA'] < sma_200[key_list_2[0][1]]['SMA']) and\
                 (symbol in portfolio_list and portfolio_list[1] > 0):
             # sell signal
+            print("Executing sell signal...")
             print(f"{stock_symbol} is being sold")
-            if portfolio_list[1] == 0:
-                print(f"No {symbol} shares owned; shorting not enabled")
-            else:
-                try:
-                    print(f"Stock {stock_symbol} is being sold")
-                    submit_order(symbol=stock_symbol,
-                                 qty=2,
-                                 side='sell',
-                                 type='limit',
-                                 time_in_force='gtc',
-                                 limit_price=mean_price
-                                 )
-                except BaseException as e:
-                    print(e)
-                    submit_order(symbol=stock_symbol,
-                                 qty=3,
-                                 side='sell',
-                                 type='limit',
-                                 time_in_force='gtc',
-                                 limit_price=mean_price
-                                 )
-                    pass
+            try:
+                print(f"Stock {stock_symbol} is being sold")
+                submit_order(symbol=stock_symbol,
+                             qty=2,
+                             side='sell',
+                             type='limit',
+                             time_in_force='gtc',
+                             limit_price=mean_price
+                             )
+            except BaseException as e:
+                print(e)
+                submit_order(symbol=stock_symbol,
+                             qty=3,
+                             side='sell',
+                             type='limit',
+                             time_in_force='gtc',
+                             limit_price=mean_price
+                             )
+                pass
             print("script execution time:", time.time() - start_time, "sec.")
         else:
             print("No action needed to be conducted at", dt.now().isoformat())

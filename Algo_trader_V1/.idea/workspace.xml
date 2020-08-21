@@ -25,11 +25,7 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1aa0a1a9-df87-4847-b597-2f2227d476e8" name="Default Changelist" comment=" --restructured into separate folders&#10; --Introduced second loop with a simple moving average&#10; Model:&#10;    -fixed working directory bug&#10;    -minor spelling&#10;    -weighted moving average&#10;    -docs changed for submit order&#10;    -streamlined imports&#10;    -correct evaluation of signal (intersection 50/200)&#10;    -list exhaustion handling when iterating over dates&#10;    - added buy signal and sell signal&#10;Raw Code Snippets&#10;    -raw code goes here that might prove useful later on&#10; AV_intraday&#10;    -fixed plotting feature and added to df pull/intra_df_pull&#10;    -plots are not co-existing and not overwriting each other">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/live_model_functions/Python_live_model.py" beforeDir="false" afterPath="$PROJECT_DIR$/live_model_functions/Python_live_model.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/starter_app.py" beforeDir="false" afterPath="$PROJECT_DIR$/starter_app.py" afterDir="false" />
-    </list>
+    <list default="true" id="1aa0a1a9-df87-4847-b597-2f2227d476e8" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -313,7 +309,7 @@
       <workItem from="1597023694991" duration="3022000" />
       <workItem from="1597973511931" duration="1234000" />
       <workItem from="1597975067045" duration="1391000" />
-      <workItem from="1597977618588" duration="433000" />
+      <workItem from="1597977618588" duration="488000" />
     </task>
     <task id="LOCAL-00001" summary="-fuck mac">
       <created>1590719250675</created>
@@ -553,7 +549,14 @@
       <option name="project" value="LOCAL" />
       <updated>1597974573213</updated>
     </task>
-    <option name="localTasksCounter" value="35" />
+    <task id="LOCAL-00035" summary=" --restructured into separate folders&#10; --Introduced second loop with a simple moving average&#10; Model:&#10;    -fixed working directory bug&#10;    -minor spelling&#10;    -weighted moving average&#10;    -docs changed for submit order&#10;    -streamlined imports&#10;    -correct evaluation of signal (intersection 50/200)&#10;    -list exhaustion handling when iterating over dates&#10;    - added buy signal and sell signal&#10;Raw Code Snippets&#10;    -raw code goes here that might prove useful later on&#10; AV_intraday&#10;    -fixed plotting feature and added to df pull/intra_df_pull&#10;    -plots are not co-existing and not overwriting each other">
+      <created>1597978070740</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1597978070740</updated>
+    </task>
+    <option name="localTasksCounter" value="36" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -616,10 +619,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="640" y="256" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1597974619795" />
-    <state x="520" y="0" key="CommitChangelistDialog2" timestamp="1597977728721">
+    <state x="520" y="0" key="CommitChangelistDialog2" timestamp="1597978068277">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="520" y="0" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1597977728721" />
+    <state x="520" y="0" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1597978068277" />
     <state x="184" y="86" key="DiffContextDialog" timestamp="1595540669674">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -652,10 +655,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="718" y="194" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1597973849938" />
-    <state x="552" y="253" key="Vcs.Push.Dialog.v2" timestamp="1597974594942">
+    <state x="552" y="253" key="Vcs.Push.Dialog.v2" timestamp="1597978075797">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="552" y="253" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1597974594942" />
+    <state x="552" y="253" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1597978075797" />
     <state width="968" height="528" key="XDebugger.FullValuePopup" timestamp="1594916001602">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>

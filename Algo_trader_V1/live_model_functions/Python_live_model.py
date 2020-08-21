@@ -6,6 +6,7 @@ Created on 5/18/2020 8:15 PM
 """
 import time
 from datetime import datetime as dt
+
 import numpy as np
 import pandas as pd
 from alpha_vantage.techindicators import TechIndicators
@@ -158,9 +159,8 @@ def simple_loop():
 
 # loop based on the WEIGHTED MOVING AVERAGE
 # this loop does not allow shorting
-# TODO
-# add argument symbol
-def wma_loop(symbol):
+
+def wma_loop(stock_symbol):
     """
     symbol : 'XXXX'
     interval : 1min, 5min, 15min, 30min, 60min, daily, weekly, monthly
@@ -182,6 +182,7 @@ def wma_loop(symbol):
 
     # tech indicator returns a tuple; sma dictionary with values; meta dict with characteristics
     # instantiate the class first and provide the API key
+    print("Retrieving weighted moving averages...")
     ti = TechIndicators('PKS7JXWMMDQQXQNDWT2P')
     wma_50, meta_wma_50 = ti.get_wma(symbol=stock_symbol, interval='daily', time_period='50', series_type='open')
     wma_200, meta_wma_200 = ti.get_wma(symbol=stock_symbol, interval='daily', time_period='200', series_type='open')
@@ -298,6 +299,7 @@ def ma_loop(stock_symbol):
         # zero indexed counter with values selected before index 3(last element exclusive); start at index 0
         # tech indicator returns a tuple; sma dictionary with values; meta dict with characteristics
         # instantiate the class first and provide the API key
+        print("Retrieving moving averages...")
         ti = TechIndicators('PKS7JXWMMDQQXQNDWT2P')
         sma_50, meta_sma_50 = ti.get_sma(symbol=stock_symbol, interval='daily', time_period='50', series_type='open')
         sma_200, meta_sma_200 = ti.get_sma(symbol=stock_symbol, interval='daily', time_period='200', series_type='open')

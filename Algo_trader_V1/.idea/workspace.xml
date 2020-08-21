@@ -28,7 +28,6 @@
     <list default="true" id="1aa0a1a9-df87-4847-b597-2f2227d476e8" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/live_model_functions/Python_live_model.py" beforeDir="false" afterPath="$PROJECT_DIR$/live_model_functions/Python_live_model.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/starter_app.py" beforeDir="false" afterPath="$PROJECT_DIR$/starter_app.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -78,7 +77,7 @@
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+    <property name="settings.editor.selected.configurable" value="configurable.group.appearance" />
   </component>
   <component name="PyConsoleOptionsProvider">
     <option name="myPythonConsoleState">
@@ -168,6 +167,9 @@
       <module name="Algo_trader_V1" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
       <option name="SDK_HOME" value="" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/live_model_functions" />
       <option name="IS_MODULE_SDK" value="true" />
@@ -231,6 +233,9 @@
       <module name="Algo_trader_V1" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
       <option name="SDK_HOME" value="" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <option name="IS_MODULE_SDK" value="true" />
@@ -306,6 +311,7 @@
       <workItem from="1596061594175" duration="850000" />
       <workItem from="1597023135302" duration="148000" />
       <workItem from="1597023694991" duration="3022000" />
+      <workItem from="1597973511931" duration="742000" />
     </task>
     <task id="LOCAL-00001" summary="-fuck mac">
       <created>1590719250675</created>
@@ -633,10 +639,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1397" height="282" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1592341577141" />
-    <state x="718" y="194" key="SettingsEditor" timestamp="1594914640649">
+    <state x="718" y="194" key="SettingsEditor" timestamp="1597973849938">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="718" y="194" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1594914640649" />
+    <state x="718" y="194" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1597973849938" />
     <state x="552" y="253" key="Vcs.Push.Dialog.v2" timestamp="1595540390982">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>

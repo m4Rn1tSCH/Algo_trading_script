@@ -1,12 +1,13 @@
 """
-This module connects to the integrated Alpha Vantage API and allows data queries
+This module connects to the Alpha Vantage API and allows data queries
 IMPORTANT LIMIT AV API 5 API requests per minute and 500 requests per day
-pull_stock_data = pulls data in intervals of days or higher
+pull_data_adj = pulls data in intervals of days or higher
 pull_intraday_data = dataframes for minute intervals
 
 returns a dataframe
 """
 import matplotlib.pyplot as plt
+import pandas as pd
 from Algo_trader_V1.api.alpaca_API_connector import api
 from Algo_trader_V1.api.av_acc_config import AV_API_KEY
 
@@ -16,63 +17,37 @@ from alpha_vantage.timeseries import TimeSeries
 # last price with changes
 # ts.get_quote_endpoint('AAPl')
 
-# pull stock data from Alpha Vantage
-def pull_stock_data(symbol, outputsize, cadence, output_format, plot_price=False):
+# pull stock data from Alpha Vantage; returned as tuple
+def pull_data_adj(symbol, outputsize, cadence, output_format, plot_price=False):
     """
     DOCUMENTATION
     symbol: pick abbreviation in letter strings 'XXXX'
-    adjusted: 'True' or 'False'
     outputsize: 'compact'(100 rows for faster calls) or 'Full'(full retrieval)
     cadence: 'daily' / 'weekly' / 'monthly'
     output_format: ['json', 'csv', 'pandas']
     """
     ts = TimeSeries(key=AV_API_KEY, output_format=output_format,
                     treat_info_as_error=True, indexing_type='date', proxy=None)
+    data = pd.DataFrame()
     try:
         if cadence == 'daily':
             data, meta_data = ts.get_daily_adjusted(symbol=symbol,
                                                 outputsize=outputsize)
-            # drop the date as index to use it
-            data = data.reset_index(drop=False, inplace=False)
-
-            # rename columns names for better handling
-            data = data.rename(columns={"1. open": "open",
-                                    "2. high": "high",
-                                    "3. low": "low",
-                                    "4. close": "close",
-                                    "5. adjusted close": "adjusted_close",
-                                    "6. volume": "volume",
-                                    "7. dividend amount": "dividend amount"},
-                                    inplace=False)
         if cadence == 'weekly':
-            data = ts.get_weekly_adjusted(symbol=symbol,
-                                        outputsize=outputsize)
-            # drop the date as index to use it
-            data = data.reset_index(drop=False, inplace=False)
-
-            # rename columns names for better handling
-            data = data.rename(columns={"1. open": "open",
-                                    "2. high": "high",
-                                    "3. low": "low",
-                                    "4. close": "close",
-                                    "5. adjusted close": "adjusted_close",
-                                    "6. volume": "volume",
-                                    "7. dividend amount": "dividend amount"},
-                                    inplace=False)
+            data, meta_data = ts.get_weekly_adjusted(symbol=symbol)
         if cadence == 'monthly':
-            data = ts.get_monthly_adjusted(symbol=symbol,
-                                        outputsize=outputsize)
-            # drop the date as index to use it
-            data = data.reset_index(drop=False, inplace=False)
-            # rename columns names for better handling
-            data = data.rename(columns={"1. open": "open",
-                                    "2. high": "high",
-                                    "3. low": "low",
-                                    "4. close": "close",
-                                    "5. adjusted close": "adjusted_close",
-                                    "6. volume": "volume",
-                                    "7. dividend amount": "dividend amount"},
-                                    inplace=False)
+            data, meta_data = ts.get_monthly_adjusted(symbol=symbol)
+        # drop the date as index to use it
+        data = data.reset_index(drop=False, inplace=False)
+        # rename columns names for better handling
+        data = data.rename(columns={"1. open": "open",
+                                "2. high": "high",
+                                "3. low": "low",
+                                "4. close": "close",
+                                "5. adjusted close": "adjusted_close",
+                                "6. volume": "volume",
+                                "7. dividend amount": "dividend amount"},
+                                inplace=False)
         if plot_price:
             # LINE VALUES
             # supported values are: '-', '--', '-.', ':',
@@ -91,8 +66,9 @@ def pull_stock_data(symbol, outputsize, cadence, output_format, plot_price=False
     except BaseException as e:
         print(e)
         print("AV-API not properly connected!")
-    return data, meta_data
+    return data
 
+# pull intraday data; returned as tuple
 def pull_intraday_data(symbol, interval, outputsize, output_format, plot_price=False):
 
 
@@ -106,6 +82,7 @@ def pull_intraday_data(symbol, interval, outputsize, output_format, plot_price=F
     """
     ts = TimeSeries(key=AV_API_KEY, output_format=output_format,
                     treat_info_as_error=True, indexing_type='date', proxy=None)
+    data = pd.DataFrame()
     try:
         data, meta_data = ts.get_intraday(symbol=symbol,
                                         interval=interval,
@@ -136,7 +113,7 @@ def pull_intraday_data(symbol, interval, outputsize, output_format, plot_price=F
     except BaseException as e:
         print(e)
         print("AV-API not properly connected!")
-    return data, meta_data
+    return [data, meta_data]
 
 
 def submit_order(symbol, qty, side, order_type, time_in_force, limit_price):

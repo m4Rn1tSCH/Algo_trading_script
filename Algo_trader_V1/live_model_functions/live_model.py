@@ -11,7 +11,7 @@ import pandas as pd
 from alpha_vantage.techindicators import TechIndicators
 
 from Algo_trader_V1.api import alpaca_API_connector as api
-from Algo_trader_V1.live_model_functions.AV_get_intraday_stock import pull_intraday_data, pull_stock_data, submit_order
+from Algo_trader_V1.live_model_functions.AV_get_intraday_stock import pull_intraday_data, pull_data_adj, submit_order
 
 intra_df = pull_intraday_data(symbol='TSLA',
                               interval='5min',
@@ -22,8 +22,7 @@ intra_df = pull_intraday_data(symbol='TSLA',
 # intra_df = pred_feat(df=intra_df)
 
 # monthly data
-stock_df = pull_stock_data(symbol='NVDA',
-                           adjusted=True,
+stock_df= pull_data_adj(symbol='NVDA',
                            outputsize='full',
                            cadence='monthly',
                            output_format='pandas',

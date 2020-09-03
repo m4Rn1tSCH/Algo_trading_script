@@ -9,7 +9,7 @@ This endpoint unifies all functions
 and starts the algorithm.
 Specify which loop and stock
 '''
-from live_model_functions.Python_live_model import ma_loop
+from Algo_trader_V1.live_model_functions.Python_live_model import ma_loop, wma_loop
 
 
 def endpoint_algo():

@@ -10,7 +10,7 @@ import numpy as np
 import pandas as pd
 from alpha_vantage.techindicators import TechIndicators
 
-from Algo_trader_V1.api import Python_alpaca_API_connector
+from Algo_trader_V1.api import Python_alpaca_API_connector as api
 from Algo_trader_V1.live_model_functions.Python_AV_get_intraday_stock import pull_intraday_data, pull_stock_data, submit_order
 
 intra_df = pull_intraday_data(symbol='TSLA',

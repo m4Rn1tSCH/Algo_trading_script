@@ -9,9 +9,12 @@ returns a dataframe
 import matplotlib.pyplot as plt
 
 from Algo_trader_V1.api.Python_alpaca_API_connector import api
+# TODO
+# fix the missing alpha vantage artefacts and replace all lines
+# consult AV documentation for new data
 
 
-#pull stock data from Alpha Vantage
+# pull stock data from Alpha Vantage
 def pull_stock_data(symbol, adjusted, outputsize, cadence, output_format, plot_price=False):
     """
     DOCUMENTATION
@@ -22,16 +25,16 @@ def pull_stock_data(symbol, adjusted, outputsize, cadence, output_format, plot_p
     output_format: ['json', 'csv', 'pandas']
     """
     try:
-        df_pull = api.alpha_vantage.historic_quotes(symbol=symbol,
-                                                    adjusted=adjusted,
-                                                    outputsize=outputsize,
-                                                    cadence=cadence,
-                                                    output_format=output_format)
-        #drop the date as index to use it
-        df_pull = df_pull.reset_index(drop=False, inplace=False)
+        df = api.alpha_vantage.historic_quotes(symbol=symbol,
+                                                adjusted=adjusted,
+                                                outputsize=outputsize,
+                                                cadence=cadence,
+                                                output_format=output_format)
+        # drop the date as index to use it
+        df = df.reset_index(drop=False, inplace=False)
 
-        #rename columns names for better handling
-        df_pull = df_pull.rename(columns={"1. open": "open",
+        # rename columns names for better handling
+        df = df.rename(columns={"1. open": "open",
                                         "2. high": "high",
                                         "3. low": "low",
                                         "4. close": "close",
@@ -41,13 +44,13 @@ def pull_stock_data(symbol, adjusted, outputsize, cadence, output_format, plot_p
                                 inplace=False)
         if plot_price:
             # LINE VALUES
-            #   supported values are: '-', '--', '-.', ':',
-            #   'None', ' ', '', 'solid', 'dashed', 'dashdot', 'dotted'
+            # supported values are: '-', '--', '-.', ':',
+            # 'None', ' ', '', 'solid', 'dashed', 'dashdot', 'dotted'
             fig, ax = plt.subplots(2, 1, figsize=(15, 8))
-            ax[0].plot(df_pull['date'], df_pull['open'],
+            ax[0].plot(df['date'], df['open'],
                        color='blue', lw=1, ls='dashdot', marker=',', label="Open Price")
             # Plot the date on x-axis and the trading volume on y-axis
-            ax[1].plot(df_pull['date'], df_pull['volume'],
+            ax[1].plot(df['date'], df['volume'],
                        color='orange', lw=1, ls='--', marker='x', label="Trade Volume")
             ax[0].set_title('Open Price', style='oblique')
             ax[1].set_title('Trading Volume', style='oblique')
@@ -57,28 +60,29 @@ def pull_stock_data(symbol, adjusted, outputsize, cadence, output_format, plot_p
     except BaseException as e:
         print(e)
         print("API not properly connected!")
-    return df_pull
-
-
+    return df
 
 def pull_intraday_data(symbol, interval, outputsize, output_format, plot_price=False):
-    '''
+
+
+    """
     DOCUMENTATION
     symbol: pick abbreviation in letter strings 'XXXX'
     interval: ['1min', '5min', '15min', '30min', '60min']
     outputsize: 'Full'
     output_format: ['json', 'csv', 'pandas']
     plot_price: boolean; generate a plot with open price and trading volume
-    '''
-    try:
-        df_intra_pull = api.alpha_vantage.intraday_quotes(symbol=symbol,
-                                                            interval=interval,
-                                                            outputsize=outputsize,
-                                                            output_format=output_format)
-        #drop the date as index to use it
-        df_intra_pull = df_intra_pull.reset_index(drop=False, inplace=False)
+    """
 
-        df_intra_pull = df_intra_pull.rename(columns={"1. open": "open",
+    try:
+        df = api.alpha_vantage.intraday_quotes(symbol=symbol,
+                                                interval=interval,
+                                                outputsize=outputsize,
+                                                output_format=output_format)
+        #drop the date as index to use it
+        df = df.reset_index(drop=False, inplace=False)
+
+        df = df.rename(columns={"1. open": "open",
                                                     "2. high": "high",
                                                     "3. low": "low",
                                                     "4. close": "close",
@@ -89,10 +93,10 @@ def pull_intraday_data(symbol, interval, outputsize, output_format, plot_price=F
             #   supported values are: '-', '--', '-.', ':',
             #   'None', ' ', '', 'solid', 'dashed', 'dashdot', 'dotted'
             fig, ax_intra = plt.subplots(2, 1, figsize=(15, 8))
-            ax_intra[0].plot(df_intra_pull['date'], df_intra_pull['open'],
+            ax_intra[0].plot(df['date'], df['open'],
                        color='red', lw=1, ls='dashdot', marker=',', label="Open Price")
             # Plot the date on x-axis and the trading volume on y-axis
-            ax_intra[1].plot(df_intra_pull['date'], df_intra_pull['volume'],
+            ax_intra[1].plot(df['date'], df['volume'],
                        color='cyan', lw=1, ls='--', marker='x', label="Trading Volume")
             ax_intra[0].set_title('Open Price', style='oblique')
             ax_intra[1].set_title('Trading Volume', style='oblique')
@@ -103,15 +107,10 @@ def pull_intraday_data(symbol, interval, outputsize, output_format, plot_price=F
     except BaseException as e:
         print(e)
         print("API not properly connected!")
-    return df_intra_pull
+    return df
 
-#intra_df = pull_intraday_data(symbol='COTY',
-#                            interval='5min',
-#                            outputsize='full',
-#                            output_format='pandas',
-#                            plot_price=False)
 
-def submit_order(symbol, qty, side, type, time_in_force, limit_price):
+def submit_order(symbol, qty, side, order_type, time_in_force, limit_price):
     '''
      DOCUMENTATION
      symbol: Abbr in 'XXX',
@@ -126,7 +125,7 @@ def submit_order(symbol, qty, side, type, time_in_force, limit_price):
         api.submit_order(symbol=symbol,
                          qty=qty,
                          side=side,
-                         type=type,
+                         type=order_type,
                          time_in_force=time_in_force,
                          limit_price=limit_price
                          )
@@ -136,13 +135,14 @@ def submit_order(symbol, qty, side, type, time_in_force, limit_price):
 
 # seems to list all equities
 def get_asset_list(status, asset_class):
-    '''
+
+    """
     Generate a list of all assets
     status:
     asset_class:
     :return:
     list of asset in possession
-    '''
+    """
     try:
         asset_list = api.list_assets(status=status,
                         asset_class=asset_class

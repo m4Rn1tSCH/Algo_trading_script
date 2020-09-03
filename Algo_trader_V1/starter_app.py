@@ -9,9 +9,9 @@ This endpoint unifies all functions
 and starts the algorithm.
 Specify which loop and stock
 '''
-from Algo_trader_V1.live_model_functions.live_model import ma_loop, wma_loop
+from Algo_trader_V1.live_model_functions.live_model import ma_loop
 
-
+# stocks_picked = ['BILL', 'CUK', 'OIL_CRUDE', 'AAPL', 'NVDA']
 def endpoint_algo():
 
 	"""
@@ -19,10 +19,12 @@ def endpoint_algo():
 	It just starts the function ma_loop, the moving average loop.
 	-----
 	Parameters.
-	stock_symbol: string; specify the stock for which data will be pulled.
+	equities_list: strings; specify the stocks for which data will be pulled and
+	the check will be performed.
 	"""
-	ma_loop(stock_symbol='TSLA')
+
+	ma_loop(equities_List=['BILL', 'CUK', 'OIL_CRUDE', 'AAPL', 'NVDA'])
 	return 'function run'
 
 
-print("test was successful")
+print("algo script is running...")

@@ -8,7 +8,7 @@ returns a dataframe
 """
 import matplotlib.pyplot as plt
 
-from api.Python_alpaca_API_connector import api
+from Algo_trader_V1.api.Python_alpaca_API_connector import api
 
 
 #pull stock data from Alpha Vantage

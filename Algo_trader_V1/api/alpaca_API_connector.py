@@ -1,16 +1,16 @@
 """
 This module connects to the alpaca API and automatically to the Alpha Vantage API
 The functions gather data around the account primarily profit n loss; buying power
-The keys are stored in  Python_acc_config.py
+The keys are stored in  alpaca_acc_config.py
 """
 # access files
 import alpaca_trade_api as tradeapi
 
-from Algo_trader_V1.api import Python_acc_config
+from Algo_trader_V1.api import alpaca_acc_config
 
 # initialize the API connection
-api = tradeapi.REST(Python_acc_config.API_KEY,
-                    Python_acc_config.SECRET_KEY,
+api = tradeapi.REST(alpaca_acc_config.API_KEY,
+                    alpaca_acc_config.SECRET_KEY,
                     'https://paper-api.alpaca.markets')
 
 
@@ -25,8 +25,8 @@ def acc_report():
 
 # Lists currently open trades
 def list_positions():
-    api = tradeapi.REST(Python_acc_config.API_KEY,
-                        Python_acc_config.SECRET_KEY,
+    api = tradeapi.REST(alpaca_acc_config.API_KEY,
+                        alpaca_acc_config.SECRET_KEY,
                         'https://paper-api.alpaca.markets')
 
     try:

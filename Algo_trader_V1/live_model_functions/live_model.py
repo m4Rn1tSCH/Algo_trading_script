@@ -23,10 +23,10 @@ intra_df = pull_intraday_data(symbol='TSLA',
 
 # monthly data
 stock_df= pull_data_adj(symbol='NVDA',
-                           outputsize='full',
-                           cadence='monthly',
-                           output_format='pandas',
-                           plot_price=False)
+                       outputsize='full',
+                       cadence='monthly',
+                       output_format='pandas',
+                       plot_price=False)
 # stock_df['open_diff'] = stock_df['open'].diff()
 # adds features and removes NaNs
 # stock_df = pred_feat(df=stock_df)
@@ -35,7 +35,7 @@ stock_df= pull_data_adj(symbol='NVDA',
 def trading_support_resistance(df, bin_width=30):
 
     """
-    create empty indicator columns and add values as the data evovles
+    create empty indicator columns and add values as the data evolves
     sup_tol : supportive tolerance
     res_tol : resistance tolerance
     sup_count : support count
@@ -258,6 +258,7 @@ def ma_loop(equities_list):
     """
     Parameters
     -----------------
+    equities_list : iterable list of strings representing stocks
     symbol : 'XXXX'
     interval : 1min, 5min, 15min, 30min, 60min, daily, weekly, monthly
     time_period : time_period=60, time_period=200
@@ -275,6 +276,8 @@ def ma_loop(equities_list):
                                             interval='5min',
                                             outputsize='full',
                                             output_format='pandas')
+            # calculate the mean price of the last 25 min of the trading day
+            mean_price = last_price['open'][:5].mean()
             # retrieve the very last quote to compare with
             actual_price = last_price['open'][:1].mean()
             # retrieve accounts remaining buying power
@@ -335,7 +338,7 @@ def ma_loop(equities_list):
             # check if sma_50 is intersecting sma_200 coming from above; the stock is owned; at least one stock is owned
             elif (sma_50[key_list[2][1]]['SMA'] > sma_200[key_list_2[2][1]]['SMA'] and
                     sma_50[key_list[0][1]]['SMA'] < sma_200[key_list_2[0][1]]['SMA']) and\
-                    (symbol in portfolio_list and portfolio_list[1] > 0):
+                    (stock_symbol in portfolio_list and portfolio_list[1] > 0):
                 # sell signal
                 print("Executing sell signal...")
                 print(f"{stock_symbol} is being sold")

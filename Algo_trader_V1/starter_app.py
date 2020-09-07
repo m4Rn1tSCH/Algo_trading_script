@@ -15,7 +15,7 @@ from Algo_trader_V1.live_model_functions.live_model import ma_loop
 def endpoint_algo():
 
 	"""
-	This functions kicks off the loop in the algorithm and should sit on top of everything.
+	This functions kicks off the loop in the algorithm and sits on top of everything.
 	It just starts the function ma_loop, the moving average loop.
 	-----
 	Parameters.

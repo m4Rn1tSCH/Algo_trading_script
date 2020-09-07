@@ -28,6 +28,8 @@ from Algo_trader_V1.live_model_functions.AV_get_intraday_stock import pull_intra
 # stock_df['open_diff'] = stock_df['open'].diff()
 
 # time loop for trading logic
+
+
 def simple_loop():
 
     """
@@ -109,9 +111,17 @@ def wma_loop(stock_symbol):
     mean_price = last_price['open'][:5].mean()
     # retrieve the very last quote to compare with
     actual_price = last_price['open'][:1].mean()
-
     # retrieve accounts remaining buying power
     bp = float(api.get_account().buying_power)
+
+    pos = api.list_positions()
+    portfolio_list = []
+    print("Current portfolio positions:\n SYMBOL | NO. STOCKS")
+    for i in range(0, len(pos), 1):
+        # print as tuple
+        print((pos[i].symbol, pos[i].qty))
+        # append a tuple with the stock and quantity held
+        portfolio_list.append((pos[i].symbol, pos[i].qty))
 
     # tech indicator returns a tuple; sma dictionary with values; meta dict with characteristics
     # instantiate the class first and provide the API key
@@ -175,7 +185,7 @@ def wma_loop(stock_symbol):
             except BaseException as e:
                 print(e)
                 submit_order(symbol=stock_symbol,
-                             qty=float(stock_df['high'].head(1) / bp * 0.1),
+                             qty=float(last_price['high'].head(1) / bp * 0.1),
                              side='sell',
                              type='limit',
                              time_in_force='gtc',
@@ -193,7 +203,6 @@ def ma_loop(equities_list):
     Parameters
     -----------------
     equities_list : iterable list of strings representing stocks
-    symbol : 'XXXX'
     interval : 1min, 5min, 15min, 30min, 60min, daily, weekly, monthly
     time_period : time_period=60, time_period=200
     series_type : close, open, high, low
@@ -262,7 +271,7 @@ def ma_loop(equities_list):
                 except BaseException as e:
                     print(e)
                     submit_order(symbol=stock_symbol,
-                                 qty=float(stock_df['high'].head(1) / bp * 0.1),
+                                 qty=float(last_price['high'].head(1) / bp * 0.1),
                                  side='buy',
                                  type='limit',
                                  time_in_force='gtc',

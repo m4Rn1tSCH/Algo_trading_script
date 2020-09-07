@@ -6,92 +6,26 @@ Created on 5/18/2020 8:15 PM
 """
 import time
 from datetime import datetime as dt
-import numpy as np
-import pandas as pd
 from alpha_vantage.techindicators import TechIndicators
 
 from Algo_trader_V1.api import alpaca_API_connector as api
-from Algo_trader_V1.live_model_functions.AV_get_intraday_stock import pull_intraday_data, pull_data_adj, submit_order
+from Algo_trader_V1.live_model_functions.AV_get_intraday_stock import pull_intraday_data, submit_order
 
-intra_df = pull_intraday_data(symbol='TSLA',
-                              interval='5min',
-                              outputsize='full',
-                              output_format='pandas',
-                              plot_price=False)
+# Quick visual confirmation area for picked stocks
+# intra_df = pull_intraday_data(symbol='TSLA',
+#                               interval='5min',
+#                               outputsize='full',
+#                               output_format='pandas',
+#                               plot_price=False)
 # intra_df['open_diff'] = intra_df['open'].diff()
-# intra_df = pred_feat(df=intra_df)
 
 # monthly data
-stock_df= pull_data_adj(symbol='NVDA',
-                       outputsize='full',
-                       cadence='monthly',
-                       output_format='pandas',
-                       plot_price=False)
+# stock_df = pull_data_adj(symbol='NVDA',
+#                        outputsize='full',
+#                        cadence='monthly',
+#                        output_format='pandas',
+#                        plot_price=False)
 # stock_df['open_diff'] = stock_df['open'].diff()
-# adds features and removes NaNs
-# stock_df = pred_feat(df=stock_df)
-
-
-def trading_support_resistance(df, bin_width=30):
-
-    """
-    create empty indicator columns and add values as the data evolves
-    sup_tol : supportive tolerance
-    res_tol : resistance tolerance
-    sup_count : support count
-    res_count : resistance count
-    sup : support
-    res : resistance
-    positions : positions open
-    signal : signals found
-    """
-
-    df['sup_tol'] = pd.Series(np.zeros(len(df)))
-    df['res_tol'] = pd.Series(np.zeros(len(df)))
-    df['sup_count'] = pd.Series(np.zeros(len(df)))
-    df['res_count'] = pd.Series(np.zeros(len(df)))
-    df['sup'] = pd.Series(np.zeros(len(df)))
-    df['res'] = pd.Series(np.zeros(len(df)))
-    df['positions'] = pd.Series(np.zeros(len(df)))
-    df['signal'] = pd.Series(np.zeros(len(df)))
-    in_support = 0
-    in_resistance = 0
-
-    for x in range((bin_width - 1) + bin_width, len(df)):
-        df_section = df[x - bin_width:x + 1]
-
-    support_level = min(df_section['open'])
-    resistance_level = max(df_section['open'])
-    range_level = resistance_level - support_level
-
-    df['res'][x] = resistance_level
-    df['sup'][x] = support_level
-    # allow a 20% buffer back into the mean zone of the price movement
-    df['sup_tol'][x] = support_level + 0.2 * range_level
-    # allow a 20% buffer back into the mean zone of the price movement
-    df['res_tol'][x] = resistance_level - 0.2 * range_level
-
-    if df['open'][x] >= df['res_tol'][x] and df['open'][x] <= df['res'][x]:
-        in_resistance += 1
-        df['res_count'][x] = in_resistance
-    elif df['open'][x] <= df['sup_tol'][x] and df['open'][x] >= df['sup'][x]:
-        in_support += 1
-        df['sup_count'][x] = in_support
-    else:
-        in_support = 0
-        in_resistance = 0
-
-    if in_resistance > 2:
-        df['signal'][x] = 1
-    elif in_support > 2:
-        df['signal'][x] = 0
-    else:
-        df['signal'][x] = df['signal'][x - 1]
-        df['positions'] = df['signal'].diff()
-
-    # produces NaNs in the df again!
-    trading_support_resistance(df=stock_df, bin_width=30)
-
 
 # time loop for trading logic
 def simple_loop():
@@ -153,11 +87,11 @@ def simple_loop():
         else:
             print("Both prices identical; no action")
         # loop will pause for x seconds
-        time.sleep(600)
+        time.sleep(86400)
+
 
 # loop based on the WEIGHTED MOVING AVERAGE
 # this loop does not allow shorting
-
 def wma_loop(stock_symbol):
 
     """
@@ -221,12 +155,12 @@ def wma_loop(stock_symbol):
                              time_in_force='gtc',
                              limit_price=mean_price
                              )
-            print(f"{symbol} is being bought")
+            print(f"{stock_symbol} is being bought")
 
         # check if wma_50 is smaller than wma_200; the stock is owned; at least one stock is owned
         elif (wma_50[key_list[2][1]]['WMA'] > wma_200[key_list_2[2][1]]['WMA'] and
                 wma_50[key_list[0][1]]['WMA'] < wma_200[key_list_2[0][1]]['WMA']) and\
-                (symbol in portfolio_list and portfolio_list[1] > 0):
+                (stock_symbol in portfolio_list and portfolio_list[1] > 0):
             # execute sell signal
             print("Executing sell signal...")
             try:
@@ -250,7 +184,7 @@ def wma_loop(stock_symbol):
                 pass
         else:
             print("No action conducted at", dt.now().isoformat())
-            time.sleep(5)
+            time.sleep(86400)
 
 
 def ma_loop(equities_list):

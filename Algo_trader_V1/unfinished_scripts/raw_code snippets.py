@@ -122,3 +122,10 @@ except BaseException as e:
 #%%
 # generator statement to print certain orders
 [o for o in api.list_orders() if o.symbol == "AAPL"]
+
+# printin bar set with time specs
+import pandas as pd
+NY = 'America/New_York'
+start=pd.Timestamp('2020-08-01', tz=NY).isoformat()
+end=pd.Timestamp('2020-08-30', tz=NY).isoformat()
+print(api.get_barset(['AAPL', 'GOOG'], 'day', start=start, end=end).df)

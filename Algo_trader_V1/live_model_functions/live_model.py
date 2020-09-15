@@ -150,10 +150,11 @@ def wma_loop(equities_list):
                     wma_50[key_list[0][1]]['WMA'] > wma_200[key_list_2[0][1]]['WMA']):
                 # buy signal
                 print("Executing buy signal...")
+                print(f"{stock_symbol} is being bought")
                 try:
                     print("Stock is being purchased")
                     submit_order(symbol=stock_symbol,
-                                 qty=bp,
+                                 qty=float(last_price['high'].head(1) / bp * 0.1),
                                  side='buy',
                                  type='limit',
                                  time_in_force='gtc',
@@ -168,8 +169,6 @@ def wma_loop(equities_list):
                                  time_in_force='gtc',
                                  limit_price=mean_price
                                  )
-                print(f"{stock_symbol} is being bought")
-
             # check if wma_50 is smaller than wma_200; the stock is owned; at least one stock is owned
             elif (wma_50[key_list[2][1]]['WMA'] > wma_200[key_list_2[2][1]]['WMA'] and
                     wma_50[key_list[0][1]]['WMA'] < wma_200[key_list_2[0][1]]['WMA']) and\
@@ -262,6 +261,7 @@ def ma_loop(equities_list):
                     sma_50[key_list[0][1]]['SMA'] > sma_200[key_list_2[0][1]]['SMA']):
                 # buy signal
                 print("Executing buy signal...")
+                print(f"{stock_symbol} is being bought")
                 try:
                     print(f"Stock {stock_symbol} is being purchased")
                     submit_order(symbol=stock_symbol,
@@ -281,7 +281,6 @@ def ma_loop(equities_list):
                                  time_in_force='gtc',
                                  limit_price=actual_price
                                  )
-                print(f"{stock_symbol} is being bought")
             # check if sma_50 is intersecting sma_200 coming from above; the stock is owned; at least one stock is owned
             elif (sma_50[key_list[2][1]]['SMA'] > sma_200[key_list_2[2][1]]['SMA'] and
                     sma_50[key_list[0][1]]['SMA'] < sma_200[key_list_2[0][1]]['SMA']) and\

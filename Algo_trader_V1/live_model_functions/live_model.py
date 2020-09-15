@@ -168,7 +168,7 @@ def wma_loop(equities_list):
                                  time_in_force='gtc',
                                  limit_price=mean_price
                                  )
-                    print(f"{stock_symbol} is being bought")
+                print(f"{stock_symbol} is being bought")
 
             # check if wma_50 is smaller than wma_200; the stock is owned; at least one stock is owned
             elif (wma_50[key_list[2][1]]['WMA'] > wma_200[key_list_2[2][1]]['WMA'] and

@@ -46,7 +46,7 @@ def simple_loop():
         mean_price = last_price['open'][:5].mean()
         # retrieve the very last quote to compare with
         actual_price = last_price['open'][:1].mean()
-        print("Price retrieved; procuring stocks")
+        print("Price retrieved")
         if mean_price > actual_price:
             # buy signal
             try:
@@ -150,7 +150,7 @@ def wma_loop(equities_list):
                     wma_50[key_list[0][1]]['WMA'] > wma_200[key_list_2[0][1]]['WMA']):
                 # buy signal
                 print("Executing buy signal...")
-                print(f"{stock_symbol} is being bought")
+                print(stock_symbol, " is being bought")
                 try:
                     print("Stock is being purchased")
                     submit_order(symbol=stock_symbol,
@@ -197,9 +197,10 @@ def wma_loop(equities_list):
             else:
                 print("No action conducted at", dt.now().isoformat())
         # time in seconds
-        time.sleep(86400)
+        time.sleep(17280)
 
-
+# TODO
+# consider running it directly through this
 def ma_loop(equities_list):
 
     """
@@ -215,7 +216,7 @@ def ma_loop(equities_list):
     while True:
         # iteration start
         for stock_symbol in equities_list:
-            '''endless loop for buying and selling'''
+            '''endless loop for buying and selling; sleep time at the end'''
             # create a iterable tuple for the orders;
             start_time = time.time()
             last_price = pull_intraday_data(symbol=stock_symbol,
@@ -261,9 +262,9 @@ def ma_loop(equities_list):
                     sma_50[key_list[0][1]]['SMA'] > sma_200[key_list_2[0][1]]['SMA']):
                 # buy signal
                 print("Executing buy signal...")
-                print(f"{stock_symbol} is being bought")
+                print(stock_symbol, " is being bought")
                 try:
-                    print(f"Stock {stock_symbol} is being purchased")
+                    print("Stock ", stock_symbol, " is being purchased")
                     submit_order(symbol=stock_symbol,
                                  qty=2,
                                  side='buy',
@@ -271,7 +272,7 @@ def ma_loop(equities_list):
                                  time_in_force='gtc',
                                  limit_price=actual_price
                                  )
-                    print("script execution time:", time.time() - start_time, "sec.")
+                    print("script execution time:", time.time() - start_time, " sec.")
                 except BaseException as e:
                     print(e)
                     submit_order(symbol=stock_symbol,
@@ -287,9 +288,9 @@ def ma_loop(equities_list):
                     (stock_symbol in portfolio_list and portfolio_list[1] > 0):
                 # sell signal
                 print("Executing sell signal...")
-                print(f"{stock_symbol} is being sold")
+                print("Stock ", stock_symbol, " is being sold")
                 try:
-                    print(f"Stock {stock_symbol} is being sold")
+                    print("Stock ", stock_symbol, " is being sold")
                     submit_order(symbol=stock_symbol,
                                  qty=2,
                                  side='sell',
@@ -311,4 +312,4 @@ def ma_loop(equities_list):
             else:
                 print("No action needed to be conducted at", dt.now().isoformat())
         # time in seconds
-        time.sleep(86400)
+        time.sleep(17280)

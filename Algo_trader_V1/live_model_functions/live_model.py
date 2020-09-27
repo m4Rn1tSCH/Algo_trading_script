@@ -6,10 +6,12 @@ Created on 5/18/2020 8:15 PM
 """
 import time
 from datetime import datetime as dt
+
 from alpha_vantage.techindicators import TechIndicators
 
 from Algo_trader_V1.api import alpaca_API_connector as api
 from Algo_trader_V1.live_model_functions.AV_get_intraday_stock import pull_intraday_data, submit_order
+
 
 # Quick visual confirmation area for picked stocks
 # intra_df = pull_intraday_data(symbol='TSLA',
@@ -199,8 +201,7 @@ def wma_loop(equities_list):
         # time in seconds
         time.sleep(17280)
 
-# TODO
-# consider running it directly through this
+
 def ma_loop(equities_list):
 
     """

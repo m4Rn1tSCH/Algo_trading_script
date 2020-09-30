@@ -88,3 +88,7 @@ def simple_loop():
             print("Both prices identical; no action")
         # loop will pause for x seconds
         time.sleep(17000)
+
+if __name__ == '__main__':
+    print("invoked directly; executing script...")
+    ma_loop(equities_list=stock_list)

@@ -135,3 +135,6 @@ def wma_loop(equities_list):
                 print("No action conducted at", dt.now().isoformat())
         # time in seconds
         time.sleep(17280)
+if __name__ == '__main__':
+    print("invoked directly; executing script...")
+    wma_loop(equities_list=stock_list_wma)

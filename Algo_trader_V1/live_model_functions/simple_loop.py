@@ -6,24 +6,9 @@ Created on 9/27/2020; 9:24 AM
 """
 import time
 
+from Algo_trader_V1.api.alpaca_API_connector import portfolio_overview
 from Algo_trader_V1.live_model_functions.AV_get_intraday_stock import pull_intraday_data, submit_order
 
-
-# Quick visual confirmation area for picked stocks
-# intra_df = pull_intraday_data(symbol='TSLA',
-#                               interval='5min',
-#                               outputsize='full',
-#                               output_format='pandas',
-#                               plot_price=False)
-# intra_df['open_diff'] = intra_df['open'].diff()
-
-# monthly data
-# stock_df = pull_data_adj(symbol='NVDA',
-#                        outputsize='full',
-#                        cadence='monthly',
-#                        output_format='pandas',
-#                        plot_price=False)
-# stock_df['open_diff'] = stock_df['open'].diff()
 
 # time loop for trading logic
 
@@ -91,4 +76,5 @@ def simple_loop():
 
 if __name__ == '__main__':
     print("invoked directly; executing script...")
+    portfolio_overview()
     ma_loop(equities_list=stock_list)

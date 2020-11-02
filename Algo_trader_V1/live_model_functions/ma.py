@@ -10,24 +10,9 @@ from datetime import datetime as dt
 from alpha_vantage.techindicators import TechIndicators
 
 from Algo_trader_V1.api import alpaca_API_connector as api
+from Algo_trader_V1.api.alpaca_API_connector import portfolio_overview
 from Algo_trader_V1.live_model_functions.AV_get_intraday_stock import pull_intraday_data, submit_order
 
-
-# Quick visual confirmation area for picked stocks
-# intra_df = pull_intraday_data(symbol='TSLA',
-#                               interval='5min',
-#                               outputsize='full',
-#                               output_format='pandas',
-#                               plot_price=False)
-# intra_df['open_diff'] = intra_df['open'].diff()
-
-# monthly data
-# stock_df = pull_data_adj(symbol='NVDA',
-#                        outputsize='full',
-#                        cadence='monthly',
-#                        output_format='pandas',
-#                        plot_price=False)
-# stock_df['open_diff'] = stock_df['open'].diff()
 
 def ma_loop(equities_list):
 
@@ -57,15 +42,6 @@ def ma_loop(equities_list):
             actual_price = last_price['open'][:1].mean()
             # retrieve accounts remaining buying power
             bp = float(api.get_account().buying_power)
-
-            pos = api.list_positions()
-            portfolio_list = []
-            print("Current portfolio positions:\n SYMBOL | NO. STOCKS")
-            for i in range(0, len(pos), 1):
-                # print as tuple
-                print((pos[i].symbol, pos[i].qty))
-                # append a tuple with the stock and quantity held
-                portfolio_list.append((pos[i].symbol, pos[i].qty))
 
             '''
             ACCESS OF WEIGHTED MOVING AVERAGES AND CONSECUTIVE INTERSECTION THEREOF
@@ -144,4 +120,5 @@ def ma_loop(equities_list):
 
 if __name__ == '__main__':
     print("invoked directly; executing script...")
+    portfolio_overview()
     ma_loop(equities_list=stock_list_ma)

@@ -21,7 +21,7 @@ if __name__ == '__main__':
 	equities_list: strings; specify the stocks for which data will be pulled and
 	the check will be performed.
 	"""
-	ma_loop(equities_List=['BILL', 'CUK', 'OIL_CRUDE', 'AAPL', 'NVDA'])
+	ma_loop(equities_list=['BILL', 'CUK', 'OIL_CRUDE', 'AAPL', 'NVDA'])
 
 
 

@@ -197,7 +197,7 @@ def wma_loop(equities_list):
                                  )
                     pass
             else:
-                print("No action conducted at", dt.now().isoformat())
+                print("No action conducted at: ", dt.now().isoformat())
         # time in seconds
         time.sleep(17280)
 

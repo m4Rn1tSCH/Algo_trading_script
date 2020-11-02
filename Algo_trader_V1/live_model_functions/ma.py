@@ -9,10 +9,10 @@ from datetime import datetime as dt
 
 from alpha_vantage.techindicators import TechIndicators
 
-from Algo_trader_V1.api import alpaca_API_connector as api
+from Algo_trader_V1.api.alpaca_API_connector import api
 from Algo_trader_V1.live_model_functions.AV_get_intraday_stock_no_mtplt import pull_intraday_data, submit_order
 
-
+stock_symbol = 'AAPL'
 def ma_loop(equities_list):
 
     """
@@ -31,7 +31,8 @@ def ma_loop(equities_list):
             '''endless loop for buying and selling; sleep time at the end'''
             # create a iterable tuple for the orders;
             start_time = time.time()
-            last_price = pull_intraday_data(symbol=stock_symbol,
+            # return a list with 2 elements (pandas df, dict with info)
+            last_price, _ = pull_intraday_data(symbol=stock_symbol,
                                             interval='5min',
                                             outputsize='full',
                                             output_format='pandas')
@@ -119,4 +120,5 @@ def ma_loop(equities_list):
 
 if __name__ == '__main__':
     print("invoked directly; executing script...")
+    stock_list_ma = ['AAPL', 'TSLA', 'GOOG', 'NVDA']
     ma_loop(equities_list=stock_list_ma)

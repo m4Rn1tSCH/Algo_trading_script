@@ -9,6 +9,7 @@ import alpaca_trade_api as tradeapi
 from Algo_trader_V1.api import alpaca_acc_config
 
 # initialize the API connection
+
 api = tradeapi.REST(alpaca_acc_config.API_KEY,
                     alpaca_acc_config.SECRET_KEY,
                     'https://paper-api.alpaca.markets')
@@ -17,9 +18,8 @@ api = tradeapi.REST(alpaca_acc_config.API_KEY,
 def acc_report():
 
     account_info = api.get_account()
-    print(account_info)
     print('${} is available as buying power.'.format(account_info.buying_power))
-    return 'Account ready'
+    return account_info
 
 # Lists currently open trades
 def list_positions():

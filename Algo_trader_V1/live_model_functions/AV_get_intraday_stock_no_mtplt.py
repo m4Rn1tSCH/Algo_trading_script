@@ -52,8 +52,8 @@ def pull_data_adj(symbol, outputsize, cadence, output_format):
                                     inplace=False)
 
     except BaseException as e:
+        print("<<<AV-API Problem!>>>")
         print(e)
-        print("AV-API not properly connected!")
     return data
 
 # pull intraday data; returned as tuple
@@ -83,9 +83,9 @@ def pull_intraday_data(symbol, interval, outputsize, output_format):
                                     "5. volume": "volume"},
                                     inplace=False)
     except BaseException as e:
+        print("<<<AV-API Problem>>>!")
         print(e)
-        print("AV-API not properly connected!")
-    return [data, meta_data]
+    return data, meta_data
 
 
 def submit_order(symbol, qty, side, order_type, time_in_force, limit_price):

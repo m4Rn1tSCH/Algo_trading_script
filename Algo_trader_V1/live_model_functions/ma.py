@@ -74,7 +74,7 @@ def ma_loop(equities_list):
                     submit_order(symbol=stock_symbol,
                                  qty=2,
                                  side='buy',
-                                 type='limit',
+                                 order_type='limit',
                                  time_in_force='gtc',
                                  limit_price=actual_price
                                  )
@@ -84,7 +84,7 @@ def ma_loop(equities_list):
                     submit_order(symbol=stock_symbol,
                                  qty=float(last_price['high'].head(1) / bp * 0.1),
                                  side='buy',
-                                 type='limit',
+                                 order_type='limit',
                                  time_in_force='gtc',
                                  limit_price=actual_price
                                  )
@@ -100,7 +100,7 @@ def ma_loop(equities_list):
                     submit_order(symbol=stock_symbol,
                                  qty=2,
                                  side='sell',
-                                 type='limit',
+                                 order_type='limit',
                                  time_in_force='gtc',
                                  limit_price=mean_price
                                  )
@@ -109,7 +109,7 @@ def ma_loop(equities_list):
                     submit_order(symbol=stock_symbol,
                                  qty=3,
                                  side='sell',
-                                 type='limit',
+                                 order_type='limit',
                                  time_in_force='gtc',
                                  limit_price=mean_price
                                  )

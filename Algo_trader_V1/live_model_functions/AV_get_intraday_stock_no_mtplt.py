@@ -33,12 +33,12 @@ def pull_data_adj(symbol, outputsize, cadence, output_format):
     data = pd.DataFrame()
     try:
         if cadence == 'daily':
-            data, meta_data = ts.get_daily_adjusted(symbol=symbol,
+            data, _ = ts.get_daily_adjusted(symbol=symbol,
                                                 outputsize=outputsize)
         if cadence == 'weekly':
-            data, meta_data = ts.get_weekly_adjusted(symbol=symbol)
+            data, _ = ts.get_weekly_adjusted(symbol=symbol)
         if cadence == 'monthly':
-            data, meta_data = ts.get_monthly_adjusted(symbol=symbol)
+            data, _ = ts.get_monthly_adjusted(symbol=symbol)
         # drop the date as index to use it
         data = data.reset_index(drop=False, inplace=False)
         # rename columns names for better handling
@@ -71,7 +71,7 @@ def pull_intraday_data(symbol, interval, outputsize, output_format):
                     treat_info_as_error=True, indexing_type='date', proxy=None)
     data = pd.DataFrame()
     try:
-        data, meta_data = ts.get_intraday(symbol=symbol,
+        data, _ = ts.get_intraday(symbol=symbol,
                                         interval=interval,
                                         outputsize=outputsize)
         #drop the date as index to use it for plotting
@@ -85,7 +85,7 @@ def pull_intraday_data(symbol, interval, outputsize, output_format):
     except BaseException as e:
         print("<<<AV-API Problem>>>!")
         print(e)
-    return data, meta_data
+    return data
 
 
 def submit_order(symbol, qty, side, order_type, time_in_force, limit_price):

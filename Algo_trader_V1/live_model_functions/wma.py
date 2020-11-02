@@ -10,6 +10,7 @@ from datetime import datetime as dt
 from alpha_vantage.techindicators import TechIndicators
 
 from Algo_trader_V1.api.alpaca_API_connector import api
+from Algo_trader_V1.api.alpaca_API_connector import portfolio_overview
 from Algo_trader_V1.live_model_functions.AV_get_intraday_stock_no_mtplt import pull_intraday_data, submit_order
 
 
@@ -45,6 +46,7 @@ def wma_loop(equities_list):
             actual_price = last_price['open'][:1].mean()
             # retrieve accounts remaining buying power
             bp = float(api.get_account().buying_power)
+            portfolio = portfolio_overview()
 
             # tech indicator returns a tuple; sma dictionary with values; meta dict with characteristics
             # instantiate the class first and provide the API key
@@ -85,7 +87,7 @@ def wma_loop(equities_list):
             # check if wma_50 is smaller than wma_200; the stock is owned; at least one stock is owned
             elif (wma_50[key_list[2][1]]['WMA'] > wma_200[key_list_2[2][1]]['WMA'] and
                     wma_50[key_list[0][1]]['WMA'] < wma_200[key_list_2[0][1]]['WMA']) and\
-                    (stock_symbol in portfolio_list and portfolio_list[1] > 0):
+                    (stock_symbol in portfolio and portfolio[1] > 0):
                 # execute sell signal
                 print("Executing sell signal...")
                 try:

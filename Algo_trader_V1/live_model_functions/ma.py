@@ -10,6 +10,7 @@ from datetime import datetime as dt
 from alpha_vantage.techindicators import TechIndicators
 
 from Algo_trader_V1.api.alpaca_API_connector import api
+from Algo_trader_V1.api.alpaca_API_connector import portfolio_overview
 from Algo_trader_V1.live_model_functions.AV_get_intraday_stock_no_mtplt import pull_intraday_data, submit_order
 
 stock_symbol = 'AAPL'
@@ -42,6 +43,7 @@ def ma_loop(equities_list):
             actual_price = last_price['open'][:1].mean()
             # retrieve accounts remaining buying power
             bp = float(api.get_account().buying_power)
+            portfolio = portfolio_overview()
 
             '''
             ACCESS OF WEIGHTED MOVING AVERAGES AND CONSECUTIVE INTERSECTION THEREOF
@@ -89,7 +91,7 @@ def ma_loop(equities_list):
             # check if sma_50 is intersecting sma_200 coming from above; the stock is owned; at least one stock is owned
             elif (sma_50[key_list[2][1]]['SMA'] > sma_200[key_list_2[2][1]]['SMA'] and
                     sma_50[key_list[0][1]]['SMA'] < sma_200[key_list_2[0][1]]['SMA']) and\
-                    (stock_symbol in portfolio_list and portfolio_list[1] > 0):
+                    (stock_symbol in portfolio and portfolio[1] > 0):
                 # sell signal
                 print("Executing sell signal...")
                 print("Stock ", stock_symbol, " is being sold")

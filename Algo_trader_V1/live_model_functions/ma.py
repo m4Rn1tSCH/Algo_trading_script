@@ -54,8 +54,8 @@ def ma_loop(equities_list):
             # instantiate the class first and provide the API key
             print("Retrieving moving averages...")
             ti = TechIndicators('PKS7JXWMMDQQXQNDWT2P')
-            sma_50, meta_sma_50 = ti.get_sma(symbol=stock_symbol, interval='daily', time_period='50', series_type='open')
-            sma_200, meta_sma_200 = ti.get_sma(symbol=stock_symbol, interval='daily', time_period='200', series_type='open')
+            sma_50, _ = ti.get_sma(symbol=stock_symbol, interval='daily', time_period='50', series_type='open')
+            sma_200, _ = ti.get_sma(symbol=stock_symbol, interval='daily', time_period='200', series_type='open')
 
             key_list = sorted(enumerate(sma_50.keys()), reverse=False)[:3]
             key_list_2 = sorted(enumerate(sma_200.keys()), reverse=False)[:3]
@@ -115,6 +115,10 @@ def ma_loop(equities_list):
                 print("script execution time:", time.time() - start_time, "sec.")
             else:
                 print("No action needed to be conducted at", dt.now().isoformat())
+
+            print("Break time of 60s before next stock check to avoid Alpha Vantage overload")
+            # break after each iterator element
+            time.sleep(60)
         # time in seconds
         time.sleep(17280)
 

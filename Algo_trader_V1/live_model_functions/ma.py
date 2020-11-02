@@ -10,7 +10,6 @@ from datetime import datetime as dt
 from alpha_vantage.techindicators import TechIndicators
 
 from Algo_trader_V1.api import alpaca_API_connector as api
-from Algo_trader_V1.api.alpaca_API_connector import portfolio_overview
 from Algo_trader_V1.live_model_functions.AV_get_intraday_stock import pull_intraday_data, submit_order
 
 
@@ -120,5 +119,4 @@ def ma_loop(equities_list):
 
 if __name__ == '__main__':
     print("invoked directly; executing script...")
-    portfolio_overview()
     ma_loop(equities_list=stock_list_ma)

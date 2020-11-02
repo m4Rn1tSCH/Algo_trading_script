@@ -112,5 +112,4 @@ def wma_loop(equities_list):
         time.sleep(17280)
 if __name__ == '__main__':
     print("invoked directly; executing script...")
-    portfolio_overview()
     wma_loop(equities_list=stock_list_wma)

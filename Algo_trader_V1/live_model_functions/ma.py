@@ -118,7 +118,7 @@ def ma_loop(equities_list):
 
             print("Break time of 60s before next stock check to avoid Alpha Vantage overload")
             # break after each iterator element
-            time.sleep(60)
+            time.sleep(61)
         # time in seconds
         time.sleep(17280)
 

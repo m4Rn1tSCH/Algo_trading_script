@@ -13,7 +13,7 @@ from Algo_trader_V1.api.alpaca_API_connector import api
 from Algo_trader_V1.api.alpaca_API_connector import portfolio_overview
 from Algo_trader_V1.live_model_functions.AV_get_intraday_stock_no_mtplt import pull_intraday_data, submit_order
 
-stock_symbol = 'AAPL'
+
 def ma_loop(equities_list):
 
     """
@@ -33,10 +33,11 @@ def ma_loop(equities_list):
             # create a iterable tuple for the orders;
             start_time = time.time()
             # return a list with 2 elements (pandas df, dict with info)
+            # stock_symbol = 'AAPL'
             last_price = pull_intraday_data(symbol=stock_symbol,
                                             interval='5min',
                                             outputsize='full',
-                                            output_format='pandas')
+                                            output_format='pandas').head(10)
             # calculate the mean price of the last 25 min of the trading day
             mean_price = last_price['open'][:5].mean()
             # retrieve the very last quote to compare with

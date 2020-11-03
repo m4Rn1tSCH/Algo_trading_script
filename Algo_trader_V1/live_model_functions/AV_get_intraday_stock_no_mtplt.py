@@ -74,7 +74,6 @@ def pull_intraday_data(symbol, interval, outputsize, output_format):
         data, _ = ts.get_intraday(symbol=symbol,
                                         interval=interval,
                                         outputsize=outputsize)
-        #drop the date as index to use it for plotting
         data = data.reset_index(drop=False, inplace=False)
         data = data.rename(columns={"1. open": "open",
                                     "2. high": "high",

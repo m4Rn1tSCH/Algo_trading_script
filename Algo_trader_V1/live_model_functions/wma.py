@@ -115,6 +115,15 @@ def wma_loop(equities_list):
             print("Break time of 60s before next stock check to avoid Alpha Vantage overload")
             # break after each iterator element
             time.sleep(60)
+            # clear variables
+            del last_price
+            del mean_price
+            del actual_price
+            del portfolio
+            del sma_50
+            del sma_200
+            del key_list
+            del key_list_2
         # time in seconds
         time.sleep(17280)
 # this is for direct testin

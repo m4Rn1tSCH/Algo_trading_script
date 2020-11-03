@@ -61,6 +61,8 @@ def pull_intraday_data(symbol, interval, outputsize, output_format):
 
     """
     DOCUMENTATION
+    get_intraday_data returns a tuple with the pandas df and a meta data dictionary.
+    The metadata has been dropped currently as it is not needed.
     symbol: pick abbreviation in letter strings 'XXXX'
     interval: ['1min', '5min', '15min', '30min', '60min']
     outputsize: 'full'

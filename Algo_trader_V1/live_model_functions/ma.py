@@ -33,7 +33,7 @@ def ma_loop(equities_list):
             # create a iterable tuple for the orders;
             start_time = time.time()
             # return a list with 2 elements (pandas df, dict with info)
-            last_price, _ = pull_intraday_data(symbol=stock_symbol,
+            last_price = pull_intraday_data(symbol=stock_symbol,
                                             interval='5min',
                                             outputsize='full',
                                             output_format='pandas')

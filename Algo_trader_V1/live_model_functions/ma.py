@@ -78,7 +78,6 @@ def ma_loop(equities_list):
                                  time_in_force='gtc',
                                  limit_price=actual_price
                                  )
-                    print("script execution time:", time.time() - start_time, " sec.")
                 except BaseException as e:
                     print(e)
                     submit_order(symbol=stock_symbol,
@@ -88,6 +87,7 @@ def ma_loop(equities_list):
                                  time_in_force='gtc',
                                  limit_price=actual_price
                                  )
+                print("Order successful; script execution time:", time.time() - start_time, " sec.")
             # check if sma_50 is intersecting sma_200 coming from above; the stock is owned; at least one stock is owned
             elif (sma_50[key_list[2][1]]['SMA'] > sma_200[key_list_2[2][1]]['SMA'] and
                     sma_50[key_list[0][1]]['SMA'] < sma_200[key_list_2[0][1]]['SMA']) and\
@@ -114,7 +114,7 @@ def ma_loop(equities_list):
                                  limit_price=mean_price
                                  )
                     pass
-                print("script execution time:", time.time() - start_time, "sec.")
+                print("Order successful; script execution time:", time.time() - start_time, " sec.")
             else:
                 print("No action needed to be conducted at", dt.now().isoformat())
 

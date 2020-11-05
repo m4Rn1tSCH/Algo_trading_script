@@ -118,7 +118,7 @@ def wma_loop(equities_list):
             else:
                 print("No action conducted at", dt.now().isoformat())
 
-            print("Break time of 60s before next stock check to avoid Alpha Vantage overload")
+            print("Break time of 60s before check of next stock to avoid Alpha Vantage API overload")
             # break after each iterator element
             time.sleep(60)
             # clear variables

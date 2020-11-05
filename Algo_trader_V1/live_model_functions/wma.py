@@ -35,6 +35,11 @@ def wma_loop(equities_list):
         '''
         # iteration start
         for stock_symbol in equities_list:
+            '''endless loop for buying and selling;sleep time at the end and also after each stock
+                in order to comply with non-premium requirements of Alpha Vantage'''
+
+            start_time = time.time()
+            print("Checking element: ", stock_symbol)
             # return a list with 2 elements (pandas df, dict with info)
             last_price = pull_intraday_data(symbol=stock_symbol,
                                             interval='5min',
@@ -109,6 +114,7 @@ def wma_loop(equities_list):
                                  limit_price=actual_price
                                  )
                     pass
+                print("Order successful; script execution time:", time.time() - start_time, " sec")
             else:
                 print("No action conducted at", dt.now().isoformat())
 
@@ -124,10 +130,12 @@ def wma_loop(equities_list):
             del sma_200
             del key_list
             del key_list_2
+
         # time in seconds
         time.sleep(17280)
-# this is for direct testin
+
+# this is for direct testing
 if __name__ == '__main__':
-    print("invoked directly; executing script...")
+    print("TEST RUN;\ninvoked directly; executing script...")
     stock_list_wma = ['AAPL', 'TSLA', 'GOOG', 'NVDA']
     wma_loop(equities_list=stock_list_wma)

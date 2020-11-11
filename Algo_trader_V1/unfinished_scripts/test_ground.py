@@ -4,11 +4,13 @@ Created on 9/3/2020 2020; 3:22 PM
 
 @author: Bill Jaenke
 """
+import time
+
 # just trying out some snippets
 from Algo_trader_V1.api.alpaca_API_connector import api
-# stocks = ['BILL', 'CUK', 'OIL_CRUDE', 'AAPL', 'NVDA']
+
+# stocks = ['BILL', 'CUK', 'AAPL', 'NVDA']
 # while True:
-#
 #     for i in stocks:
 #         print(i)
 #     time.sleep(5)

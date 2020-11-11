@@ -22,7 +22,4 @@ if __name__ == '__main__':
 	the check will be performed.
 	"""
 	ma_loop(equities_list=['BILL', 'CUK', 'OIL_CRUDE', 'AAPL', 'NVDA'])
-
-
-
-print("algo script is running...")
+    print("Algo script is running...")

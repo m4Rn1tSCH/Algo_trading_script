@@ -119,7 +119,7 @@ def ma_loop(equities_list):
                     pass
                 print("Order successful; script execution time:", time.time() - start_time, " sec")
             else:
-                print("No action needed to be conducted at", dt.now().isoformat())
+                print("No action needed to be conducted at: ", dt.now().isoformat())
 
             print("Break time of 60s before next check of next stock to avoid Alpha Vantage API overload")
             # break after each iterator element

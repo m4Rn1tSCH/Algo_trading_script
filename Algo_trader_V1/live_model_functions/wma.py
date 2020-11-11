@@ -126,8 +126,8 @@ def wma_loop(equities_list):
             del mean_price
             del actual_price
             del portfolio
-            del sma_50
-            del sma_200
+            del wma_50
+            del wma_200
             del key_list
             del key_list_2
 

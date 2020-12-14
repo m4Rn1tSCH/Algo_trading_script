@@ -6,6 +6,7 @@ Created on 9/27/2020; 9:22 AM
 """
 import time
 from datetime import datetime as dt
+from datetime import timedelta
 
 from alpha_vantage.techindicators import TechIndicators
 

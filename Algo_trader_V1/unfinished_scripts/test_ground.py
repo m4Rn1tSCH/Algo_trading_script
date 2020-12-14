@@ -24,4 +24,22 @@ while True:
     print("Markets closed at: ", api.get_clock().next_close, "Algo is inactive for next: ",\
           (api.get_clock().next_open - api.get_clock().timestamp).seconds, "s")
     time.sleep((api.get_clock().next_open - api.get_clock().timestamp).seconds)
+#%%
+import alpaca_trade_api
+import pandas as pd
+
+alpaca_api = alpaca_trade_api.REST(key_id=key_id, secret_key=secret_key, base_url=endpoint, api_version=None, oauth=None)
+start =  pd.Timestamp(year=2016, month=1, day=1).isoformat()
+start =  pd.Timestamp(year=2016, month=1, day=1, tz='US/Central').isoformat() # wrong result with or without timezone
+
+print('getting barset starting from', start)
+
+wrong_bars = alpaca_api.get_barset('AAPL', '5Min', limit=100, start=start)
+correct_bars = alpaca_api.get_barset('AAPL', '5Min', start=start)
+
+print('wrong_bars with', wrong_bars['AAPL'][0].t)
+#  The current date is printed
+
+
+
 

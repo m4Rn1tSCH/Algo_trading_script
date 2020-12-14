@@ -6,6 +6,7 @@ Created on 9/27/2020; 9:23 AM
 """
 import time
 from datetime import datetime as dt
+from datetime import timedelta
 
 from alpha_vantage.techindicators import TechIndicators
 
@@ -139,9 +140,9 @@ def wma_loop(equities_list):
         # handler for closed markets; will freeze entire algo and start again when market is open
         print("Markets closed at:", api.get_clock().next_close, "Algo is inactive for next: ", \
               (api.get_clock().next_open - api.get_clock().timestamp).seconds + \
-              (datetime.timedelta(seconds=60).seconds), "s")
+              (timedelta(seconds=60).seconds), "s")
         time.sleep((api.get_clock().next_open - api.get_clock().timestamp).seconds + \
-                   (datetime.timedelta(seconds=60).seconds))
+                   (timedelta(seconds=60).seconds))
 
 
 # this is for direct testing

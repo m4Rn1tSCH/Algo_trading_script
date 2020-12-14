@@ -35,8 +35,7 @@ def wma_loop(equities_list):
 # outer infinite loop will keep running
     while True:
         # inner loop will check markets for availability
-        while api.get_clock().timestamp < api.get_clock().next_close and \
-                api.get_clock().timestamp > api.get_clock().next_open:
+        while api.get_clock().is_open:
             # iteration start
             for stock_symbol in equities_list:
                 '''endless loop for buying and selling;sleep time at the end and also after each stock

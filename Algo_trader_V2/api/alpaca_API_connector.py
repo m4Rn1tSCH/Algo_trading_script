@@ -73,6 +73,7 @@ def list_orders():
 # Places a limit order
 # api.submit_order('AAPL', 1, 'buy', 'limit', 'gtc', 170.50)
 
+
 def get_acc_profit():
 
     """
@@ -86,6 +87,16 @@ def get_acc_profit():
     balance_change = float(account.equity) - float(account.last_equity)
     print('Today\'s portfolio balance change: $ {}'.format(balance_change))
     return
+
+
+def nasdaq_equities():
+
+    # Get a list of all active assets.
+    active_assets = api.list_assets(status='active')
+
+    # Filter the assets down to just those on NASDAQ.
+    nasdaq_assets = [a for a in active_assets if a.exchange == 'NASDAQ']
+    print(nasdaq_assets)
 
 
 if __name__ == '__main__':

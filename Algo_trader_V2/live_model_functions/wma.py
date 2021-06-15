@@ -10,9 +10,9 @@ from datetime import timedelta
 
 from alpha_vantage.techindicators import TechIndicators
 
-from Algo_trader_V1.api.alpaca_API_connector import api
-from Algo_trader_V1.api.alpaca_API_connector import portfolio_overview
-from Algo_trader_V1.live_model_functions.AV_get_intraday_stock_no_mtplt import pull_intraday_data, submit_order
+from Algo_trader_V2.api.alpaca_API_connector import api
+from Algo_trader_V2.api.alpaca_API_connector import portfolio_overview
+from Algo_trader_V2.live_model_functions.AV_get_intraday_stock_no_mtplt import pull_intraday_data, submit_order
 
 
 # loop based on the WEIGHTED MOVING AVERAGE
@@ -124,28 +124,20 @@ def wma_loop(equities_list):
                 print("Break time of 60s before check of next stock to avoid Alpha Vantage API overload")
                 # break after each iterator element
                 time.sleep(60)
-                # clear variables
-                del last_price
-                del mean_price
-                del actual_price
-                del portfolio
-                del wma_50
-                del wma_200
-                del key_list
-                del key_list_2
 
             # time in seconds
             time.sleep(17280)
         # handler for closed markets; will freeze entire algo and start again when market is open
-        print("Markets closed at:", api.get_clock().next_close, "Algo is inactive for next: ", \
-              (api.get_clock().next_open - api.get_clock().timestamp).seconds + \
+        print("Markets closed at:", api.get_clock().next_close, "Algo is inactive for next: ",
+              (api.get_clock().next_open - api.get_clock().timestamp).seconds +
               (timedelta(seconds=60).seconds), "s")
-        time.sleep((api.get_clock().next_open - api.get_clock().timestamp).seconds + \
+        time.sleep((api.get_clock().next_open - api.get_clock().timestamp).seconds +
                    (timedelta(seconds=60).seconds))
 
 
 # this is for direct testing
 if __name__ == '__main__':
+
     print("TEST RUN;\ninvoked directly; executing script...")
     stock_list_wma = ['AAPL', 'TSLA', 'GOOG', 'NVDA']
     wma_loop(equities_list=stock_list_wma)

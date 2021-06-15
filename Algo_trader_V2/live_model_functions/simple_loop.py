@@ -6,8 +6,8 @@ Created on 9/27/2020; 9:24 AM
 """
 import time
 
-from Algo_trader_V1.api.alpaca_API_connector import portfolio_overview
-from Algo_trader_V1.live_model_functions.AV_get_intraday_stock import pull_intraday_data, submit_order
+from Algo_trader_V2.api.alpaca_API_connector import portfolio_overview
+from Algo_trader_V2.live_model_functions.AV_get_intraday_stock import pull_intraday_data, submit_order
 
 
 # time loop for trading logic

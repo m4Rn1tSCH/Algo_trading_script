@@ -1,22 +1,19 @@
 """
 This module connects to the Alpha Vantage API and allows data queries
+
 IMPORTANT LIMIT AV API 5 API requests per minute and 500 requests per day
+
 pull_data_adj = pulls data in intervals of days or higher
 pull_intraday_data = dataframes for minute intervals
-
 returns a dataframe
 """
 
 import pandas as pd
+from decouple import config
 from alpha_vantage.timeseries import TimeSeries
 
-from Algo_trader_V1.api.alpaca_API_connector import api
-from Algo_trader_V1.api.av_acc_config import AV_API_KEY
+from Algo_trader_V2.api.alpaca_API_connector import api
 
-
-# TODO
-# last price with changes
-# ts.get_quote_endpoint('AAPl')
 
 # pull stock data from Alpha Vantage; returned as tuple
 def pull_data_adj(symbol, outputsize, cadence, output_format):
@@ -28,13 +25,11 @@ def pull_data_adj(symbol, outputsize, cadence, output_format):
     cadence: 'daily' / 'weekly' / 'monthly'
     output_format: ['json', 'csv', 'pandas']
     """
-    ts = TimeSeries(key=AV_API_KEY, output_format=output_format,
+    ts = TimeSeries(key=config('AV_API_KEY'), output_format=output_format,
                     treat_info_as_error=True, indexing_type='date', proxy=None)
-    data = pd.DataFrame()
     try:
         if cadence == 'daily':
-            data, _ = ts.get_daily_adjusted(symbol=symbol,
-                                                outputsize=outputsize)
+            data, _ = ts.get_daily_adjusted(symbol=symbol, outputsize=outputsize)
         if cadence == 'weekly':
             data, _ = ts.get_weekly_adjusted(symbol=symbol)
         if cadence == 'monthly':
@@ -69,13 +64,10 @@ def pull_intraday_data(symbol, interval, outputsize, output_format):
     output_format: ['json', 'csv', 'pandas']
     plot_price: boolean; generate a plot with open price and trading volume
     """
-    ts = TimeSeries(key=AV_API_KEY, output_format=output_format,
+    ts = TimeSeries(key=config('AV_API_KEY'), output_format=output_format,
                     treat_info_as_error=True, indexing_type='date', proxy=None)
-    data = pd.DataFrame()
     try:
-        data, _ = ts.get_intraday(symbol=symbol,
-                                        interval=interval,
-                                        outputsize=outputsize)
+        data, _ = ts.get_intraday(symbol=symbol, interval=interval, outputsize=outputsize)
         data = data.reset_index(drop=False, inplace=False)
         data = data.rename(columns={"1. open": "open",
                                     "2. high": "high",
@@ -124,11 +116,8 @@ def get_asset_list(status, asset_class):
     list of asset in possession
     """
     try:
-        asset_list = api.list_assets(status=status,
-                        asset_class=asset_class
-                        )
+        asset_list = api.list_assets(status=status, asset_class=asset_class)
+        print(asset_list)
     except BaseException as f:
         print(f)
-    return asset_list
-
-
+    return

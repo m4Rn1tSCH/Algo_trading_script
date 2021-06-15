@@ -10,8 +10,7 @@ import matplotlib.pyplot as plt
 import pandas as pd
 from alpha_vantage.timeseries import TimeSeries
 
-from Algo_trader_V1.api.alpaca_API_connector import api
-from Algo_trader_V1.api.av_acc_config import AV_API_KEY
+from Algo_trader_V2.api.alpaca_API_connector import api
 
 
 # TODO

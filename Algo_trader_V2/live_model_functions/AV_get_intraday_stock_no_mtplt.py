@@ -28,27 +28,23 @@ def pull_data_adj(symbol, outputsize, cadence, output_format):
     """
     ts = TimeSeries(key='IH4EENERLUFUKJRW', output_format=output_format,
                     treat_info_as_error=True, indexing_type='date', proxy=None)
-    try:
-        if cadence == 'daily':
-            data, _ = ts.get_daily_adjusted(symbol=symbol, outputsize=outputsize)
-        if cadence == 'weekly':
-            data, _ = ts.get_weekly_adjusted(symbol=symbol)
-        if cadence == 'monthly':
-            data, _ = ts.get_monthly_adjusted(symbol=symbol)
-        # drop the date as index to use it
-        data = data.reset_index(drop=False, inplace=False)
-        # rename columns names for better handling
-        data = data.rename(columns={"1. open": "open",
-                                    "2. high": "high",
-                                    "3. low": "low",
-                                    "4. close": "close",
-                                    "5. adjusted close": "adjusted_close",
-                                    "6. volume": "volume",
-                                    "7. dividend amount": "dividend amount"},
-                                    inplace=False)
-
-    except BaseException as e:
-        print("<<<AV-API Problem!>>>", e)
+    if cadence == 'daily':
+        data, _ = ts.get_daily_adjusted(symbol=symbol, outputsize=outputsize)
+    if cadence == 'weekly':
+        data, _ = ts.get_weekly_adjusted(symbol=symbol)
+    if cadence == 'monthly':
+        data, _ = ts.get_monthly_adjusted(symbol=symbol)
+    # drop the date as index to use it
+    data = data.reset_index(drop=False, inplace=False)
+    # rename columns names for better handling
+    data = data.rename(columns={"1. open": "open",
+                                "2. high": "high",
+                                "3. low": "low",
+                                "4. close": "close",
+                                "5. adjusted close": "adjusted_close",
+                                "6. volume": "volume",
+                                "7. dividend amount": "dividend amount"},
+                                inplace=False)
     return data
 
 
@@ -56,8 +52,7 @@ def pull_data_adj(symbol, outputsize, cadence, output_format):
 def pull_intraday_data(symbol, interval, outputsize, output_format):
 
     """
-    DOCUMENTATION
-    get_intraday_data returns a tuple with the pandas df and a meta data dictionary.
+    Intraday_data returns a tuple with the pandas df and a meta data dictionary.
     The metadata has been dropped currently as it is not needed.
     symbol: pick abbreviation in letter strings 'XXXX'
     interval: ['1min', '5min', '15min', '30min', '60min']
@@ -67,17 +62,15 @@ def pull_intraday_data(symbol, interval, outputsize, output_format):
     """
     ts = TimeSeries(key='IH4EENERLUFUKJRW', output_format=output_format,
                     treat_info_as_error=True, indexing_type='date', proxy=None)
-    try:
-        data, _ = ts.get_intraday(symbol=symbol, interval=interval, outputsize=outputsize)
-        data = data.reset_index(drop=False, inplace=False)
-        data = data.rename(columns={"1. open": "open",
-                                    "2. high": "high",
-                                    "3. low": "low",
-                                    "4. close": "close",
-                                    "5. volume": "volume"},
-                                    inplace=False)
-    except BaseException as e:
-        print("<<<AV-API Problem>>>!", e)
+    data, _ = ts.get_intraday(symbol=symbol, interval=interval, outputsize=outputsize)
+    data = data.reset_index(drop=False, inplace=False)
+    data = data.rename(columns={"1. open": "open",
+                                "2. high": "high",
+                                "3. low": "low",
+                                "4. close": "close",
+                                "5. volume": "volume"},
+                                inplace=False)
+
     return data
 
 
@@ -89,13 +82,8 @@ def av_intraday(symbol):
     ts = TimeSeries(key='IH4EENERLUFUKJRW', output_format='pandas', treat_info_as_error=True, indexing_type='date',
                     proxy=None)
     data, meta_data = ts.get_intraday(symbol=symbol, interval='1min', outputsize='full')
-    data = data.rename(columns={"1. open": "Open",
-                                "2. high": "High",
-                                "3. low": "Low",
-                                "4. close": "Close",
-                                "5. volume": "Volume"},
-                       inplace=False)
-    return data
+
+    return data, meta_data
 
 
 def av_daily_adj(symbol):
@@ -106,7 +94,8 @@ def av_daily_adj(symbol):
     ts = TimeSeries(key='IH4EENERLUFUKJRW', output_format='pandas', treat_info_as_error=True, indexing_type='date',
                     proxy=None)
     data, meta_data = ts.get_daily_adjusted(symbol=symbol, interval='1min', outputsize='full')
-    return data
+
+    return data, meta_data
 
 
 def submit_order(symbol, qty, side, order_type, time_in_force, limit_price):
@@ -115,7 +104,7 @@ def submit_order(symbol, qty, side, order_type, time_in_force, limit_price):
      :param symbol: str; Abbr in 'XXX',
      :param qty: int,
      :param side: 'buy' / 'sell',
-     :param type: 'limit',
+     :param order_type: 'limit',
      :param time_in_force: 'gtc' / 'day',
      :param limit_price: Any = fl32 (with or without ''),
      :param stop_price: LIMIT ORDERS DO NOT REQUIRE A STOP PRICE

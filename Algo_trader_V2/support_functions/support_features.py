@@ -6,7 +6,7 @@ Created on Sat April 22 10:26:42 2020
 """
 from datetime import datetime as dt
 import numpy as np
-
+import pandas as pd
 
 def pred_feat(df):
     """
@@ -37,13 +37,13 @@ def pred_feat(df):
             df = df.drop(columns='date', axis=1)
             print("Column date dropped")
     except (TypeError, OSError, ValueError) as e:
-        print(f"Problem with conversion:{e}")
+        print(f"Problem with conversion: {e}")
 
     # typically engineered features based on lagging metrics
     # mean + stdev of past 3d/7d/30d/ + rolling volume
     df.reset_index(drop=True, inplace=True)
     # pick lag features to iterate through and calculate features
-    lag_features = ['open', 'high', 'low', 'close', 'volume']
+    lag_features = ['Open', 'High', 'Low', 'Close', 'Volume']
     # set up time frames; how many days/months back/forth
     t1 = 3
     t2 = 7
@@ -74,7 +74,7 @@ def pred_feat(df):
     # IF SCALING IS NEEDED:
     # the first two rows of lagging values have NaNs which need to be dropped
     # drop the first and second row since the indicators refer to previous non-existent days
-    # df = df.drop([0, 1])
+    df = df.drop([0, 1])
     df.reset_index(drop=True, inplace=True)
 
     # drop NaNs to allow prediction models
@@ -82,7 +82,7 @@ def pred_feat(df):
 
     return df
 
-# functions produces NaNs in the df again!
+# function produces NaNs in the df again!
 def trading_support_resistance(df, bin_width=30):
 
     """
@@ -110,10 +110,10 @@ def trading_support_resistance(df, bin_width=30):
     in_resistance = 0
 
     for x in range((bin_width - 1) + bin_width, len(df)):
-        df_section = df[x - bin_width:x + 1]
+        df_section = df[x - bin_width : x + 1]
 
-    support_level = min(df_section['open'])
-    resistance_level = max(df_section['open'])
+    support_level = min(df_section['Open'])
+    resistance_level = max(df_section['Open'])
     range_level = resistance_level - support_level
 
     df['res'][x] = resistance_level
@@ -123,10 +123,10 @@ def trading_support_resistance(df, bin_width=30):
     # allow a 20% buffer back into the mean zone of the price movement
     df['res_tol'][x] = resistance_level - 0.2 * range_level
 
-    if df['open'][x] >= df['res_tol'][x] and df['open'][x] <= df['res'][x]:
+    if df['Open'][x] >= df['res_tol'][x] and df['Open'][x] <= df['res'][x]:
         in_resistance += 1
         df['res_count'][x] = in_resistance
-    elif df['open'][x] <= df['sup_tol'][x] and df['open'][x] >= df['sup'][x]:
+    elif df['Open'][x] <= df['sup_tol'][x] and df['Open'][x] >= df['sup'][x]:
         in_support += 1
         df['sup_count'][x] = in_support
     else:

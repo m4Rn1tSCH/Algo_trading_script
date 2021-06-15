@@ -41,23 +41,26 @@ print('wrong_bars with', wrong_bars['AAPL'][0].t)
 #  The current date is printed
 #%%
 import pandas as pd
+from alpha_vantage.timeseries import TimeSeries
 from Algo_trader_V2.api.alpaca_API_connector import api
 from Algo_trader_V2.support_functions.support_features import pred_feat, trading_support_resistance
-from Algo_trader_V2.live_model_functions.AV_get_intraday_stock_no_mtplt import av_intraday, av_daily_adj,\
-    pull_intraday_data, pull_data_adj
+# from Algo_trader_V2.live_model_functions.AV_get_intraday_stock_no_mtplt import av_intraday, av_daily_adj,\
+#     pull_intraday_data, pull_data_adj
 ts = TimeSeries(key='IH4EENERLUFUKJRW', output_format='pandas', treat_info_as_error=True, indexing_type='date',
                 proxy=None)
-# data, meta_data = ts.get_daily_adjusted(symbol='NVDA', outputsize='full')
-# data = data.rename(columns={"1. open": "Open",
-#                             "2. high": "High",
-#                             "3. low": "Low",
-#                             "4. close": "Close",
-#                             "5. adjusted close": "Adj_Close",
-#                             "6. volume": "Volume",
-#                             "7. dividend amount": "Dividend_Amount",
-#                             "8. split coefficient": "Split_Coefficient"},
-#                    inplace=False)
-# # drop the date as index to use it
-# data = data.reset_index(drop=False, inplace=False)
-# processed_df = pred_feat(df=data)
-data = pull_data_adj(symbol='NVDA', cadence='30min', outputsize='full', output_format='pandas')
+df, _ = ts.get_daily_adjusted(symbol='NVDA', outputsize='compact')
+# rename columns names for better handling
+df = df.rename(columns={"1. open": "Open",
+                            "2. high": "High",
+                            "3. low": "Low",
+                            "4. close": "Close",
+                            "5. adjusted close": "Adjusted_close",
+                            "6. volume": "Volume",
+                            "7. dividend amount": "Dividend_amount",
+                            "8. split coefficient": "Split_coefficient"},
+                   inplace=False)
+df = df.drop(columns=['Adjusted_close', 'Dividend_amount', 'Split_coefficient'])
+df.reset_index(drop=False, inplace=True)
+processed_df = pred_feat(df=df)
+print(processed_df.head())
+trading_support_resistance(df=processed_df, bin_width=30)

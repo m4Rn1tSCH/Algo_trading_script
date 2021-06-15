@@ -214,12 +214,9 @@ def pipeline_reg(label_col, df, pca_plot=False):
     print("Original shape: {}".format(str(X_train_scaled.shape)))
     print("Reduced shape: {}".format(str(X_train_pca.shape)))
 
-
     if pca_plot:
-
         '''
                     Plotting of PCA/ Cluster Pairs
-
         '''
         #Kmeans clusters to categorize groups WITH SCALED DATA
         #determine number of groups needed or desired for
@@ -276,10 +273,6 @@ def pipeline_rfr(label_col, df, pca_plot=False):
     """
     Pipeline  - SelectKBest and Random Forest Regressor
     REQUIRES FLOAT32 OR INT32 VALUES AS LABELS
-    Pipeline RFR; 2020-05-14 16:28:25
-    {'feature_selection__k': 3, 'reg__min_samples_split': 4, 'reg__n_estimators': 200}
-    Overall score: 0.9796
-    Best accuracy with parameters: 0.9823479626506231
     """
 
     model_features = df.drop(columns=label_col, axis=1, inplace=False)
@@ -381,12 +374,10 @@ def pipeline_rfr(label_col, df, pca_plot=False):
 
 def pipeline_trans_reg():
 
-    '''
-            Application of Transformed Linear Regression
-
+    """
+    Application of Transformed Linear Regression
     #n_quantiles needs to be smaller than the number of samples (standard is 1000)
-
-    '''
+    """
     transformer = QuantileTransformer(n_quantiles=750, output_distribution='normal')
     regressor = LinearRegression()
     regr = TransformedTargetRegressor(regressor=regressor,
@@ -405,11 +396,6 @@ def pipeline_mlp_reg(label_col, df, pca_plot=False):
 
     """
     Pipeline - SelectKBest and Multi-Layer Perceptron
-    ##########
-    Pipeline; 2020-05-18 20:56:27
-    {'clf__alpha': 0.0001, 'clf__max_iter': 2000, 'feature_selection__k': 4}
-    Overall score: 0.9976
-    Best accuracy with parameters: 0.9965730753986879
     """
 
     model_features = df.drop(columns=label_col, axis=1, inplace=False)

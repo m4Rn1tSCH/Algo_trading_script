@@ -10,7 +10,8 @@ from decouple import config
 # initialize the API connection
 api = tradeapi.REST(config('ALPACA_API_KEY'),
                     config('ALPACA_SECRET_KEY'),
-                    config('BASE_URL'))
+                    config('BASE_URL'),
+                    api_version='v2')
 
 # Get our account information.
 def acc_report():

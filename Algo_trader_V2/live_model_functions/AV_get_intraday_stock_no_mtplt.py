@@ -9,9 +9,10 @@ returns a dataframe
 """
 
 import pandas as pd
-from decouple import config
+# from decouple import config
+# import os
 from alpha_vantage.timeseries import TimeSeries
-
+from alpha_vantage.techindicators import TechIndicators
 from Algo_trader_V2.api.alpaca_API_connector import api
 
 
@@ -25,7 +26,7 @@ def pull_data_adj(symbol, outputsize, cadence, output_format):
     cadence: 'daily' / 'weekly' / 'monthly'
     output_format: ['json', 'csv', 'pandas']
     """
-    ts = TimeSeries(key=config('AV_API_KEY'), output_format=output_format,
+    ts = TimeSeries(key='IH4EENERLUFUKJRW', output_format=output_format,
                     treat_info_as_error=True, indexing_type='date', proxy=None)
     try:
         if cadence == 'daily':
@@ -47,9 +48,9 @@ def pull_data_adj(symbol, outputsize, cadence, output_format):
                                     inplace=False)
 
     except BaseException as e:
-        print("<<<AV-API Problem!>>>")
-        print(e)
+        print("<<<AV-API Problem!>>>", e)
     return data
+
 
 # pull intraday data; returned as tuple
 def pull_intraday_data(symbol, interval, outputsize, output_format):
@@ -64,7 +65,7 @@ def pull_intraday_data(symbol, interval, outputsize, output_format):
     output_format: ['json', 'csv', 'pandas']
     plot_price: boolean; generate a plot with open price and trading volume
     """
-    ts = TimeSeries(key=config('AV_API_KEY'), output_format=output_format,
+    ts = TimeSeries(key='IH4EENERLUFUKJRW', output_format=output_format,
                     treat_info_as_error=True, indexing_type='date', proxy=None)
     try:
         data, _ = ts.get_intraday(symbol=symbol, interval=interval, outputsize=outputsize)
@@ -76,22 +77,48 @@ def pull_intraday_data(symbol, interval, outputsize, output_format):
                                     "5. volume": "volume"},
                                     inplace=False)
     except BaseException as e:
-        print("<<<AV-API Problem>>>!")
-        print(e)
+        print("<<<AV-API Problem>>>!", e)
+    return data
+
+
+def av_intraday(symbol):
+    """
+    pull ohlcv object and convert to pandas df
+    :return: df with OHLCV columns
+    """
+    ts = TimeSeries(key='IH4EENERLUFUKJRW', output_format='pandas', treat_info_as_error=True, indexing_type='date',
+                    proxy=None)
+    data, meta_data = ts.get_intraday(symbol=symbol, interval='1min', outputsize='full')
+    data = data.rename(columns={"1. open": "Open",
+                                "2. high": "High",
+                                "3. low": "Low",
+                                "4. close": "Close",
+                                "5. volume": "Volume"},
+                       inplace=False)
+    return data
+
+
+def av_daily_adj(symbol):
+    """
+    pull daily adjusted
+    :return:
+    """
+    ts = TimeSeries(key='IH4EENERLUFUKJRW', output_format='pandas', treat_info_as_error=True, indexing_type='date',
+                    proxy=None)
+    data, meta_data = ts.get_daily_adjusted(symbol=symbol, interval='1min', outputsize='full')
     return data
 
 
 def submit_order(symbol, qty, side, order_type, time_in_force, limit_price):
 
     """
-     DOCUMENTATION
-     symbol: Abbr in 'XXX',
-     qty: int,
-     side: 'buy' / 'sell',
-     type: 'limit',
-     time_in_force: 'gtc' / 'day',
-     limit_price: Any = fl32 (with or without ''),
-     stop_price: LIMIT ORDERS DO NOT REQUIRE A STOP PRICE
+     :param symbol: str; Abbr in 'XXX',
+     :param qty: int,
+     :param side: 'buy' / 'sell',
+     :param type: 'limit',
+     :param time_in_force: 'gtc' / 'day',
+     :param limit_price: Any = fl32 (with or without ''),
+     :param stop_price: LIMIT ORDERS DO NOT REQUIRE A STOP PRICE
      """
     try:
         api.submit_order(symbol=symbol,

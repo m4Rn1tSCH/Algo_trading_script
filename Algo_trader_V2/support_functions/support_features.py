@@ -5,7 +5,6 @@ Created on Sat April 22 10:26:42 2020
 @author: bill-
 """
 from datetime import datetime as dt
-
 import numpy as np
 
 
@@ -87,15 +86,16 @@ def pred_feat(df):
 def trading_support_resistance(df, bin_width=30):
 
     """
-    create empty indicator columns and add values as the data evolves
-    sup_tol : supportive tolerance
-    res_tol : resistance tolerance
-    sup_count : support count
-    res_count : resistance count
-    sup : support
-    res : resistance
-    positions : positions open
-    signal : signals found
+    Create indicator columns and add values
+    :param sup_tol: supportive tolerance
+    :param res_tol: resistance tolerance
+    :param sup_count : support count
+    :param res_count : resistance count
+    :param sup : support
+    :param res : resistance
+    :param positions : positions open
+    :param signal : signals found
+    :return dataframe with columns added:
     """
 
     df['sup_tol'] = pd.Series(np.zeros(len(df)))

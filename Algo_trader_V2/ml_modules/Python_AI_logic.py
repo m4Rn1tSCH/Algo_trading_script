@@ -464,18 +464,14 @@ def pipeline_mlp_reg(label_col, df, pca_plot=False):
         ax[1].scatter(X_test_pca[:, 0], X_test_pca[:, 1], c=test_clusters.labels_)
         ax[1].set_title('Plotted Principal Components of TEST DATA', style='oblique')
         ax[1].legend(test_clusters.l1abels_)
-    # principal components of bank panel has better results than card panel with clearer borders
-    else:
-        pass
 
     #Create pipeline with feature selector and classifier
-    #replace with classifier or regressor
     #learning_rate = 'adaptive'; when solver='sgd'
     pipe = Pipeline([
-        ('feature_selection', SelectKBest(score_func = chi2)),
+        ('feature_selection', SelectKBest(score_func=chi2)),
         ('clf', MLPRegressor(activation='relu',
-                              solver='lbfgs',
-                              learning_rate='constant'))])
+                             solver='lbfgs',
+                             learning_rate='constant'))])
 
     #Create a parameter grid
     #parameter grids provide the values for the models to try
@@ -483,29 +479,27 @@ def pipeline_mlp_reg(label_col, df, pca_plot=False):
     #Parameter explanation
     #   C: penalty parameter
     #   gamma: [standard 'auto' = 1/n_feat], kernel coefficient
-    #
     params = {
-        'feature_selection__k':[4, 5, 6, 7],
-        'clf__max_iter':[1500, 2000],
-        'clf__alpha':[0.0001, 0.001]}
+        'feature_selection__k': [10, 20, 30, 35],
+        'clf__max_iter': [1500, 2000, 2500, 3000],
+        'clf__alpha': [0.0001, 0.001, 0.01, 0.1]}
 
     #Initialize the grid search object
     grid_search_mlp_reg = GridSearchCV(pipe, param_grid = params)
 
     #Fit it to the data and print the best value combination
     print(f"Pipeline; {dt.today()}")
-    print(grid_search_mlp_reg.fit(X_train, y_train).best_params_)
-    print("Overall score: %.4f" %(grid_search_mlp_reg.score(X_test, y_test)))
+    print(grid_search_mlp_reg.fit(X_train_scaled, y_train).best_params_)
+    print("Overall score: %.4f" % (grid_search_mlp_reg.score(X_test_scaled, y_test)))
     print(f"Best accuracy with parameters: {grid_search_mlp_reg.best_score_}")
     return grid_search_mlp_reg
 
+
 def pipeline_mlp(label_col, df, pca_plot=False):
 
-    '''
+    """
     Pipeline - SelectKBest and Multi-Layer Perceptron
-    ##########
-
-    '''
+    """
 
     model_features = df.drop(columns=label_col, axis=1, inplace=False)
     model_label = df[label_col]
@@ -581,7 +575,7 @@ def pipeline_mlp(label_col, df, pca_plot=False):
     #replace with classifier or regressor
     #learning_rate = 'adaptive'; when solver='sgd'
     pipe = Pipeline([
-        ('feature_selection', SelectKBest(score_func = chi2)),
+        ('feature_selection', SelectKBest(score_func=chi2)),
         ('clf', MLPClassifier(activation='relu',
                               solver='lbfgs',
                               learning_rate='constant'))])

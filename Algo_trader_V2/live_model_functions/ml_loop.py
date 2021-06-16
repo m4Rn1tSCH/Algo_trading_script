@@ -28,8 +28,8 @@ df.reset_index(drop=False, inplace=True)
 processed_df = pred_feat(df=df)
 print(processed_df.head())
 
-# apply regression for stock price
-# TODO: datatype of label to float32
-pipeline_mlp_reg(label_col='Close', df=df, pca_plot=False)
+# regression of stock close price
+processed_df['Close'].astype('float32')
+pipeline_mlp_reg(label_col='Close', df=processed_df, pca_plot=False)
 
 # apply RNN for stock price prediction

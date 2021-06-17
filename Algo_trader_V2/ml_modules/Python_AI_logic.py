@@ -6,12 +6,11 @@ Created on 4/24/2020 5:25 PM
 @author: bill-
 """
 # packages
+import numpy as np
 import pandas as pd
 
-pd.set_option('display.width', 1000)
 from datetime import datetime as dt
 import matplotlib.pyplot as plt
-import pickle
 
 from sklearn.feature_selection import SelectKBest, chi2, f_classif, RFECV
 from sklearn.linear_model import LogisticRegression, LinearRegression, SGDRegressor
@@ -26,17 +25,17 @@ from sklearn.compose import TransformedTargetRegressor
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.neural_network import MLPClassifier, MLPRegressor
 
-'''
+"""
 This module contains the AI/ML packages to take preprocessed data, find informative features
 and facilitate their prediction
 1.) split data
 2.) apply standard scaler, minmax scaler and principal component analysis
 3.) OPTIONAL plot the PCA 
 4.) feed test and training data to pipeline
-'''
+"""
 
-'''
-            Setting up the pipeline
+"""
+SETTING UP THE PIPELINE
 
 SelectKBest picks features based on their f-value to
 find the features that can optimally predict the labels
@@ -44,28 +43,13 @@ F_CLASSIFIER;FOR CLASSIFICATION TASKS determines features based on
 the f-values between features & labels;
 Chi2: for regression tasks; requires non-neg values
 other functions: mutual_info_classif; chi2, f_regression; mutual_info_regression
-'''
-# for tests only
-# df = intra_df
-# label_col = 'open'
-# Create pipeline with feature selector and regressor/classifier
+"""
 
-#TODO
-# set up fitting with scaled values as well
+
 def pipeline_knn(df, pca_plot=False):
-
     """
     Pipeline - SelectKBest and K Nearest Neighbor
-    Pipeline KNN; 2020-05-14 16:35:40
-    {'clf__n_neighbors': 7, 'feature_selection__k': 1}
-    Best accuracy with parameters: 0.6242857142857143
-    GridSearchCV(cv=None, error_score=nan,
-             estimator=Pipeline(memory=None,
-                                steps=[('feature_selection',
-                                        SelectKBest(k=10,
-                                        score_func=chi2)),
     """
-
     model_features = df.drop(columns=label_col, axis=1, inplace=False)
     model_label = df[label_col]
 
@@ -90,10 +74,10 @@ def pipeline_knn(df, pca_plot=False):
 
 
     # create a validation set from the training set
-    print(f"Shape of the split training data set X_train:{X_train.shape}")
-    print(f"Shape of the split training data set X_test: {X_test.shape}")
-    print(f"Shape of the split training data set y_train: {y_train.shape}")
-    print(f"Shape of the split training data set y_test: {y_test.shape}")
+    print(f"Shape of X_train:{X_train.shape}")
+    print(f"Shape of X_test: {X_test.shape}")
+    print(f"Shape of y_train: {y_train.shape}")
+    print(f"Shape of y_test: {y_test.shape}")
 
     scaler = StandardScaler(copy=True, with_mean=True, with_std=True).fit(X_train)
     X_train_scaled = scaler.transform(X_train)
@@ -112,11 +96,9 @@ def pipeline_knn(df, pca_plot=False):
     print("Original shape: {}".format(str(X_train_scaled.shape)))
     print("Reduced shape: {}".format(str(X_train_pca.shape)))
 
-
     if pca_plot:
         '''
-                    Plotting of PCA/ Cluster Pairs
-
+        Plotting of PCA/ Cluster Pairs
         '''
         #Kmeans clusters to categorize groups WITH SCALED DATA
         #determine number of groups needed or desired for
@@ -129,10 +111,10 @@ def pipeline_knn(df, pca_plot=False):
         fig, ax = plt.subplots(nrows=2, ncols=1, figsize=(12, 10), dpi=600,squeeze=False)
         #styles for title: normal; italic; oblique
         ax[0].scatter(X_train_pca[:, 0], X_train_pca[:, 1], c=train_clusters.labels_)
-        ax[0].set_title('Plotted Principal Components of TRAINING DATA', style='oblique')
+        ax[0].set_title('Principal Components of TRAINING DATA', style='oblique')
         ax[0].legend(train_clusters.labels_)
         ax[1].scatter(X_test_pca[:, 0], X_test_pca[:, 1], c=test_clusters.labels_)
-        ax[1].set_title('Plotted Principal Components of TEST DATA', style='oblique')
+        ax[1].set_title('Principal Components of TEST DATA', style='oblique')
         ax[1].legend(test_clusters.l1abels_)
 
     else:
@@ -216,7 +198,7 @@ def pipeline_reg(label_col, df, pca_plot=False):
 
     if pca_plot:
         '''
-                    Plotting of PCA/ Cluster Pairs
+        Plotting of PCA/ Cluster Pairs
         '''
         #Kmeans clusters to categorize groups WITH SCALED DATA
         #determine number of groups needed or desired for
@@ -229,10 +211,10 @@ def pipeline_reg(label_col, df, pca_plot=False):
         fig, ax = plt.subplots(nrows=2, ncols=1, figsize=(12, 10), dpi=600,squeeze=False)
         #styles for title: normal; italic; oblique
         ax[0].scatter(X_train_pca[:, 0], X_train_pca[:, 1], c=train_clusters.labels_)
-        ax[0].set_title('Plotted Principal Components of TRAINING DATA', style='oblique')
+        ax[0].set_title('Principal Components of TRAINING DATA', style='oblique')
         ax[0].legend(train_clusters.labels_)
         ax[1].scatter(X_test_pca[:, 0], X_test_pca[:, 1], c=test_clusters.labels_)
-        ax[1].set_title('Plotted Principal Components of TEST DATA', style='oblique')
+        ax[1].set_title('Principal Components of TEST DATA', style='oblique')
         ax[1].legend(test_clusters.l1abels_)
     else:
         pass
@@ -266,9 +248,6 @@ def pipeline_reg(label_col, df, pca_plot=False):
     return grid_search_svr
 
 
-#TODO
-# set up fitting with scaled values
-
 def pipeline_rfr(label_col, df, pca_plot=False):
     """
     Pipeline  - SelectKBest and Random Forest Regressor
@@ -298,10 +277,10 @@ def pipeline_rfr(label_col, df, pca_plot=False):
                                                         test_size=0.4)
 
     # create a validation set from the training set
-    print(f"Shape of the split training data set X_train:{X_train.shape}")
-    print(f"Shape of the split training data set X_test: {X_test.shape}")
-    print(f"Shape of the split training data set y_train: {y_train.shape}")
-    print(f"Shape of the split training data set y_test: {y_test.shape}")
+    print(f"Shape of X_train:{X_train.shape}")
+    print(f"Shape of X_test: {X_test.shape}")
+    print(f"Shape of y_train: {y_train.shape}")
+    print(f"Shape of y_test: {y_test.shape}")
 
     scaler = StandardScaler(copy=True, with_mean=True, with_std=True).fit(X_train)
     X_train_scaled = scaler.transform(X_train)
@@ -323,8 +302,7 @@ def pipeline_rfr(label_col, df, pca_plot=False):
 
     if pca_plot:
         '''
-                    Plotting of PCA/ Cluster Pairs
-
+        Plotting of PCA/ Cluster Pairs
         '''
         #Kmeans clusters to categorize groups WITH SCALED DATA
         #determine number of groups needed or desired for
@@ -337,10 +315,10 @@ def pipeline_rfr(label_col, df, pca_plot=False):
         fig, ax = plt.subplots(nrows=2, ncols=1, figsize=(12, 10), dpi=600,squeeze=False)
         #styles for title: normal; italic; oblique
         ax[0].scatter(X_train_pca[:, 0], X_train_pca[:, 1], c=train_clusters.labels_)
-        ax[0].set_title('Plotted Principal Components of TRAINING DATA', style='oblique')
+        ax[0].set_title('Principal Components of TRAINING DATA', style='oblique')
         ax[0].legend(train_clusters.labels_)
         ax[1].scatter(X_test_pca[:, 0], X_test_pca[:, 1], c=test_clusters.labels_)
-        ax[1].set_title('Plotted Principal Components of TEST DATA', style='oblique')
+        ax[1].set_title('Principal Components of TEST DATA', style='oblique')
         ax[1].legend(test_clusters.l1abels_)
     #principal components of bank panel has better results than card panel with clearer borders
     else:
@@ -373,19 +351,17 @@ def pipeline_rfr(label_col, df, pca_plot=False):
 
 
 def pipeline_trans_reg():
-
     """
     Application of Transformed Linear Regression
     #n_quantiles needs to be smaller than the number of samples (standard is 1000)
     """
     transformer = QuantileTransformer(n_quantiles=750, output_distribution='normal')
     regressor = LinearRegression()
-    regr = TransformedTargetRegressor(regressor=regressor,
-                                       transformer=transformer)
+    regr = TransformedTargetRegressor(regressor=regressor, transformer=transformer)
 
     regr.fit(X_train, y_train)
 
-    TransformedTargetRegressor(...)
+    #TransformedTargetRegressor
     print('q-t R2-score: {0:.3f}'.format(regr.score(X_test, y_test)))
 
     raw_target_regr = LinearRegression().fit(X_train, y_train)
@@ -418,13 +394,13 @@ def pipeline_mlp_reg(label_col, df, pca_plot=False):
     X_train, X_test, y_train, y_test = train_test_split(model_features,
                                                         model_label,
                                                         shuffle=True,
-                                                        test_size=0.4)
+                                                        test_size=0.5)
 
     # create a validation set from the training set
-    print(f"Shape of the split training data set X_train:{X_train.shape}")
-    print(f"Shape of the split training data set X_test: {X_test.shape}")
-    print(f"Shape of the split training data set y_train: {y_train.shape}")
-    print(f"Shape of the split training data set y_test: {y_test.shape}")
+    print(f"Shape of X_train:{X_train.shape}")
+    print(f"Shape of X_test: {X_test.shape}")
+    print(f"Shape of y_train: {y_train.shape}")
+    print(f"Shape of y_test: {y_test.shape}")
 
     scaler = StandardScaler(copy=True, with_mean=True, with_std=True).fit(X_train)
     X_train_scaled = scaler.transform(X_train)
@@ -433,8 +409,7 @@ def pipeline_mlp_reg(label_col, df, pca_plot=False):
     X_test_scaled = scaler.transform(X_test)
 
     # Principal Component Reduction
-    # keep the most important features of the data
-    pca = PCA(n_components=int(len(df.columns) / 2))
+    pca = PCA(n_components=0.95)
     # fit PCA model to breast cancer data
     pca.fit(X_train_scaled)
     # transform data onto the first two principal components
@@ -445,8 +420,7 @@ def pipeline_mlp_reg(label_col, df, pca_plot=False):
 
     if pca_plot:
         '''
-                    Plotting of PCA/ Cluster Pairs
-
+        Plotting of PCA/ Cluster Pairs
         '''
         # Kmeans clusters to categorize groups WITH SCALED DATA
         # determine number of groups needed or desired for
@@ -459,19 +433,21 @@ def pipeline_mlp_reg(label_col, df, pca_plot=False):
         fig, ax = plt.subplots(nrows=2, ncols=1, figsize=(12, 10), dpi=600, squeeze=False)
         # styles for title: normal; italic; oblique
         ax[0].scatter(X_train_pca[:, 0], X_train_pca[:, 1], c=train_clusters.labels_)
-        ax[0].set_title('Plotted Principal Components of TRAINING DATA', style='oblique')
+        ax[0].set_title('Principal Components of TRAINING DATA', style='oblique')
         ax[0].legend(train_clusters.labels_)
         ax[1].scatter(X_test_pca[:, 0], X_test_pca[:, 1], c=test_clusters.labels_)
-        ax[1].set_title('Plotted Principal Components of TEST DATA', style='oblique')
+        ax[1].set_title('Principal Components of TEST DATA', style='oblique')
         ax[1].legend(test_clusters.l1abels_)
 
     #Create pipeline with feature selector and classifier
+    # chi2 only accepts non negative values
     #learning_rate = 'adaptive'; when solver='sgd'
     pipe = Pipeline([
-        ('feature_selection', SelectKBest(score_func=chi2)),
-        ('clf', MLPRegressor(activation='relu',
-                             solver='lbfgs',
-                             learning_rate='constant'))])
+        ('feature_selection', SelectKBest(score_func=f_classif)),
+        ('reg', MLPRegressor(activation='relu',
+                             solver='sgd',
+                             learning_rate='adaptive',
+                             random_state=47))])
 
     #Create a parameter grid
     #parameter grids provide the values for the models to try
@@ -481,16 +457,16 @@ def pipeline_mlp_reg(label_col, df, pca_plot=False):
     #   gamma: [standard 'auto' = 1/n_feat], kernel coefficient
     params = {
         'feature_selection__k': [10, 20, 30, 35],
-        'clf__max_iter': [1500, 2000, 2500, 3000],
-        'clf__alpha': [0.0001, 0.001, 0.01, 0.1]}
+        'reg__max_iter': [1500, 2000, 2500, 3000],
+        'reg__alpha': [0.0001, 0.001, 0.01, 0.1]}
 
     #Initialize the grid search object
     grid_search_mlp_reg = GridSearchCV(pipe, param_grid = params)
 
     #Fit it to the data and print the best value combination
     print(f"Pipeline; {dt.today()}")
-    print(grid_search_mlp_reg.fit(X_train_scaled, y_train).best_params_)
-    print("Overall score: %.4f" % (grid_search_mlp_reg.score(X_test_scaled, y_test)))
+    print(grid_search_mlp_reg.fit(X_train, y_train).best_params_)
+    print("Overall score: %.4f" % (grid_search_mlp_reg.score(X_test, y_test)))
     print(f"Best accuracy with parameters: {grid_search_mlp_reg.best_score_}")
     return grid_search_mlp_reg
 
@@ -549,7 +525,6 @@ def pipeline_mlp(label_col, df, pca_plot=False):
     if pca_plot:
         '''
                     Plotting of PCA/ Cluster Pairs
-
         '''
         # Kmeans clusters to categorize groups WITH SCALED DATA
         # determine number of groups needed or desired for
@@ -562,10 +537,10 @@ def pipeline_mlp(label_col, df, pca_plot=False):
         fig, ax = plt.subplots(nrows=2, ncols=1, figsize=(12, 10), dpi=600, squeeze=False)
         # styles for title: normal; italic; oblique
         ax[0].scatter(X_train_pca[:, 0], X_train_pca[:, 1], c=train_clusters.labels_)
-        ax[0].set_title('Plotted Principal Components of TRAINING DATA', style='oblique')
+        ax[0].set_title('Principal Components of TRAINING DATA', style='oblique')
         ax[0].legend(train_clusters.labels_)
         ax[1].scatter(X_test_pca[:, 0], X_test_pca[:, 1], c=test_clusters.labels_)
-        ax[1].set_title('Plotted Principal Components of TEST DATA', style='oblique')
+        ax[1].set_title('Principal Components of TEST DATA', style='oblique')
         ax[1].legend(test_clusters.l1abels_)
     # principal components of bank panel has better results than card panel with clearer borders
     else:
@@ -650,7 +625,7 @@ def set_rfe_cross_val(pca_plot=False):
     # Principal Component Reduction
     # keep the most important features of the data
     pca = PCA(n_components=int(len(df.columns) / 2))
-    # fit PCA model to breast cancer data
+    # fit PCA model to data
     pca.fit(X_train_scaled)
     # transform data onto the first two principal components
     X_train_pca = pca.transform(X_train_scaled)
@@ -661,7 +636,6 @@ def set_rfe_cross_val(pca_plot=False):
     if pca_plot:
         '''
                     Plotting of PCA/ Cluster Pairs
-
         '''
         # Kmeans clusters to categorize groups WITH SCALED DATA
         # determine number of groups needed or desired for
@@ -674,10 +648,10 @@ def set_rfe_cross_val(pca_plot=False):
         fig, ax = plt.subplots(nrows=2, ncols=1, figsize=(12, 10), dpi=600,squeeze=False)
         # styles for title: normal; italic; oblique
         ax[0].scatter(X_train_pca[:, 0], X_train_pca[:, 1], c=train_clusters.labels_)
-        ax[0].set_title('Plotted Principal Components of TRAINING DATA', style='oblique')
+        ax[0].set_title('Principal Components of TRAINING DATA', style='oblique')
         ax[0].legend(train_clusters.labels_)
         ax[1].scatter(X_test_pca[:, 0], X_test_pca[:, 1], c=test_clusters.labels_)
-        ax[1].set_title('Plotted Principal Components of TEST DATA', style='oblique')
+        ax[1].set_title('Principal Components of TEST DATA', style='oblique')
         ax[1].legend(test_clusters.l1abels_)
 
     else:
@@ -732,34 +706,3 @@ def set_rfe_cross_val(pca_plot=False):
     plt.show()
 
     return rfecv_obj
-
-
-'''
-        Usage of a Pickle Model -Storage of a trained Model
-'''
-def store_pickle(model):
-    model_file = "gridsearch_model.sav"
-    with open(model_file, mode='wb') as m_f:
-        pickle.dump(model, m_f)
-    return model_file
-
-
-'''
-        Usage of a Pickle Model -Loading of a Pickle File
-
-model file can be opened either with FILE NAME
-open_pickle(model_file="gridsearch_model.sav")
-INTERNAL PARAMETER
-open_pickle(model_file=model_file)
-'''
-
-
-def open_pickle(model_file):
-    with open(model_file, mode='rb') as m_f:
-        grid_search = pickle.load(m_f)
-        result = grid_search.score(X_test, y_test)
-        print("Employed Estimator:", grid_search.get_params)
-        print("--------------------")
-        print("BEST PARAMETER COMBINATION:", grid_search.best_params_)
-        print("Training Accuracy Result: %.4f" % (result))
-        return 'grid_search parameters loaded'

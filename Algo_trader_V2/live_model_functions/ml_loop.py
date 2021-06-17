@@ -12,16 +12,12 @@ from Algo_trader_V2.ml_modules.Python_AI_logic import pipeline_mlp_reg
 
 ts = TimeSeries(key='IH4EENERLUFUKJRW', output_format='pandas', treat_info_as_error=True, indexing_type='date',
                 proxy=None)
-df, _ = ts.get_daily_adjusted(symbol='NVDA', outputsize='compact')
+df, _ = ts.get_daily_adjusted(symbol='NVDA', outputsize='full')
 # rename columns names for better handling
-df = df.rename(columns={"1. open": "Open",
-                            "2. high": "High",
-                            "3. low": "Low",
-                            "4. close": "Close",
-                            "5. adjusted close": "Adjusted_close",
-                            "6. volume": "Volume",
-                            "7. dividend amount": "Dividend_amount",
-                            "8. split coefficient": "Split_coefficient"},
+df = df.rename(columns={"1. open": "Open", "2. high": "High", "3. low": "Low",
+                        "4. close": "Close", "5. adjusted close": "Adjusted_close",
+                        "6. volume": "Volume", "7. dividend amount": "Dividend_amount",
+                        "8. split coefficient": "Split_coefficient"},
                inplace=False)
 df = df.drop(columns=['Adjusted_close', 'Dividend_amount', 'Split_coefficient'])
 df.reset_index(drop=False, inplace=True)

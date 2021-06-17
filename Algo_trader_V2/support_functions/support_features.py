@@ -74,7 +74,7 @@ def pred_feat(df):
     # IF SCALING IS NEEDED:
     # the first two rows of lagging values have NaNs which need to be dropped
     # drop the first and second row since the indicators refer to previous non-existent days
-    df = df.drop([0, 1])
+    # df = df.drop([0, 1])
     df.reset_index(drop=True, inplace=True)
 
     # drop NaNs to allow prediction models

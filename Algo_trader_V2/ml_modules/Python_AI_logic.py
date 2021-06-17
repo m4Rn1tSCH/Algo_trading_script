@@ -36,7 +36,6 @@ and facilitate their prediction
 
 """
 SETTING UP THE PIPELINE
-
 SelectKBest picks features based on their f-value to
 find the features that can optimally predict the labels
 F_CLASSIFIER;FOR CLASSIFICATION TASKS determines features based on
@@ -88,7 +87,7 @@ def pipeline_knn(df, pca_plot=False):
     # Principal Component Reduction
     # keep the most important features of the data
     pca = PCA(n_components=int(len(df.columns) / 2))
-    # fit PCA model to breast cancer data
+    # fit PCA model to  data
     pca.fit(X_train_scaled)
     # transform data onto the first two principal components
     X_train_pca = pca.transform(X_train_scaled)
@@ -146,7 +145,7 @@ def pipeline_knn(df, pca_plot=False):
 # set up fitting with scaled values as well
 def pipeline_reg(label_col, df, pca_plot=False):
     """
-    Pipeline - Logistic Regression and Support Vector Kernel
+    Pipeline - Logistic Regression and Support Vector Regression
     """
 
     model_features = df.drop(columns=label_col, axis=1, inplace=False)
@@ -188,7 +187,7 @@ def pipeline_reg(label_col, df, pca_plot=False):
     # Principal Component Reduction
     # keep the most important features of the data
     pca = PCA(n_components=int(len(df.columns) / 2))
-    # fit PCA model to breast cancer data
+    # fit PCA model to  data
     pca.fit(X_train_scaled)
     # transform data onto the first two principal components
     X_train_pca = pca.transform(X_train_scaled)
@@ -219,7 +218,7 @@ def pipeline_reg(label_col, df, pca_plot=False):
     else:
         pass
 
-    pipe = Pipeline([
+    pipe = Pipeline(steps=[
         ('feature_selection', SelectKBest(score_func=chi2)),
         ('reg', SVR(kernel='linear'))
     ])
@@ -291,7 +290,7 @@ def pipeline_rfr(label_col, df, pca_plot=False):
     # Principal Component Reduction
     # keep the most important features of the data
     pca = PCA(n_components=int(len(df.columns) / 2))
-    # fit PCA model to breast cancer data
+    # fit PCA model to  data
     pca.fit(X_train_scaled)
     # transform data onto the first two principal components
     X_train_pca = pca.transform(X_train_scaled)
@@ -410,7 +409,7 @@ def pipeline_mlp_reg(label_col, df, pca_plot=False):
 
     # Principal Component Reduction
     pca = PCA(n_components=0.95)
-    # fit PCA model to breast cancer data
+    # fit PCA model to data
     pca.fit(X_train_scaled)
     # transform data onto the first two principal components
     X_train_pca = pca.transform(X_train_scaled)
@@ -456,8 +455,8 @@ def pipeline_mlp_reg(label_col, df, pca_plot=False):
     #   C: penalty parameter
     #   gamma: [standard 'auto' = 1/n_feat], kernel coefficient
     params = {
-        'feature_selection__k': [10, 20, 30, 35],
-        'reg__max_iter': [1500, 2000, 2500, 3000],
+        'feature_selection__k': [5, 8, 10, 20, 30, 35],
+        'reg__max_iter': [1500, 2000, 2500, 3000, 4500],
         'reg__alpha': [0.0001, 0.001, 0.01, 0.1]}
 
     #Initialize the grid search object
@@ -513,8 +512,8 @@ def pipeline_mlp(label_col, df, pca_plot=False):
 
     # Principal Component Reduction
     # keep the most important features of the data
-    pca = PCA(n_components=int(len(df.columns) / 2))
-    # fit PCA model to breast cancer data
+    pca = PCA(n_components=0.95)
+    # fit PCA model to data
     pca.fit(X_train_scaled)
     # transform data onto the first two principal components
     X_train_pca = pca.transform(X_train_scaled)

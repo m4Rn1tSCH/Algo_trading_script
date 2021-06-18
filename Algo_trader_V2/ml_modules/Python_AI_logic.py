@@ -8,23 +8,23 @@ Created on 4/24/2020 5:25 PM
 # packages
 import numpy as np
 import pandas as pd
-
 from datetime import datetime as dt
 import matplotlib.pyplot as plt
 
+from sklearn.pipeline import Pipeline
+from sklearn.model_selection import GridSearchCV, train_test_split
 from sklearn.feature_selection import SelectKBest, chi2, f_classif, RFECV
+from sklearn.metrics import mean_squared_error
+
 from sklearn.linear_model import LogisticRegression, LinearRegression, SGDRegressor
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.svm import SVR
-from sklearn.pipeline import Pipeline
-from sklearn.model_selection import GridSearchCV, train_test_split
 from sklearn.cluster import KMeans
 from sklearn.preprocessing import StandardScaler, QuantileTransformer
 from sklearn.decomposition import PCA
 from sklearn.compose import TransformedTargetRegressor
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.neural_network import MLPClassifier, MLPRegressor
-
 """
 This module contains the AI/ML packages to take preprocessed data, find informative features
 and facilitate their prediction
@@ -107,7 +107,7 @@ def pipeline_knn(df, pca_plot=False):
         kmeans = KMeans(n_clusters=5, random_state=10)
         test_clusters = kmeans.fit(X_test_scaled)
 
-        fig, ax = plt.subplots(nrows=2, ncols=1, figsize=(12, 10), dpi=600,squeeze=False)
+        fig, ax = plt.subplots(nrows=2, ncols=1, figsize=(12, 10), dpi=600, squeeze=False)
         #styles for title: normal; italic; oblique
         ax[0].scatter(X_train_pca[:, 0], X_train_pca[:, 1], c=train_clusters.labels_)
         ax[0].set_title('Principal Components of TRAINING DATA', style='oblique')
@@ -207,7 +207,7 @@ def pipeline_reg(label_col, df, pca_plot=False):
         kmeans = KMeans(n_clusters=5, random_state=10)
         test_clusters = kmeans.fit(X_test_scaled)
 
-        fig, ax = plt.subplots(nrows=2, ncols=1, figsize=(12, 10), dpi=600,squeeze=False)
+        fig, ax = plt.subplots(nrows=2, ncols=1, figsize=(12, 10), dpi=600, squeeze=False)
         #styles for title: normal; italic; oblique
         ax[0].scatter(X_train_pca[:, 0], X_train_pca[:, 1], c=train_clusters.labels_)
         ax[0].set_title('Principal Components of TRAINING DATA', style='oblique')
@@ -311,7 +311,7 @@ def pipeline_rfr(label_col, df, pca_plot=False):
         kmeans = KMeans(n_clusters=5, random_state=10)
         test_clusters = kmeans.fit(X_test_scaled)
 
-        fig, ax = plt.subplots(nrows=2, ncols=1, figsize=(12, 10), dpi=600,squeeze=False)
+        fig, ax = plt.subplots(nrows=2, ncols=1, figsize=(12, 10), dpi=600, squeeze=False)
         #styles for title: normal; italic; oblique
         ax[0].scatter(X_train_pca[:, 0], X_train_pca[:, 1], c=train_clusters.labels_)
         ax[0].set_title('Principal Components of TRAINING DATA', style='oblique')
@@ -372,7 +372,6 @@ def pipeline_mlp_reg(label_col, df, pca_plot=False):
     """
     Pipeline - SelectKBest and Multi-Layer Perceptron
     """
-
     model_features = df.drop(columns=label_col, axis=1, inplace=False)
     model_label = df[label_col]
 
@@ -390,10 +389,8 @@ def pipeline_mlp_reg(label_col, df, pca_plot=False):
     else:
         print("datetime object still in df; scaling will fail")
 
-    X_train, X_test, y_train, y_test = train_test_split(model_features,
-                                                        model_label,
-                                                        shuffle=True,
-                                                        test_size=0.5)
+    X_train, X_test, y_train, y_test = train_test_split(model_features, model_label,
+                                                        shuffle=True, test_size=0.4)
 
     # create a validation set from the training set
     print(f"Shape of X_train:{X_train.shape}")
@@ -464,9 +461,9 @@ def pipeline_mlp_reg(label_col, df, pca_plot=False):
 
     #Fit it to the data and print the best value combination
     print(f"Pipeline; {dt.today()}")
-    print(grid_search_mlp_reg.fit(X_train, y_train).best_params_)
-    print("Overall score: %.4f" % (grid_search_mlp_reg.score(X_test, y_test)))
-    print(f"Best accuracy with parameters: {grid_search_mlp_reg.best_score_}")
+    print(grid_search_mlp_reg.fit(X_train_pca, y_train).best_params_)
+    print("Overall R2 score: %.4f" % (grid_search_mlp_reg.score(X_test_pca, y_test)))
+    print(f"Best R2 with parameters: {grid_search_mlp_reg.best_score_}")
     return grid_search_mlp_reg
 
 
@@ -511,7 +508,7 @@ def pipeline_mlp(label_col, df, pca_plot=False):
     X_test_scaled = scaler.transform(X_test)
 
     # Principal Component Reduction
-    # keep the most important features of the data
+    # keep the most important features of the data that cover XX% (95% here) of the variance
     pca = PCA(n_components=0.95)
     # fit PCA model to data
     pca.fit(X_train_scaled)
@@ -577,16 +574,17 @@ def pipeline_mlp(label_col, df, pca_plot=False):
     return grid_search_mlp
 
 
-def set_rfe_cross_val(pca_plot=False):
+def rfe_cross_val(df, label_col, pca_plot=False):
     """
+    :param df: pandas dataframe
+    :param label_col: column that is to be prediction
+    :param pca_plot: plot the reduced cluster of features
+    :return: recursive feature extraction object
         Application of Recursive Feature Extraction - Cross Validation
         IMPORTANT
         Accuracy: for classification problems
         Mean Squared Error(MSE); Root Mean Squared Error(RSME); R2 Score: for regression
     """
-    df = df
-    label_col = 'open'
-
     model_features = df.drop(columns=label_col, axis=1, inplace=False)
     model_label = df[label_col]
 
@@ -644,7 +642,7 @@ def set_rfe_cross_val(pca_plot=False):
         kmeans = KMeans(n_clusters=5, random_state=10)
         test_clusters = kmeans.fit(X_test_scaled)
 
-        fig, ax = plt.subplots(nrows=2, ncols=1, figsize=(12, 10), dpi=600,squeeze=False)
+        fig, ax = plt.subplots(nrows=2, ncols=1, figsize=(12, 10), dpi=600, squeeze=False)
         # styles for title: normal; italic; oblique
         ax[0].scatter(X_train_pca[:, 0], X_train_pca[:, 1], c=train_clusters.labels_)
         ax[0].set_title('Principal Components of TRAINING DATA', style='oblique')
@@ -684,14 +682,15 @@ def set_rfe_cross_val(pca_plot=False):
                   C=1.0,
                   epsilon=0.01)
 
-    # WORKS WITH LOGREG(pick r2), SGDRregressor(r2;rmse)
-    rfecv = RFECV(estimator=est_logreg,
+    # SCORING FIGURES: LOGREG(pick r2), SGDRregressor(r2;rmse)
+    rfecv = RFECV(estimator=est_sgd,
                   step=1,
-                  # cross_calidation determines if clustering scorers can be used or regression based!
+                  min_features_to_select=5,
+                  # cross_validation determines if clustering scorers can be used or regression based!
                   # needs to be aligned with estimator
-                  cv=None,
-                  scoring='completeness_score')
-    rfecv.fit(x, y)
+                  cv=5,
+                  scoring='mean_squared_error')
+    rfecv.fit(X_train, y_train)
 
     print("Optimal number of features: %d" % rfecv.n_features_)
     print('Selected features: %s' % list(x.columns[rfecv.support_]))
@@ -700,7 +699,7 @@ def set_rfe_cross_val(pca_plot=False):
     plt.figure(figsize=(10, 7))
     plt.suptitle(f"{RFECV.get_params}")
     plt.xlabel("Number of features selected")
-    plt.ylabel("Cross validation score (nb of correct classifications)")
+    plt.ylabel("Cross validation score (nb of correct predictions)")
     plt.plot(range(1, len(rfecv.grid_scores_) + 1), rfecv.grid_scores_)
     plt.show()
 

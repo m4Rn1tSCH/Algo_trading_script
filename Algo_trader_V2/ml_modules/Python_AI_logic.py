@@ -141,8 +141,6 @@ def pipeline_knn(df, pca_plot=False):
     return grid_search_knn
 
 
-#TODO
-# set up fitting with scaled values as well
 def pipeline_reg(label_col, df, pca_plot=False):
     """
     Pipeline - Logistic Regression and Support Vector Regression
@@ -187,7 +185,7 @@ def pipeline_reg(label_col, df, pca_plot=False):
     # Principal Component Reduction
     # keep the most important features of the data
     pca = PCA(n_components=int(len(df.columns) / 2))
-    # fit PCA model to  data
+    # fit PCA model to data
     pca.fit(X_train_scaled)
     # transform data onto the first two principal components
     X_train_pca = pca.transform(X_train_scaled)
@@ -222,7 +220,6 @@ def pipeline_reg(label_col, df, pca_plot=False):
         ('feature_selection', SelectKBest(score_func=chi2)),
         ('reg', SVR(kernel='linear'))
     ])
-
     # Create a parameter grid
     # C regularization parameter that is applied to all terms
     # to push down their individual impact and reduce overfitting
@@ -231,8 +228,8 @@ def pipeline_reg(label_col, df, pca_plot=False):
     # the more features picked the more prone the model is to overfitting
     # stricter C and e to counteract
     params = {
-        'feature_selection__k': [4, 6, 7, 8, 9],
-        'reg__C': [1.0, 0.1, 0.01, 0.001],
+        'feature_selection__k': [5, 8, 15, 20, 30],
+        'reg__C': [1.0, 0.1, 0.01, 0.001, 0.0001],
         'reg__epsilon': [0.30, 0.25, 0.15, 0.10],
     }
 
@@ -252,7 +249,6 @@ def pipeline_rfr(label_col, df, pca_plot=False):
     Pipeline  - SelectKBest and Random Forest Regressor
     REQUIRES FLOAT32 OR INT32 VALUES AS LABELS
     """
-
     model_features = df.drop(columns=label_col, axis=1, inplace=False)
     model_label = df[label_col]
 
@@ -274,7 +270,6 @@ def pipeline_rfr(label_col, df, pca_plot=False):
                                                         model_label,
                                                         shuffle=True,
                                                         test_size=0.4)
-
     # create a validation set from the training set
     print(f"Shape of X_train:{X_train.shape}")
     print(f"Shape of X_test: {X_test.shape}")
@@ -298,11 +293,10 @@ def pipeline_rfr(label_col, df, pca_plot=False):
     print("Original shape: {}".format(str(X_train_scaled.shape)))
     print("Reduced shape: {}".format(str(X_train_pca.shape)))
 
-
     if pca_plot:
-        '''
+        """
         Plotting of PCA/ Cluster Pairs
-        '''
+        """
         #Kmeans clusters to categorize groups WITH SCALED DATA
         #determine number of groups needed or desired for
         kmeans = KMeans(n_clusters=5, random_state=10)
@@ -415,9 +409,9 @@ def pipeline_mlp_reg(label_col, df, pca_plot=False):
     print("Reduced shape: {}".format(str(X_train_pca.shape)))
 
     if pca_plot:
-        '''
+        """
         Plotting of PCA/ Cluster Pairs
-        '''
+        """
         # Kmeans clusters to categorize groups WITH SCALED DATA
         # determine number of groups needed or desired for
         kmeans = KMeans(n_clusters=5, random_state=10)
@@ -569,7 +563,7 @@ def pipeline_mlp(label_col, df, pca_plot=False):
     #Fit it to the data and print the best value combination
     print(f"Pipeline; {dt.today()}")
     print(grid_search_mlp.fit(X_train, y_train).best_params_)
-    print("Overall score: %.4f" %(grid_search_mlp.score(X_test, y_test)))
+    print("Overall score: %.4f" % (grid_search_mlp.score(X_test, y_test)))
     print(f"Best accuracy with parameters: {grid_search_mlp.best_score_}")
     return grid_search_mlp
 
@@ -651,10 +645,7 @@ def rfe_cross_val(df, label_col, pca_plot=False):
         ax[1].set_title('Principal Components of TEST DATA', style='oblique')
         ax[1].legend(test_clusters.l1abels_)
 
-    else:
-        pass
-
-    # Use the Cross-Validation function of the RFE module
+    # Cross-Validation function of the RFE module
     # LOGISTIC REGRESSION
     est_logreg = LogisticRegression(max_iter=2000)
     # SGD REGRESSOR

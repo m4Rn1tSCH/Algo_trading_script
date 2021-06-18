@@ -8,8 +8,8 @@ import pandas as pd
 from alpha_vantage.timeseries import TimeSeries
 from Algo_trader_V2.api.alpaca_API_connector import api
 from Algo_trader_V2.support_functions.support_features import pred_feat, trading_support_resistance
-from Algo_trader_V2.ml_modules.Python_AI_logic import pipeline_mlp_reg, pipeline_rfr
-from Algo_trader_V2.ml_modules.Python_AI_logic import rfe_cross_val
+from Algo_trader_V2.ml_modules.Python_AI_logic import pipeline_mlp_reg, pipeline_reg
+
 
 ts = TimeSeries(key='IH4EENERLUFUKJRW', output_format='pandas', treat_info_as_error=True, indexing_type='date',
                 proxy=None)
@@ -28,5 +28,5 @@ print(processed_df.head())
 # regression of stock close price
 processed_df['Close'].astype('float32')
 pipeline_mlp_reg(label_col='Close', df=processed_df, pca_plot=False)
-rfe_cross_val(df=processed_df, label_col='Close', pca_plot=False)
+pipeline_reg(df=processed_df, label_col='Close', pca_plot=False)
 # apply RNN for stock price prediction

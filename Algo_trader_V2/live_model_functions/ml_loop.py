@@ -13,7 +13,8 @@ from Algo_trader_V2.ml_modules.Python_AI_logic import pipeline_mlp_reg, pipeline
 
 ts = TimeSeries(key='IH4EENERLUFUKJRW', output_format='pandas', treat_info_as_error=True, indexing_type='date',
                 proxy=None)
-df, _ = ts.get_daily_adjusted(symbol='NVDA', outputsize='full')
+# outputsize=full; all data or outputsize=compact; 100 rows
+df, _ = ts.get_daily_adjusted(symbol='NVDA', outputsize='compact')
 # rename columns names for better handling
 df = df.rename(columns={"1. open": "Open", "2. high": "High", "3. low": "Low",
                         "4. close": "Close", "5. adjusted close": "Adjusted_close",
@@ -27,6 +28,10 @@ print(processed_df.head())
 
 # regression of stock close price
 processed_df['Close'].astype('float32')
-pipeline_mlp_reg(label_col='Close', df=processed_df, pca_plot=False)
-pipeline_reg(df=processed_df, label_col='Close', pca_plot=False)
+# MLP works
+# pipeline_mlp_reg(label_col='Close', df=processed_df, pca_plot=False)
+# TODO: SVR gets stuck
+# pipeline_reg(label_col='Close', df=processed_df, pca_plot=False)
+# RFR
+pipeline_rfr(label_col='Close', df=processed_df, pca_plot=False)
 # apply RNN for stock price prediction

@@ -15,7 +15,7 @@ ts = TimeSeries(key='IH4EENERLUFUKJRW', output_format='pandas', treat_info_as_er
                 proxy=None)
 
 # outputsize=full; all data or outputsize=compact; 100 rows
-df, _ = ts.get_daily_adjusted(symbol='NVDA', outputsize='compact')
+df, _ = ts.get_daily_adjusted(symbol='NVDA', outputsize='full')
 # rename columns names for better handling
 df = df.rename(columns={"1. open": "Open", "2. high": "High", "3. low": "Low",
                         "4. close": "Close", "5. adjusted close": "Adjusted_close",

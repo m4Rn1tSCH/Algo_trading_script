@@ -371,7 +371,7 @@ def pipeline_trans_reg():
     return regr, raw_target_regr
 
 
-def pipeline_mlp_reg(label_col, df, pca_plot=False):
+def pipeline_mlp_reg(label_col, df, pca_plot=False, shuffle_data=False):
 
     """
     Pipeline - SelectKBest and Multi-Layer Perceptron

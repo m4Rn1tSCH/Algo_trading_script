@@ -13,8 +13,8 @@ import matplotlib.pyplot as plt
 
 from sklearn.pipeline import Pipeline
 from sklearn.model_selection import GridSearchCV, train_test_split
-from sklearn.feature_selection import SelectKBest, chi2, f_classif, RFECV
-from sklearn.metrics import mean_squared_error
+from sklearn.feature_selection import SelectKBest, chi2, f_classif, RFECV, f_regression
+from sklearn.metrics import mean_squared_error, r2_score, mean_absolute_error
 
 from sklearn.linear_model import LogisticRegression, LinearRegression, SGDRegressor
 from sklearn.neighbors import KNeighborsClassifier
@@ -68,7 +68,7 @@ def pipeline_knn(df, pca_plot=False):
 
     X_train, X_test, y_train, y_test = train_test_split(model_features,
                                                         model_label,
-                                                        shuffle=True,
+                                                        shuffle=shuffle_data,
                                                         test_size=0.4)
 
 
@@ -141,7 +141,7 @@ def pipeline_knn(df, pca_plot=False):
     return grid_search_knn
 
 
-def pipeline_reg(label_col, df, pca_plot=False):
+def pipeline_reg(label_col, df, pca_plot=False, shuffle_data=False):
     """
     Pipeline - Logistic Regression and Support Vector Regression
     """
@@ -165,7 +165,7 @@ def pipeline_reg(label_col, df, pca_plot=False):
 
     X_train, X_test, y_train, y_test = train_test_split(model_features,
                                                         model_label,
-                                                        shuffle=True,
+                                                        shuffle=shuffle_data,
                                                         test_size=0.4)
 
     # create a validation set from the training set
@@ -217,7 +217,7 @@ def pipeline_reg(label_col, df, pca_plot=False):
         pass
 
     pipe = Pipeline(steps=[
-        ('feature_selection', SelectKBest(score_func=chi2)),
+        ('feature_selection', SelectKBest(score_func=f_regression)),
         ('reg', SVR(kernel='linear'))
     ])
     # Create a parameter grid
@@ -239,12 +239,15 @@ def pipeline_reg(label_col, df, pca_plot=False):
     # Fit it to the data and print the best value combination
     print(f"Pipeline SVR; {dt.today()}")
     print(grid_search_svr.fit(X_train, y_train).best_params_)
+    print("MSE:", mean_squared_error(y_true=y_test, y_pred=grid_search_svr.predict(X_test)))
+    print("MAE:", mean_absolute_error(y_true=y_test, y_pred=grid_search_svr.predict(X_test)))
+    print("R2-Score:", r2_score(y_true=y_test, y_pred=grid_search_svr.predict(X_test)))
     print(f"Best accuracy with parameters: {grid_search_svr.best_score_}")
 
     return grid_search_svr
 
 
-def pipeline_rfr(label_col, df, pca_plot=False):
+def pipeline_rfr(label_col, df, pca_plot=False, shuffle_data=False):
     """
     Pipeline  - SelectKBest and Random Forest Regressor
     REQUIRES FLOAT32 OR INT32 VALUES AS LABELS
@@ -268,7 +271,7 @@ def pipeline_rfr(label_col, df, pca_plot=False):
 
     X_train, X_test, y_train, y_test = train_test_split(model_features,
                                                         model_label,
-                                                        shuffle=True,
+                                                        shuffle=shuffle_data,
                                                         test_size=0.4)
     # create a validation set from the training set
     print(f"Shape of X_train:{X_train.shape}")
@@ -319,7 +322,7 @@ def pipeline_rfr(label_col, df, pca_plot=False):
 
     # Create pipeline with feature selector and classifier
     pipe = Pipeline([
-        ('feature_selection', SelectKBest(score_func=f_classif)),
+        ('feature_selection', SelectKBest(score_func=f_regression)),
         ('reg', RandomForestRegressor(max_depth=len(df.columns) / 2,
                                       random_state=8))
     ])
@@ -337,6 +340,9 @@ def pipeline_rfr(label_col, df, pca_plot=False):
     # Fit it to the data and print the best value combination
     print(f"Pipeline RFR; {dt.today()}")
     print(grid_search_rfr.fit(X_train, y_train).best_params_)
+    print("MSE:", mean_squared_error(y_true=y_test, y_pred=grid_search_rfr.predict(X_test)))
+    print("MAE:", mean_absolute_error(y_true=y_test, y_pred=grid_search_rfr.predict(X_test)))
+    print("R2-Score:", r2_score(y_true=y_test, y_pred=grid_search_rfr.predict(X_test)))
     print("Overall score: %.4f" % (grid_search_rfr.score(X_test, y_test)))
     print(f"Best accuracy with parameters: {grid_search_rfr.best_score_}")
 
@@ -359,7 +365,11 @@ def pipeline_trans_reg():
 
     raw_target_regr = LinearRegression().fit(X_train, y_train)
     print('unprocessed R2-score: {0:.3f}'.format(raw_target_regr.score(X_test, y_test)))
+    print("linear_reg MSE:", mean_squared_error(y_true=y_test, y_pred=raw_target_regr.predict(X_test)))
+    print("trans_reg MSE:", mean_squared_error(y_true=y_test, y_pred=regr.predict(X_test)))
+
     return regr, raw_target_regr
+
 
 def pipeline_mlp_reg(label_col, df, pca_plot=False):
 
@@ -384,7 +394,7 @@ def pipeline_mlp_reg(label_col, df, pca_plot=False):
         print("datetime object still in df; scaling will fail")
 
     X_train, X_test, y_train, y_test = train_test_split(model_features, model_label,
-                                                        shuffle=True, test_size=0.4)
+                                                        shuffle=shuffle_data, test_size=0.4)
 
     # create a validation set from the training set
     print(f"Shape of X_train:{X_train.shape}")
@@ -433,7 +443,7 @@ def pipeline_mlp_reg(label_col, df, pca_plot=False):
     # chi2 only accepts non negative values
     #learning_rate = 'adaptive'; when solver='sgd'
     pipe = Pipeline([
-        ('feature_selection', SelectKBest(score_func=f_classif)),
+        ('feature_selection', SelectKBest(score_func=f_regression)),
         ('reg', MLPRegressor(activation='relu',
                              solver='sgd',
                              learning_rate='adaptive',
@@ -451,17 +461,20 @@ def pipeline_mlp_reg(label_col, df, pca_plot=False):
         'reg__alpha': [0.0001, 0.001, 0.01, 0.1]}
 
     #Initialize the grid search object
-    grid_search_mlp_reg = GridSearchCV(pipe, param_grid = params)
+    grid_search_mlp_reg = GridSearchCV(pipe, param_grid=params)
 
     #Fit it to the data and print the best value combination
     print(f"Pipeline; {dt.today()}")
     print(grid_search_mlp_reg.fit(X_train_pca, y_train).best_params_)
     print("Overall R2 score: %.4f" % (grid_search_mlp_reg.score(X_test_pca, y_test)))
+    print("MSE:", mean_squared_error(y_true=y_test, y_pred=grid_search_mlp_reg.predict(X_test)))
+    print("MAE:", mean_absolute_error(y_true=y_test, y_pred=grid_search_mlp_reg.predict(X_test)))
+    print("R2-Score:", r2_score(y_true=y_test, y_pred=grid_search_mlp_reg.predict(X_test)))
     print(f"Best R2 with parameters: {grid_search_mlp_reg.best_score_}")
     return grid_search_mlp_reg
 
 
-def pipeline_mlp(label_col, df, pca_plot=False):
+def pipeline_mlp(label_col, df, pca_plot=False, shuffle_data=False):
 
     """
     Pipeline - SelectKBest and Multi-Layer Perceptron
@@ -486,7 +499,7 @@ def pipeline_mlp(label_col, df, pca_plot=False):
 
     X_train, X_test, y_train, y_test = train_test_split(model_features,
                                                         model_label,
-                                                        shuffle=True,
+                                                        shuffle=shuffle_data,
                                                         test_size=0.4)
 
     # create a validation set from the training set
@@ -540,7 +553,7 @@ def pipeline_mlp(label_col, df, pca_plot=False):
     #replace with classifier or regressor
     #learning_rate = 'adaptive'; when solver='sgd'
     pipe = Pipeline([
-        ('feature_selection', SelectKBest(score_func=chi2)),
+        ('feature_selection', SelectKBest(score_func=f_regression)),
         ('clf', MLPClassifier(activation='relu',
                               solver='lbfgs',
                               learning_rate='constant'))])
@@ -558,7 +571,7 @@ def pipeline_mlp(label_col, df, pca_plot=False):
         'clf__alpha':[0.0001, 0.001]}
 
     #Initialize the grid search object
-    grid_search_mlp = GridSearchCV(pipe, param_grid = params)
+    grid_search_mlp = GridSearchCV(pipe, param_grid=params)
 
     #Fit it to the data and print the best value combination
     print(f"Pipeline; {dt.today()}")
@@ -568,7 +581,7 @@ def pipeline_mlp(label_col, df, pca_plot=False):
     return grid_search_mlp
 
 
-def rfe_cross_val(df, label_col, pca_plot=False):
+def rfe_cross_val(df, label_col, pca_plot=False, shuffle_data=False):
     """
     :param df: pandas dataframe
     :param label_col: column that is to be prediction
@@ -598,7 +611,7 @@ def rfe_cross_val(df, label_col, pca_plot=False):
 
     X_train, X_test, y_train, y_test = train_test_split(model_features,
                                                         model_label,
-                                                        shuffle=True,
+                                                        shuffle=shuffle_data,
                                                         test_size=0.4)
 
     # create a validation set from the training set
@@ -651,16 +664,16 @@ def rfe_cross_val(df, label_col, pca_plot=False):
     # SGD REGRESSOR
     est_sgd = SGDRegressor(loss='squared_loss',
                            penalty='l1',
-                           alpha=0.001,
+                           alpha=0.01,
                            l1_ratio=0.15,
                            fit_intercept=True,
                            max_iter=1000,
-                           tol=0.001,
-                           shuffle=True,
+                           tol=0.01,
+                           shuffle=shuffle_data,
                            verbose=0,
                            epsilon=0.1,
                            random_state=None,
-                           learning_rate='constant',
+                           learning_rate='adaptive',
                            eta0=0.01,
                            power_t=0.25,
                            early_stopping=False,
@@ -676,22 +689,25 @@ def rfe_cross_val(df, label_col, pca_plot=False):
     # SCORING FIGURES: LOGREG(pick r2), SGDRregressor(r2;rmse)
     rfecv = RFECV(estimator=est_sgd,
                   step=1,
-                  min_features_to_select=5,
+                  min_features_to_select=3,
                   # cross_validation determines if clustering scorers can be used or regression based!
                   # needs to be aligned with estimator
                   cv=5,
-                  scoring='mean_squared_error')
+                  scoring='neg_median_absolute_error')
     rfecv.fit(X_train, y_train)
 
     print("Optimal number of features: %d" % rfecv.n_features_)
-    print('Selected features: %s' % list(x.columns[rfecv.support_]))
+    # print("MSE:", mean_squared_error(y_true=y_test, y_pred=rfecv.predict(X_test)))
+    print("MAE:", mean_absolute_error(y_true=y_test, y_pred=rfecv.predict(X_test)))
+    print("R2-Score:", r2_score(y_true=y_test, y_pred=rfecv.predict(X_test)))
+    print('Selected features: %s' % list(model_features.columns[rfecv.get_support()]))
 
     # plot number of features VS. cross-validation scores
     plt.figure(figsize=(10, 7))
     plt.suptitle(f"{RFECV.get_params}")
     plt.xlabel("Number of features selected")
-    plt.ylabel("Cross validation score (nb of correct predictions)")
-    plt.plot(range(1, len(rfecv.grid_scores_) + 1), rfecv.grid_scores_)
+    plt.ylabel("Cross validation score (no. of correct predictions)")
+    plt.plot(scalex=range(1, len(rfecv.grid_scores_) + 1), scaley=rfecv.grid_scores_)
     plt.show()
 
-    return rfecv_obj
+    return rfecv

@@ -49,7 +49,10 @@ print(processed_df.head())
 # train_df['weekday'] = train['date'].dt.weekday
 
 sns.lineplot(x="date", y="Open",legend = 'full' , data=processed_df)
+plt.show()
+
 sns.lineplot(x="date", y="Volume",legend = 'full' , data=processed_df)
+plt.show()
 
 sns.boxplot(x="date", y="Volume_mean_lag7", data=processed_df)
 plt.show()

@@ -110,7 +110,7 @@ def trading_support_resistance(df, bin_width=30):
     in_resistance = 0
 
     for x in range((bin_width - 1) + bin_width, len(df)):
-        df_section = df[x - bin_width : x + 1]
+        df_section = df[x - bin_width: x + 1]
 
     support_level = min(df_section['Open'])
     resistance_level = max(df_section['Open'])

@@ -32,35 +32,8 @@ from tensorflow.keras import Model, layers, regularizers
 RNN Regression
 single-step and multi-step model for a recurrent neural network
 '''
-# Pie chart States - works
-state_ct = Counter(list(df['state']))
-# The * operator can be used in conjunction with zip() to unzip the list.
-labels, values=zip(*state_ct.items())
-# Pie chart, where the slices will be ordered and plotted counter-clockwise:
-fig1, ax = plt.subplots(figsize=(20, 12))
-ax.pie(values, labels=labels, autopct='%1.1f%%',
-        shadow=True, startangle=90)
-# Equal aspect ratio ensures that pie is drawn as a circle.
-ax.axis('equal')
-#ax.title('Transaction locations of user {df[unique_mem_id][0]}')
-ax.legend(loc='center right')
-plt.show()
-
-# Pie chart transaction type -works
-trans_ct = Counter(list(df['transaction_category_name']))
-# The * operator can be used in conjunction with zip() to unzip the list.
-labels_2, values_2=zip(*trans_ct.items())
-#Pie chart, where the slices will be ordered and plotted counter-clockwise:
-fig1, ax = plt.subplots(figsize=(20, 12))
-ax.pie(values_2, labels=labels_2, autopct='%1.1f%%', shadow=True, startangle=90)
-# Equal aspect ratio ensures that pie is drawn as a circle.
-ax.axis('equal')
-#ax.title('Transaction categories of user {df[unique_mem_id][0]}')
-ax.legend(loc='center right')
-plt.show()
-
-ax_desc=df['description'].astype('int64', errors='ignore')
-ax_amount=df['amount'].astype('int64', errors='ignore')
+ax_desc = df['Close'].astype('int64', errors='ignore')
+ax_amount = df['volume'].astype('int64', errors='ignore')
 sns.pairplot(df)
 sns.boxplot(x=ax_desc, y=ax_amount)
 sns.heatmap(df)

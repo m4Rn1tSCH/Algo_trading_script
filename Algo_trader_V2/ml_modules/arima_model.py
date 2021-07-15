@@ -34,6 +34,8 @@ df = df.drop(columns=['Adjusted_close', 'Dividend_amount', 'Split_coefficient'])
 df.reset_index(drop=False, inplace=True)
 # pandas at 1.2.2 and numpy 1.20.3 at avoids error of conditional import
 processed_df = pred_feat(df=df)
+# reverse df as it starts with the latest day
+processed_df = processed_df.iloc[::-1]
 print(processed_df.head())
 #####
 
@@ -54,35 +56,40 @@ plt.show()
 sns.lineplot(x="date", y="Volume",legend = 'full' , data=processed_df)
 plt.show()
 
-sns.boxplot(x="date", y="Volume_mean_lag7", data=processed_df)
+sns.boxplot(x="date", y="Open", data=processed_df)
 plt.show()
 
 # TODO
+train_df = processed_df[:2500]
 train_df = train_df.set_index('date')
 train_df['Close'] = train_df['Close'].astype(float)
 
 train_df.head()
 
 from statsmodels.tsa.seasonal import seasonal_decompose
-result = seasonal_decompose(train_df['sales'], model='additive', freq=365)
+result = seasonal_decompose(train_df['Open'], model='additive', freq=365)
 
+# decompose plot definitely shows seasonality
+# that makes ARIMA necessary
 fig = plt.figure()
 fig = result.plot()
 fig.set_size_inches(15, 12)
+plt.show()
+
 
 from statsmodels.tsa.stattools import adfuller
 
 
 def test_stationarity(timeseries, window=12, cutoff=0.01):
     # Determing rolling statistics
-    rolmean = timeseries.rolling(window).mean()
-    rolstd = timeseries.rolling(window).std()
+    rol_mean = timeseries.rolling(window).mean()
+    rol_std = timeseries.rolling(window).std()
 
     # Plot rolling statistics:
     fig = plt.figure(figsize=(12, 8))
     orig = plt.plot(timeseries, color='blue', label='Original')
-    mean = plt.plot(rolmean, color='red', label='Rolling Mean')
-    std = plt.plot(rolstd, color='black', label='Rolling Std')
+    mean = plt.plot(rol_mean, color='red', label='Rolling Mean')
+    std = plt.plot(rol_std, color='black', label='Rolling Std')
     plt.legend(loc='best')
     plt.title('Rolling Mean & Standard Deviation')
     plt.show()
@@ -101,9 +108,10 @@ def test_stationarity(timeseries, window=12, cutoff=0.01):
 
     print(dfoutput)
 
-test_stationarity(train_df['sales'])
+test_stationarity(train_df['Open'])
 
-first_diff = train_df.sales - train_df.sales.shift(1)
+# TODO
+first_diff = train_df.Open - train_df.Open.shift(1)
 first_diff = first_diff.dropna(inplace = False)
 test_stationarity(first_diff, window = 12)
 
@@ -111,21 +119,23 @@ import statsmodels.api as sm
 
 fig = plt.figure(figsize=(12,8))
 ax1 = fig.add_subplot(211)
-fig = sm.graphics.tsa.plot_acf(train_df.sales, lags=40, ax=ax1) #
+fig = sm.graphics.tsa.plot_acf(train_df.Open, lags=40, ax=ax1) #
 ax2 = fig.add_subplot(212)
-fig = sm.graphics.tsa.plot_pacf(train_df.sales, lags=40, ax=ax2)# , lags=40
+fig = sm.graphics.tsa.plot_pacf(train_df.Open, lags=40, ax=ax2)# , lags=40
+plt.show()
 
 fig = plt.figure(figsize=(12,8))
 ax1 = fig.add_subplot(211)
 fig = sm.graphics.tsa.plot_acf(first_diff, lags=40, ax=ax1)
 ax2 = fig.add_subplot(212)
 fig = sm.graphics.tsa.plot_pacf(first_diff, lags=40, ax=ax2)
+plt.show()
 
 # Here we can see the acf and pacf both has a recurring pattern every 7 periods. Indicating a weekly pattern exists.
 # Any time you see a regular pattern like that in one of these plots, you should suspect that there is some sort of
 # significant seasonal thing going on. Then we should start to consider SARIMA to take seasonality into account
 
-arima_mod6 = sm.tsa.ARIMA(train_df.sales, (6,1,0)).fit(disp=False)
+arima_mod6 = sm.tsa.ARIMA(train_df.Open, (6,1,0)).fit(disp=False)
 print(arima_mod6.summary())
 
 
@@ -139,9 +149,10 @@ print(normaltest(resid))
 
 fig = plt.figure(figsize=(12,8))
 ax0 = fig.add_subplot(111)
+plt.show()
 
 sns.distplot(resid ,fit = stats.norm, ax = ax0) # need to import scipy.stats
-
+plt.show()
 # Get the fitted parameters used by the function
 (mu, sigma) = stats.norm.fit(resid)
 

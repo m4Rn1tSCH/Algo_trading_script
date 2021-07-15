@@ -28,11 +28,10 @@ def pull_data_adj(symbol, outputsize, cadence, output_format, plot_price=False):
     """
     ts = TimeSeries(key=AV_API_KEY, output_format=output_format,
                     treat_info_as_error=True, indexing_type='date', proxy=None)
-    data = pd.DataFrame()
     try:
         if cadence == 'daily':
             data, meta_data = ts.get_daily_adjusted(symbol=symbol,
-                                                outputsize=outputsize)
+                                                    outputsize=outputsize)
         if cadence == 'weekly':
             data, meta_data = ts.get_weekly_adjusted(symbol=symbol)
         if cadence == 'monthly':
@@ -40,23 +39,23 @@ def pull_data_adj(symbol, outputsize, cadence, output_format, plot_price=False):
         # drop the date as index to use it
         data = data.reset_index(drop=False, inplace=False)
         # rename columns names for better handling
-        data = data.rename(columns={"1. open": "open",
-                                "2. high": "high",
-                                "3. low": "low",
-                                "4. close": "close",
-                                "5. adjusted close": "adjusted_close",
+        data = data.rename(columns={"1. open": "Open",
+                                "2. high": "High",
+                                "3. low": "Low",
+                                "4. close": "Close",
+                                "5. adjusted close": "Adjusted_close",
                                 "6. volume": "volume",
-                                "7. dividend amount": "dividend amount"},
+                                "7. dividend amount": "Dividend_amount"},
                                 inplace=False)
         if plot_price:
             # LINE VALUES
             # supported values are: '-', '--', '-.', ':',
             # 'None', ' ', '', 'solid', 'dashed', 'dashdot', 'dotted'
             fig, ax = plt.subplots(2, 1, figsize=(15, 8))
-            ax[0].plot(data['date'], data['open'],
+            ax[0].plot(data['date'], data['Open'],
                        color='blue', lw=1, ls='dashdot', marker=',', label="Open Price")
             # Plot the date on x-axis and the trading volume on y-axis
-            ax[1].plot(data['date'], data['volume'],
+            ax[1].plot(data['date'], data['Volume'],
                        color='orange', lw=1, ls='--', marker='x', label="Trade Volume")
             ax[0].set_title('Open Price', style='oblique')
             ax[1].set_title('Trading Volume', style='oblique')
@@ -71,7 +70,6 @@ def pull_data_adj(symbol, outputsize, cadence, output_format, plot_price=False):
 # pull intraday data; returned as tuple
 def pull_intraday_data(symbol, interval, outputsize, output_format, plot_price=False):
 
-
     """
     DOCUMENTATION
     symbol: pick abbreviation in letter strings 'XXXX'
@@ -82,29 +80,28 @@ def pull_intraday_data(symbol, interval, outputsize, output_format, plot_price=F
     """
     ts = TimeSeries(key=AV_API_KEY, output_format=output_format,
                     treat_info_as_error=True, indexing_type='date', proxy=None)
-    data = pd.DataFrame()
     try:
         data, meta_data = ts.get_intraday(symbol=symbol,
-                                        interval=interval,
-                                        outputsize=outputsize)
+                                          interval=interval,
+                                          outputsize=outputsize)
         #drop the date as index to use it for plotting
         data = data.reset_index(drop=False, inplace=False)
-        data = data.rename(columns={"1. open": "open",
-                                "2. high": "high",
-                                "3. low": "low",
-                                "4. close": "close",
-                                "5. volume": "volume"},
+        data = data.rename(columns={"1. open": "Open",
+                                "2. high": "High",
+                                "3. low": "Low",
+                                "4. close": "Close",
+                                "5. volume": "Volume"},
                                 inplace=False)
         if plot_price:
             # LINE VALUES
             #   supported values are: '-', '--', '-.', ':',
             #   'None', ' ', '', 'solid', 'dashed', 'dashdot', 'dotted'
             fig, ax_intra = plt.subplots(2, 1, figsize=(15, 8))
-            ax_intra[0].plot(data['date'], data['open'],
-                            color='red', lw=1, ls='dashdot', marker=',', label="Open Price")
+            ax_intra[0].plot(data['date'], data['Open'],
+                             color='red', lw=1, ls='dashdot', marker=',', label="Open Price")
             # Plot the date on x-axis and the trading volume on y-axis
-            ax_intra[1].plot(data['date'], data['volume'],
-                            color='cyan', lw=1, ls='--', marker='x', label="Trading Volume")
+            ax_intra[1].plot(data['date'], data['Volume'],
+                             color='cyan', lw=1, ls='--', marker='x', label="Trading Volume")
             ax_intra[0].set_title('Open Price', style='oblique')
             ax_intra[1].set_title('Trading Volume', style='oblique')
             ax_intra[0].legend(loc='upper right')
@@ -117,7 +114,6 @@ def pull_intraday_data(symbol, interval, outputsize, output_format, plot_price=F
 
 
 def submit_order(symbol, qty, side, order_type, time_in_force, limit_price):
-
 
     """
      DOCUMENTATION
@@ -153,8 +149,7 @@ def get_asset_list(status, asset_class):
     """
     try:
         asset_list = api.list_assets(status=status,
-                        asset_class=asset_class
-                        )
+                                     asset_class=asset_class)
     except BaseException as f:
         print(f)
     return asset_list

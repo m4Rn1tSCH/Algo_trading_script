@@ -8,6 +8,10 @@ import warnings
 warnings.filterwarnings('ignore')
 import numpy as np
 import pandas as pd
+from scipy import stats
+from scipy.stats import normaltest
+from statsmodels.tsa.stattools import adfuller
+import statsmodels.api as sm
 
 from Algo_trader_V2.support_functions.support_features import pred_feat, trading_support_resistance
 from alpha_vantage.timeseries import TimeSeries
@@ -16,7 +20,6 @@ ts = TimeSeries(key='IH4EENERLUFUKJRW', output_format='pandas', treat_info_as_er
 
 import matplotlib.pyplot as plt
 import seaborn as sns
-import statsmodels.api as sm
 color = sns.color_palette()
 sns.set_style('darkgrid')
 
@@ -59,7 +62,7 @@ plt.show()
 sns.boxplot(x="date", y="Open", data=processed_df)
 plt.show()
 
-# TODO
+
 train_df = processed_df[:2500]
 train_df = train_df.set_index('date')
 train_df['Close'] = train_df['Close'].astype(float)
@@ -77,9 +80,6 @@ fig.set_size_inches(15, 12)
 plt.show()
 
 
-from statsmodels.tsa.stattools import adfuller
-
-
 def test_stationarity(timeseries, window=12, cutoff=0.01):
     # Determing rolling statistics
     rol_mean = timeseries.rolling(window).mean()
@@ -94,7 +94,7 @@ def test_stationarity(timeseries, window=12, cutoff=0.01):
     plt.title('Rolling Mean & Standard Deviation')
     plt.show()
 
-    # Perform Dickey-Fuller test:
+    # Perform augmented Dickey-Fuller test:
     print('Results of Dickey-Fuller Test:')
     dftest = adfuller(timeseries, autolag='AIC', maxlag=20)
     dfoutput = pd.Series(dftest[0:4], index=['Test Statistic', 'p-value', '#Lags Used', 'Number of Observations Used'])
@@ -111,11 +111,15 @@ def test_stationarity(timeseries, window=12, cutoff=0.01):
 test_stationarity(train_df['Open'])
 
 # TODO
+# check for viability
 first_diff = train_df.Open - train_df.Open.shift(1)
 first_diff = first_diff.dropna(inplace = False)
 test_stationarity(first_diff, window = 12)
 
-import statsmodels.api as sm
+# external test; automatic minimization of auto regression
+# from pmdarima import auto_arima
+# stepwise_fit = auto_arima(df['AvgTemp'], trace=True,
+# suppress_warnings=True)
 
 fig = plt.figure(figsize=(12,8))
 ax1 = fig.add_subplot(211)
@@ -138,9 +142,6 @@ plt.show()
 arima_mod6 = sm.tsa.ARIMA(train_df.Open, (6,1,0)).fit(disp=False)
 print(arima_mod6.summary())
 
-
-from scipy import stats
-from scipy.stats import normaltest
 
 resid = arima_mod6.resid
 print(normaltest(resid))
@@ -171,7 +172,7 @@ fig = sm.graphics.tsa.plot_pacf(arima_mod6.resid, lags=40, ax=ax2)
 
 
 # consider seasonality by sarima
-sarima_mod6 = sm.tsa.statespace.SARIMAX(train_df.sales, trend='n', order=(6,1,0)).fit()
+sarima_mod6 = sm.tsa.statespace.SARIMAX(train_df.Open, trend='n', order=(6,1,0)).fit()
 print(sarima_mod6.summary())
 
 resid = sarima_mod6.resid
@@ -181,7 +182,7 @@ fig = plt.figure(figsize=(12,8))
 ax0 = fig.add_subplot(111)
 
 sns.distplot(resid ,fit = stats.norm, ax = ax0) # need to import scipy.stats
-
+plt.show()
 # Get the fitted parameters used by the function
 (mu, sigma) = stats.norm.fit(resid)
 
@@ -197,12 +198,21 @@ ax1 = fig.add_subplot(211)
 fig = sm.graphics.tsa.plot_acf(arima_mod6.resid, lags=40, ax=ax1)
 ax2 = fig.add_subplot(212)
 fig = sm.graphics.tsa.plot_pacf(arima_mod6.resid, lags=40, ax=ax2)
+fig.show()
 
-# prediction and evaluation
-start_index = 1730
-end_index = 1826
-train_df['forecast'] = sarima_mod6.predict(start = start_index, end= end_index, dynamic= True)
-train_df[start_index:end_index][['sales', 'forecast']].plot(figsize=(12, 8))
+# TODO
+# PREDICTION AND EVALUATION
+# sarima needs all dates to be consecutive and filled with values
+# use forward fill . ffill() to fill weekends and holidays
+start_index = len(train_df)
+end_index = len(processed_df)
+train_df.reset_index(drop=False, inplace=True)
+train_df.ffill()
+train_df = train_df.set_index('date')
+train_df['forecast'] = sarima_mod6.predict(start=start_index, end=end_index, dynamic=True)
+train_df[start_index:end_index][['Open', 'forecast']].plot(figsize=(14, 10))
+plt.show()
+
 
 def smape_kun(y_true, y_pred):
     mape = np.mean(abs((y_true-y_pred)/y_true))*100

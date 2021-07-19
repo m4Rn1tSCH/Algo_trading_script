@@ -139,7 +139,7 @@ plt.show()
 # Any time you see a regular pattern like that in one of these plots, you should suspect that there is some sort of
 # significant seasonal thing going on. Then we should start to consider SARIMA to take seasonality into account
 
-arima_mod6 = sm.tsa.ARIMA(train_df.Open, (6,1,0)).fit(disp=False)
+arima_mod6 = sm.tsa.ARIMA(train_df.Open, (2,1,0)).fit(disp=False)
 print(arima_mod6.summary())
 
 
@@ -172,7 +172,7 @@ fig = sm.graphics.tsa.plot_pacf(arima_mod6.resid, lags=40, ax=ax2)
 
 
 # consider seasonality by sarima
-sarima_mod6 = sm.tsa.statespace.SARIMAX(train_df.Open, trend='n', order=(6,1,0)).fit()
+sarima_mod6 = sm.tsa.statespace.SARIMAX(train_df.Open, trend='n', order=(4,1,0)).fit()
 print(sarima_mod6.summary())
 
 resid = sarima_mod6.resid
@@ -200,7 +200,7 @@ ax2 = fig.add_subplot(212)
 fig = sm.graphics.tsa.plot_pacf(arima_mod6.resid, lags=40, ax=ax2)
 fig.show()
 
-# TODO
+# TODO; all forecasted values become NaN - investigate
 # PREDICTION AND EVALUATION
 # sarima needs all dates to be consecutive and filled with values
 # use forward fill . ffill() to fill weekends and holidays
@@ -219,20 +219,20 @@ def smape_kun(y_true, y_pred):
     smape = np.mean((np.abs(y_pred - y_true) * 200/ (np.abs(y_pred) + np.abs(y_true))).fillna(0))
     print('MAPE: %.2f %% \nSMAPE: %.2f'% (mape,smape), "%")
 
-smape_kun(train_df[1730:1825]['sales'], train_df[1730:1825]['forecast'])
+smape_kun(train_df[start_index:end_index]['Open'], train_df[start_index:end_index]['forecast'])
 
 # SARIMAX - adding external variables
 # per 1 store, 1 item
-storeid = 1
-itemid = 1
-train_df = train[train['store']==storeid]
-train_df = train_df[train_df['item']==itemid]
-
-# train_df = train_df.set_index('date')
-train_df['year'] = train_df['date'].dt.year - 2012
-train_df['month'] = train_df['date'].dt.month
-train_df['day'] = train_df['date'].dt.dayofyear
-train_df['weekday'] = train_df['date'].dt.weekday
+# storeid = 1
+# itemid = 1
+# train_df = train[train['store']==storeid]
+# train_df = train_df[train_df['item']==itemid]
+#
+# # train_df = train_df.set_index('date')
+# train_df['year'] = train_df['date'].dt.year - 2012
+# train_df['month'] = train_df['date'].dt.month
+# train_df['day'] = train_df['date'].dt.dayofyear
+# train_df['weekday'] = train_df['date'].dt.weekday
 
 start_index = 1730
 end_index = 1826

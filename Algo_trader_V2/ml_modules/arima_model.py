@@ -67,6 +67,9 @@ train_df = processed_df[:2500]
 train_df = train_df.set_index('date')
 train_df['Close'] = train_df['Close'].astype(float)
 
+# look for missing values and NaNs that ruin the prediction
+train_df.isna().sum()
+train_df.isnull().sum()
 train_df.head()
 
 from statsmodels.tsa.seasonal import seasonal_decompose

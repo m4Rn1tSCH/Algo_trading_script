@@ -39,24 +39,17 @@ df.reset_index(drop=False, inplace=True)
 processed_df = pred_feat(df=df)
 # reverse df as it starts with the latest day
 processed_df = processed_df.iloc[::-1]
+# dropping the index later as well
+# processed_df.reset_index(drop=True, inplace=True)
 print(processed_df.head())
 #####
 
 # processed_df['date'] = pd.to_datetime(processed_df['date'], format="%Y-%m-%d")
 
-# per 1 store, 1 item
-# train_df = train[train['store']==1]
-# train_df = train_df[train['item']==1]
-# train_df = train_df.set_index('date')
-# train_df['year'] = train['date'].dt.year
-# train_df['month'] = train['date'].dt.month
-# train_df['day'] = train['date'].dt.dayofyear
-# train_df['weekday'] = train['date'].dt.weekday
-
-sns.lineplot(x="date", y="Open",legend = 'full' , data=processed_df)
+sns.lineplot(x="date", y="Open", legend='full', data=processed_df)
 plt.show()
 
-sns.lineplot(x="date", y="Volume",legend = 'full' , data=processed_df)
+sns.lineplot(x="date", y="Volume", legend='full', data=processed_df)
 plt.show()
 
 sns.boxplot(x="date", y="Open", data=processed_df)
@@ -115,6 +108,7 @@ test_stationarity(train_df['Open'])
 
 # TODO
 # check for viability
+# try tutorial and logarithmic approach
 first_diff = train_df.Open - train_df.Open.shift(1)
 first_diff = first_diff.dropna(inplace = False)
 test_stationarity(first_diff, window = 12)
@@ -138,28 +132,35 @@ ax2 = fig.add_subplot(212)
 fig = sm.graphics.tsa.plot_pacf(first_diff, lags=40, ax=ax2)
 plt.show()
 
-# Here we can see the acf and pacf both has a recurring pattern every 7 periods. Indicating a weekly pattern exists.
+# Here we can see the acf and pacf both has a recurring pattern approximately every 10 periods.
+# Indicating a weekly pattern exists.
 # Any time you see a regular pattern like that in one of these plots, you should suspect that there is some sort of
 # significant seasonal thing going on. Then we should start to consider SARIMA to take seasonality into account
 
-arima_mod6 = sm.tsa.ARIMA(train_df.Open, (2,1,0)).fit(disp=False)
-print(arima_mod6.summary())
+# pick p, d, q
+# i: order that has made the df stationary (our case: first order)
+# AR or p: lag length that is statistically significant with the Dickey-Fuller Test (our case: 10 periods)
+# When the AR model is appropriately specified, the the residuals from this model can be used
+# to directly observe the uncorrelated error
+# pass as tuple: (AR, i, )
 
+# SUMMARY OF NON-STATIONARY DF (FOR COMPARISON)
+arima_mod6 = sm.tsa.ARIMA(train_df.Open, (10,1,0)).fit(disp=False)
+print(arima_mod6.summary())
 
 resid = arima_mod6.resid
 print(normaltest(resid))
 # returns a 2-tuple of the chi-squared statistic, and the associated p-value. the p-value is very small, meaning
 # the residual is not a normal distribution
 
+
 fig = plt.figure(figsize=(12,8))
 ax0 = fig.add_subplot(111)
 plt.show()
-
-sns.distplot(resid ,fit = stats.norm, ax = ax0) # need to import scipy.stats
+sns.distplot(resid , fit=stats.norm, ax=ax0)
 plt.show()
 # Get the fitted parameters used by the function
 (mu, sigma) = stats.norm.fit(resid)
-
 #Now plot the distribution using
 plt.legend(['Normal dist. ($\mu=$ {:.2f} and $\sigma=$ {:.2f} )'.format(mu, sigma)], loc='best')
 plt.ylabel('Frequency')
@@ -173,9 +174,8 @@ fig = sm.graphics.tsa.plot_acf(arima_mod6.resid, lags=40, ax=ax1)
 ax2 = fig.add_subplot(212)
 fig = sm.graphics.tsa.plot_pacf(arima_mod6.resid, lags=40, ax=ax2)
 
-
-# consider seasonality by sarima
-sarima_mod6 = sm.tsa.statespace.SARIMAX(train_df.Open, trend='n', order=(4,1,0)).fit()
+# CONSIDER SEASONALITY BY SARIMA
+sarima_mod6 = sm.tsa.statespace.SARIMAX(train_df.Open, trend='n', order=(10, 1, 0)).fit()
 print(sarima_mod6.summary())
 
 resid = sarima_mod6.resid
@@ -184,7 +184,7 @@ print(normaltest(resid))
 fig = plt.figure(figsize=(12,8))
 ax0 = fig.add_subplot(111)
 
-sns.distplot(resid ,fit = stats.norm, ax = ax0) # need to import scipy.stats
+sns.distplot(resid ,fit=stats.norm, ax=ax0)
 plt.show()
 # Get the fitted parameters used by the function
 (mu, sigma) = stats.norm.fit(resid)
@@ -212,30 +212,20 @@ end_index = len(processed_df)
 train_df.reset_index(drop=False, inplace=True)
 train_df.ffill()
 train_df = train_df.set_index('date')
+train_df.isnull().sum().sum()
 train_df['forecast'] = sarima_mod6.predict(start=start_index, end=end_index, dynamic=True)
 train_df[start_index:end_index][['Open', 'forecast']].plot(figsize=(14, 10))
 plt.show()
 
 
 def smape_kun(y_true, y_pred):
-    mape = np.mean(abs((y_true-y_pred)/y_true))*100
+    mape = np.mean(abs((y_true-y_pred)/y_true)) * 100
     smape = np.mean((np.abs(y_pred - y_true) * 200/ (np.abs(y_pred) + np.abs(y_true))).fillna(0))
     print('MAPE: %.2f %% \nSMAPE: %.2f'% (mape,smape), "%")
 
 smape_kun(train_df[start_index:end_index]['Open'], train_df[start_index:end_index]['forecast'])
 
 # SARIMAX - adding external variables
-# per 1 store, 1 item
-# storeid = 1
-# itemid = 1
-# train_df = train[train['store']==storeid]
-# train_df = train_df[train_df['item']==itemid]
-#
-# # train_df = train_df.set_index('date')
-# train_df['year'] = train_df['date'].dt.year - 2012
-# train_df['month'] = train_df['date'].dt.month
-# train_df['day'] = train_df['date'].dt.dayofyear
-# train_df['weekday'] = train_df['date'].dt.weekday
 
 start_index = 1730
 end_index = 1826

@@ -11,6 +11,7 @@ import pandas as pd
 from scipy import stats
 from scipy.stats import normaltest
 from statsmodels.tsa.stattools import adfuller
+from statsmodels.tsa.seasonal import seasonal_decompose
 import statsmodels.api as sm
 
 from Algo_trader_V2.support_functions.support_features import pred_feat, trading_support_resistance
@@ -65,7 +66,7 @@ train_df.isna().sum()
 train_df.isnull().sum()
 train_df.head()
 
-from statsmodels.tsa.seasonal import seasonal_decompose
+
 result = seasonal_decompose(train_df['Open'], model='additive', freq=365)
 
 # decompose plot definitely shows seasonality
@@ -106,12 +107,14 @@ def test_stationarity(timeseries, window=12, cutoff=0.01):
 
 test_stationarity(train_df['Open'])
 
-# TODO
 # check for viability
 # try tutorial and logarithmic approach
-first_diff = train_df.Open - train_df.Open.shift(1)
-first_diff = first_diff.dropna(inplace = False)
-test_stationarity(first_diff, window = 12)
+df_diff = train_df.Open - train_df.Open.shift(1)
+df_diff = df_diff.dropna(inplace = False)
+test_stationarity(df_diff, window = 12)
+
+# index needs to be continuous date range
+train_df.index.isnull().sum()
 
 # external test; automatic minimization of auto regression
 # from pmdarima import auto_arima
@@ -120,16 +123,16 @@ test_stationarity(first_diff, window = 12)
 
 fig = plt.figure(figsize=(12,8))
 ax1 = fig.add_subplot(211)
-fig = sm.graphics.tsa.plot_acf(train_df.Open, lags=40, ax=ax1) #
+fig = sm.graphics.tsa.plot_acf(train_df.Open, lags=40, ax=ax1)
 ax2 = fig.add_subplot(212)
-fig = sm.graphics.tsa.plot_pacf(train_df.Open, lags=40, ax=ax2)# , lags=40
+fig = sm.graphics.tsa.plot_pacf(train_df.Open, lags=40, ax=ax2)
 plt.show()
 
 fig = plt.figure(figsize=(12,8))
 ax1 = fig.add_subplot(211)
-fig = sm.graphics.tsa.plot_acf(first_diff, lags=40, ax=ax1)
+fig = sm.graphics.tsa.plot_acf(df_diff, lags=40, ax=ax1)
 ax2 = fig.add_subplot(212)
-fig = sm.graphics.tsa.plot_pacf(first_diff, lags=40, ax=ax2)
+fig = sm.graphics.tsa.plot_pacf(df_diff, lags=40, ax=ax2)
 plt.show()
 
 # Here we can see the acf and pacf both has a recurring pattern approximately every 10 periods.
@@ -145,10 +148,10 @@ plt.show()
 # pass as tuple: (AR, i, )
 
 # SUMMARY OF NON-STATIONARY DF (FOR COMPARISON)
-arima_mod6 = sm.tsa.ARIMA(train_df.Open, (10,1,0)).fit(disp=False)
-print(arima_mod6.summary())
+arima_mod = sm.tsa.ARIMA(train_df.Open, (5,1,0)).fit(disp=False)
+print(arima_mod.summary())
 
-resid = arima_mod6.resid
+resid = arima_mod.resid
 print(normaltest(resid))
 # returns a 2-tuple of the chi-squared statistic, and the associated p-value. the p-value is very small, meaning
 # the residual is not a normal distribution
@@ -156,29 +159,32 @@ print(normaltest(resid))
 
 fig = plt.figure(figsize=(12,8))
 ax0 = fig.add_subplot(111)
+sns.distplot(resid, fit=stats.norm, ax=ax0)
 plt.show()
-sns.distplot(resid , fit=stats.norm, ax=ax0)
-plt.show()
+
+# TODO - still empty
 # Get the fitted parameters used by the function
 (mu, sigma) = stats.norm.fit(resid)
 #Now plot the distribution using
 plt.legend(['Normal dist. ($\mu=$ {:.2f} and $\sigma=$ {:.2f} )'.format(mu, sigma)], loc='best')
 plt.ylabel('Frequency')
 plt.title('Residual distribution')
+plt.show()
 
 # analyze results
 # ACF and PACF
 fig = plt.figure(figsize=(12,8))
 ax1 = fig.add_subplot(211)
-fig = sm.graphics.tsa.plot_acf(arima_mod6.resid, lags=40, ax=ax1)
+fig = sm.graphics.tsa.plot_acf(arima_mod.resid, lags=40, ax=ax1)
 ax2 = fig.add_subplot(212)
-fig = sm.graphics.tsa.plot_pacf(arima_mod6.resid, lags=40, ax=ax2)
+fig = sm.graphics.tsa.plot_pacf(arima_mod.resid, lags=40, ax=ax2)
 
 # CONSIDER SEASONALITY BY SARIMA
-sarima_mod6 = sm.tsa.statespace.SARIMAX(train_df.Open, trend='n', order=(10, 1, 0)).fit()
-print(sarima_mod6.summary())
+sarima_mod = sm.tsa.statespace.SARIMAX(train_df.Open, trend='n', order=(10, 1, 0),
+                                       enforce_stationarity=True).fit()
+print(sarima_mod.summary())
 
-resid = sarima_mod6.resid
+resid = sarima_mod.resid
 print(normaltest(resid))
 
 fig = plt.figure(figsize=(12,8))
@@ -198,37 +204,41 @@ plt.title('Residual distribution')
 # ACF and PACF
 fig = plt.figure(figsize=(12,8))
 ax1 = fig.add_subplot(211)
-fig = sm.graphics.tsa.plot_acf(arima_mod6.resid, lags=40, ax=ax1)
+fig = sm.graphics.tsa.plot_acf(sarima_mod.resid, lags=40, ax=ax1)
 ax2 = fig.add_subplot(212)
-fig = sm.graphics.tsa.plot_pacf(arima_mod6.resid, lags=40, ax=ax2)
+fig = sm.graphics.tsa.plot_pacf(sarima_mod.resid, lags=40, ax=ax2)
 fig.show()
 
 # TODO; all forecasted values become NaN - investigate
 # PREDICTION AND EVALUATION
 # sarima needs all dates to be consecutive and filled with values
 # use forward fill . ffill() to fill weekends and holidays
-start_index = len(train_df)
-end_index = len(processed_df)
+start_index = 0
+end_index = len(train_df)
 train_df.reset_index(drop=False, inplace=True)
 train_df.ffill()
 train_df = train_df.set_index('date')
+
+# test for missing values and continuous date index
 train_df.isnull().sum().sum()
-train_df['forecast'] = sarima_mod6.predict(start=start_index, end=end_index, dynamic=True)
+train_df.index.isnull().sum()
+# TODO - removing start and end renders it 0 instead NAN
+train_df['forecast'] = sarima_mod.predict(dynamic=False)
 train_df[start_index:end_index][['Open', 'forecast']].plot(figsize=(14, 10))
 plt.show()
 
 
 def smape_kun(y_true, y_pred):
     mape = np.mean(abs((y_true-y_pred)/y_true)) * 100
-    smape = np.mean((np.abs(y_pred - y_true) * 200/ (np.abs(y_pred) + np.abs(y_true))).fillna(0))
+    smape = np.mean((np.abs(y_pred - y_true) * 200 / (np.abs(y_pred) + np.abs(y_true))).fillna(0))
     print('MAPE: %.2f %% \nSMAPE: %.2f'% (mape,smape), "%")
 
 smape_kun(train_df[start_index:end_index]['Open'], train_df[start_index:end_index]['forecast'])
 
 # SARIMAX - adding external variables
 
-start_index = 1730
-end_index = 1826
+start_index = 0
+end_index = len(train_df)
 
 train_df.head()
 

@@ -209,7 +209,6 @@ ax2 = fig.add_subplot(212)
 fig = sm.graphics.tsa.plot_pacf(sarima_mod.resid, lags=40, ax=ax2)
 fig.show()
 
-# TODO; all forecasted values become NaN - investigate
 # PREDICTION AND EVALUATION
 # sarima needs all dates to be consecutive and filled with values
 # use forward fill . ffill() to fill weekends and holidays
@@ -222,21 +221,21 @@ train_df = train_df.set_index('date')
 # test for missing values and continuous date index
 train_df.isnull().sum().sum()
 train_df.index.isnull().sum()
-# TODO - removing start and end renders it 0 instead NAN
+
 train_df['forecast'] = sarima_mod.predict(dynamic=False)
 train_df[start_index:end_index][['Open', 'forecast']].plot(figsize=(14, 10))
 plt.show()
 
 
 def smape_kun(y_true, y_pred):
-    mape = np.mean(abs((y_true-y_pred)/y_true)) * 100
+    mape = np.mean(abs((y_true-y_pred) / y_true)) * 100
     smape = np.mean((np.abs(y_pred - y_true) * 200 / (np.abs(y_pred) + np.abs(y_true))).fillna(0))
     print('MAPE: %.2f %% \nSMAPE: %.2f'% (mape,smape), "%")
 
 smape_kun(train_df[start_index:end_index]['Open'], train_df[start_index:end_index]['forecast'])
 
+# TODO
 # SARIMAX - adding external variables
-
 start_index = 0
 end_index = len(train_df)
 

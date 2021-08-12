@@ -141,11 +141,11 @@ plt.show()
 # significant seasonal thing going on. Then we should start to consider SARIMA to take seasonality into account
 
 # pick p, d, q
-# i: order that has made the df stationary (our case: first order)
+# i/q: order that has made the df stationary (our case: first order)
 # AR or p: lag length that is statistically significant with the Dickey-Fuller Test (our case: 10 periods)
 # When the AR model is appropriately specified, the the residuals from this model can be used
 # to directly observe the uncorrelated error
-# pass as tuple: (AR, i, )
+# pass as tuple: (p, 0, q)
 
 # SUMMARY OF NON-STATIONARY DF (FOR COMPARISON)
 arima_mod = sm.tsa.ARIMA(train_df.Open, (5,1,0)).fit(disp=False)
@@ -180,6 +180,14 @@ ax2 = fig.add_subplot(212)
 fig = sm.graphics.tsa.plot_pacf(arima_mod.resid, lags=40, ax=ax2)
 
 # CONSIDER SEASONALITY BY SARIMA
+# Things to note here:
+# When running such a large batch of models, particularly when the autoregressive and moving average
+# orders become large, there is the possibility of poor maximum likelihood convergence.
+# We use the option enforce_invertibility=False, which allows the moving average polynomial to be non-invertible,
+# so that more of the models are estimable.
+# If several models do not produce good results, their AIC value is set to NaN.
+# (Durbin and Koopman note numerical problems with the high order model)
+
 sarima_mod = sm.tsa.statespace.SARIMAX(train_df.Open, trend='n', order=(10, 1, 0),
                                        enforce_stationarity=True).fit()
 print(sarima_mod.summary())

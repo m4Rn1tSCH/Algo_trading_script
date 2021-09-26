@@ -29,8 +29,6 @@ from Algo_trader_V2.live_model_functions.AV_get_intraday_stock import pull_intra
 #                        plot_price=False)
 # stock_df['open_diff'] = stock_df['open'].diff()
 
-# time loop for trading logic
-
 
 def simple_loop():
 

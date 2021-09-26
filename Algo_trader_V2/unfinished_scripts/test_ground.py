@@ -64,3 +64,16 @@ df.reset_index(drop=False, inplace=True)
 processed_df = pred_feat(df=df)
 print(processed_df.head())
 trading_support_resistance(df=processed_df, bin_width=30)
+#%%
+from Algo_trader_V2.live_model_functions.AV_get_intraday_stock_no_mtplt import pull_intraday_data, submit_order
+last_price = pull_intraday_data(symbol='AAPL',
+                                interval='5min',
+                                outputsize='full',
+                                output_format='pandas')[:5]
+# calculate the mean price of the last 25 min of the trading day
+mean_price = last_price['open'].mean()
+# retrieve the very last quote to compare with
+actual_price = float(last_price['open'][:1]) * 1.04
+# retrieve accounts remaining buying power
+bp = float(api.get_account().buying_power)
+portfolio = portfolio_overview()

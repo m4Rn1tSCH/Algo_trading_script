@@ -44,18 +44,20 @@ def ma_loop(equities_list):
                 start_time = time.time()
                 print("Checking element: ", stock_symbol)
                 # pull_intraday can return a list with 2 elements (pandas df, dict with info)
-                # stock_symbol = 'AAPL'
                 last_price = pull_intraday_data(symbol=stock_symbol,
                                                 interval='5min',
                                                 outputsize='full',
-                                                output_format='pandas').head(10)
+                                                output_format='pandas')[:5]
                 # calculate the mean price of the last 25 min of the trading day
-                mean_price = last_price['open'][:5].mean()
-                # retrieve the very last quote to compare with
-                actual_price = last_price['open'][:1].mean()
+                mean_price = last_price['open'].mean()
+                # retrieve the very last quote; add 2.5% for order execution
+                actual_price = float(last_price['open'][:1]) * 1.025
                 # retrieve accounts remaining buying power
                 bp = float(api.get_account().buying_power)
                 portfolio = portfolio_overview()
+                # dynamic quantity scaled by buying power for buy orders
+                dyn_qty = round(float(bp * 0.1 / last_price['high'][:1]), ndigits=0)
+
 
                 '''
                 ACCESS OF WEIGHTED MOVING AVERAGES AND CONSECUTIVE INTERSECTION THEREOF
@@ -80,23 +82,22 @@ def ma_loop(equities_list):
                         sma_50[key_list[0][1]]['SMA'] > sma_200[key_list_2[0][1]]['SMA']):
                     # buy signal
                     print("Executing buy signal...")
-                    print(stock_symbol, " is being bought")
                     try:
                         print("Stock ", stock_symbol, " is being purchased")
                         submit_order(symbol=stock_symbol,
-                                     qty=2,
+                                     qty=dyn_qty,
                                      side='buy',
-                                     order_type='limit',
-                                     time_in_force='gtc',
+                                     type='market',
+                                     time_in_force='day',
                                      limit_price=actual_price
                                      )
                     except BaseException as e:
                         print(e)
                         submit_order(symbol=stock_symbol,
-                                     qty=float(last_price['high'].head(1) / bp * 0.1),
+                                     qty=5,
                                      side='buy',
-                                     order_type='limit',
-                                     time_in_force='gtc',
+                                     type='market',
+                                     time_in_force='day',
                                      limit_price=actual_price
                                      )
                     print("Order successful; script execution time:", time.time() - start_time, " sec.")
@@ -106,24 +107,22 @@ def ma_loop(equities_list):
                         (stock_symbol in portfolio and portfolio[1] > 0):
                     # sell signal
                     print("Executing sell signal...")
-                    print("Stock ", stock_symbol, " is being sold")
+                    # TODO: quantity calculation for held stocks and sell order
                     try:
                         print("Stock ", stock_symbol, " is being sold")
                         submit_order(symbol=stock_symbol,
                                      qty=2,
                                      side='sell',
-                                     order_type='limit',
-                                     time_in_force='gtc',
-                                     limit_price=mean_price
+                                     type='market',
+                                     time_in_force='day'
                                      )
                     except BaseException as e:
                         print(e)
                         submit_order(symbol=stock_symbol,
                                      qty=3,
                                      side='sell',
-                                     order_type='limit',
-                                     time_in_force='gtc',
-                                     limit_price=mean_price
+                                     type='market',
+                                     time_in_force='day',
                                      )
                         pass
                     print("Order successful; script execution time:", time.time() - start_time, " sec")

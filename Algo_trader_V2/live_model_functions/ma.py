@@ -48,10 +48,8 @@ def ma_loop(equities_list):
                                                 interval='5min',
                                                 outputsize='full',
                                                 output_format='pandas')[:5]
-                # calculate the mean price of the last 25 min of the trading day
-                mean_price = last_price['open'].mean()
                 # retrieve the very last quote; add 2.5% for order execution
-                actual_price = float(last_price['open'][:1]) * 1.025
+                exec_price = float(last_price['open'][:1]) * 1.025
                 # retrieve accounts remaining buying power
                 bp = float(api.get_account().buying_power)
                 portfolio = portfolio_overview()
@@ -66,7 +64,6 @@ def ma_loop(equities_list):
                 # zero indexed counter with values selected before index 3(last element exclusive); start at index 0
                 # tech indicator returns a tuple; sma dictionary with values; meta dict with characteristics
                 # instantiate the class first and provide the API key
-                print("Retrieving moving averages...")
                 ti = TechIndicators('PKS7JXWMMDQQXQNDWT2P')
                 sma_50, _ = ti.get_sma(symbol=stock_symbol, interval='daily', time_period='50', series_type='open')
                 sma_200, _ = ti.get_sma(symbol=stock_symbol, interval='daily', time_period='200', series_type='open')
@@ -85,7 +82,8 @@ def ma_loop(equities_list):
                                      qty=dyn_qty,
                                      side='buy',
                                      type='market',
-                                     time_in_force='day'
+                                     time_in_force='day',
+                                     limit_price=exec_price
                                      )
                     except BaseException as e:
                         print(e)
@@ -93,7 +91,8 @@ def ma_loop(equities_list):
                                      qty=5,
                                      side='buy',
                                      type='market',
-                                     time_in_force='day'
+                                     time_in_force='day',
+                                     limit_price=exec_price
                                      )
                     print("Order successful; script execution time:", time.time() - start_time, " sec.")
                 # check if sma_50 is intersecting sma_200 coming from above; the stock is owned;
@@ -109,7 +108,8 @@ def ma_loop(equities_list):
                                      qty=2,
                                      side='sell',
                                      type='market',
-                                     time_in_force='day'
+                                     time_in_force='day',
+                                     limit_price=exec_price
                                      )
                     except BaseException as e:
                         print(e)
@@ -118,6 +118,7 @@ def ma_loop(equities_list):
                                      side='sell',
                                      type='market',
                                      time_in_force='day',
+                                     limit_price=exec_price
                                      )
                         pass
                     print("Order successful; script execution time:", time.time() - start_time, " sec")

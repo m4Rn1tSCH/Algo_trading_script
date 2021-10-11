@@ -49,7 +49,7 @@ def wma_loop(equities_list):
                                                 outputsize='full',
                                                 output_format='pandas')
                 # retrieve the very last quote to compare with
-                actual_price = float(last_price['open'][:1]) * 1.025
+                exec_price = float(last_price['open'][:1]) * 1.025
                 # retrieve accounts remaining buying power
                 bp = float(api.get_account().buying_power)
                 portfolio = portfolio_overview()
@@ -77,7 +77,8 @@ def wma_loop(equities_list):
                                      qty=dyn_qty,
                                      side='buy',
                                      type='limit',
-                                     time_in_force='day'
+                                     time_in_force='day',
+                                     limit_price=exec_price
                                      )
                     except BaseException as e:
                         print(e)
@@ -85,7 +86,8 @@ def wma_loop(equities_list):
                                      qty=5,
                                      side='buy',
                                      type='limit',
-                                     time_in_force='day'
+                                     time_in_force='day',
+                                     limit_price=exec_price
                                      )
                 # check if wma_50 is smaller than wma_200; the stock is owned; at least one stock is owned
                 elif (wma_50[key_list[2][1]]['WMA'] > wma_200[key_list_2[2][1]]['WMA'] and
@@ -98,7 +100,8 @@ def wma_loop(equities_list):
                                      qty=2,
                                      side='sell',
                                      type='limit',
-                                     time_in_force='day'
+                                     time_in_force='day',
+                                     limit_price=exec_price
                                      )
                     except BaseException as e:
                         print(e)
@@ -106,7 +109,8 @@ def wma_loop(equities_list):
                                      qty=float(last_price['high'].head(1) / bp * 0.1),
                                      side='sell',
                                      type='limit',
-                                     time_in_force='day'
+                                     time_in_force='day',
+                                     limit_price=exec_price
                                      )
                         pass
                     print("Order successful; script execution time:", time.time() - start_time, " sec")

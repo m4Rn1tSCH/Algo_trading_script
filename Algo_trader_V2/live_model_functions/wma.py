@@ -48,16 +48,15 @@ def wma_loop(equities_list):
                                                 interval='5min',
                                                 outputsize='full',
                                                 output_format='pandas')
-                # calculate the mean price of the last 25 min of the trading day
-                mean_price = last_price['open'][:5].mean()
                 # retrieve the very last quote to compare with
-                actual_price = last_price['open'][:1].mean()
+                actual_price = float(last_price['open'][:1]) * 1.025
                 # retrieve accounts remaining buying power
                 bp = float(api.get_account().buying_power)
                 portfolio = portfolio_overview()
+                # dynamic quantity scaled by buying power for buy orders
+                dyn_qty = round(float(bp * 0.1 / last_price['high'][:1]), ndigits=0)
 
                 # tech indicator returns a tuple; sma dictionary with values; meta dict with characteristics
-                # instantiate the class first and provide the API key
                 print("Retrieving weighted moving averages...")
                 ti = TechIndicators('PKS7JXWMMDQQXQNDWT2P')
                 wma_50, meta_wma_50 = ti.get_wma(symbol=stock_symbol, interval='daily', time_period='50', series_type='open')
@@ -72,16 +71,13 @@ def wma_loop(equities_list):
                 if (wma_50[key_list[2][1]]['WMA'] < wma_200[key_list_2[2][1]]['WMA'] and
                         wma_50[key_list[0][1]]['WMA'] > wma_200[key_list_2[0][1]]['WMA']):
                     # buy signal
-                    print("Executing buy signal...")
-                    print(stock_symbol, " is being bought")
                     try:
-                        print("Stock is being purchased")
+                        print("Stock buy: ", stock_symbol, "\ntimestamp: ", dt.now())
                         submit_order(symbol=stock_symbol,
-                                     qty=float(last_price['high'].head(1) / bp * 0.1),
+                                     qty=dyn_qty,
                                      side='buy',
                                      type='limit',
-                                     time_in_force='gtc',
-                                     limit_price=mean_price
+                                     time_in_force='day'
                                      )
                     except BaseException as e:
                         print(e)
@@ -89,23 +85,20 @@ def wma_loop(equities_list):
                                      qty=5,
                                      side='buy',
                                      type='limit',
-                                     time_in_force='gtc',
-                                     limit_price=mean_price
+                                     time_in_force='day'
                                      )
                 # check if wma_50 is smaller than wma_200; the stock is owned; at least one stock is owned
                 elif (wma_50[key_list[2][1]]['WMA'] > wma_200[key_list_2[2][1]]['WMA'] and
                         wma_50[key_list[0][1]]['WMA'] < wma_200[key_list_2[0][1]]['WMA']) and\
                         (stock_symbol in portfolio and portfolio[1] > 0):
                     # execute sell signal
-                    print("Executing sell signal...")
                     try:
-                        print("Stock is owned and is being sold...")
+                        print("Stock being sold: ", stock_symbol, "\n timestamp: ", dt.now())
                         submit_order(symbol=stock_symbol,
                                      qty=2,
                                      side='sell',
                                      type='limit',
-                                     time_in_force='gtc',
-                                     limit_price=actual_price
+                                     time_in_force='day'
                                      )
                     except BaseException as e:
                         print(e)
@@ -113,8 +106,7 @@ def wma_loop(equities_list):
                                      qty=float(last_price['high'].head(1) / bp * 0.1),
                                      side='sell',
                                      type='limit',
-                                     time_in_force='gtc',
-                                     limit_price=actual_price
+                                     time_in_force='day'
                                      )
                         pass
                     print("Order successful; script execution time:", time.time() - start_time, " sec")

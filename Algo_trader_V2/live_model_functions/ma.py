@@ -79,15 +79,13 @@ def ma_loop(equities_list):
                 if (sma_50[key_list[2][1]]['SMA'] < sma_200[key_list_2[2][1]]['SMA'] and
                         sma_50[key_list[0][1]]['SMA'] > sma_200[key_list_2[0][1]]['SMA']):
                     # buy signal
-                    print("Executing buy signal...")
                     try:
-                        print("Stock ", stock_symbol, " is being purchased")
+                        print("Stock buy: ", stock_symbol, "\ntimestamp: ", dt.now())
                         submit_order(symbol=stock_symbol,
                                      qty=dyn_qty,
                                      side='buy',
                                      type='market',
-                                     time_in_force='day',
-                                     limit_price=actual_price
+                                     time_in_force='day'
                                      )
                     except BaseException as e:
                         print(e)
@@ -95,8 +93,7 @@ def ma_loop(equities_list):
                                      qty=5,
                                      side='buy',
                                      type='market',
-                                     time_in_force='day',
-                                     limit_price=actual_price
+                                     time_in_force='day'
                                      )
                     print("Order successful; script execution time:", time.time() - start_time, " sec.")
                 # check if sma_50 is intersecting sma_200 coming from above; the stock is owned;
@@ -105,10 +102,9 @@ def ma_loop(equities_list):
                         sma_50[key_list[0][1]]['SMA'] < sma_200[key_list_2[0][1]]['SMA']) and\
                         (stock_symbol in portfolio and portfolio[1] > 0):
                     # sell signal
-                    print("Executing sell signal...")
                     # TODO: quantity calculation for held stocks and sell order
                     try:
-                        print("Stock ", stock_symbol, " is being sold")
+                        print("Stock being sold: ", stock_symbol, "\n timestamp: ", dt.now())
                         submit_order(symbol=stock_symbol,
                                      qty=2,
                                      side='sell',

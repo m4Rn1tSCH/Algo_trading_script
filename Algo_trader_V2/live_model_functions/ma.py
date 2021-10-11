@@ -57,8 +57,6 @@ def ma_loop(equities_list):
                 portfolio = portfolio_overview()
                 # dynamic quantity scaled by buying power for buy orders
                 dyn_qty = round(float(bp * 0.1 / last_price['high'][:1]), ndigits=0)
-
-
                 '''
                 ACCESS OF WEIGHTED MOVING AVERAGES AND CONSECUTIVE INTERSECTION THEREOF
                 naming of day + 1 is inverted to index position because list is in descending order
@@ -101,7 +99,8 @@ def ma_loop(equities_list):
                                      limit_price=actual_price
                                      )
                     print("Order successful; script execution time:", time.time() - start_time, " sec.")
-                # check if sma_50 is intersecting sma_200 coming from above; the stock is owned; at least one stock is owned
+                # check if sma_50 is intersecting sma_200 coming from above; the stock is owned;
+                # at least one stock is owned
                 elif (sma_50[key_list[2][1]]['SMA'] > sma_200[key_list_2[2][1]]['SMA'] and
                         sma_50[key_list[0][1]]['SMA'] < sma_200[key_list_2[0][1]]['SMA']) and\
                         (stock_symbol in portfolio and portfolio[1] > 0):

@@ -88,15 +88,17 @@ def get_acc_profit():
     return
 
 
-def nasdaq_equities():
-
+def list_equities():
+    """
+    available exchanges: {'NASDAQ', 'OTC', 'AMEX', 'NYSE', 'ARCA', 'BATS'}
+    :return: list
+    """
     # Get a list of all active assets.
     active_assets = api.list_assets(status='active')
 
     # Filter the assets down to just those on NASDAQ.
     nasdaq_assets = [a for a in active_assets if a.exchange == 'NASDAQ']
-    print(nasdaq_assets)
-
+    return nasdaq_assets
 
 if __name__ == '__main__':
     """
@@ -104,5 +106,6 @@ if __name__ == '__main__':
     comparing your current balance to yesterday's balance.
     """
     # run two functions when invoked directly
-    acc_report()
+    bal_report()
     get_acc_profit()
+    list_equities()

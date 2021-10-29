@@ -95,7 +95,7 @@ def av_daily_adj(symbol):
     return data, meta_data
 
 
-def submit_order(symbol, qty, side, type, time_in_force, limit_price):
+def submit_order(symbol, qty, side, type_order, time_in_force, limit_price):
 
     """
      :param symbol: str; Abbr in 'XXX',
@@ -112,7 +112,7 @@ def submit_order(symbol, qty, side, type, time_in_force, limit_price):
         api.submit_order(symbol=symbol,
                          qty=qty,
                          side=side,
-                         type=type,
+                         type=type_order,
                          time_in_force=time_in_force,
                          limit_price=limit_price
                          )

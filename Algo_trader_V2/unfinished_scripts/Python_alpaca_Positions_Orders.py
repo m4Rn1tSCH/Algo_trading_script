@@ -9,7 +9,7 @@ from PySide2.QtWidgets import *
 
 
 def loadOpenOrders():
-    open_orders = api.list_orders(status='open', limit = 500, direction = 'desc')
+    open_orders = api.list_orders(status='open', limit=500, direction='desc')
     return open_orders
 
 def loadOpenPosition():
@@ -17,12 +17,12 @@ def loadOpenPosition():
     return existing_positions
 
 def loadClosedOrders():
-    closed_orders= api.list_orders(status = 'closed', limit = 500, direction = 'desc')
+    closed_orders= api.list_orders(status='closed', limit=500, direction='desc')
     return closed_orders
 
 class Tree(QWidget):
 
-    def __init__(self,columns):
+    def __init__(self, columns):
         QWidget.__init__(self)
 
         self.tv = QTreeView()
@@ -35,14 +35,14 @@ class Tree(QWidget):
         MainWindow.addWidget(self.tv)
         self.setLayout(MainWindow)
 
-    def addrow(self,columns):
+    def addrow(self, columns):
         items = []
         for c in columns:
             items.append(QStandardItem(c))
         self.tvim.appendRow(tuple(items))
         return items
 
-    def addchild(self,parent,columns):
+    def addchild(self, parent, columns):
         items = []
         for c in columns:
             items.append(QStandardItem(c))
@@ -52,7 +52,7 @@ class Tree(QWidget):
 if __name__ == "__main__":
 
     try:
-        key_id =  os.environ['KEY_ID']
+        key_id = os.environ['KEY_ID']
         secret_key = os.environ['SECRET_KEY']
         base_url = os.environ['BASE_URL']
     except Exception as e:

@@ -32,7 +32,7 @@ def ma_loop(equities_list):
     then the increasing index element in the list represents a day
     further in the past (smaller date number)
     '''
-# outer infinite loop will keep running
+    # outer infinite loop will keep running
     while True:
         # inner loop will check markets for availability
         while api.get_clock().is_open:

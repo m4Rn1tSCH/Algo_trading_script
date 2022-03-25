@@ -86,12 +86,12 @@ def av_intraday(symbol):
 
 def av_daily_adj(symbol):
     """
-    pull daily adjusted
+    pull daily prices
     :return:
     """
     ts = TimeSeries(key='IH4EENERLUFUKJRW', output_format='pandas', treat_info_as_error=True, indexing_type='date',
                     proxy=None)
-    data, meta_data = ts.get_daily_adjusted(symbol=symbol, interval='1min', outputsize='full')
+    data, meta_data = ts.get_daily(symbol=symbol, interval='1min', outputsize='full')
     return data, meta_data
 
 

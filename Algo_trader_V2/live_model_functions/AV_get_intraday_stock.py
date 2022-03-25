@@ -12,11 +12,7 @@ from alpha_vantage.timeseries import TimeSeries
 
 from Algo_trader_V2.api.alpaca_API_connector import api
 
-
-# TODO
-# last price with changes
-# ts.get_quote_endpoint('AAPl')
-
+# TODO: remove adjusted pull and convert to regular one
 # pull stock data from Alpha Vantage; returned as tuple
 def pull_data_adj(symbol, outputsize, cadence, output_format, plot_price=False):
     """
@@ -30,12 +26,12 @@ def pull_data_adj(symbol, outputsize, cadence, output_format, plot_price=False):
                     treat_info_as_error=True, indexing_type='date', proxy=None)
     try:
         if cadence == 'daily':
-            data, meta_data = ts.get_daily_adjusted(symbol=symbol,
+            data, meta_data = ts.get_daily(symbol=symbol,
                                                     outputsize=outputsize)
         if cadence == 'weekly':
-            data, meta_data = ts.get_weekly_adjusted(symbol=symbol)
+            data, meta_data = ts.get_weekly(symbol=symbol)
         if cadence == 'monthly':
-            data, meta_data = ts.get_monthly_adjusted(symbol=symbol)
+            data, meta_data = ts.get_monthly(symbol=symbol)
         # drop the date as index to use it
         data = data.reset_index(drop=False, inplace=False)
         # rename columns names for better handling

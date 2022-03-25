@@ -17,7 +17,7 @@ from Algo_trader_V2.api.alpaca_API_connector import api
 
 
 # pull stock data from Alpha Vantage; returned as tuple
-def pull_data_adj(symbol, outputsize, cadence, output_format):
+def pull_data(symbol, outputsize, cadence, output_format):
 
     """
     DOCUMENTATION
@@ -29,11 +29,11 @@ def pull_data_adj(symbol, outputsize, cadence, output_format):
     ts = TimeSeries(key='IH4EENERLUFUKJRW', output_format=output_format,
                     treat_info_as_error=True, indexing_type='date', proxy=None)
     if cadence == 'daily':
-        data, _ = ts.get_daily_adjusted(symbol=symbol, outputsize=outputsize)
+        data, _ = ts.get_daily(symbol=symbol, outputsize=outputsize)
     if cadence == 'weekly':
-        data, _ = ts.get_weekly_adjusted(symbol=symbol)
+        data, _ = ts.get_weekly(symbol=symbol)
     if cadence == 'monthly':
-        data, _ = ts.get_monthly_adjusted(symbol=symbol)
+        data, _ = ts.get_monthly(symbol=symbol)
     # drop the date as index to use it
     data = data.reset_index(drop=False, inplace=False)
     # rename columns names for better handling
@@ -112,7 +112,7 @@ def submit_order(symbol, qty, side, type_order, time_in_force, limit_price):
         api.submit_order(symbol=symbol,
                          qty=qty,
                          side=side,
-                         type=type_order,
+                         type=type_order    ,
                          time_in_force=time_in_force,
                          limit_price=limit_price
                          )

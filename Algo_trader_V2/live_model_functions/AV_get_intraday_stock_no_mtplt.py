@@ -37,14 +37,12 @@ def pull_data(symbol, outputsize, cadence, output_format):
     # drop the date as index to use it
     data = data.reset_index(drop=False, inplace=False)
     # rename columns names for better handling
-    data = data.rename(columns={"1. open": "open",
-                                "2. high": "high",
-                                "3. low": "low",
-                                "4. close": "close",
-                                "5. adjusted close": "adjusted_close",
-                                "6. volume": "volume",
-                                "7. dividend amount": "dividend amount"},
-                                inplace=False)
+    data = data.rename(columns={"1. open": "Open",
+                                "2. high": "High",
+                                "3. low": "Low",
+                                "4. close": "Close",
+                                "5. volume": "Volume"
+                                }, inplace=False)
     return data
 
 

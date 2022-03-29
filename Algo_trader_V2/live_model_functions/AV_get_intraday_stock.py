@@ -27,7 +27,7 @@ def pull_data_adj(symbol, outputsize, cadence, output_format, plot_price=False):
     try:
         if cadence == 'daily':
             data, meta_data = ts.get_daily(symbol=symbol,
-                                                    outputsize=outputsize)
+                                           outputsize=outputsize)
         if cadence == 'weekly':
             data, meta_data = ts.get_weekly(symbol=symbol)
         if cadence == 'monthly':
@@ -36,13 +36,11 @@ def pull_data_adj(symbol, outputsize, cadence, output_format, plot_price=False):
         data = data.reset_index(drop=False, inplace=False)
         # rename columns names for better handling
         data = data.rename(columns={"1. open": "Open",
-                                "2. high": "High",
-                                "3. low": "Low",
-                                "4. close": "Close",
-                                "5. adjusted close": "Adjusted_close",
-                                "6. volume": "volume",
-                                "7. dividend amount": "Dividend_amount"},
-                                inplace=False)
+                                    "2. high": "High",
+                                    "3. low": "Low",
+                                    "4. close": "Close",
+                                    "5. volume": "Volume"
+                                    }, inplace=False)
         if plot_price:
             # LINE VALUES
             # supported values are: '-', '--', '-.', ':',

@@ -27,16 +27,17 @@ sns.set_style('darkgrid')
 #####
 # retrieve data
 # outputsize=full; all data or outputsize=compact; 100 rows
-df, _ = ts.get_daily_adjusted(symbol='NVDA', outputsize='full')
+df, _ = ts.get_daily(symbol='NVDA', outputsize='full')
 # rename columns names for better handling
-df = df.rename(columns={"1. open": "Open", "2. high": "High", "3. low": "Low",
-                        "4. close": "Close", "5. adjusted close": "Adjusted_close",
-                        "6. volume": "Volume", "7. dividend amount": "Dividend_amount",
-                        "8. split coefficient": "Split_coefficient"},
-               inplace=False)
-df = df.drop(columns=['Adjusted_close', 'Dividend_amount', 'Split_coefficient'])
+df = df.rename(columns={"1. open": "Open",
+                        "2. high": "High",
+                        "3. low": "Low",
+                        "4. close": "Close",
+                        "5. volume": "Volume"
+                        }, inplace=False)
 df.reset_index(drop=False, inplace=True)
 # pandas at 1.2.2 and numpy 1.20.3 at avoids error of conditional import
+# remove redundant columns to reduce VIF, correlation
 processed_df = pred_feat(df=df)
 # reverse df as it starts with the latest day
 processed_df = processed_df.iloc[::-1]
@@ -62,8 +63,8 @@ train_df = train_df.set_index('date')
 train_df['Close'] = train_df['Close'].astype(float)
 
 # look for missing values and NaNs that ruin the prediction
-train_df.isna().sum()
-train_df.isnull().sum()
+print(train_df.isna().sum())
+print(train_df.isnull().sum())
 train_df.head()
 
 

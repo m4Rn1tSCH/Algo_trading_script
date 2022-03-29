@@ -112,6 +112,7 @@ test_stationarity(train_df['Open'])
 # try tutorial and logarithmic approach
 df_diff = train_df.Open - train_df.Open.shift(1)
 df_diff = df_diff.dropna(inplace = False)
+# after
 test_stationarity(df_diff, window = 12)
 
 # index needs to be continuous date range

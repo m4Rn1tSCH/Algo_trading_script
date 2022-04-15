@@ -64,7 +64,6 @@ train_df['Close'] = train_df['Close'].astype(float)
 # look for missing values and NaNs that ruin the prediction
 print(train_df.isna().sum())
 print(train_df.isnull().sum())
-train_df.head()
 
 result = seasonal_decompose(train_df['Open'], model='additive', freq=365)
 
@@ -103,7 +102,7 @@ ax2 = fig.add_subplot(212)
 fig = sm.graphics.tsa.plot_pacf(df_diff, lags=40, ax=ax2)
 plt.show()
 
-# Here we can see the acf and pacf both has a recurring pattern approximately every 10 periods.
+# Here we can see the ACF and PACF both has a recurring pattern approximately every 10 periods.
 # Indicating a weekly pattern exists.
 # Any time you see a regular pattern like that in one of these plots, you should suspect that there is some sort of
 # significant seasonal thing going on. Then we should start to consider SARIMA to take seasonality into account
@@ -133,18 +132,47 @@ plt.show()
 # TODO - still empty
 # Get the fitted parameters used by the function
 (mu, sigma) = stats.norm.fit(resid)
-#Now plot the distribution using
+# Plot the distribution using
+plt.plot(mu, sigma)
 plt.legend(['Normal dist. ($\mu=$ {:.2f} and $\sigma=$ {:.2f} )'.format(mu, sigma)], loc='best')
 plt.ylabel('Frequency')
 plt.title('Residual distribution')
 plt.show()
 
-# analyze results
 # ACF and PACF
 fig = plt.figure(figsize=(12, 8))
 ax1 = fig.add_subplot(211)
 fig = sm.graphics.tsa.plot_acf(arima_mod.resid, lags=40, ax=ax1)
 ax2 = fig.add_subplot(212)
 fig = sm.graphics.tsa.plot_pacf(arima_mod.resid, lags=40, ax=ax2)
+
+# Here we can see the acf and pacf both has a recurring pattern approximately every 10 periods.
+# Indicating a weekly pattern exists.
+# Any time you see a regular pattern like that in one of these plots, you should suspect that there is some sort of
+# significant seasonal thing going on. Then we should start to consider SARIMA to take seasonality into account
+
+# pick p, d, q
+# i/q: order that has made the df stationary (our case: first order)
+# AR or p: lag length that is statistically significant with the Dickey-Fuller Test (our case: 10 periods)
+# When the AR model is appropriately specified, the residuals from this model can be used
+# to directly observe the uncorrelated error
+# pass as tuple: (p, 0, q)
+
+# PREDICTION AND EVALUATION
+# ARIMA needs all dates to be consecutive and filled with values
+# use forward fill .ffill() to fill weekends and holidays
+start_index = 0
+end_index = len(train_df)
+train_df.reset_index(drop=False, inplace=True)
+train_df.ffill()
+train_df = train_df.set_index('date')
+
+# test for missing values and continuous date index
+train_df.isnull().sum().sum()
+train_df.index.isnull().sum()
+
+train_df['forecast'] = arima_mod.predict(dynamic=False)
+train_df[start_index:end_index][['Open', 'forecast']].plot(figsize=(14, 10))
+plt.show()
 
 smape_kun(train_df[start_index:end_index]['Open'], train_df[start_index:end_index]['forecast'])

@@ -7,6 +7,8 @@ Created on Sat April 22 10:26:42 2020
 from datetime import datetime as dt
 import numpy as np
 import pandas as pd
+import matplotlib.pyplot as plt
+
 
 def pred_feat(df):
     """
@@ -20,7 +22,7 @@ def pred_feat(df):
     NaNs need to be dropped to make scaling and selection of features working
     """
 
-    #Conversion datetime to timestamps
+    # Conversion datetime to timestamps
     try:
         # handle datetime object and add features
         for col in list(df):
@@ -29,7 +31,7 @@ def pred_feat(df):
                 df[f"{col}_week"] = df[col].dt.week
                 df[f"{col}_weekday"] = df[col].dt.weekday
 
-        #conversion of dates to unix timestamps as numeric value (fl64)
+        # conversion of dates to unix timestamps as numeric value (fl64)
         if df['date'].isnull().sum() == 0:
             df['date_ts'] = df['date'].apply(lambda x: dt.timestamp(x))
             df['date_ts'].astype('int64')
@@ -39,7 +41,6 @@ def pred_feat(df):
     except (TypeError, OSError, ValueError) as e:
         print(f"Problem with conversion: {e}")
 
-    # typically engineered features based on lagging metrics
     # mean + stdev of past 3d/7d/30d/ + rolling volume
     df.reset_index(drop=True, inplace=True)
     # pick lag features to iterate through and calculate features
@@ -141,3 +142,51 @@ def trading_support_resistance(df, bin_width=30):
         df['signal'][x] = df['signal'][x - 1]
         df['positions'] = df['signal'].diff()
     return df
+
+
+def test_stationarity(timeseries, window=12, cutoff=0.01):
+    """
+
+    :param timeseries:
+    :param window:
+    :param cutoff:
+    :return:
+    """
+    # Determing rolling statistics
+    rol_mean = timeseries.rolling(window).mean()
+    rol_std = timeseries.rolling(window).std()
+
+    # Plot rolling statistics:
+    fig = plt.figure(figsize=(12, 8))
+    orig = plt.plot(timeseries, color='blue', label='Original')
+    mean = plt.plot(rol_mean, color='red', label='Rolling Mean')
+    std = plt.plot(rol_std, color='black', label='Rolling Std')
+    plt.legend(loc='best')
+    plt.title('Rolling Mean & Standard Deviation')
+    plt.show()
+
+    # Perform augmented Dickey-Fuller test:
+    print('Results of Dickey-Fuller Test:')
+    dftest = adfuller(timeseries, autolag='AIC', maxlag=20)
+    dfoutput = pd.Series(dftest[0:4], index=['Test Statistic', 'p-value', '#Lags Used', 'Number of Observations Used'])
+    for key, value in dftest[4].items():
+        dfoutput['Critical Value (%s)' % key] = value
+    pvalue = dftest[1]
+    if pvalue < cutoff:
+        print('p-value = %.4f. The series is likely stationary.' % pvalue)
+    else:
+        print('p-value = %.4f. The series is likely non-stationary.' % pvalue)
+
+    print(dfoutput)
+
+
+def smape_kun(y_true, y_pred):
+    """
+    The function calculates the
+    :param y_true: array, pd.Series; given targets of data set
+    :param y_pred: array, pd.Series; predicted target values
+    :return: float; MAPE and SMAPE
+    """
+    mape = np.mean(abs((y_true-y_pred) / y_true)) * 100
+    smape = np.mean((np.abs(y_pred - y_true) * 200 / (np.abs(y_pred) + np.abs(y_true))).fillna(0))
+    print('MAPE: %.2f %% \nSMAPE: %.2f'% (mape, smape), "%")

@@ -23,11 +23,10 @@ import seaborn as sns
 color = sns.color_palette()
 sns.set_style('darkgrid')
 
-#####
+# this ARIMA script is for investigation purposes of new ideas
 # retrieve data
 # outputsize=full; all data or outputsize=compact; 100 rows
 df, _ = ts.get_daily(symbol='NVDA', outputsize='full')
-# rename columns names for better handling
 df = df.rename(columns={"1. open": "Open",
                         "2. high": "High",
                         "3. low": "Low",
@@ -40,12 +39,7 @@ df.reset_index(drop=False, inplace=True)
 processed_df = pred_feat(df=df)
 # reverse df as it starts with the latest day
 processed_df = processed_df.iloc[::-1]
-# dropping the index later as well
-# processed_df.reset_index(drop=True, inplace=True)
 print(processed_df.head())
-#####
-
-# processed_df['date'] = pd.to_datetime(processed_df['date'], format="%Y-%m-%d")
 
 sns.lineplot(x="date", y="Open", legend='full', data=processed_df)
 plt.show()
@@ -62,16 +56,16 @@ train_df = train_df.set_index('date')
 train_df['Close'] = train_df['Close'].astype(float)
 
 # look for missing values and NaNs that ruin the prediction
-print(train_df.isna().sum())
-print(train_df.isnull().sum())
+print("Number of Nan: ", train_df.isna().sum())
+print("Number of nulls: ", train_df.isnull().sum())
 
+# check for seasonality
 result = seasonal_decompose(train_df['Open'], model='additive', freq=365)
-
 # decompose plot definitely shows seasonality
 # that makes ARIMA necessary
-fig = plt.figure()
+fig = plt.figure(figsize=(15, 12))
 fig = result.plot()
-fig.set_size_inches(15, 12)
+# fig.set_size_inches(15, 12)
 plt.show()
 
 test_stationarity(train_df['Open'])
@@ -115,7 +109,7 @@ plt.show()
 # pass as tuple: (p, 0, q)
 
 # SUMMARY OF NON-STATIONARY DF (FOR COMPARISON)
-arima_mod = sm.tsa.ARIMA(train_df.Open, (5, 1, 0)).fit(disp=False)
+arima_mod = sm.tsa.ARIMA(train_df.Open, trend='n', order=(5, 1, 0)).fit()
 print(arima_mod.summary())
 
 resid = arima_mod.resid
@@ -127,16 +121,13 @@ print(normaltest(resid))
 fig = plt.figure(figsize=(12, 8))
 ax0 = fig.add_subplot(111)
 sns.distplot(resid, fit=stats.norm, ax=ax0)
-plt.show()
-
-# TODO - still empty
-# Get the fitted parameters used by the function
-(mu, sigma) = stats.norm.fit(resid)
-# Plot the distribution using
-plt.plot(mu, sigma)
 plt.legend(['Normal dist. ($\mu=$ {:.2f} and $\sigma=$ {:.2f} )'.format(mu, sigma)], loc='best')
 plt.ylabel('Frequency')
-plt.title('Residual distribution')
+plt.show()
+
+# Get the fitted parameters used by the function
+(mu, sigma) = stats.norm.fit(resid)
+plt.plot(mu, sigma)
 plt.show()
 
 # ACF and PACF

@@ -20,11 +20,10 @@ ts = TimeSeries(key='IH4EENERLUFUKJRW', output_format='pandas', treat_info_as_er
 import matplotlib.pyplot as plt
 import seaborn as sns
 
-#####
+# this SARIMA script is for investigation purposes of new ideas
 # retrieve data
 # outputsize=full; all data or outputsize=compact; 100 rows
 df, _ = ts.get_daily(symbol='NVDA', outputsize='full')
-# rename columns names for better handling
 df = df.rename(columns={"1. open": "Open",
                         "2. high": "High",
                         "3. low": "Low",
@@ -37,12 +36,8 @@ df.reset_index(drop=False, inplace=True)
 processed_df = pred_feat(df=df)
 # reverse df as it starts with the latest day
 processed_df = processed_df.iloc[::-1]
-# dropping the index later as well
-# processed_df.reset_index(drop=True, inplace=True)
 print(processed_df.head())
 #####
-
-# processed_df['date'] = pd.to_datetime(processed_df['date'], format="%Y-%m-%d")
 
 sns.lineplot(x="date", y="Open", legend='full', data=processed_df)
 plt.show()
@@ -59,16 +54,16 @@ train_df = train_df.set_index('date')
 train_df['Close'] = train_df['Close'].astype(float)
 
 # look for missing values and NaNs that ruin the prediction
-print(train_df.isna().sum())
-print(train_df.isnull().sum())
+print("Number of Nan: ", train_df.isna().sum())
+print("Number of nulls: ", train_df.isnull().sum())
 
+# check for seasonality
 result = seasonal_decompose(train_df['Open'], model='additive', freq=365)
-
 # decompose plot definitely shows seasonality
 # that makes ARIMA necessary
-fig = plt.figure()
+fig = plt.figure(figsize=(15, 12))
 fig = result.plot()
-fig.set_size_inches(15, 12)
+# fig.set_size_inches(15, 12)
 plt.show()
 
 test_stationarity(train_df['Open'])
@@ -83,6 +78,7 @@ test_stationarity(df_diff, window=12)
 # index needs to be continuous date range
 train_df.index.isnull().sum()
 
+# regular df
 fig = plt.figure(figsize=(12, 8))
 ax1 = fig.add_subplot(211)
 fig = sm.graphics.tsa.plot_acf(train_df.Open, lags=40, ax=ax1)
@@ -90,6 +86,7 @@ ax2 = fig.add_subplot(212)
 fig = sm.graphics.tsa.plot_pacf(train_df.Open, lags=40, ax=ax2)
 plt.show()
 
+# diff df
 fig = plt.figure(figsize=(12, 8))
 ax1 = fig.add_subplot(211)
 fig = sm.graphics.tsa.plot_acf(df_diff, lags=40, ax=ax1)

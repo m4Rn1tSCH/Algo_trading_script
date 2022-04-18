@@ -22,11 +22,8 @@ ts = TimeSeries(key='IH4EENERLUFUKJRW', output_format='pandas', treat_info_as_er
 df, _ = ts.get_daily_adjusted(symbol='NVDA', outputsize='full')
 # rename columns names for better handling
 df = df.rename(columns={"1. open": "Open", "2. high": "High", "3. low": "Low",
-                        "4. close": "Close", "5. adjusted close": "Adjusted_close",
-                        "6. volume": "Volume", "7. dividend amount": "Dividend_amount",
-                        "8. split coefficient": "Split_coefficient"},
+                        "4. close": "Close", "5. volume": "Volume"},
                inplace=False)
-df = df.drop(columns=['Adjusted_close', 'Dividend_amount', 'Split_coefficient'])
 df.reset_index(drop=False, inplace=True)
 # pandas at 1.2.2 and numpy 1.20.3 at avoids error of conditional import
 processed_df = pred_feat(df=df)
@@ -36,24 +33,18 @@ processed_df = processed_df.iloc[::-1]
 # processed_df.reset_index(drop=True, inplace=True)
 print(processed_df.head())
 
-train_df = processed_df[:2800]
+train_df = processed_df[:2500]
 train_df = train_df.set_index('date')
 train_df['Close'] = train_df['Close'].astype(float)
 
-# look for missing values and NaNs that ruin the prediction
-train_df.isna().sum()
-train_df.isnull().sum()
-train_df.head()
-
-# Iterate over all ARMA(p, q) models with p, q in [0, 6]
+# Iterate over all ARIMA(p, q) models with p, q in [0, 6]
 aic_full = pd.DataFrame(np.zeros((6, 6), dtype=float))
 aic_miss = pd.DataFrame(np.zeros((6, 6), dtype=float))
-for p in range(6):
-    for q in range(6):
+for p in range(0, 6, 1):
+    for q in range(0, 6, 1):
         if p == 0 and q == 0:
             continue
-
-        # Estimate the model with no missing datapoints
+        # Estimate the model with no missing data points
         mod = sm.tsa.statespace.SARIMAX(train_df, order=(p, 0, q), enforce_invertibility=False)
         try:
             res = mod.fit(disp=False)
@@ -61,7 +52,7 @@ for p in range(6):
         except:
             aic_full.iloc[p, q] = np.nan
 
-        # Estimate the model with missing datapoints
+        # Estimate the model with missing data points
         mod = sm.tsa.statespace.SARIMAX(dta_miss, order=(p, 0, q), enforce_invertibility=False)
         try:
             res = mod.fit(disp=False)

@@ -211,8 +211,7 @@ smape_kun(train_df[start_index:end_index]['Open'], train_df[start_index:end_inde
 # start_index = '2017-10-01'
 # end_index = '2017-12-31'
 # # exog_data.head()
-#
-# %%time
+
 # sarimax_mod6 = sm.tsa.statespace.SARIMAX(endog = train_df.sales[:start_index],
 #                                         exog = exog_data[:start_index],
 #                                         trend='n', order=(6,1,0), seasonal_order=(0,1,1,7)).fit()

@@ -19,8 +19,7 @@ ts = TimeSeries(key='IH4EENERLUFUKJRW', output_format='pandas', treat_info_as_er
                 proxy=None)
 
 # outputsize=full; all data or outputsize=compact; 100 rows
-df, _ = ts.get_daily_adjusted(symbol='NVDA', outputsize='full')
-# rename columns names for better handling
+df, _ = ts.get_daily(symbol='NVDA', outputsize='full')
 df = df.rename(columns={"1. open": "Open", "2. high": "High", "3. low": "Low",
                         "4. close": "Close", "5. volume": "Volume"},
                inplace=False)
@@ -40,12 +39,10 @@ train_df['Close'] = train_df['Close'].astype(float)
 # Iterate over all ARIMA(p, q) models with p, q in [0, 6]
 aic_full = pd.DataFrame(np.zeros((6, 6), dtype=float))
 aic_miss = pd.DataFrame(np.zeros((6, 6), dtype=float))
-for p in range(0, 6, 1):
-    for q in range(0, 6, 1):
-        if p == 0 and q == 0:
-            continue
+for p in range(1, 6, 1):
+    for q in range(1, 2, 1):
         # Estimate the model with no missing data points
-        mod = sm.tsa.statespace.SARIMAX(train_df, order=(p, 0, q), enforce_invertibility=False)
+        mod = sm.tsa.statespace.SARIMAX(train_df, order=(p, 1, q), enforce_invertibility=False)
         try:
             res = mod.fit(disp=False)
             aic_full.iloc[p, q] = res.aic
@@ -53,7 +50,7 @@ for p in range(0, 6, 1):
             aic_full.iloc[p, q] = np.nan
 
         # Estimate the model with missing data points
-        mod = sm.tsa.statespace.SARIMAX(dta_miss, order=(p, 0, q), enforce_invertibility=False)
+        mod = sm.tsa.statespace.SARIMAX(dta_miss, order=(p, 1, q), enforce_invertibility=False)
         try:
             res = mod.fit(disp=False)
             aic_miss.iloc[p, q] = res.aic

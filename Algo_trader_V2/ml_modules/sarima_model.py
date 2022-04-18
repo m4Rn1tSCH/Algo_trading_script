@@ -118,7 +118,9 @@ plt.show()
 # If several models do not produce good results, their AIC value is set to NaN.
 # (Durbin and Koopman note numerical problems with the high order model)
 
-sarima_mod = sm.tsa.statespace.SARIMAX(train_df.Open, trend='n', order=(10, 1, 0), enforce_stationarity=True).fit()
+# procedure; pick 10 orders (AR/p value) and see when the first value is statistically significant
+# check plot and MAPE/SMAPE for minimal value
+sarima_mod = sm.tsa.statespace.SARIMAX(train_df.Open, trend='n', order=(4, 1, 1), enforce_stationarity=True).fit()
 print(sarima_mod.summary())
 
 resid = sarima_mod.resid
@@ -127,15 +129,11 @@ print(normaltest(resid))
 fig = plt.figure(figsize=(12, 8))
 ax0 = fig.add_subplot(111)
 sns.distplot(resid, fit=stats.norm, ax=ax0)
+plt.legend(['Normal dist. ($\mu=$ {:.2f} and $\sigma=$ {:.2f} )'.format(mu, sigma)], loc='best')
+plt.ylabel('Frequency')
 plt.show()
 # Get the fitted parameters used by the function
 (mu, sigma) = stats.norm.fit(resid)
-
-# Plot the distribution
-plt.legend(['Normal dist. ($\mu=$ {:.2f} and $\sigma=$ {:.2f} )'.format(mu, sigma)], loc='best')
-plt.ylabel('Frequency')
-plt.title('Residual distribution')
-
 
 # ACF and PACF
 fig = plt.figure(figsize=(12, 8))
@@ -169,7 +167,7 @@ train_df = train_df.set_index('date')
 # test for missing values and continuous date index
 train_df.isnull().sum().sum()
 train_df.index.isnull().sum()
-
+# set dynamic=false to avoid nans
 train_df['forecast'] = sarima_mod.predict(dynamic=False)
 train_df[start_index:end_index][['Open', 'forecast']].plot(figsize=(14, 10))
 plt.show()

@@ -1,0 +1,5 @@
+in case of installation problems with pmdarima:
+-add metadata file to numpy installation
+- run command in cmd manually
+    C:\Users\Bill Jaenke\Py_env\venv\Scripts\activate.bat
+    pip install pmdarima

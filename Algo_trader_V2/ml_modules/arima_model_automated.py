@@ -4,7 +4,7 @@ Created on 8/11/2021; 9:42 PM
 
 @author: Bill Jaenke
 """
-from Algo_trader_V2.support_functions.support_features import pred_feat, trading_support_resistance
+from Algo_trader_V2.support_functions.support_features import pred_feat
 from alpha_vantage.timeseries import TimeSeries
 import numpy as np
 import pandas as pd
@@ -12,6 +12,7 @@ from scipy.stats import norm
 import statsmodels.api as sm
 import matplotlib.pyplot as plt
 import seaborn as sns
+from pmdarima import auto_arima
 color = sns.color_palette()
 sns.set_style('darkgrid')
 

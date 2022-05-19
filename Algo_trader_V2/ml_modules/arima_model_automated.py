@@ -16,8 +16,8 @@ from pmdarima import auto_arima
 color = sns.color_palette()
 sns.set_style('darkgrid')
 
-ts = TimeSeries(key='IH4EENERLUFUKJRW', output_format='pandas', treat_info_as_error=True, indexing_type='date',
-                proxy=None)
+ts = TimeSeries(key='IH4EENERLUFUKJRW', output_format='pandas', treat_info_as_error=True,
+                indexing_type='date', proxy=None)
 
 # outputsize=full; all data or outputsize=compact; 100 rows
 df, _ = ts.get_daily(symbol='NVDA', outputsize='full')
@@ -38,6 +38,7 @@ train_df = train_df.set_index('date')
 train_df['Close'] = train_df['Close'].astype(float)
 
 # Iterate over all ARIMA(p, q) models with p, q in [0, 6]
+# TODO: pick minimal SMAPE and use model
 aic_full = pd.DataFrame(np.zeros((6, 6), dtype=float))
 aic_miss = pd.DataFrame(np.zeros((6, 6), dtype=float))
 for p in range(1, 6, 1):
@@ -47,7 +48,7 @@ for p in range(1, 6, 1):
         try:
             res = mod.fit(disp=False)
             aic_full.iloc[p, q] = res.aic
-        except:
+        except BaseException as e:
             aic_full.iloc[p, q] = np.nan
 
         # Estimate the model with missing data points
@@ -55,9 +56,8 @@ for p in range(1, 6, 1):
         try:
             res = mod.fit(disp=False)
             aic_miss.iloc[p, q] = res.aic
-        except:
+        except BaseException as e:
             aic_miss.iloc[p, q] = np.nan
-
 
 mod = sm.tsa.statespace.SARIMAX(dta_miss, order=(1, 0, 1))
 res = mod.fit(disp=False)

@@ -1,4 +1,4 @@
-# DEPENDENCIES USED IN ALL ENVIRONMENTS
+# DEPENDENCIES USED IN ALL ENVIRONMENTS (without ML for ma_loop only)
 # do not use tabs here when copied;
 Keras-Preprocessing==1.1.2
 Markdown==3.3.4
@@ -6,7 +6,7 @@ Pillow==8.2.0
 Werkzeug==2.0.1
 absl-py==0.12.0
 aiohttp==3.6.2
-alpaca-trade-api==requirements_V2.txt.2.1
+alpaca-trade-api==2.3.0
 alpha-vantage==2.3.1
 astunparse==1.6.3
 async-timeout==3.0.1

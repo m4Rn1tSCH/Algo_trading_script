@@ -117,7 +117,7 @@ print(normaltest(resid))
 # returns a 2-tuple of the chi-squared statistic, and the associated p-value. the p-value is very small, meaning
 # the residual is not a normal distribution
 
-
+# TODO: fix definition of mu and sigma
 fig = plt.figure(figsize=(12, 8))
 ax0 = fig.add_subplot(111)
 sns.distplot(resid, fit=stats.norm, ax=ax0)

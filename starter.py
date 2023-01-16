@@ -8,7 +8,7 @@ Created on 7/23/2020 5:46 PM
 This endpoint starts the algorithm.
 Specify which loop and stock
 '''
-from Algo_trader_V1.live_model_functions.ma import ma_loop
+from Algo_trader_V2.live_model_functions.ma import ma_loop
 
 # stocks_picked = ['BILL', 'CUK', 'OIL_CRUDE', 'AAPL', 'NVDA']
 if __name__ == '__main__':
@@ -21,5 +21,10 @@ if __name__ == '__main__':
 	equities_list: strings; specify the stocks for which data will be pulled and
 	the check will be performed.
 	"""
-	ma_loop(equities_list=['BILL', 'CUK', 'OIL_CRUDE', 'AAPL', 'NVDA'])
+	# prepare data from stock_skimmer
+    # test_dict = zip(df_test_bed['stock'].to_list(), df_test_bed['return'].to_list())
+    # test_dict = dict(zip(df_test_bed['stock'].to_list(), df_test_bed['return'].to_list()))
+    # top5_l = [k for k, v in test_dict.items() if v > 0]
+    
+    ma_loop(equities_list=['BILL', 'CUK', 'OIL_CRUDE', 'AAPL', 'NVDA'])
 	print("Algo script is running...")

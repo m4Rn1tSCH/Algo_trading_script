@@ -22,9 +22,9 @@ if __name__ == '__main__':
 	the check will be performed.
 	"""
 	# prepare data from stock_skimmer
-    # test_dict = zip(df_test_bed['stock'].to_list(), df_test_bed['return'].to_list())
-    # test_dict = dict(zip(df_test_bed['stock'].to_list(), df_test_bed['return'].to_list()))
-    # top5_l = [k for k, v in test_dict.items() if v > 0]
-    
-    ma_loop(equities_list=['BILL', 'CUK', 'OIL_CRUDE', 'AAPL', 'NVDA'])
+	# test_dict = zip(df_test_bed['stock'].to_list(), df_test_bed['return'].to_list())
+	# test_dict = dict(zip(df_test_bed['stock'].to_list(), df_test_bed['return'].to_list()))
+	# top5_l = [k for k, v in test_dict.items() if v > 0]
+
+	ma_loop(equities_list=['MGRX', 'MSFT', 'LEVI', 'AAPL', 'NVDA'])
 	print("Algo script is running...")

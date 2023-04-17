@@ -110,7 +110,7 @@ def submit_order(symbol, qty, side, type_order, time_in_force, limit_price):
         api.submit_order(symbol=symbol,
                          qty=qty,
                          side=side,
-                         type=type_order    ,
+                         type=type_order,
                          time_in_force=time_in_force,
                          limit_price=limit_price
                          )

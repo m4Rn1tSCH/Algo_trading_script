@@ -21,9 +21,12 @@ def ma_loop(equities_list):
 	Parameters
 	-----------------
 	equities_list : iterable list of strings representing stocks
+
+	Parameters of pull_data function inside
 	interval : 1min, 5min, 15min, 30min, 60min, daily, weekly, monthly
 	time_period : time_period=60, time_period=200
 	series_type : close, open, high, low
+	output_size : full, compact
 	datatype : 'json', 'csv', 'pandas'
 	"""
 	'''
@@ -67,14 +70,13 @@ def ma_loop(equities_list):
 				ti = TechIndicators('PKS7JXWMMDQQXQNDWT2P')
 				sma_50, _ = ti.get_sma(symbol=stock_symbol, interval='daily', time_period='50', series_type='open')
 				sma_200, _ = ti.get_sma(symbol=stock_symbol, interval='daily', time_period='200', series_type='open')
-
+				# access tuples inside list with key_list[LIST_INDEX][TUPLE_ELEMENT] (both 0-indexed)
 				key_list = sorted(enumerate(sma_50.keys()), reverse=False)[:3]
 				key_list_2 = sorted(enumerate(sma_200.keys()), reverse=False)[:3]
-				# access tuples inside list with key_list[LIST_INDEX][TUPLE_ELEMENT] (both 0-indexed)
 
 				# check if sma_50 is intersecting sma_200 coming from below
-				if (sma_50[key_list[2][1]]['SMA'] < sma_200[key_list_2[2][1]]['SMA'] and
-						sma_50[key_list[0][1]]['SMA'] > sma_200[key_list_2[0][1]]['SMA']):
+				if (sma_50[key_list[2][1]]['SMA'] < sma_200[key_list_2[2][1]]['SMA']) and\
+					(sma_50[key_list[0][1]]['SMA'] >= sma_200[key_list_2[0][1]]['SMA']):
 					# buy signal
 					try:
 						print("Stock buy: ", stock_symbol, "\ntimestamp: ", dt.now())
@@ -83,8 +85,7 @@ def ma_loop(equities_list):
 									 side='buy',
 									 type_order='market',
 									 time_in_force='day',
-									 limit_price=exec_price
-									 )
+									 limit_price=exec_price)
 					except BaseException as e:
 						print(e)
 						submit_order(symbol=stock_symbol,
@@ -92,34 +93,31 @@ def ma_loop(equities_list):
 									 side='buy',
 									 type_order='market',
 									 time_in_force='day',
-									 limit_price=exec_price
-									 )
+									 limit_price=exec_price)
 					print("Order successful; script execution time:", time.time() - start_time, " sec.")
 				# check if sma_50 is intersecting sma_200 coming from above; the stock is owned;
 				# at least one stock is owned
-				elif (sma_50[key_list[2][1]]['SMA'] > sma_200[key_list_2[2][1]]['SMA'] and
-						sma_50[key_list[0][1]]['SMA'] < sma_200[key_list_2[0][1]]['SMA']) and\
-						(stock_symbol in portfolio and portfolio[1] > 0):
+				elif (sma_50[key_list[2][1]]['SMA'] > sma_200[key_list_2[2][1]]['SMA']) and \
+					(sma_50[key_list[0][1]]['SMA'] <= sma_200[key_list_2[0][1]]['SMA']) and\
+					(stock_symbol in portfolio and portfolio[1] > 0):
 					# sell signal
-					# TODO: quantity calculation for held stocks and sell order
+					sell_qty = round(float(bp * 0.05 / last_price['close'].iloc[0]), ndigits=0)
 					try:
 						print("Stock being sold: ", stock_symbol, "\n timestamp: ", dt.now())
 						submit_order(symbol=stock_symbol,
-									 qty=2,
+									 qty=sell_qty,
 									 side='sell',
 									 type_order='market',
 									 time_in_force='day',
-									 limit_price=exec_price
-									 )
+									 limit_price=exec_price)
 					except BaseException as e:
 						print(e)
 						submit_order(symbol=stock_symbol,
-									 qty=3,
+									 qty=sell_qty,
 									 side='sell',
 									 type_order='market',
 									 time_in_force='day',
-									 limit_price=exec_price
-									 )
+									 limit_price=exec_price)
 						pass
 					print("Order successful; script execution time:", time.time() - start_time, " sec")
 				else:
@@ -133,11 +131,10 @@ def ma_loop(equities_list):
 			time.sleep(17280)
 		# handler for closed markets; will freeze entire algo and start again when market is open
 		print("Markets closed at:", api.get_clock().next_close, "Algo is inactive for next: ",
-			  (api.get_clock().next_open - api.get_clock().timestamp).seconds +
-			  (timedelta(seconds=60).seconds), "s")
+			(api.get_clock().next_open - api.get_clock().timestamp).seconds +
+			(timedelta(seconds=60).seconds), "s")
 		time.sleep((api.get_clock().next_open - api.get_clock().timestamp).seconds +
-				   (timedelta(seconds=60).seconds))
-
+			(timedelta(seconds=60).seconds))
 
 # this is for direct testing
 if __name__ == '__main__':

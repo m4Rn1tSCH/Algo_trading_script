@@ -54,7 +54,6 @@ def simple_loop():
                 submit_order(symbol='TSLA',
                              qty=2,
                              side='buy',
-                             type='limit',
                              time_in_force='gtc',
                              limit_price=mean_price
                              )
@@ -63,7 +62,6 @@ def simple_loop():
                 submit_order(symbol='TSLA',
                              qty=2,
                              side='buy',
-                             type='limit',
                              time_in_force='gtc',
                              limit_price=mean_price
                              )
@@ -73,7 +71,6 @@ def simple_loop():
                 submit_order(symbol='TSLA',
                              qty=2,
                              side='sell',
-                             type='limit',
                              time_in_force='gtc',
                              limit_price=actual_price
                              )
@@ -82,7 +79,6 @@ def simple_loop():
                 submit_order(symbol='TSLA',
                              qty=2,
                              side='sell',
-                             type='limit',
                              time_in_force='gtc',
                              limit_price=actual_price
                              )

@@ -3,7 +3,7 @@ This module connects to the alpaca API and automatically to the Alpha Vantage AP
 The functions gather data around the account primarily profit n loss; buying power
 The keys are stored in  alpaca_acc_config.py
 """
-# access files
+# import packages
 import alpaca_trade_api as tradeapi
 from decouple import config
 
@@ -13,7 +13,7 @@ api = tradeapi.REST(config('ALPACA_API_KEY'),
 					config('BASE_URL'),
 					api_version='v2')
 
-# simple test order
+# simple order
 # api.submit_order(symbol='NVDA',
 #                  qty=1,
 #                  side="buy",
@@ -21,9 +21,7 @@ api = tradeapi.REST(config('ALPACA_API_KEY'),
 
 # Get our account information.
 def bal_report():
-
-	msg = 'Accounts buying power: ${}.'.format(api.get_account().buying_power)
-	return msg
+	return 'Accounts buying power: ${}.'.format(api.get_account().buying_power)
 
 # Lists currently open trades
 def list_positions():
@@ -79,11 +77,8 @@ def get_acc_profit():
 	Check daily equity difference of the account
 	:return: str
 	"""
-	# Get account info
-	account = api.get_account()
-
 	# Check our current balance vs. our balance at the last market close
-	balance_change = float(account.equity) - float(account.last_equity)
+	balance_change = float(api.get_account().equity) - float(api.get_account().last_equity)
 	print('Today\'s portfolio balance change: $ {}'.format(balance_change))
 	return
 

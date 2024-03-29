@@ -1,7 +1,8 @@
-# 2/19/24: use py <= 3.10.8 or aiohttp will fail
-# to resolve numpy build error
+# March 24: use py <= 3.9.12
+# to resolve C++ build errors:
 # https://stackoverflow.com/questions/64261546/how-to-solve-error-microsoft-visual-c-14-0-or-greater-is-required-when-inst
-# https://wiki.python.org/moin/WindowsCompilers
+# The solution - manually install these packages before installing alpaca-trade-api. e.g:
+pip install pandas==1.1.5 numpy==1.19.4 scipy==1.5.4
 # DEPENDENCIES USED IN ALL ENVIRONMENTS (without ML for ma_loop only)
 # do not use tabs here when copied;
 Backtesting==0.3.3

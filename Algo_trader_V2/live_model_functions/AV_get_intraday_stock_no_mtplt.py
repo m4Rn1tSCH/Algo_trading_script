@@ -8,11 +8,7 @@ pull_intraday_data = dataframes for minute intervals
 returns a dataframe
 """
 
-import pandas as pd
-# from decouple import config
-# import os
 from alpha_vantage.timeseries import TimeSeries
-from alpha_vantage.techindicators import TechIndicators
 from Algo_trader_V2.api.alpaca_API_connector import api
 
 
@@ -37,12 +33,12 @@ def pull_data(symbol, outputsize, cadence, output_format):
     # drop the date as index to use it
     data = data.reset_index(drop=False, inplace=False)
     # rename columns names for better handling
-    data = data.rename(columns={"1. open": "Open",
-                                "2. high": "High",
-                                "3. low": "Low",
-                                "4. close": "Close",
-                                "5. volume": "Volume"
-                                }, inplace=False)
+    data.rename(columns={"1. open": "Open",
+                         "2. high": "High",
+                         "3. low": "Low",
+                         "4. close": "Close",
+                         "5. volume": "Volume"
+                         }, inplace=True)
     return data
 
 
@@ -54,7 +50,7 @@ def pull_intraday_data(symbol, interval, outputsize, output_format):
     The metadata has been dropped currently as it is not needed.
     symbol: pick abbreviation in letter strings 'XXXX'
     interval: ['1min', '5min', '15min', '30min', '60min']
-    outputsize: 'full'
+    outputsize: 'full', 'compact'
     output_format: ['json', 'csv', 'pandas']
     plot_price: boolean; generate a plot with open price and trading volume
     """
@@ -62,12 +58,12 @@ def pull_intraday_data(symbol, interval, outputsize, output_format):
                     treat_info_as_error=True, indexing_type='date', proxy=None)
     data, _ = ts.get_intraday(symbol=symbol, interval=interval, outputsize=outputsize)
     data = data.reset_index(drop=False, inplace=False)
-    data = data.rename(columns={"1. open": "open",
-                                "2. high": "high",
-                                "3. low": "low",
-                                "4. close": "close",
-                                "5. volume": "volume"},
-                                inplace=False)
+    data.rename(columns={"1. open": "open",
+                         "2. high": "high",
+                         "3. low": "low",
+                         "4. close": "close",
+                         "5. volume": "volume"
+                         }, inplace=True)
     return data
 
 
@@ -99,7 +95,7 @@ def submit_order(symbol, qty, side, type_order, time_in_force, limit_price):
      :param symbol: str; Abbr in 'XXX',
      :param qty: int,
      :param side: 'buy' / 'sell',
-     :param type: 'limit',
+     :param type_order: 'limit',
      :param time_in_force: 'day' / 'gtc' / 'day' / 'fok' / 'ioc' / 'opg' / 'cls',
                             Day / good till canceled / fill or kill / immediate or cancel /
                             at the open / at the close

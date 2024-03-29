@@ -31,8 +31,6 @@ print(processed_df.head())
 processed_df['Close'].astype('float32')
 # MLP
 # pipeline_mlp_reg(label_col='Close', df=processed_df, pca_plot=False, shuffle_data=False)
-# TODO: SVR gets stuck
-# pipeline_reg(label_col='Close', df=processed_df, pca_plot=False, shuffle_data=False)
 # RFR
 # pipeline_rfr(label_col='Close', df=processed_df, pca_plot=False, shuffle_data=False)
 # RFE

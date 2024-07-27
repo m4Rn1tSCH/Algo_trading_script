@@ -36,7 +36,7 @@ def bt_buyer(stocks):
                          side='buy',
                          type_order='limit',
                          time_in_force='gtc',
-                         limit_price=(last_price * (1 + ret)) * 0.98
+                         limit_price=(last_price * (1 + ret / 100)) * 0.98
                          )
             print(f"backtester order executed: {st}", dt.now().isoformat())
     except BaseException as e:

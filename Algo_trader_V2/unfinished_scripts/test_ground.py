@@ -6,8 +6,7 @@ Created on 9/3/2020 2020; 3:22 PM
 """
 import time
 
-# just trying out some snippets
-from Algo_trader_V2.api.alpaca_API_connector import api
+from Algo_trader_V2.api.alpaca_py_api import *
 
 # stocks = ['BILL', 'CUK', 'AAPL', 'NVDA']
 # while True:
@@ -25,7 +24,7 @@ while True:
           (api.get_clock().next_open - api.get_clock().timestamp).seconds, "s")
     time.sleep((api.get_clock().next_open - api.get_clock().timestamp).seconds)
 #%%
-import alpaca_trade_api
+import alpaca
 import pandas as pd
 
 alpaca_api = alpaca_trade_api.REST(key_id=key_id, secret_key=secret_key, base_url=endpoint, api_version=None, oauth=None)
@@ -42,7 +41,7 @@ print('wrong_bars with', wrong_bars['AAPL'][0].t)
 #%%
 import pandas as pd
 from alpha_vantage.timeseries import TimeSeries
-from Algo_trader_V2.api.alpaca_API_connector import api
+from Algo_trader_V2.api.alpaca_py_api import *
 from Algo_trader_V2.support_functions.support_features import pred_feat, trading_support_resistance
 # from Algo_trader_V2.live_model_functions.AV_get_intraday_stock_no_mtplt import av_intraday, av_daily_adj,\
 #     pull_intraday_data, pull_data_adj

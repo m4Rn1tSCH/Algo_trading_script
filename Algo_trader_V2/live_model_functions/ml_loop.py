@@ -6,7 +6,7 @@ Created on 6/15/2021; 5:07 PM
 """
 import pandas as pd
 from alpha_vantage.timeseries import TimeSeries
-from Algo_trader_V2.api.alpaca_API_connector import api
+from Algo_trader_V2.api.alpaca_py_api import *
 from Algo_trader_V2.support_functions.support_features import pred_feat, trading_support_resistance
 from Algo_trader_V2.ml_modules.Python_AI_logic import pipeline_mlp_reg, pipeline_reg, pipeline_rfr, rfe_cross_val
 

@@ -22,20 +22,25 @@ if __name__ == '__main__':
     stocks: list of strings; specify the stocks for which data will be pulled and
     the check will be performed.
     """
-
     # config for task scheduler; will use separate process to generate CSV
     """backtester loop section"""
     today = dt.today().date().isoformat()
     st_in_df = pd.read_csv(f'C:/Users/Administrator/Documents/file_drop/stock_backtesting_{today}.csv')
     # solution with dictionary
     ret_dict = dict(zip(st_in_df['stock'].to_list(), st_in_df['return'].to_list()))
-    filter_d = {k, v for k, v in ret_dict.items() if v > 0.05}
-    # solution with
-    buy_list = []
-    sell_list = []
-    pos_ret_df = stock_df[stock_df['return'] >= 0.0275]
-    neg_ret_df = stock_df[stock_df['return'] <= 0]
-    buy_list = [n for n in pos_ret_df['stock'].to_list()]
-    sell_list = [m for m in neg_ret_df['stock'].to_list()]
+    filter_d = {}
+    for k, v in ret_dict.items():
+        if v > 0.09:
+            filter_d[k] = v
+
+    # solution with lists
+    # buy_list = []
+    # sell_list = []
+    # pos_ret_df = st_in_df[st_in_df['return'] >= 0.0275]
+    # neg_ret_df = st_in_df[st_in_df['return'] <= 0]
+    # buy_list = [n for n in pos_ret_df['stock'].to_list()]
+    # sell_list = [m for m in neg_ret_df['stock'].to_list()]
+
+    # buyer script
     bt_buyer(stocks=filter_d)
     print("Algo backtester script is running...")

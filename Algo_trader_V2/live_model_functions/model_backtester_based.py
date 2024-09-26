@@ -26,26 +26,44 @@ def bt_buyer(stocks):
     :param stocks: dict; contains all stocks as keys and holding times as values
     :return: None
     """
+    if len(stocks.keys()) != 0:
+        try:
+            tc = TradingClient(api_key=config('ALPACA_API_KEY'), secret_key=config('ALPACA_SECRET_KEY'), paper=True)
+            print("buying power on account: ", float(tc.get_account().buying_power))
+            # bp = float(tc.get_account().buying_power)
 
-    try:
-        tc = TradingClient(api_key=config('ALPACA_API_KEY'), secret_key=config('ALPACA_SECRET_KEY'), paper=True)
-        print("buying power on account: ", float(tc.get_account().buying_power))
-        bp = float(tc.get_account().buying_power)
-        # iterate through list and execute orders
-        # execute buy
-        # set limit price at 98% of theoretically predicted profit
-        # st = tock; ret = return from backtester
-        for st, ret in stocks.items():
-            last_price = latest_stock_price(input_list=st)
-            submit_limit_order(symbol=st,
-                               limit_pr=(last_price * (1 + ret / 100)) * 0.98,
-                               purchase_notional=0.05 * bp,
-                               order_side=OrderSide.BUY)
+            # iterate through list and execute orders
 
-            # if limit does not work, use market order for now
-            # submit_market_order(symbol=st, quantity=1, order_side=OrderSide.BUY)
-            # time.sleep(2)
-            print(f"backtester order executed: {st}", dt.now().isoformat())
-    except BaseException as e:
-        print(e)
+            # set limit price at 98% of theoretically predicted profit
+            # st = tock; ret = return from backtester
+            for st, ret in stocks.items():
+                # last_price = latest_stock_price(input_list=st)
+                # submit_limit_order(symbol=st,
+                #                    limit_pr=(last_price * (1 + ret / 100)) * 0.98,
+                #                    purchase_notional=0.05 * bp,
+                #                    order_side=OrderSide.BUY)
+
+                # if limit does not work, use market order for now
+                submit_market_order(symbol=st, quantity=1, order_side=OrderSide.BUY)
+                time.sleep(2)
+                print(f"backtester order executed: {st}", dt.now().isoformat())
+        except BaseException as e:
+            print(e)
+    else:
+        print("no stocks in dictionary; no purchases necessary")
     return
+
+if __name__ == '__main__':
+    # test successful 9/24/2024
+    test_dict = {
+        'MSFT': 0.1,
+        'NVDA': 0.075,
+        'SPY': 0.0885
+    }
+    filter_dict = {}
+    for k, v in test_dict.items():
+        if v > 0.09:
+            filter_dict[k] = v
+        else:
+            continue
+    bt_buyer(stocks=filter_dict)

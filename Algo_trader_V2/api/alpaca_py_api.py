@@ -3,14 +3,11 @@
 
 # Created by: bjaen
 """
-import datetime
-
 """
 alpaca python client available
 also contains data access from alpaca
 -stock data, options data, crypto currency data
 alpaca.data; StockHistoricalDataClient, OptionsData
-
 """
 from datetime import datetime as dt
 from datetime import timedelta
@@ -44,8 +41,8 @@ https://alpaca.markets/sdks/python/api_reference/data/stock/requests.html#alpaca
  feed: Optional[str] = None,
  asof: Optional[str] = None,
  sort: Optional[Sort] = None
-
 """
+
 
 def market_data(symbol_input, time_frame, start, end, limit, sort):
     data_client = StockHistoricalDataClient(
@@ -73,6 +70,7 @@ def latest_stock_price(input_list):
     prices = st_c.get_stock_latest_quote(req_parameters)
     v = prices[input_list[0]].ask_price
     return v
+
 
 # AssetClass.US_EQUITY
 def get_tradable_assets(asset_class):
@@ -108,6 +106,7 @@ def submit_market_order(symbol, quantity, order_side):
 """
 Limit Order Submissions
 """
+
 
 def submit_limit_order(symbol, limit_pr, purchase_notional, order_side):
     limit_order_data = LimitOrderRequest(

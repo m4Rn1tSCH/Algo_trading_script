@@ -11,7 +11,7 @@ Specify which loop and stocks
 import pandas as pd
 from datetime import datetime as dt
 from Algo_trader_V2.live_model_functions.model_backtester_based import bt_buyer
-# from Algo_trader_V2.live_model_functions.ma import ma_loop
+from Algo_trader_V2.api.alpaca_py_api import get_all_positions
 
 if __name__ == '__main__':
 
@@ -28,6 +28,10 @@ if __name__ == '__main__':
     st_in_df = pd.read_csv(f'C:/Users/Administrator/Documents/file_drop/stock_backtesting_{today}.csv')
     # solution with dictionary
     ret_dict = dict(zip(st_in_df['stock'].to_list(), st_in_df['return'].to_list()))
+
+    li = get_all_positions()
+    acc_pos = [st.symbol for st in li]
+
     buy_d = {}
     sell_d = {}
     for k, v in ret_dict.items():
@@ -36,13 +40,8 @@ if __name__ == '__main__':
         else:
             sell_d[k] = v
     # solution with lists
-    # buy_list = []
-    # sell_list = []
-    # pos_ret_df = st_in_df[st_in_df['return'] >= 0.0275]
-    # neg_ret_df = st_in_df[st_in_df['return'] <= 0]
-    # buy_list = [n for n in pos_ret_df['stock'].to_list()]
-    # sell_list = [m for m in neg_ret_df['stock'].to_list()]
 
+    held_pos_list = [s for s in sell_d.keys() if s in acc_pos]
     # buyer script
     bt_buyer(stocks=buy_d)
     print("Algo backtester script is running...")

@@ -28,11 +28,13 @@ if __name__ == '__main__':
     st_in_df = pd.read_csv(f'C:/Users/Administrator/Documents/file_drop/stock_backtesting_{today}.csv')
     # solution with dictionary
     ret_dict = dict(zip(st_in_df['stock'].to_list(), st_in_df['return'].to_list()))
-    filter_d = {}
+    buy_d = {}
+    sell_d = {}
     for k, v in ret_dict.items():
-        if v > 0.09:
-            filter_d[k] = v
-
+        if v > 0.075:
+            buy_d[k] = v
+        else:
+            sell_d[k] = v
     # solution with lists
     # buy_list = []
     # sell_list = []
@@ -42,5 +44,5 @@ if __name__ == '__main__':
     # sell_list = [m for m in neg_ret_df['stock'].to_list()]
 
     # buyer script
-    bt_buyer(stocks=filter_d)
+    bt_buyer(stocks=buy_d)
     print("Algo backtester script is running...")

@@ -44,4 +44,4 @@ if __name__ == '__main__':
     held_pos_list = [s for s in sell_d.keys() if s in acc_pos]
     # buyer script
     bt_buyer(stocks=buy_d)
-    print("Algo backtester script is running...")
+    print("Algo backtester buyer has finished...")

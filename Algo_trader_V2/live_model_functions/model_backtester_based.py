@@ -45,13 +45,9 @@ def bt_buyer(stocks):
                 #                    limit_pr=(last_price * (1 + ret / 100)) * 0.98,
                 #                    purchase_notional=0.05 * bp,
                 #                    order_side=OrderSide.BUY)
-                if ret >= 0.05:
-                    # if limit does not work, use market order for now
-                    submit_market_order(symbol=st, quantity=1, order_side=OrderSide.BUY)
-                    time.sleep(2)
-                    print(f"backtester buy order executed: {st}", dt.now().isoformat())
-                else:
-                    print(f"insufficient return for: {st}", dt.now().isoformat())
+                submit_market_order(symbol=st, quantity=1, order_side=OrderSide.BUY)
+                time.sleep(2)
+                print(f"backtester buy order executed: {st}", dt.now().isoformat())
         except BaseException as e:
             print(e)
     else:

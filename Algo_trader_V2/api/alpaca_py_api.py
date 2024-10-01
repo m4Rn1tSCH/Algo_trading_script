@@ -86,6 +86,39 @@ def get_tradable_assets(asset_class):
 
 
 """
+Retrieve all positions
+ returns a list of JSON-elements of all open position in portfolio
+ access with element.column
+ example of element:
+ {   'asset_class': <AssetClass.US_EQUITY: 'us_equity'>,
+    'asset_id': UUID('b6d1aa75-5c9c-4353-a305-9e2caa1925ab'),
+    'asset_marginable': True,
+    'avg_entry_price': '431.18',
+    'avg_entry_swap_rate': None,
+    'change_today': '-0.0180804090169649',
+    'cost_basis': '862.36',
+    'current_price': '422.52',
+    'exchange': <AssetExchange.NASDAQ: 'NASDAQ'>,
+    'lastday_price': '430.3',
+    'market_value': '845.04',
+    'qty': '2',
+    'qty_available': '2',
+    'side': <PositionSide.LONG: 'long'>,
+    'swap_rate': None,
+    'symbol': 'MSFT',
+    'unrealized_intraday_pl': '-15.56',
+    'unrealized_intraday_plpc': '-0.0180804090169649',
+    'unrealized_pl': '-17.32',
+    'unrealized_plpc': '-0.0200844194999768',
+    'usd': None}
+"""
+def get_all_positions():
+    tc = TradingClient(api_key=config('ALPACA_API_KEY'), secret_key=config('ALPACA_SECRET_KEY'), paper=True)
+    pos_l = tc.get_all_positions()
+    return pos_l
+
+
+"""
 Market Order submission
  quantity has to be integer
  use OrderSide.BUY or OrderSide.SELL
@@ -133,6 +166,9 @@ if __name__ == "__main__":
     # eq = get_tradable_assets(asset_class=AssetClass.US_EQUITY)
     # for i in eq:
     #     print(i.symbol)
+    li = get_all_positions()
+    stock_list = [st.symbol for st in li]
+
     a = market_data(symbol_input=['SPY'],
                     time_frame=TimeFrame.Day,
                     start=dt.today() - timedelta(days=365), end=dt.today(),

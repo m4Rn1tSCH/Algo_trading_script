@@ -17,7 +17,7 @@ from alpaca.trading.enums import OrderSide, TimeInForce, AssetClass, AssetStatus
 from Algo_trader_V2.api.alpaca_py_api import latest_stock_price, submit_market_order, submit_limit_order, get_all_positions
 
 
-# "C:\Users\Administrator\Documents\file_drop\stock_backtesting_2024-03-06.csv"
+# "C:\Users\Administrator\Documents\file_drop\stock_backtesting_2024-10-17.csv"
 def bt_buyer(stocks):
     """
     Data based on backtester module will feed into this function
@@ -40,14 +40,17 @@ def bt_buyer(stocks):
 
             # st = stock; ret = return from backtester
             for st, ret in stocks.items():
-                # last_price = latest_stock_price(input_list=st)
-                # submit_limit_order(symbol=st,
-                #                    limit_pr=(last_price * (1 + ret / 100)) * 0.98,
-                #                    purchase_notional=0.05 * bp,
-                #                    order_side=OrderSide.BUY)
-                submit_market_order(symbol=st, quantity=1, order_side=OrderSide.BUY)
-                time.sleep(2)
-                print(f"backtester buy order executed: {st}", dt.now().isoformat())
+                try:
+                    # last_price = latest_stock_price(input_list=st)
+                    # submit_limit_order(symbol=st,
+                    #                    limit_pr=(last_price * (1 + ret / 100)) * 0.98,
+                    #                    purchase_notional=0.05 * bp,
+                    #                    order_side=OrderSide.BUY)
+                    submit_market_order(symbol=st, quantity=1, order_side=OrderSide.BUY)
+                    time.sleep(2)
+                    print(f"backtester buy order executed: {st}", dt.now().isoformat())
+                except Exception as e:
+                    print("ERROR: ", e)
         except BaseException as e:
             print(e)
     else:

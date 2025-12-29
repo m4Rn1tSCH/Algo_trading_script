@@ -58,7 +58,7 @@ def bt_buyer(stocks):
     return 'buyer completed task'
 
 if __name__ == '__main__':
-    # test successful 9/24/2024
+    # re-implemented with python 3.11 on 12/29/2025
     li = get_all_positions()
     acc_pos = [st.symbol for st in li]
     test_dict = {

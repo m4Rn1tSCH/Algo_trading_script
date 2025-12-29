@@ -6,6 +6,11 @@ Created on 7/23/2020 5:46 PM
 """
 '''
 This endpoint starts the algorithm.
+It will be addressed by the task scheduler of Windows
+Current schedule:
+--each morning 6.00AM; runtime around 1h
+--only weekdays
+
 Specify which loop and stocks
 '''
 import pandas as pd

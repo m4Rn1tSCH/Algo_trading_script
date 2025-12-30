@@ -16,9 +16,9 @@ from alpaca.trading.enums import OrderSide, TimeInForce, AssetClass, AssetStatus
 
 from Algo_trader_V2.api.alpaca_py_api import latest_stock_price, submit_market_order, submit_limit_order, get_all_positions
 
-
+# create directory <file_drop>
 # "C:\Users\Administrator\Documents\file_drop\stock_backtesting_2024-10-17.csv"
-def bt_buyer(stocks):
+def backtesting_buyer(stocks):
     """
     Data based on backtester module will feed into this function
     and then will trigger buy orders with limit prices.
@@ -33,6 +33,7 @@ def bt_buyer(stocks):
             # bp = float(tc.get_account().buying_power)
             # set limit price at 98% of theoretically predicted profit
             # TODO: refine logic for selling existing positions
+            # TODO: logic utilizes the hold time that the backtester calculated
             # li = get_all_positions()
             # acc_pos = [st.symbol for st in li]
             # sell_dict = {}
@@ -55,10 +56,11 @@ def bt_buyer(stocks):
             print(e)
     else:
         print("no stocks in dictionary; no purchases necessary")
-    return 'buyer completed task'
+    return 'py-backtester completed task'
 
 if __name__ == '__main__':
     # re-implemented with python 3.11 on 12/29/2025
+    """Get stock symbols and stocks already in portfolio"""
     li = get_all_positions()
     acc_pos = [st.symbol for st in li]
     test_dict = {
@@ -79,4 +81,4 @@ if __name__ == '__main__':
             sell_dict[k] = v
 
     held_pos_list = [s for s in sell_dict.keys() if s in acc_pos]
-    bt_buyer(stocks=filter_dict)
+    backtesting_buyer(stocks=filter_dict)

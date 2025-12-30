@@ -15,7 +15,7 @@ Specify which loop and stocks
 '''
 import pandas as pd
 from datetime import datetime as dt
-from Algo_trader_V2.live_model_functions.model_backtester_based import bt_buyer
+from Algo_trader_V2.live_model_functions.model_backtester_based import backtesting_buyer
 from Algo_trader_V2.api.alpaca_py_api import get_all_positions
 
 if __name__ == '__main__':
@@ -48,5 +48,5 @@ if __name__ == '__main__':
 
     held_pos_list = [s for s in sell_d.keys() if s in acc_pos]
     # buyer script
-    bt_buyer(stocks=buy_d)
+    backtesting_buyer(stocks=buy_d)
     print("Algo backtester buyer has finished...")
